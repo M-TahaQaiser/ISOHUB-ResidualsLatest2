@@ -6,6 +6,7 @@
 
 import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
+import fetch from 'cross-fetch';
 import { db } from '../../db';
 import { aiChatSessions, aiKnowledgeBase, merchants, monthlyData } from '../../../shared/schema';
 import { eq, and, like, desc, sql } from 'drizzle-orm';
@@ -76,6 +77,7 @@ export class AdvancedAIAgent {
       this.openai = new OpenAI({
         apiKey: openaiKey,
         baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+        fetch,
       });
     }
   }

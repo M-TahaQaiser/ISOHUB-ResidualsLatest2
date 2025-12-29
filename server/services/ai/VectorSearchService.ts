@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import fetch from 'cross-fetch';
 import { db } from '../../db';
 import { aiKnowledgeBase } from '../../../shared/schema';
 import { eq, and, sql } from 'drizzle-orm';
@@ -29,6 +30,7 @@ export class VectorSearchService {
       this.openai = new OpenAI({
         apiKey,
         ...(baseURL && { baseURL }),
+        fetch,
       });
     }
   }

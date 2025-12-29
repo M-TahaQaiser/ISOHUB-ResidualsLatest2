@@ -5,8 +5,10 @@
 -- VENDORS TABLE
 -- =====================================================
 DO $$ BEGIN
-    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'vendors' AND column_name = 'contact_phone') THEN
-        ALTER TABLE vendors ADD COLUMN contact_phone VARCHAR(50);
+    IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'vendors') THEN
+        IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'vendors' AND column_name = 'contact_phone') THEN
+            ALTER TABLE vendors ADD COLUMN contact_phone VARCHAR(50);
+        END IF;
     END IF;
 END $$;
 

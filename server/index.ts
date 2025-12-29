@@ -1,3 +1,28 @@
+import 'dotenv/config';
+import fetch from 'cross-fetch';
+import { webcrypto, randomFillSync } from 'crypto';
+
+// Polyfill `fetch` for Node versions < 18 so OpenAI client works
+if (!globalThis.fetch) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  globalThis.fetch = fetch as any;
+}
+
+// Ensure global crypto.getRandomValues exists (Vite expects it)
+if (typeof (globalThis as any).crypto !== 'object') {
+  (globalThis as any).crypto = {};
+}
+if (typeof (globalThis as any).crypto.getRandomValues !== 'function') {
+  (globalThis as any).crypto.getRandomValues = (arr: Uint8Array) => randomFillSync(arr);
+}
+
+// ALSO patch the Node `crypto` module namespace so libraries that import
+// `node:crypto` (Vite and others) can call `crypto.getRandomValues`.
+import nodeCrypto from 'node:crypto';
+if (typeof (nodeCrypto as any).getRandomValues !== 'function') {
+  (nodeCrypto as any).getRandomValues = (arr: Uint8Array) => (nodeCrypto as any).randomFillSync(arr);
+}
 import express, { type Request, Response, NextFunction } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -134,6 +159,16 @@ app.use((req, res, next) => {
   // Seed default admin user if none exists - disabled due to schema issues
   // await seedAdminUser();
 
+  // In development, provide easy login credentials shown in the UI
+  if (app.get('env') === 'development') {
+    try {
+      const { seedDevUsers } = await import('./utils/seedDevUsers');
+      await seedDevUsers();
+    } catch (err) {
+      console.warn('⚠️ Failed to seed dev users:', err);
+    }
+  }
+
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -148,6 +183,7 @@ app.use((req, res, next) => {
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
+    console.log('DEBUG: globalThis.crypto:', typeof (globalThis as any).crypto, 'getRandomValues:', typeof (globalThis as any).crypto?.getRandomValues);
     await setupVite(app, server);
   } else {
     serveStatic(app);

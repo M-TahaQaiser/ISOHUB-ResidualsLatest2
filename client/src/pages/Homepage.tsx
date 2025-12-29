@@ -274,7 +274,7 @@ export default function Homepage() {
                     Still calculating residuals manually in Excel? Still fielding "Where's my check?" calls all day?
                   </p>
                   <p className="text-lg text-gray-400 mt-2">
-                    <span className="text-white font-semibold">ISOHUB</span> is your command center — connecting your CRM data, processor residuals,
+                    <span className="text-white font-semibold">ISOHUB</span> is your command center connecting your CRM data, processor residuals,
                     rep portals, and AI-powered analytics into <span className="text-yellow-400">one unified platform</span>.
                     Give your reps self-service access. Get your time back.
                   </p>
@@ -434,7 +434,7 @@ export default function Homepage() {
               {
                 icon: Database,
                 title: "CRM Data Integration",
-                description: "Connect your existing data sources. ISOHUB becomes your single source of truth — pulling everything together so you're not hunting across 5 different systems.",
+                description: "Connect your existing data sources. ISOHUB becomes your single source of truth pulling everything together so you're not hunting across 5 different systems.",
                 highlight: "ONE HUB"
               },
               {
@@ -498,7 +498,7 @@ export default function Homepage() {
 
               <div className="space-y-4 mb-8">
                 {[
-                  "Answer rep questions instantly — \"What's my commission on MID 4521?\"",
+                  "Answer rep questions instantly \"What's my commission on MID 4521?\"",
                   "Explain residual calculations and split structures",
                   "Help reps understand their statements and payouts",
                   "Draft merchant proposals with competitive rate analysis",
@@ -515,7 +515,7 @@ export default function Homepage() {
               </div>
 
               <p className="text-lg text-gray-500 italic">
-                "It's like having a senior ISO operations manager available 24/7 — for you AND your reps."
+                "It's like having a senior ISO operations manager available 24/7 for you AND your reps."
               </p>
             </div>
 
@@ -571,7 +571,7 @@ export default function Homepage() {
                     <div className="flex justify-start">
                       <div className="bg-[#1a1a24] border border-gray-700 rounded-lg rounded-bl-none px-4 py-2 max-w-[80%]">
                         <p className="text-gray-300 text-sm">
-                          MID 3392 (Tony's Auto Shop) volume dropped 68% — from $23K to $7.4K.
+                          MID 3392 (Tony's Auto Shop) volume dropped 68% from $23K to $7.4K.
                           Looks like they may have added a second processor. I'd recommend a retention call.
                           Want me to pull their full history and draft talking points?
                         </p>
@@ -688,7 +688,7 @@ export default function Homepage() {
             </h2>
 
             <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-              Stop wasting hours on residual calculations and rep questions. ISOHUB connects your entire ISO under one roof — so you can focus on growth, not spreadsheets.
+              Stop wasting hours on residual calculations and rep questions. ISOHUB connects your entire ISO under one roof so you can focus on growth, not spreadsheets.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

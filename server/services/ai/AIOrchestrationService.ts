@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import fetch from 'cross-fetch';
 import Anthropic from '@anthropic-ai/sdk';
 import { db } from '../../db';
 import { aiChatSessions, aiModelConfigs } from '../../../shared/schema';
@@ -42,6 +43,7 @@ export class AIOrchestrationService {
       this.openai = new OpenAI({
         apiKey: openaiApiKey,
         ...(openaiBaseURL && { baseURL: openaiBaseURL }),
+        fetch,
       });
       console.log('OpenAI client initialized with Replit AI Integrations');
     }

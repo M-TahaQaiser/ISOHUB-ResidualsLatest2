@@ -2,7 +2,6 @@ import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
@@ -11,7 +10,9 @@ import { nanoid } from "nanoid";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const viteLogger = createLogger();
+// NOTE: we import `vite` dynamically inside `setupVite` so we can ensure
+// global polyfills (like crypto.getRandomValues) are set before Vite runs.
+
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
@@ -30,6 +31,11 @@ export async function setupVite(app: Express, server: Server) {
     hmr: { server },
     allowedHosts: true as const,
   };
+
+  // import `vite` lazily so that any global polyfills set in
+  // `server/index.ts` are in place before Vite initializes
+  const { createServer: createViteServer, createLogger } = await import('vite');
+  const viteLogger = createLogger();
 
   const vite = await createViteServer({
     ...viteConfig,
