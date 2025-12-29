@@ -1,0 +1,53 @@
+/* src/components/billing-reports/billing-reports.component.css */
+
+.billing-reports {
+    padding: 20px;
+    background-color: var(--section-background);
+    color: var(--text-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--shadow-color);
+    box-sizing: border-box; /* Ensure padding and margin do not exceed the container width */
+}
+
+/* Header section with flexbox layout */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Filters section with gap between elements */
+.filters {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.filters select,
+.filters input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--separator-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Action buttons */
+.btn-view {
+    color: var(--accent-color);
+}
+
+.btn-delete {
+    color: red;
+}
+
+button {
+    padding: 12px 20px;
+    border-radius: 4px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }

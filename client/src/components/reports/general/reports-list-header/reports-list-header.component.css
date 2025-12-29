@@ -1,0 +1,50 @@
+/* Header section with flexbox layout */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow wrapping if needed */
+}
+
+/* Filters section with gap between elements, aligned left */
+.filters {
+    display: flex;
+    justify-content: flex-start; /* Align filters and search bar to the left */
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1; /* Ensure it takes available space */
+    flex-wrap: wrap; /* Allow wrapping if needed */
+    margin-bottom: 20px;
+}
+
+/* Search input and filters styling */
+.filters select,
+.filters input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--separator-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+/* Buttons aligned to the right */
+.actions-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; /* Allow wrapping if needed */
+}
+
+/* Action buttons */
+button {
+    padding: 12px 20px;
+    border-radius: 4px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

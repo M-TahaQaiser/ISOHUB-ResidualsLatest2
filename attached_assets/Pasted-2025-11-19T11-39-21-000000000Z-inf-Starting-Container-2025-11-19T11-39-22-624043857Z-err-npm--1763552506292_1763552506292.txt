@@ -1,0 +1,192 @@
+2025-11-19T11:39:21.000000000Z [inf]  Starting Container
+2025-11-19T11:39:22.624043857Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T11:39:22.624069617Z [inf]  
+2025-11-19T11:39:22.624077751Z [inf]  > rest-express@1.0.0 start
+2025-11-19T11:39:22.624083886Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T11:39:22.624090084Z [inf]  
+2025-11-19T11:39:23.191079837Z [inf]  ISO-AI sample data initialized
+2025-11-19T11:39:23.192331979Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T11:39:23.192337818Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T11:39:23.196230731Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T11:39:23.204261917Z [inf]  Security systems ready - migrations available via API
+2025-11-19T11:39:23.204268825Z [inf]  ISO-AI initialization skipped - manual setup available
+2025-11-19T11:39:23.204275593Z [inf]  📋 PreApplications router mounted at /api/preapplications
+2025-11-19T11:39:23.596911628Z [inf]  [SECURITY] Security middleware initialized
+2025-11-19T11:39:23.596922565Z [inf]  [MONITORING] Application monitoring active
+2025-11-19T11:39:23.596930753Z [inf]  [CACHE] Cache service ready
+2025-11-19T11:39:23.596942966Z [inf]  [OAuth Cleanup] Started periodic cleanup job (runs every hour)
+2025-11-19T11:39:23.596968340Z [inf]  11:39:23 AM [express] 🔒 Secure ISO Hub server running on port 8080
+2025-11-19T11:39:23.596975893Z [inf]  11:39:23 AM [express] 🔍 Health check: http://localhost:8080/health
+2025-11-19T11:39:23.596982698Z [inf]  11:39:23 AM [express] 📊 Metrics: http://localhost:8080/metrics
+2025-11-19T11:39:43.244689979Z [inf]  🔗 Personalized URL accessed: /assets/index-6xMbUkvr.js
+2025-11-19T11:39:43.244697447Z [inf]  ✅ Valid personalized URL, redirecting to form
+2025-11-19T11:39:43.244705742Z [inf]  🔗 Personalized URL accessed: /assets/index-6rJrHJul.css
+2025-11-19T11:39:43.244715083Z [inf]  ✅ Valid personalized URL, redirecting to form
+2025-11-19T11:40:03.248403673Z [err]      _extensions: {},
+2025-11-19T11:40:03.248423904Z [err]      _paused: false,
+2025-11-19T11:40:03.248433648Z [err]      _protocol: '',
+2025-11-19T11:40:03.248441923Z [err]      _readyState: 3,
+2025-11-19T11:40:03.248446678Z [err]      _receiver: null,
+2025-11-19T11:40:03.248451637Z [err]      _sender: null,
+2025-11-19T11:40:03.248456478Z [err]      _socket: null,
+2025-11-19T11:40:03.248460995Z [err]      _bufferedAmount: 0,
+2025-11-19T11:40:03.248466533Z [err]      _isServer: false,
+2025-11-19T11:40:03.248473611Z [err]      _redirects: 0,
+2025-11-19T11:40:03.248479333Z [err]      _autoPong: true,
+2025-11-19T11:40:03.248485068Z [err]      _url: 'wss://postgres.railway.internal/v2',
+2025-11-19T11:40:03.248492942Z [err]      _req: null,
+2025-11-19T11:40:03.248513566Z [err]  [DB HEALTH] Health check failed (1 consecutive failures): ErrorEvent {
+2025-11-19T11:40:03.248520079Z [err]    [Symbol(kTarget)]: WebSocket {
+2025-11-19T11:40:03.248527005Z [err]      _events: [Object: null prototype] {
+2025-11-19T11:40:03.248534184Z [err]        error: [Function],
+2025-11-19T11:40:03.248543206Z [err]        message: [Function],
+2025-11-19T11:40:03.248548858Z [err]        close: [Function],
+2025-11-19T11:40:03.248557475Z [err]        open: [Function]
+2025-11-19T11:40:03.248565185Z [err]      },
+2025-11-19T11:40:03.248571615Z [err]      _eventsCount: 4,
+2025-11-19T11:40:03.248581377Z [err]      _maxListeners: undefined,
+2025-11-19T11:40:03.248588125Z [err]      _binaryType: 'arraybuffer',
+2025-11-19T11:40:03.248594287Z [err]      _closeCode: 1006,
+2025-11-19T11:40:03.248599797Z [err]      _closeFrameReceived: false,
+2025-11-19T11:40:03.248605594Z [err]      _closeFrameSent: false,
+2025-11-19T11:40:03.248614151Z [err]      _closeMessage: <Buffer >,
+2025-11-19T11:40:03.248619682Z [err]      _closeTimer: null,
+2025-11-19T11:40:03.248627370Z [err]      _errorEmitted: true,
+2025-11-19T11:40:03.249773561Z [err]      [Symbol(shapeMode)]: false,
+2025-11-19T11:40:03.249783097Z [err]      [Symbol(kCapture)]: false
+2025-11-19T11:40:03.249789662Z [err]    },
+2025-11-19T11:40:03.249795891Z [err]    [Symbol(kType)]: 'error',
+2025-11-19T11:40:03.249801037Z [err]    [Symbol(kError)]: AggregateError [ECONNREFUSED]: 
+2025-11-19T11:40:03.249806179Z [err]        at internalConnectMultiple (node:net:1134:18)
+2025-11-19T11:40:03.249812016Z [err]        at afterConnectMultiple (node:net:1715:7) {
+2025-11-19T11:40:03.249816196Z [err]      code: 'ECONNREFUSED',
+2025-11-19T11:40:03.249820496Z [err]      [errors]: [ [Error], [Error] ]
+2025-11-19T11:40:03.249825749Z [err]    },
+2025-11-19T11:40:03.249830727Z [err]    [Symbol(kMessage)]: ''
+2025-11-19T11:40:03.249836071Z [err]  }
+2025-11-19T11:40:33.259634039Z [err]  [DB HEALTH] Health check failed (2 consecutive failures): ErrorEvent {
+2025-11-19T11:40:33.259657437Z [err]    [Symbol(kTarget)]: WebSocket {
+2025-11-19T11:40:33.259666894Z [err]      _events: [Object: null prototype] {
+2025-11-19T11:40:33.259673861Z [err]        error: [Function],
+2025-11-19T11:40:33.259692257Z [err]        message: [Function],
+2025-11-19T11:40:33.259700218Z [err]        close: [Function],
+2025-11-19T11:40:33.259707195Z [err]        open: [Function]
+2025-11-19T11:40:33.259716998Z [err]      },
+2025-11-19T11:40:33.259725248Z [err]      _eventsCount: 4,
+2025-11-19T11:40:33.259732604Z [err]      _maxListeners: undefined,
+2025-11-19T11:40:33.259740030Z [err]      _binaryType: 'arraybuffer',
+2025-11-19T11:40:33.259747162Z [err]      _closeCode: 1006,
+2025-11-19T11:40:33.259754099Z [err]      _closeFrameReceived: false,
+2025-11-19T11:40:33.259760911Z [err]      _closeFrameSent: false,
+2025-11-19T11:40:33.259770131Z [err]      _closeMessage: <Buffer >,
+2025-11-19T11:40:33.259777363Z [err]      _closeTimer: null,
+2025-11-19T11:40:33.259783734Z [err]      _errorEmitted: true,
+2025-11-19T11:40:33.259791100Z [err]      _extensions: {},
+2025-11-19T11:40:33.259798287Z [err]      _paused: false,
+2025-11-19T11:40:33.259804978Z [err]      _protocol: '',
+2025-11-19T11:40:33.259811913Z [err]      _readyState: 3,
+2025-11-19T11:40:33.259818644Z [err]      _receiver: null,
+2025-11-19T11:40:33.259825301Z [err]      _sender: null,
+2025-11-19T11:40:33.259832502Z [err]      _socket: null,
+2025-11-19T11:40:33.259839922Z [err]      _bufferedAmount: 0,
+2025-11-19T11:40:33.259846775Z [err]      _isServer: false,
+2025-11-19T11:40:33.259853672Z [err]      _redirects: 0,
+2025-11-19T11:40:33.259861345Z [err]      _autoPong: true,
+2025-11-19T11:40:33.259868515Z [err]      _url: 'wss://postgres.railway.internal/v2',
+2025-11-19T11:40:33.259875485Z [err]      _req: null,
+2025-11-19T11:40:33.262344477Z [err]      [Symbol(shapeMode)]: false,
+2025-11-19T11:40:33.262356050Z [err]      [Symbol(kCapture)]: false
+2025-11-19T11:40:33.262362946Z [err]    },
+2025-11-19T11:40:33.262369662Z [err]    [Symbol(kType)]: 'error',
+2025-11-19T11:40:33.262376934Z [err]    [Symbol(kError)]: AggregateError [ECONNREFUSED]: 
+2025-11-19T11:40:33.262394818Z [err]        at internalConnectMultiple (node:net:1134:18)
+2025-11-19T11:40:33.262400895Z [err]        at afterConnectMultiple (node:net:1715:7) {
+2025-11-19T11:40:33.262406539Z [err]      code: 'ECONNREFUSED',
+2025-11-19T11:40:33.262419079Z [err]      [errors]: [ [Error], [Error] ]
+2025-11-19T11:40:33.262431496Z [err]    },
+2025-11-19T11:40:33.262440850Z [err]    [Symbol(kMessage)]: ''
+2025-11-19T11:40:33.262447144Z [err]  }
+2025-11-19T11:41:03.269862066Z [err]  [DB HEALTH] Health check failed (3 consecutive failures): ErrorEvent {
+2025-11-19T11:41:03.269867801Z [err]      _errorEmitted: true,
+2025-11-19T11:41:03.269870424Z [err]      _req: null,
+2025-11-19T11:41:03.269870664Z [err]    [Symbol(kTarget)]: WebSocket {
+2025-11-19T11:41:03.269879076Z [err]      _events: [Object: null prototype] {
+2025-11-19T11:41:03.269881705Z [err]      _extensions: {},
+2025-11-19T11:41:03.269887703Z [err]        error: [Function],
+2025-11-19T11:41:03.269890165Z [err]      _paused: false,
+2025-11-19T11:41:03.269895780Z [err]        message: [Function],
+2025-11-19T11:41:03.269902409Z [err]      _protocol: '',
+2025-11-19T11:41:03.269903569Z [err]        close: [Function],
+2025-11-19T11:41:03.269910916Z [err]        open: [Function]
+2025-11-19T11:41:03.269914296Z [err]      _readyState: 3,
+2025-11-19T11:41:03.269917818Z [err]      },
+2025-11-19T11:41:03.269923690Z [err]      _receiver: null,
+2025-11-19T11:41:03.269924582Z [err]      _eventsCount: 4,
+2025-11-19T11:41:03.269930582Z [err]      _sender: null,
+2025-11-19T11:41:03.269932754Z [err]      _maxListeners: undefined,
+2025-11-19T11:41:03.269937597Z [err]      _socket: null,
+2025-11-19T11:41:03.269940146Z [err]      _binaryType: 'arraybuffer',
+2025-11-19T11:41:03.269943916Z [err]      _bufferedAmount: 0,
+2025-11-19T11:41:03.269947367Z [err]      _closeCode: 1006,
+2025-11-19T11:41:03.269951168Z [err]      _isServer: false,
+2025-11-19T11:41:03.269955549Z [err]      _closeFrameReceived: false,
+2025-11-19T11:41:03.269958238Z [err]      _redirects: 0,
+2025-11-19T11:41:03.269964707Z [err]      _autoPong: true,
+2025-11-19T11:41:03.269964777Z [err]      _closeFrameSent: false,
+2025-11-19T11:41:03.269973687Z [err]      _closeMessage: <Buffer >,
+2025-11-19T11:41:03.269974197Z [err]      _url: 'wss://postgres.railway.internal/v2',
+2025-11-19T11:41:03.269981628Z [err]      _closeTimer: null,
+2025-11-19T11:41:03.271692692Z [err]      [Symbol(shapeMode)]: false,
+2025-11-19T11:41:03.271704055Z [err]      [Symbol(kCapture)]: false
+2025-11-19T11:41:03.271710617Z [err]    },
+2025-11-19T11:41:03.271717234Z [err]    [Symbol(kType)]: 'error',
+2025-11-19T11:41:03.271723327Z [err]    [Symbol(kError)]: AggregateError [ECONNREFUSED]: 
+2025-11-19T11:41:03.271730113Z [err]        at internalConnectMultiple (node:net:1134:18)
+2025-11-19T11:41:03.271735953Z [err]        at afterConnectMultiple (node:net:1715:7) {
+2025-11-19T11:41:03.271741395Z [err]      code: 'ECONNREFUSED',
+2025-11-19T11:41:03.271747517Z [err]      [errors]: [ [Error], [Error] ]
+2025-11-19T11:41:03.271753180Z [err]    },
+2025-11-19T11:41:03.271758119Z [err]    [Symbol(kMessage)]: ''
+2025-11-19T11:41:03.271763765Z [err]  }
+2025-11-19T11:41:33.280678861Z [err]  [DB HEALTH] Health check failed (4 consecutive failures): ErrorEvent {
+2025-11-19T11:41:33.280702152Z [err]    [Symbol(kTarget)]: WebSocket {
+2025-11-19T11:41:33.280721891Z [err]      _events: [Object: null prototype] {
+2025-11-19T11:41:33.280731366Z [err]        error: [Function],
+2025-11-19T11:41:33.280742674Z [err]        message: [Function],
+2025-11-19T11:41:33.280751890Z [err]        close: [Function],
+2025-11-19T11:41:33.280759740Z [err]        open: [Function]
+2025-11-19T11:41:33.280769143Z [err]      },
+2025-11-19T11:41:33.280777118Z [err]      _eventsCount: 4,
+2025-11-19T11:41:33.280785310Z [err]      _maxListeners: undefined,
+2025-11-19T11:41:33.280796777Z [err]      _binaryType: 'arraybuffer',
+2025-11-19T11:41:33.280809266Z [err]      _closeCode: 1006,
+2025-11-19T11:41:33.280818285Z [err]      _closeFrameReceived: false,
+2025-11-19T11:41:33.280826848Z [err]      _closeFrameSent: false,
+2025-11-19T11:41:33.280834499Z [err]      _closeMessage: <Buffer >,
+2025-11-19T11:41:33.280843439Z [err]      _closeTimer: null,
+2025-11-19T11:41:33.280858488Z [err]      _errorEmitted: true,
+2025-11-19T11:41:33.280867817Z [err]      _extensions: {},
+2025-11-19T11:41:33.280877168Z [err]      _paused: false,
+2025-11-19T11:41:33.280886246Z [err]      _protocol: '',
+2025-11-19T11:41:33.280894951Z [err]      _readyState: 3,
+2025-11-19T11:41:33.280903288Z [err]      _receiver: null,
+2025-11-19T11:41:33.280910770Z [err]      _sender: null,
+2025-11-19T11:41:33.280919290Z [err]      _socket: null,
+2025-11-19T11:41:33.280927602Z [err]      _bufferedAmount: 0,
+2025-11-19T11:41:33.280935118Z [err]      _isServer: false,
+2025-11-19T11:41:33.280942226Z [err]      _redirects: 0,
+2025-11-19T11:41:33.280972392Z [err]      _autoPong: true,
+2025-11-19T11:41:33.280982241Z [err]      _url: 'wss://postgres.railway.internal/v2',
+2025-11-19T11:41:33.280990850Z [err]      _req: null,
+2025-11-19T11:41:33.282065214Z [err]      [Symbol(shapeMode)]: false,
+2025-11-19T11:41:33.282075090Z [err]      [Symbol(kCapture)]: false
+2025-11-19T11:41:33.282081604Z [err]    },
+2025-11-19T11:41:33.282088221Z [err]    [Symbol(kType)]: 'error',
+2025-11-19T11:41:33.282093586Z [err]    [Symbol(kError)]: AggregateError [ECONNREFUSED]: 
+2025-11-19T11:41:33.282100568Z [err]        at internalConnectMultiple (node:net:1134:18)
+2025-11-19T11:41:33.282105260Z [err]        at afterConnectMultiple (node:net:1715:7) {
+2025-11-19T11:41:33.282112821Z [err]      code: 'ECONNREFUSED',
+2025-11-19T11:41:33.282118558Z [err]      [errors]: [ [Error], [Error] ]
+2025-11-19T11:41:33.282123909Z [err]    },
+2025-11-19T11:41:33.282129287Z [err]    [Symbol(kMessage)]: ''
+2025-11-19T11:41:33.282134370Z [err]  }

@@ -1,0 +1,47 @@
+.agent-summary-reports-list {
+    padding: 20px;
+    background-color: var(--section-background);
+    color: var(--text-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--shadow-color);
+    margin: 0 auto;
+    overflow-x: auto;
+    height: auto;
+  }
+  
+  .agent-summary-reports-list table {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  .agent-summary-reports-list th,
+  .agent-summary-reports-list td {
+    padding: 10px;
+    border: 1px solid var(--separator-color);
+    text-align: left;
+  }
+  
+  .agent-summary-reports-list th {
+    background-color: var(--section-background);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .btn-view {
+    padding: 8px 12px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  /*
+  .btn-view:hover {
+    background-color: var(--accent-color2);
+  }
+  */

@@ -1,0 +1,53 @@
+chunk-WERSD76P.js?v=029ddcf5:8438 Refused to frame 'https://api.leadconnectorhq.com/' because it violates the following Content Security Policy directive: "frame-src 'none'".
+Understand this error
+The script has an unsupported MIME type ('text/html').Understand this error
+(index):153 SW registration failed:  SecurityError: Failed to register a ServiceWorker for scope ('https://8d392a04-f812-4857-b548-d4495467f6e8-00-tupafc07smx3.kirk.replit.dev/') with script ('https://8d392a04-f812-4857-b548-d4495467f6e8-00-tupafc07smx3.kirk.replit.dev/sw.js'): The script has an unsupported MIME type ('text/html').
+manifest.json:1 Manifest: Line: 1, column: 1, Syntax error.Understand this error
+(index):1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">Understand this warning
+Login.tsx:30 Starting login process...
+auth.api.ts:34 Starting login process...
+requests.js:1  POST https://8d392a04-f812-4857-b548-d4495467f6e8-00-tupafc07smx3.kirk.replit.dev/api/auth/login 429 (Too Many Requests)
+s.fetch @ requests.js:1
+login @ auth.api.ts:37
+handleSubmit @ Login.tsx:36
+await in handleSubmit
+callCallback2 @ chunk-WERSD76P.js?v=029ddcf5:3674
+invokeGuardedCallbackDev @ chunk-WERSD76P.js?v=029ddcf5:3699
+invokeGuardedCallback @ chunk-WERSD76P.js?v=029ddcf5:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-WERSD76P.js?v=029ddcf5:3736
+executeDispatch @ chunk-WERSD76P.js?v=029ddcf5:7014
+processDispatchQueueItemsInOrder @ chunk-WERSD76P.js?v=029ddcf5:7034
+processDispatchQueue @ chunk-WERSD76P.js?v=029ddcf5:7043
+dispatchEventsForPlugins @ chunk-WERSD76P.js?v=029ddcf5:7051
+(anonymous) @ chunk-WERSD76P.js?v=029ddcf5:7174
+batchedUpdates$1 @ chunk-WERSD76P.js?v=029ddcf5:18913
+batchedUpdates @ chunk-WERSD76P.js?v=029ddcf5:3579
+dispatchEventForPluginEventSystem @ chunk-WERSD76P.js?v=029ddcf5:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-WERSD76P.js?v=029ddcf5:5478
+dispatchEvent @ chunk-WERSD76P.js?v=029ddcf5:5472
+dispatchDiscreteEvent @ chunk-WERSD76P.js?v=029ddcf5:5449Understand this error
+auth.api.ts:60 Login error: Error: Login failed: Too Many Requests
+    at login (auth.api.ts:54:13)
+    at async handleSubmit (Login.tsx:36:25)
+login @ auth.api.ts:60
+await in login
+handleSubmit @ Login.tsx:36
+await in handleSubmit
+callCallback2 @ chunk-WERSD76P.js?v=029ddcf5:3674
+invokeGuardedCallbackDev @ chunk-WERSD76P.js?v=029ddcf5:3699
+invokeGuardedCallback @ chunk-WERSD76P.js?v=029ddcf5:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-WERSD76P.js?v=029ddcf5:3736
+executeDispatch @ chunk-WERSD76P.js?v=029ddcf5:7014
+processDispatchQueueItemsInOrder @ chunk-WERSD76P.js?v=029ddcf5:7034
+processDispatchQueue @ chunk-WERSD76P.js?v=029ddcf5:7043
+dispatchEventsForPlugins @ chunk-WERSD76P.js?v=029ddcf5:7051
+(anonymous) @ chunk-WERSD76P.js?v=029ddcf5:7174
+batchedUpdates$1 @ chunk-WERSD76P.js?v=029ddcf5:18913
+batchedUpdates @ chunk-WERSD76P.js?v=029ddcf5:3579
+dispatchEventForPluginEventSystem @ chunk-WERSD76P.js?v=029ddcf5:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-WERSD76P.js?v=029ddcf5:5478
+dispatchEvent @ chunk-WERSD76P.js?v=029ddcf5:5472
+dispatchDiscreteEvent @ chunk-WERSD76P.js?v=029ddcf5:5449Understand this error
+Login.tsx:53 Login failed: Error: Login failed: Too Many Requests
+    at login (auth.api.ts:54:13)
+    at async handleSubmit (Login.tsx:36:25)

@@ -1,0 +1,221 @@
+2025-12-03T05:29:42.000000000Z [inf]  Starting Container
+2025-12-03T05:29:44.312425803Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-12-03T05:29:44.312436842Z [inf]  
+2025-12-03T05:29:44.312445013Z [inf]  > rest-express@1.0.0 start
+2025-12-03T05:29:44.312452909Z [inf]  > NODE_ENV=production node dist/index.js
+2025-12-03T05:29:44.312461991Z [inf]  [Startup] Running data integrity check...
+2025-12-03T05:29:44.312476448Z [inf]  [Startup] Current status: healthy
+2025-12-03T05:29:44.312477412Z [inf]  📁 Looking for migrations in: /migrations
+2025-12-03T05:29:44.312487894Z [inf]  [Startup] Organizations: 2, Missing required: 0
+2025-12-03T05:29:44.312488100Z [inf]  📁 No migrations directory found, skipping migrations
+2025-12-03T05:29:44.312498044Z [inf]  Security systems ready - migrations available via API
+2025-12-03T05:29:44.312498494Z [inf]  [Startup] All required organizations present, no seeding needed
+2025-12-03T05:29:44.312504894Z [inf]  
+2025-12-03T05:29:44.312504976Z [inf]  ISO-AI initialization skipped - manual setup available
+2025-12-03T05:29:44.312506380Z [inf]  [Startup] Demo data check: 0 merchants, 0 monthly records
+2025-12-03T05:29:44.312514624Z [inf]  [Startup] Demo data appears empty, seeding...
+2025-12-03T05:29:44.312522414Z [inf]  🌱 Starting demo data seed...
+2025-12-03T05:29:44.312529546Z [inf]  ISO-AI sample data initialized
+2025-12-03T05:29:44.312532326Z [inf]  📦 Creating demo processors...
+2025-12-03T05:29:44.312541025Z [inf]  ✅ 9 processors ready
+2025-12-03T05:29:44.312544696Z [inf]  🔄 Real Data Display routes initializing...
+2025-12-03T05:29:44.312549917Z [err]  ❌ Demo data seed failed: error: column "branch_id" does not exist
+2025-12-03T05:29:44.312555585Z [inf]  🔄 Starting database migrations...
+2025-12-03T05:29:44.312558864Z [err]      at /app/node_modules/pg-pool/index.js:45:11
+2025-12-03T05:29:44.312564646Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-03T05:29:44.315106914Z [err]      at async file:///app/node_modules/drizzle-orm/node-postgres/session.js:83:22
+2025-12-03T05:29:44.315107591Z [inf]  📋 PreApplications router mounted at /api/preapplications
+2025-12-03T05:29:44.315118384Z [err]      at async seedDemoData (file:///app/dist/index.js:4076:31)
+2025-12-03T05:29:44.315119631Z [inf]  5:29:44 AM [express] 🔒 Secure ISO Hub server running on port 8080
+2025-12-03T05:29:44.315124770Z [err]    internalPosition: undefined,
+2025-12-03T05:29:44.315125632Z [err]      at async seedDemoDataIfNeeded (file:///app/dist/index.js:22545:24)
+2025-12-03T05:29:44.315128412Z [inf]  5:29:44 AM [express] 🔍 Health check: http://localhost:8080/health
+2025-12-03T05:29:44.315133033Z [err]      at async runStartupDataSeeding (file:///app/dist/index.js:22520:5)
+2025-12-03T05:29:44.315136190Z [err]    internalQuery: undefined,
+2025-12-03T05:29:44.315140612Z [err]      at async file:///app/dist/index.js:24483:5 {
+2025-12-03T05:29:44.315143261Z [err]    where: undefined,
+2025-12-03T05:29:44.315148173Z [err]    length: 109,
+2025-12-03T05:29:44.315150165Z [err]    schema: undefined,
+2025-12-03T05:29:44.315155158Z [err]    severity: 'ERROR',
+2025-12-03T05:29:44.315158214Z [err]    table: undefined,
+2025-12-03T05:29:44.315161005Z [err]    code: '42703',
+2025-12-03T05:29:44.315165725Z [err]    column: undefined,
+2025-12-03T05:29:44.315167336Z [err]    detail: undefined,
+2025-12-03T05:29:44.315172990Z [err]    dataType: undefined,
+2025-12-03T05:29:44.315173538Z [err]    hint: undefined,
+2025-12-03T05:29:44.315179847Z [err]    position: '59',
+2025-12-03T05:29:44.315180098Z [err]    constraint: undefined,
+2025-12-03T05:29:44.315185819Z [err]    internalPosition: undefined,
+2025-12-03T05:29:44.315186106Z [err]    file: 'parse_relation.c',
+2025-12-03T05:29:44.315192056Z [err]    internalQuery: undefined,
+2025-12-03T05:29:44.315192502Z [err]    line: '3716',
+2025-12-03T05:29:44.315198039Z [err]    routine: 'errorMissingColumn'
+2025-12-03T05:29:44.315198713Z [err]    where: undefined,
+2025-12-03T05:29:44.315203466Z [err]  }
+2025-12-03T05:29:44.315205063Z [err]    schema: undefined,
+2025-12-03T05:29:44.315209749Z [inf]  [Startup] Final data integrity status: healthy
+2025-12-03T05:29:44.315211812Z [err]    table: undefined,
+2025-12-03T05:29:44.315219645Z [err]    column: undefined,
+2025-12-03T05:29:44.315225197Z [err]    dataType: undefined,
+2025-12-03T05:29:44.315230947Z [err]    constraint: undefined,
+2025-12-03T05:29:44.315236750Z [err]    file: 'parse_relation.c',
+2025-12-03T05:29:44.315243178Z [err]    line: '3716',
+2025-12-03T05:29:44.315249302Z [err]    routine: 'errorMissingColumn'
+2025-12-03T05:29:44.315255229Z [err]  }
+2025-12-03T05:29:44.315261321Z [err]  [Startup] Failed to seed demo data: error: column "branch_id" does not exist
+2025-12-03T05:29:44.315267371Z [err]      at /app/node_modules/pg-pool/index.js:45:11
+2025-12-03T05:29:44.315273207Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-03T05:29:44.315279400Z [err]      at async file:///app/node_modules/drizzle-orm/node-postgres/session.js:83:22
+2025-12-03T05:29:44.315285162Z [err]      at async seedDemoData (file:///app/dist/index.js:4076:31)
+2025-12-03T05:29:44.315291379Z [err]      at async seedDemoDataIfNeeded (file:///app/dist/index.js:22545:24)
+2025-12-03T05:29:44.315297586Z [err]      at async runStartupDataSeeding (file:///app/dist/index.js:22520:5)
+2025-12-03T05:29:44.315303610Z [err]      at async file:///app/dist/index.js:24483:5 {
+2025-12-03T05:29:44.315309694Z [err]    length: 109,
+2025-12-03T05:29:44.315315620Z [err]    severity: 'ERROR',
+2025-12-03T05:29:44.315321984Z [err]    code: '42703',
+2025-12-03T05:29:44.315327734Z [err]    detail: undefined,
+2025-12-03T05:29:44.315333343Z [err]    hint: undefined,
+2025-12-03T05:29:44.315340208Z [err]    position: '59',
+2025-12-03T05:29:44.315880310Z [inf]  5:29:44 AM [express] 📊 Metrics: http://localhost:8080/metrics
+2025-12-03T05:29:44.315886762Z [inf]  [SECURITY] Security middleware initialized
+2025-12-03T05:29:44.315891629Z [inf]  [MONITORING] Application monitoring active
+2025-12-03T05:29:44.315895979Z [inf]  [CACHE] Cache service ready
+2025-12-03T06:09:34.200063582Z [inf]  6:09:33 AM [express] GET /api/organizations/list 403 in 2ms :: {"error":"Invalid or expired token"}
+2025-12-03T06:09:34.200075718Z [inf]  6:09:33 AM [express] GET /api/analytics/trends 400 in 1ms :: {"error":"organizationId is required"}
+2025-12-03T06:09:34.200082901Z [inf]  6:09:33 AM [express] GET /api/processors 403 in 1ms :: {"error":"Invalid or expired token"}
+2025-12-03T06:09:34.200090551Z [inf]  6:09:33 AM [express] GET /api/audit-issues 200 in 11ms
+2025-12-03T06:09:34.200098416Z [inf]  6:09:33 AM [express] GET /api/monthly-stats 200 in 6ms
+2025-12-03T06:09:34.262343409Z [inf]  6:09:34 AM [express] GET /api/dashboard/org-86f76df1/needs-approval 304 in 509ms :: {"needsApproval"…
+2025-12-03T06:09:34.292550136Z [inf]  6:09:34 AM [express] GET /api/dashboard/org-86f76df1/recent-activity 304 in 535ms :: {"activity":[]}
+2025-12-03T06:09:35.187484892Z [inf]  6:09:34 AM [express] GET /api/dashboard/org-86f76df1/metrics 304 in 981ms :: {"metrics":{"totalAgent…
+2025-12-03T06:09:54.706125240Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 14.29%
+2025-12-03T06:14:46.382591467Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 14.29%
+2025-12-03T06:19:47.904096441Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 14.29%
+2025-12-03T06:24:49.383339682Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 14.29%
+2025-12-03T06:29:50.777070003Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 14.29%
+2025-12-03T06:34:52.136520273Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 14.29%
+2025-12-03T06:39:53.634535521Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 14.29%
+2025-12-03T06:44:55.385907914Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 14.29%
+2025-12-03T06:49:46.472643056Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 14.29%
+2025-12-03T06:54:48.006145609Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 14.29%
+2025-12-03T06:59:49.689026769Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 13.64%
+2025-12-03T07:04:51.342984387Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 13.64%
+2025-12-03T07:09:52.154643560Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 13.64%
+2025-12-03T07:14:53.537160280Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 13.04%
+2025-12-03T07:19:54.701996536Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 13.04%
+2025-12-03T07:24:55.530012844Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 13.04%
+2025-12-03T07:29:57.083928879Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 13.04%
+2025-12-03T07:34:38.640922541Z [inf]  7:34:31 AM [express] GET /api/monthly-stats 304 in 8ms
+2025-12-03T07:34:38.640929318Z [inf]  7:34:31 AM [express] GET /api/processors 403 in 1ms :: {"error":"Invalid or expired token"}
+2025-12-03T07:34:38.640934466Z [inf]  7:34:31 AM [express] GET /api/audit-issues 304 in 5ms
+2025-12-03T07:34:38.640939587Z [inf]  7:34:31 AM [express] GET /api/organizations/list 403 in 1ms :: {"error":"Invalid or expired token"}
+2025-12-03T07:34:38.640944527Z [inf]  7:34:31 AM [express] GET /api/analytics/trends 400 in 1ms :: {"error":"organizationId is required"}
+2025-12-03T07:34:38.640949780Z [inf]  7:34:31 AM [express] GET /api/dashboard/org-86f76df1/needs-approval 304 in 516ms :: {"needsApproval"…
+2025-12-03T07:34:38.640955044Z [inf]  7:34:31 AM [express] GET /api/dashboard/org-86f76df1/recent-activity 304 in 537ms :: {"activity":[]}
+2025-12-03T07:34:38.640960414Z [inf]  7:34:32 AM [express] GET /api/dashboard/org-86f76df1/metrics 304 in 915ms :: {"metrics":{"totalAgent…
+2025-12-03T07:34:47.581027096Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 19.35%
+2025-12-03T07:39:49.772761263Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 19.35%
+2025-12-03T07:40:49.395403407Z [inf]  7:40:48 AM [express] GET /api/organizations/list 403 in 1ms :: {"error":"Invalid or expired token"}
+2025-12-03T07:40:49.395411338Z [inf]  7:40:48 AM [express] GET /api/processors 403 in 1ms :: {"error":"Invalid or expired token"}
+2025-12-03T07:40:49.395417325Z [inf]  7:40:48 AM [express] GET /api/analytics/trends 400 in 1ms :: {"error":"organizationId is required"}
+2025-12-03T07:40:49.395424092Z [inf]  7:40:48 AM [express] GET /api/monthly-stats 304 in 3ms
+2025-12-03T07:40:49.395431452Z [inf]  7:40:48 AM [express] GET /api/audit-issues 304 in 5ms
+2025-12-03T07:40:49.395441251Z [inf]  7:40:48 AM [express] GET /api/dashboard/org-86f76df1/recent-activity 304 in 520ms :: {"activity":[]}
+2025-12-03T07:40:49.395447625Z [inf]  7:40:48 AM [express] GET /api/dashboard/org-86f76df1/needs-approval 304 in 536ms :: {"needsApproval"…
+2025-12-03T07:40:49.395451514Z [inf]  7:40:48 AM [express] GET /api/dashboard/org-86f76df1/metrics 304 in 555ms :: {"metrics":{"totalAgent…
+2025-12-03T07:44:50.912202905Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T07:49:52.296570717Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T07:54:53.632495856Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T07:59:55.325817549Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T08:04:56.529070857Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T08:09:58.125077757Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T08:14:49.496514999Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T08:19:51.058887825Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T08:24:52.643972080Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T08:29:55.234424227Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T08:34:56.441986033Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T08:39:57.735413902Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T08:44:50.208959289Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T08:49:51.370870144Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T08:54:53.666543822Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T08:59:56.301982557Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T09:04:58.779605187Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T09:05:59.032271735Z [inf]  9:05:49 AM [express] GET /api/processors 403 in 0ms :: {"error":"Invalid or expired token"}
+2025-12-03T09:05:59.032279920Z [inf]  9:05:49 AM [express] GET /api/organizations/list 403 in 1ms :: {"error":"Invalid or expired token"}
+2025-12-03T09:05:59.032289365Z [inf]  9:05:49 AM [express] GET /api/monthly-stats 304 in 9ms
+2025-12-03T09:05:59.032295015Z [inf]  9:05:49 AM [express] GET /api/audit-issues 304 in 2ms
+2025-12-03T09:05:59.032338486Z [inf]  9:05:50 AM [express] GET /api/dashboard/org-86f76df1/needs-approval 304 in 504ms :: {"needsApproval"…
+2025-12-03T09:05:59.032344353Z [inf]  9:05:50 AM [express] GET /api/dashboard/org-86f76df1/metrics 304 in 517ms :: {"metrics":{"totalAgent…
+2025-12-03T09:05:59.032349302Z [inf]  9:05:50 AM [express] GET /api/dashboard/org-86f76df1/recent-activity 304 in 528ms :: {"activity":[]}
+2025-12-03T09:05:59.032363310Z [inf]  9:05:49 AM [express] GET /api/analytics/trends 400 in 1ms :: {"error":"organizationId is required"}
+2025-12-03T09:09:50.941770801Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 25.53%
+2025-12-03T09:14:52.161878260Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 25.53%
+2025-12-03T09:19:54.585390795Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 25.53%
+2025-12-03T09:24:55.913178365Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 25.53%
+2025-12-03T09:29:57.031864871Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 25.53%
+2025-12-03T09:34:59.660225495Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 25.53%
+2025-12-03T09:39:51.882663102Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 25.53%
+2025-12-03T09:41:51.709193138Z [inf]  9:41:47 AM [express] GET /api/organizations/list 403 in 0ms :: {"error":"Invalid or expired token"}
+2025-12-03T09:41:51.709202424Z [inf]  9:41:47 AM [express] GET /api/analytics/trends 400 in 1ms :: {"error":"organizationId is required"}
+2025-12-03T09:41:51.709209204Z [inf]  9:41:47 AM [express] GET /api/audit-issues 304 in 12ms
+2025-12-03T09:41:51.709215808Z [inf]  9:41:47 AM [express] GET /api/processors 403 in 0ms :: {"error":"Invalid or expired token"}
+2025-12-03T09:41:51.709222657Z [inf]  9:41:47 AM [express] GET /api/monthly-stats 304 in 2ms
+2025-12-03T09:41:51.709229499Z [inf]  9:41:48 AM [express] GET /api/dashboard/org-86f76df1/needs-approval 304 in 937ms :: {"needsApproval"…
+2025-12-03T09:41:51.709235597Z [inf]  9:41:48 AM [express] GET /api/dashboard/org-86f76df1/recent-activity 304 in 943ms :: {"activity":[]}
+2025-12-03T09:41:51.709241642Z [inf]  9:41:48 AM [express] GET /api/dashboard/org-86f76df1/metrics 304 in 949ms :: {"metrics":{"totalAgent…
+2025-12-03T09:44:52.440361291Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 27.27%
+2025-12-03T09:49:54.213463778Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 27.27%
+2025-12-03T09:54:56.710773868Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 27.27%
+2025-12-03T09:59:58.194042263Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 27.27%
+2025-12-03T10:04:59.987947187Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 27.27%
+2025-12-03T10:10:01.296706405Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 27.27%
+2025-12-03T10:14:52.406894748Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 27.27%
+2025-12-03T10:19:53.699685406Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 27.27%
+2025-12-03T10:24:55.068705620Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 27.27%
+2025-12-03T10:29:56.800932088Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 27.27%
+2025-12-03T10:34:58.225421440Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 27.27%
+2025-12-03T10:39:59.611787724Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 27.27%
+2025-12-03T10:42:49.733568777Z [inf]  10:42:48 AM [express] GET /api/dashboard/org-86f76df1/metrics 304 in 562ms :: {"metrics":{"totalAgent…
+2025-12-03T10:42:49.733590650Z [inf]  10:42:48 AM [express] GET /api/dashboard/org-86f76df1/needs-approval 304 in 571ms :: {"needsApproval"…
+2025-12-03T10:42:49.733605152Z [inf]  10:42:49 AM [express] GET /api/dashboard/org-86f76df1/recent-activity 304 in 1344ms :: {"activity":[]}
+2025-12-03T10:42:49.733636835Z [inf]  10:42:47 AM [express] GET /api/analytics/trends 400 in 1ms :: {"error":"organizationId is required"}
+2025-12-03T10:42:49.733644721Z [inf]  10:42:47 AM [express] GET /api/organizations/list 403 in 1ms :: {"error":"Invalid or expired token"}
+2025-12-03T10:42:49.733650610Z [inf]  10:42:47 AM [express] GET /api/processors 403 in 0ms :: {"error":"Invalid or expired token"}
+2025-12-03T10:42:49.733655871Z [inf]  10:42:47 AM [express] GET /api/monthly-stats 304 in 13ms
+2025-12-03T10:42:49.733661035Z [inf]  10:42:47 AM [express] GET /api/audit-issues 304 in 8ms
+2025-12-03T10:45:00.847075082Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 28.57%
+2025-12-03T10:50:02.199022756Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 28.57%
+2025-12-03T10:54:52.828496269Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 28.57%
+2025-12-03T10:59:54.469969652Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 28.57%
+2025-12-03T11:04:55.494517450Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 28.57%
+2025-12-03T11:09:56.216604453Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 28.57%
+2025-12-03T11:14:57.187909873Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 28.57%
+2025-12-03T11:19:57.881436956Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 28.57%
+2025-12-03T11:24:59.892274624Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 28.57%
+2025-12-03T11:30:00.818080749Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 28.57%
+2025-12-03T11:32:51.116627487Z [inf]  11:32:43 AM [express] GET /api/audit-issues 304 in 6ms
+2025-12-03T11:32:51.116632428Z [inf]  11:32:43 AM [express] GET /api/monthly-stats 304 in 6ms
+2025-12-03T11:32:51.116637467Z [inf]  11:32:43 AM [express] GET /api/organizations/list 403 in 0ms :: {"error":"Invalid or expired token"}
+2025-12-03T11:32:51.116642732Z [inf]  11:32:43 AM [express] GET /api/processors 403 in 1ms :: {"error":"Invalid or expired token"}
+2025-12-03T11:32:51.116647194Z [inf]  11:32:43 AM [express] GET /api/analytics/trends 400 in 0ms :: {"error":"organizationId is required"}
+2025-12-03T11:32:51.116652392Z [inf]  11:32:43 AM [express] GET /api/dashboard/org-86f76df1/needs-approval 304 in 565ms :: {"needsApproval"…
+2025-12-03T11:32:51.116657961Z [inf]  11:32:43 AM [express] GET /api/dashboard/org-86f76df1/recent-activity 304 in 572ms :: {"activity":[]}
+2025-12-03T11:32:51.116662831Z [inf]  11:32:43 AM [express] GET /api/dashboard/org-86f76df1/metrics 304 in 965ms :: {"metrics":{"totalAgent…
+2025-12-03T11:35:01.923074018Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 29.58%
+2025-12-03T11:39:54.199143018Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 29.58%
+2025-12-03T11:43:54.743418435Z [inf]  11:43:47 AM [express] GET /api/processors 403 in 1ms :: {"error":"Invalid or expired token"}
+2025-12-03T11:43:54.743426989Z [inf]  11:43:47 AM [express] GET /api/organizations/list 403 in 1ms :: {"error":"Invalid or expired token"}
+2025-12-03T11:43:54.743433725Z [inf]  11:43:47 AM [express] GET /api/audit-issues 304 in 5ms
+2025-12-03T11:43:54.743439501Z [inf]  11:43:47 AM [express] GET /api/analytics/trends 400 in 1ms :: {"error":"organizationId is required"}
+2025-12-03T11:43:54.743445473Z [inf]  11:43:47 AM [express] GET /api/monthly-stats 304 in 6ms
+2025-12-03T11:43:54.743451413Z [inf]  11:43:48 AM [express] GET /api/dashboard/org-86f76df1/metrics 304 in 514ms :: {"metrics":{"totalAgent…
+2025-12-03T11:43:54.743458158Z [inf]  11:43:48 AM [express] GET /api/dashboard/org-86f76df1/needs-approval 304 in 534ms :: {"needsApproval"…
+2025-12-03T11:43:54.743464761Z [inf]  11:43:48 AM [express] GET /api/dashboard/org-86f76df1/recent-activity 304 in 944ms :: {"activity":[]}
+2025-12-03T11:44:54.454534860Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 30.38%
+2025-12-03T11:49:56.079581215Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 30.38%
+2025-12-03T11:54:58.091968085Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 30.38%
+2025-12-03T11:59:59.411658074Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 30.38%
+2025-12-03T12:05:00.373795741Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 30.38%
+2025-12-03T12:10:01.908934187Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 30.38%
+2025-12-03T12:15:02.907087363Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 30.38%
+2025-12-03T12:20:04.036356160Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 30.38%

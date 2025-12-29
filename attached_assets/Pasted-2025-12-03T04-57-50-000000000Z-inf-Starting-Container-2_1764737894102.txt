@@ -1,0 +1,29 @@
+2025-12-03T04:57:50.000000000Z [inf]  Starting Container
+2025-12-03T04:57:52.085926385Z [err]  [Startup] Errors during seeding: Failed to seed org-demo-isohub-2025: column "admin_contact_name" of relation "organizations" does not exist; Failed to seed org-86f76df1: column "admin_contact_name" of relation "organizations" does not exist
+2025-12-03T04:57:52.085961580Z [err]  [DataIntegrity] Failed to seed org-86f76df1: column "admin_contact_name" of relation "organizations" does not exist
+2025-12-03T04:57:52.086437604Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-12-03T04:57:52.086447589Z [inf]  
+2025-12-03T04:57:52.086457296Z [inf]  > rest-express@1.0.0 start
+2025-12-03T04:57:52.086468161Z [inf]  > NODE_ENV=production node dist/index.js
+2025-12-03T04:57:52.086477689Z [inf]  
+2025-12-03T04:57:52.086488084Z [inf]  ISO-AI sample data initialized
+2025-12-03T04:57:52.086496381Z [inf]  🔄 Real Data Display routes initializing...
+2025-12-03T04:57:52.086505815Z [inf]  🔄 Starting database migrations...
+2025-12-03T04:57:52.086516118Z [inf]  📁 Looking for migrations in: /migrations
+2025-12-03T04:57:52.086525865Z [inf]  📁 No migrations directory found, skipping migrations
+2025-12-03T04:57:52.086535569Z [inf]  Security systems ready - migrations available via API
+2025-12-03T04:57:52.086545464Z [inf]  ISO-AI initialization skipped - manual setup available
+2025-12-03T04:57:52.086557947Z [inf]  [Startup] Running data integrity check...
+2025-12-03T04:57:52.086566986Z [inf]  [Startup] Current status: critical
+2025-12-03T04:57:52.086576573Z [inf]  [Startup] Organizations: 0, Missing required: 2
+2025-12-03T04:57:52.086586775Z [inf]  [Startup] Missing required organizations detected, seeding...
+2025-12-03T04:57:52.086595715Z [err]  [DataIntegrity] Failed to seed org-demo-isohub-2025: column "admin_contact_name" of relation "organizations" does not exist
+2025-12-03T04:57:52.276437116Z [inf]  [Startup] Final data integrity status: critical
+2025-12-03T04:57:52.276443543Z [err]  [Startup] WARNING: Data integrity is in CRITICAL state!
+2025-12-03T04:57:52.279996192Z [inf]  📋 PreApplications router mounted at /api/preapplications
+2025-12-03T04:57:52.303465097Z [inf]  4:57:52 AM [express] 🔒 Secure ISO Hub server running on port 8080
+2025-12-03T04:57:52.303472313Z [inf]  4:57:52 AM [express] 🔍 Health check: http://localhost:8080/health
+2025-12-03T04:57:52.303478036Z [inf]  4:57:52 AM [express] 📊 Metrics: http://localhost:8080/metrics
+2025-12-03T04:57:52.303484012Z [inf]  [SECURITY] Security middleware initialized
+2025-12-03T04:57:52.303489814Z [inf]  [MONITORING] Application monitoring active
+2025-12-03T04:57:52.303494579Z [inf]  [CACHE] Cache service ready

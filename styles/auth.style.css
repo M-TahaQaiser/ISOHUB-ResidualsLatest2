@@ -1,0 +1,78 @@
+
+/* Authentication Page Styling */
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .auth-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: var(--section-background);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  /* Auth Container Headings */
+  .auth-container h2 {
+    /* margin-bottom: 20px; */
+    font-size: 24px;
+    color: #fff;
+    font-weight: 600;
+}
+  
+  
+  
+  .auth-container .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  /*
+  .auth-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color);
+  }*/
+  
+  .auth-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  /* Button styling for auth container */
+  /*
+  .auth-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--accent-color2);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .auth-container button:hover {
+    background-color: var(--accent-color2); 
+  }
+  */
+  /* Paragraph styling in auth container */
+  .auth-container p {
+    margin-top: 15px;
+    /*color: #555;*/
+  }
+  
+  /* Error message styling */
+  .auth-container .error-message {
+    color: red;
+    margin-bottom: 15px;
+  }

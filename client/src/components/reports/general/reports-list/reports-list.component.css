@@ -1,0 +1,193 @@
+.reports {
+    padding: 20px;
+   /* background-color: var(--section-background);*/
+    color: var(--text-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--shadow-color);
+    box-sizing: border-box;
+}
+
+/* Header section with flexbox layout */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow wrapping if needed */
+}
+
+/* Filters section with gap between elements, aligned left */
+.filters {
+    display: flex;
+    justify-content: flex-start; /* Align filters and search bar to the left */
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1; /* Ensure it takes available space */
+    flex-wrap: wrap; /* Allow wrapping if needed */
+    margin-bottom: 20px;
+}
+
+/* Search input and filters styling */
+.filters select,
+.filters input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--separator-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+/* Buttons aligned to the right */
+.actions-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; /* Allow wrapping if needed */
+}
+
+/* Action buttons */
+.btn-view {
+    color: var(--accent-color);
+}
+
+.btn-delete {
+    color: red;
+}
+
+button {
+    padding: 12px 20px;
+    border-radius: 4px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Dropdown with checkboxes styling */
+.dropdown {
+    position: relative;
+}
+
+.processor-dropdown {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--separator-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    width: 100%;
+    cursor: pointer;
+}
+
+.processor-dropdown::after {
+    content: '▼';
+    float: right;
+    margin-right: 10px;
+}
+
+.processor-checklist {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--section-background);
+    border: 1px solid var(--separator-color);
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    z-index: 100;
+    display: none; /* Initially hidden */
+}
+
+.dropdown:hover .processor-checklist {
+    display: block; /* Show on hover */
+}
+
+.processor-checklist label {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.processor-checklist label input {
+    margin-right: 10px;
+}
+
+.processor-checklist label:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* Pagination */
+.pagination button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    /* background-color: var(--accent-color); */
+    /* color: white; */
+    /* cursor: pointer; */
+    /* border-radius: 4px; */
+    border: 1px solid #dddddd5c;
+}
+
+.pagination button.active {
+    background-color: #facc15;
+    color: #000;
+}
+
+.pagination button:hover {
+    background-color:#facc15;
+}
+
+/* Override default react-confirm-alert styles to match the theme */
+.react-confirm-alert-overlay {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.react-confirm-alert {
+    color: var(--text-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    padding: 20px;
+    font-size: 1rem;
+    max-width: 90%;
+}
+
+.react-confirm-alert .react-confirm-alert-body {
+    text-align: center;
+    color: var(--text-color);
+    background-color: var(--section-background);
+}
+
+.react-confirm-alert .react-confirm-alert-button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.react-confirm-alert-button-group button {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.react-confirm-alert-button-group button:hover {
+    background-color: var(--accent-color2);
+}
+
+.react-confirm-alert-button-group button:first-child {
+    background-color: red;
+    color: white;
+}
+
+.react-confirm-alert-button-group button:first-child:hover {
+    background-color: darkred;
+}

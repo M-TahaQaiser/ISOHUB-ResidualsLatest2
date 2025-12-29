@@ -1,0 +1,304 @@
+2025-11-18T23:30:43.000000000Z [inf]  Mounting volume on: /var/lib/containers/railwayapp/bind-mounts/9a6361b0-f4a0-4d4e-aeec-ff8088619ca5/vol_lrpifto8l30t8v4e
+2025-11-18T23:30:44.000000000Z [inf]  Starting Container
+2025-11-18T23:30:44.608518736Z [inf]  selecting default time zone ... Etc/UTC
+2025-11-18T23:30:44.608530609Z [inf]  creating configuration files ... ok
+2025-11-18T23:30:44.608543781Z [inf]  
+2025-11-18T23:30:44.608547756Z [inf]  running bootstrap script ... ok
+2025-11-18T23:30:44.608549041Z [inf]  The files belonging to this database system will be owned by user "postgres".
+2025-11-18T23:30:44.608553922Z [inf]  This user must also own the server process.
+2025-11-18T23:30:44.608556774Z [inf]  fixing permissions on existing directory /var/lib/postgresql/data/pgdata ... ok
+2025-11-18T23:30:44.608560177Z [inf]  
+2025-11-18T23:30:44.608565851Z [inf]  creating subdirectories ... ok
+2025-11-18T23:30:44.608573314Z [inf]  The database cluster will be initialized with locale "en_US.utf8".
+2025-11-18T23:30:44.608574934Z [inf]  selecting dynamic shared memory implementation ... posix
+2025-11-18T23:30:44.608582334Z [inf]  The default database encoding has accordingly been set to "UTF8".
+2025-11-18T23:30:44.608583200Z [inf]  selecting default "max_connections" ... 100
+2025-11-18T23:30:44.608590807Z [inf]  selecting default "shared_buffers" ... 128MB
+2025-11-18T23:30:44.608599766Z [inf]  The default text search configuration will be set to "english".
+2025-11-18T23:30:44.608608698Z [inf]  
+2025-11-18T23:30:44.608620248Z [inf]  Data page checksums are disabled.
+2025-11-18T23:30:44.808484508Z [inf]  performing post-bootstrap initialization ... ok
+2025-11-18T23:30:45.812712407Z [inf]  syncing data to disk ... ok
+2025-11-18T23:30:45.812721261Z [inf]  
+2025-11-18T23:30:45.812727510Z [inf]  
+2025-11-18T23:30:45.812733983Z [inf]  Success. You can now start the database server using:
+2025-11-18T23:30:45.812739210Z [inf]  
+2025-11-18T23:30:45.812746485Z [inf]      pg_ctl -D /var/lib/postgresql/data/pgdata -l logfile start
+2025-11-18T23:30:45.812752319Z [inf]  
+2025-11-18T23:30:45.812758104Z [err]  initdb: warning: enabling "trust" authentication for local connections
+2025-11-18T23:30:45.812764875Z [err]  initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+2025-11-18T23:30:45.863892142Z [inf]  waiting for server to start....2025-11-18 23:30:45.861 UTC [46] LOG:  starting PostgreSQL 17.7 (Debian 17.7-3.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2025-11-18T23:30:45.866386944Z [inf]  2025-11-18 23:30:45.863 UTC [46] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-11-18T23:30:45.879220453Z [inf]  2025-11-18 23:30:45.872 UTC [49] LOG:  database system was shut down at 2025-11-18 23:30:44 UTC
+2025-11-18T23:30:45.883038270Z [inf]  2025-11-18 23:30:45.880 UTC [46] LOG:  database system is ready to accept connections
+2025-11-18T23:30:45.940460721Z [inf]   done
+2025-11-18T23:30:45.940470404Z [inf]  server started
+2025-11-18T23:30:46.658937074Z [err]  +++++++++++++*
+2025-11-18T23:30:46.659319783Z [inf]  CREATE DATABASE
+2025-11-18T23:30:46.659327412Z [inf]  
+2025-11-18T23:30:46.659334243Z [inf]  
+2025-11-18T23:30:46.659345974Z [inf]  /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init-ssl.sh
+2025-11-18T23:30:46.659358486Z [err]  .........+.....+....+..+...................+.....+++
+2025-11-18T23:30:46.659365161Z [err]  ++++++++++
+2025-11-18T23:30:46.659371696Z [err]  ++++++++++
+2025-11-18T23:30:46.659379340Z [err]  ++++++++++++
+2025-11-18T23:30:46.659385872Z [err]  ++++*.......++++++
+2025-11-18T23:30:46.659395109Z [err]  ++++++++++
+2025-11-18T23:30:46.659403502Z [err]  ++++++++++
+2025-11-18T23:30:46.677632682Z [err]  ................+.+
+2025-11-18T23:30:46.677644064Z [err]  +++++
+2025-11-18T23:30:46.677652179Z [err]  ......+.....+...+......+..........+.....+.+..+...+
+2025-11-18T23:30:46.677660205Z [err]  .........+...+................+.................+....+...+.....+.+......+......+
+2025-11-18T23:30:46.677667230Z [err]  .....+.......+...+..+.+...........+......+...+....+
+2025-11-18T23:30:46.677676415Z [err]  ..+.+..............+.+.....+.......+++
+2025-11-18T23:30:46.677683573Z [err]  ++++++++++++
+2025-11-18T23:30:46.677690274Z [err]  +++++++++++
+2025-11-18T23:30:46.677696740Z [err]  ++++++++++
+2025-11-18T23:30:46.677703382Z [err]  +++*..........+.+.....+...+....+...
+2025-11-18T23:30:46.677708810Z [err]  ...+..+.............+............++++
+2025-11-18T23:30:46.677715398Z [err]  ++++++++++
+2025-11-18T23:30:46.677721930Z [err]  ++++++++++
+2025-11-18T23:30:46.677727973Z [err]  +++++++++++
+2025-11-18T23:30:46.677734085Z [err]  ++++*...+............+...+
+2025-11-18T23:30:46.677740402Z [err]  ......+......+.........
+2025-11-18T23:30:46.677746318Z [err]  +.......+...+.....+.........+..........
+2025-11-18T23:30:46.677753065Z [err]  ++++++
+2025-11-18T23:30:46.677759237Z [err]  -----
+2025-11-18T23:30:46.677765231Z [err]  .+..+.........+......+....+............+............+
+2025-11-18T23:30:46.677770619Z [err]  ++++++++++++
+2025-11-18T23:30:46.677780406Z [err]  +++++++++++
+2025-11-18T23:30:46.677785330Z [err]  ++++++++++
+2025-11-18T23:30:46.677790306Z [err]  +++++*....++++
+2025-11-18T23:30:46.677795967Z [err]  ++++++++++
+2025-11-18T23:30:46.677796757Z [err]  ++++++++++
+2025-11-18T23:30:46.677802921Z [err]  +++++++++++
+2025-11-18T23:30:46.677803093Z [err]  ++++++++++
+2025-11-18T23:30:46.677810143Z [err]  +++++++*.......+...............
+2025-11-18T23:30:46.677812623Z [err]  +++++++++++
+2025-11-18T23:30:46.677815348Z [err]  .......+...+.........
+2025-11-18T23:30:46.677819478Z [err]  +++*....+.+.......
+2025-11-18T23:30:46.677824703Z [err]  ..+..+....+......+......+.........
+2025-11-18T23:30:46.677831202Z [err]  +...+...........+.+
+2025-11-18T23:30:46.677835815Z [err]  .........+......+.....+.+.....
+2025-11-18T23:30:46.677840852Z [err]  ............
+2025-11-18T23:30:46.677845327Z [err]  ...+..........+...+
+2025-11-18T23:30:46.677850089Z [err]  ...........+.........+.+.....
+2025-11-18T23:30:46.677854721Z [err]  ....+..+.......+..+
+2025-11-18T23:30:46.677859984Z [err]  ...+.+.....++++
+2025-11-18T23:30:46.677865123Z [err]  ++
+2025-11-18T23:30:46.677869447Z [err]  ...+.....+...+++++++++
+2025-11-18T23:30:46.677874465Z [err]  ++++++++++
+2025-11-18T23:30:46.677880054Z [err]  ++++++++++++++
+2025-11-18T23:30:46.677892533Z [err]  ++++++*....+......+.++
+2025-11-18T23:30:46.677902069Z [err]  ++++++++++
+2025-11-18T23:30:46.681451444Z [err]  ..+...+...+.......+...........
+2025-11-18T23:30:46.681458470Z [err]  +....+...+...+......+..
+2025-11-18T23:30:46.681465178Z [err]  ...+...+.......+
+2025-11-18T23:30:46.681470372Z [err]  ......+........+......
+2025-11-18T23:30:46.681474800Z [err]  .+.....+...+...........
+2025-11-18T23:30:46.683520617Z [err]  .+...+..........
+2025-11-18T23:30:46.683528878Z [err]  .........+..+.......
+2025-11-18T23:30:46.683534954Z [err]  ..+....+...+..+.+
+2025-11-18T23:30:46.683541495Z [err]  ..............+.......
+2025-11-18T23:30:46.685526914Z [err]  +.....+...+.+.....+.+....
+2025-11-18T23:30:46.685534566Z [err]  ....+...+.........+......
+2025-11-18T23:30:46.685539638Z [err]  ...+......+.+.........+....
+2025-11-18T23:30:46.685544958Z [err]  ...........+...+......+
+2025-11-18T23:30:46.685548987Z [err]  .........+......
+2025-11-18T23:30:46.687192675Z [err]  ...........
+2025-11-18T23:30:46.687201420Z [err]  +.+........+......+.........+
+2025-11-18T23:30:46.687207397Z [err]  .+......+........+.......
+2025-11-18T23:30:46.687213234Z [err]  .....+.........+...+
+2025-11-18T23:30:46.689657006Z [err]  ...+...+.+........+....
+2025-11-18T23:30:46.689672602Z [err]  ..+.+........+......
+2025-11-18T23:30:46.689679213Z [err]  ......+...+.......
+2025-11-18T23:30:46.689686729Z [err]  ........+......+....+..+.
+2025-11-18T23:30:46.693317147Z [err]  +...+..+...+......+
+2025-11-18T23:30:46.693323864Z [err]  ......+.......+..+......+...
+2025-11-18T23:30:46.693328945Z [err]  +...................+...+............
+2025-11-18T23:30:46.693333802Z [err]  ...+..+.+..+....+
+2025-11-18T23:30:46.693338810Z [err]  ......+..+......+....+..+
+2025-11-18T23:30:46.695521016Z [err]  ......+.......+..+++++
+2025-11-18T23:30:46.695532987Z [err]  +
+2025-11-18T23:30:46.695540006Z [err]  -----
+2025-11-18T23:30:46.695585526Z [err]  Certificate request self-signature ok
+2025-11-18T23:30:46.695592218Z [err]  subject=CN=localhost
+2025-11-18T23:30:46.695600319Z [inf]  
+2025-11-18T23:30:46.695605718Z [inf]  waiting for server to shut down....2025-11-18 23:30:46.258 UTC [46] LOG:  received fast shutdown request
+2025-11-18T23:30:46.695612106Z [inf]  2025-11-18 23:30:46.270 UTC [46] LOG:  aborting any active transactions
+2025-11-18T23:30:46.695619050Z [inf]  2025-11-18 23:30:46.275 UTC [46] LOG:  background worker "logical replication launcher" (PID 52) exited with exit code 1
+2025-11-18T23:30:46.695625678Z [inf]  2025-11-18 23:30:46.278 UTC [47] LOG:  shutting down
+2025-11-18T23:30:46.695631899Z [inf]  2025-11-18 23:30:46.288 UTC [47] LOG:  checkpoint starting: shutdown immediate
+2025-11-18T23:30:46.695637289Z [inf]  2025-11-18 23:30:46.524 UTC [47] LOG:  checkpoint complete: wrote 925 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.024 s, sync=0.194 s, total=0.246 s; sync files=301, longest=0.044 s, average=0.001 s; distance=4256 kB, estimate=4256 kB; lsn=0/1915960, redo lsn=0/1915960
+2025-11-18T23:30:46.695643238Z [inf]  2025-11-18 23:30:46.533 UTC [46] LOG:  database system is shut down
+2025-11-18T23:30:46.695648483Z [inf]   done
+2025-11-18T23:30:46.695654149Z [inf]  server stopped
+2025-11-18T23:30:46.695659699Z [inf]  
+2025-11-18T23:30:46.695664871Z [inf]  PostgreSQL init process complete; ready for start up.
+2025-11-18T23:30:46.697945612Z [err]  2025-11-18 23:30:46.695 UTC [3] LOG:  database system is ready to accept connections
+2025-11-18T23:30:46.697951633Z [inf]  
+2025-11-18T23:30:46.697959373Z [err]  2025-11-18 23:30:46.590 UTC [3] LOG:  starting PostgreSQL 17.7 (Debian 17.7-3.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2025-11-18T23:30:46.697964803Z [err]  2025-11-18 23:30:46.590 UTC [3] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2025-11-18T23:30:46.697970633Z [err]  2025-11-18 23:30:46.590 UTC [3] LOG:  listening on IPv6 address "::", port 5432
+2025-11-18T23:30:46.697977972Z [err]  2025-11-18 23:30:46.676 UTC [3] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-11-18T23:30:46.697982991Z [err]  2025-11-18 23:30:46.685 UTC [78] LOG:  database system was shut down at 2025-11-18 23:30:46 UTC
+2025-11-18T23:35:52.929077421Z [err]  2025-11-18 23:35:46.785 UTC [76] LOG:  checkpoint starting: time
+2025-11-18T23:35:52.929088269Z [err]  2025-11-18 23:35:51.238 UTC [76] LOG:  checkpoint complete: wrote 47 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.415 s, sync=0.004 s, total=4.454 s; sync files=12, longest=0.003 s, average=0.001 s; distance=270 kB, estimate=270 kB; lsn=0/1959210, redo lsn=0/1959180
+2025-11-18T23:45:51.316694537Z [err]  2025-11-18 23:45:46.432 UTC [76] LOG:  checkpoint starting: time
+2025-11-18T23:46:21.395276314Z [err]  2025-11-18 23:46:12.205 UTC [76] LOG:  checkpoint complete: wrote 257 buffers (1.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=25.675 s, sync=0.088 s, total=25.773 s; sync files=273, longest=0.024 s, average=0.001 s; distance=1727 kB, estimate=1727 kB; lsn=0/1B21B70, redo lsn=0/1B09060
+2025-11-19T00:07:56.407788512Z [err]  2025-11-19 00:07:48.108 UTC [202] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407791035Z [err]  2025-11-19 00:07:46.991 UTC [198] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407797096Z [err]  2025-11-19 00:07:47.302 UTC [199] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407797637Z [err]  2025-11-19 00:07:48.421 UTC [203] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407804322Z [err]  2025-11-19 00:07:47.613 UTC [201] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407853008Z [err]  2025-11-19 00:07:48.732 UTC [204] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407860711Z [err]  2025-11-19 00:07:49.219 UTC [205] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407866267Z [err]  2025-11-19 00:07:49.697 UTC [206] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407871195Z [err]  2025-11-19 00:07:50.041 UTC [207] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407877071Z [err]  2025-11-19 00:07:50.871 UTC [209] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407878089Z [err]  2025-11-19 00:07:50.382 UTC [208] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407891659Z [err]  2025-11-19 00:07:51.405 UTC [210] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407900237Z [err]  2025-11-19 00:07:51.718 UTC [211] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407905088Z [err]  2025-11-19 00:07:53.139 UTC [215] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407908953Z [err]  2025-11-19 00:07:52.032 UTC [212] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407912183Z [err]  2025-11-19 00:07:53.488 UTC [216] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407916844Z [err]  2025-11-19 00:07:52.512 UTC [213] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.407923613Z [err]  2025-11-19 00:07:52.828 UTC [214] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.410647153Z [err]  2025-11-19 00:07:53.802 UTC [217] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.410653067Z [err]  2025-11-19 00:07:54.119 UTC [218] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.410659687Z [err]  2025-11-19 00:07:54.598 UTC [219] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.410665865Z [err]  2025-11-19 00:07:54.911 UTC [220] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.410671623Z [err]  2025-11-19 00:07:55.228 UTC [221] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.410677525Z [err]  2025-11-19 00:07:55.572 UTC [222] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.410689404Z [err]  2025-11-19 00:07:55.885 UTC [223] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.410695798Z [err]  2025-11-19 00:07:56.197 UTC [224] LOG:  invalid length of startup packet
+2025-11-19T00:07:56.565876503Z [err]  2025-11-19 00:07:56.562 UTC [225] LOG:  invalid length of startup packet
+2025-11-19T00:07:57.278309670Z [err]  2025-11-19 00:07:56.874 UTC [226] LOG:  invalid length of startup packet
+2025-11-19T00:07:57.278314991Z [err]  2025-11-19 00:07:57.185 UTC [227] LOG:  invalid length of startup packet
+2025-11-19T00:07:57.605245535Z [err]  2025-11-19 00:07:57.537 UTC [228] LOG:  invalid length of startup packet
+2025-11-19T00:07:58.413804375Z [err]  2025-11-19 00:07:57.851 UTC [229] LOG:  invalid length of startup packet
+2025-11-19T00:07:58.413813661Z [err]  2025-11-19 00:07:58.164 UTC [230] LOG:  invalid length of startup packet
+2025-11-19T00:07:58.507144753Z [err]  2025-11-19 00:07:58.505 UTC [231] LOG:  invalid length of startup packet
+2025-11-19T00:07:59.427942990Z [err]  2025-11-19 00:07:59.265 UTC [234] LOG:  invalid length of startup packet
+2025-11-19T00:07:59.427988377Z [err]  2025-11-19 00:07:58.817 UTC [232] LOG:  invalid length of startup packet
+2025-11-19T00:07:59.427996003Z [err]  2025-11-19 00:07:59.129 UTC [233] LOG:  invalid length of startup packet
+2025-11-19T00:07:59.487900309Z [err]  2025-11-19 00:07:59.484 UTC [235] LOG:  invalid length of startup packet
+2025-11-19T00:07:59.644443607Z [err]  2025-11-19 00:07:59.597 UTC [236] LOG:  invalid length of startup packet
+2025-11-19T00:07:59.800714582Z [err]  2025-11-19 00:07:59.798 UTC [237] LOG:  invalid length of startup packet
+2025-11-19T00:08:00.441068301Z [err]  2025-11-19 00:07:59.928 UTC [238] LOG:  invalid length of startup packet
+2025-11-19T00:08:00.441076330Z [err]  2025-11-19 00:08:00.117 UTC [239] LOG:  invalid length of startup packet
+2025-11-19T00:08:00.613566250Z [err]  2025-11-19 00:08:00.608 UTC [240] LOG:  invalid length of startup packet
+2025-11-19T00:08:01.435031871Z [err]  2025-11-19 00:08:00.924 UTC [241] LOG:  invalid length of startup packet
+2025-11-19T00:08:01.435038754Z [err]  2025-11-19 00:08:01.223 UTC [242] LOG:  invalid length of startup packet
+2025-11-19T00:08:01.545777703Z [err]  2025-11-19 00:08:01.535 UTC [243] LOG:  invalid length of startup packet
+2025-11-19T00:08:02.419955740Z [err]  2025-11-19 00:08:02.194 UTC [245] LOG:  invalid length of startup packet
+2025-11-19T00:08:02.420199561Z [err]  2025-11-19 00:08:01.847 UTC [244] LOG:  invalid length of startup packet
+2025-11-19T00:08:02.514159288Z [err]  2025-11-19 00:08:02.507 UTC [246] LOG:  invalid length of startup packet
+2025-11-19T00:08:02.829245480Z [err]  2025-11-19 00:08:02.825 UTC [247] LOG:  invalid length of startup packet
+2025-11-19T00:08:03.412354956Z [err]  2025-11-19 00:08:03.169 UTC [248] LOG:  invalid length of startup packet
+2025-11-19T00:08:03.503340113Z [err]  2025-11-19 00:08:03.484 UTC [249] LOG:  invalid length of startup packet
+2025-11-19T00:08:03.822069462Z [err]  2025-11-19 00:08:03.803 UTC [250] LOG:  invalid length of startup packet
+2025-11-19T00:08:04.341992967Z [err]  2025-11-19 00:08:04.158 UTC [251] LOG:  invalid length of startup packet
+2025-11-19T00:08:04.481229718Z [err]  2025-11-19 00:08:04.473 UTC [252] LOG:  invalid length of startup packet
+2025-11-19T00:08:04.809502156Z [err]  2025-11-19 00:08:04.790 UTC [253] LOG:  invalid length of startup packet
+2025-11-19T00:08:05.329410465Z [err]  2025-11-19 00:08:05.141 UTC [254] LOG:  invalid length of startup packet
+2025-11-19T00:08:05.462310642Z [err]  2025-11-19 00:08:05.455 UTC [255] LOG:  invalid length of startup packet
+2025-11-19T00:08:05.784569603Z [err]  2025-11-19 00:08:05.770 UTC [256] LOG:  invalid length of startup packet
+2025-11-19T00:08:06.412137998Z [err]  2025-11-19 00:08:06.109 UTC [257] LOG:  invalid length of startup packet
+2025-11-19T00:08:06.412150469Z [err]  2025-11-19 00:08:06.363 UTC [258] LOG:  invalid length of startup packet
+2025-11-19T00:08:06.426472941Z [err]  2025-11-19 00:08:06.424 UTC [259] LOG:  invalid length of startup packet
+2025-11-19T00:08:06.740469242Z [err]  2025-11-19 00:08:06.738 UTC [260] LOG:  invalid length of startup packet
+2025-11-19T00:08:07.377952030Z [err]  2025-11-19 00:08:06.835 UTC [261] LOG:  invalid length of startup packet
+2025-11-19T00:08:07.377959094Z [err]  2025-11-19 00:08:07.075 UTC [262] LOG:  invalid length of startup packet
+2025-11-19T00:08:07.377966026Z [err]  2025-11-19 00:08:07.310 UTC [263] LOG:  invalid length of startup packet
+2025-11-19T00:08:07.391373251Z [err]  2025-11-19 00:08:07.387 UTC [265] LOG:  invalid length of startup packet
+2025-11-19T00:08:07.705946407Z [err]  2025-11-19 00:08:07.701 UTC [266] LOG:  invalid length of startup packet
+2025-11-19T00:08:08.355250723Z [err]  2025-11-19 00:08:08.044 UTC [267] LOG:  invalid length of startup packet
+2025-11-19T00:08:08.360709615Z [err]  2025-11-19 00:08:08.358 UTC [268] LOG:  invalid length of startup packet
+2025-11-19T00:08:08.687339017Z [err]  2025-11-19 00:08:08.671 UTC [269] LOG:  invalid length of startup packet
+2025-11-19T00:08:09.387258451Z [err]  2025-11-19 00:08:09.012 UTC [270] LOG:  invalid length of startup packet
+2025-11-19T00:08:09.387266202Z [err]  2025-11-19 00:08:09.326 UTC [271] LOG:  invalid length of startup packet
+2025-11-19T00:08:09.387273459Z [err]  2025-11-19 00:08:09.327 UTC [272] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.355063498Z [err]  2025-11-19 00:08:09.641 UTC [273] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.355069700Z [err]  2025-11-19 00:08:09.659 UTC [274] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.355075738Z [err]  2025-11-19 00:08:10.001 UTC [275] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.355081950Z [err]  2025-11-19 00:08:10.002 UTC [276] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.355088014Z [err]  2025-11-19 00:08:10.317 UTC [277] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.355094805Z [err]  2025-11-19 00:08:10.369 UTC [278] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.355101601Z [err]  2025-11-19 00:08:10.629 UTC [279] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.355107005Z [err]  2025-11-19 00:08:10.701 UTC [280] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.355148816Z [err]  2025-11-19 00:08:10.971 UTC [281] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.355153468Z [err]  2025-11-19 00:08:11.033 UTC [282] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.355158750Z [err]  2025-11-19 00:08:11.289 UTC [283] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.410994282Z [err]  2025-11-19 00:08:11.395 UTC [284] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.617907264Z [err]  2025-11-19 00:08:11.606 UTC [285] LOG:  invalid length of startup packet
+2025-11-19T00:08:11.735306820Z [err]  2025-11-19 00:08:11.727 UTC [286] LOG:  invalid length of startup packet
+2025-11-19T00:08:12.333369964Z [err]  2025-11-19 00:08:11.963 UTC [287] LOG:  invalid length of startup packet
+2025-11-19T00:08:12.333377764Z [err]  2025-11-19 00:08:12.062 UTC [288] LOG:  invalid length of startup packet
+2025-11-19T00:08:12.333384560Z [err]  2025-11-19 00:08:12.276 UTC [289] LOG:  invalid length of startup packet
+2025-11-19T00:08:12.426434070Z [err]  2025-11-19 00:08:12.419 UTC [290] LOG:  invalid length of startup packet
+2025-11-19T00:08:12.606343859Z [err]  2025-11-19 00:08:12.592 UTC [291] LOG:  invalid length of startup packet
+2025-11-19T00:08:12.756505066Z [err]  2025-11-19 00:08:12.752 UTC [292] LOG:  invalid length of startup packet
+2025-11-19T00:08:13.396921834Z [err]  2025-11-19 00:08:12.940 UTC [293] LOG:  invalid length of startup packet
+2025-11-19T00:08:13.396928850Z [err]  2025-11-19 00:08:13.083 UTC [294] LOG:  invalid length of startup packet
+2025-11-19T00:08:13.396936540Z [err]  2025-11-19 00:08:13.253 UTC [295] LOG:  invalid length of startup packet
+2025-11-19T00:08:13.450280481Z [err]  2025-11-19 00:08:13.439 UTC [296] LOG:  invalid length of startup packet
+2025-11-19T00:08:13.568979015Z [err]  2025-11-19 00:08:13.567 UTC [297] LOG:  invalid length of startup packet
+2025-11-19T00:08:13.797810085Z [err]  2025-11-19 00:08:13.773 UTC [298] LOG:  invalid length of startup packet
+2025-11-19T00:08:14.427170740Z [err]  2025-11-19 00:08:13.909 UTC [299] LOG:  invalid length of startup packet
+2025-11-19T00:08:14.427176703Z [err]  2025-11-19 00:08:14.105 UTC [300] LOG:  invalid length of startup packet
+2025-11-19T00:08:14.427178070Z [err]  2025-11-19 00:08:14.223 UTC [301] LOG:  invalid length of startup packet
+2025-11-19T00:08:14.541348828Z [err]  2025-11-19 00:08:14.536 UTC [302] LOG:  invalid length of startup packet
+2025-11-19T00:08:14.579971999Z [err]  2025-11-19 00:08:14.574 UTC [303] LOG:  invalid length of startup packet
+2025-11-19T00:08:15.457028981Z [err]  2025-11-19 00:08:14.889 UTC [304] LOG:  invalid length of startup packet
+2025-11-19T00:08:15.457034792Z [err]  2025-11-19 00:08:14.915 UTC [305] LOG:  invalid length of startup packet
+2025-11-19T00:08:15.457039635Z [err]  2025-11-19 00:08:14.975 UTC [306] LOG:  invalid length of startup packet
+2025-11-19T00:08:15.457043807Z [err]  2025-11-19 00:08:15.247 UTC [307] LOG:  invalid length of startup packet
+2025-11-19T00:08:15.457048646Z [err]  2025-11-19 00:08:15.286 UTC [308] LOG:  invalid length of startup packet
+2025-11-19T00:08:15.457054090Z [err]  2025-11-19 00:08:15.359 UTC [309] LOG:  invalid length of startup packet
+2025-11-19T00:08:15.630908518Z [err]  2025-11-19 00:08:15.601 UTC [310] LOG:  invalid length of startup packet
+2025-11-19T00:08:15.831924735Z [err]  2025-11-19 00:08:15.830 UTC [311] LOG:  invalid length of startup packet
+2025-11-19T00:08:16.518004758Z [err]  2025-11-19 00:08:16.023 UTC [312] LOG:  invalid length of startup packet
+2025-11-19T00:08:16.518010365Z [err]  2025-11-19 00:08:16.336 UTC [313] LOG:  invalid length of startup packet
+2025-11-19T00:08:16.661308052Z [err]  2025-11-19 00:08:16.650 UTC [314] LOG:  invalid length of startup packet
+2025-11-19T00:08:18.441641051Z [err]  2025-11-19 00:08:17.955 UTC [318] LOG:  invalid length of startup packet
+2025-11-19T00:08:18.441745995Z [err]  2025-11-19 00:08:18.267 UTC [319] LOG:  invalid length of startup packet
+2025-11-19T00:08:18.442260650Z [err]  2025-11-19 00:08:16.994 UTC [315] LOG:  invalid length of startup packet
+2025-11-19T00:08:18.442266292Z [err]  2025-11-19 00:08:17.307 UTC [316] LOG:  invalid length of startup packet
+2025-11-19T00:08:18.442270243Z [err]  2025-11-19 00:08:17.618 UTC [317] LOG:  invalid length of startup packet
+2025-11-19T00:08:18.591910012Z [err]  2025-11-19 00:08:18.578 UTC [320] LOG:  invalid length of startup packet
+2025-11-19T00:08:19.433593306Z [err]  2025-11-19 00:08:18.919 UTC [321] LOG:  invalid length of startup packet
+2025-11-19T00:08:19.433597835Z [err]  2025-11-19 00:08:19.231 UTC [322] LOG:  invalid length of startup packet
+2025-11-19T00:08:19.554334447Z [err]  2025-11-19 00:08:19.549 UTC [323] LOG:  invalid length of startup packet
+2025-11-19T00:09:39.598856690Z [err]  2025-11-19 00:09:31.913 UTC [328] LOG:  invalid length of startup packet
+2025-11-19T00:09:39.598866731Z [err]  2025-11-19 00:09:31.974 UTC [329] LOG:  invalid length of startup packet
+2025-11-19T00:09:39.598873952Z [err]  2025-11-19 00:09:32.384 UTC [330] LOG:  invalid length of startup packet
+2025-11-19T00:09:39.598881441Z [err]  2025-11-19 00:09:32.445 UTC [331] LOG:  invalid length of startup packet
+2025-11-19T00:09:39.598888048Z [err]  2025-11-19 00:09:32.854 UTC [332] LOG:  invalid length of startup packet
+2025-11-19T00:09:39.598895691Z [err]  2025-11-19 00:09:32.918 UTC [333] LOG:  invalid length of startup packet
+2025-11-19T00:09:39.598902246Z [err]  2025-11-19 00:09:33.365 UTC [334] LOG:  invalid length of startup packet
+2025-11-19T00:09:39.598922265Z [err]  2025-11-19 00:09:33.448 UTC [335] LOG:  invalid length of startup packet
+2025-11-19T00:09:39.598928190Z [err]  2025-11-19 00:09:33.837 UTC [336] LOG:  invalid length of startup packet
+2025-11-19T00:09:39.598934524Z [err]  2025-11-19 00:09:33.920 UTC [337] LOG:  invalid length of startup packet
+2025-11-19T00:09:39.598940110Z [err]  2025-11-19 00:09:34.308 UTC [338] LOG:  invalid length of startup packet
+2025-11-19T00:09:39.598944961Z [err]  2025-11-19 00:09:34.392 UTC [339] LOG:  invalid length of startup packet
+2025-11-19T00:16:36.679584634Z [err]  2025-11-19 00:16:34.342 UTC [361] LOG:  invalid length of startup packet
+2025-11-19T00:16:36.679589762Z [err]  2025-11-19 00:16:34.680 UTC [362] LOG:  invalid length of startup packet
+2025-11-19T00:16:36.679595521Z [err]  2025-11-19 00:16:35.012 UTC [363] LOG:  invalid length of startup packet
+2025-11-19T00:16:36.679603800Z [err]  2025-11-19 00:16:35.393 UTC [364] LOG:  invalid length of startup packet
+2025-11-19T00:16:36.679609816Z [err]  2025-11-19 00:16:35.725 UTC [365] LOG:  invalid length of startup packet
+2025-11-19T00:16:36.679617479Z [err]  2025-11-19 00:16:36.056 UTC [366] LOG:  invalid length of startup packet
+2025-11-19T00:16:36.679623876Z [err]  2025-11-19 00:16:36.452 UTC [367] LOG:  invalid length of startup packet
+2025-11-19T00:16:36.798714616Z [err]  2025-11-19 00:16:36.784 UTC [368] LOG:  invalid length of startup packet
+2025-11-19T00:16:37.563857333Z [err]  2025-11-19 00:16:37.510 UTC [370] LOG:  invalid length of startup packet
+2025-11-19T00:16:37.564098169Z [err]  2025-11-19 00:16:37.115 UTC [369] LOG:  invalid length of startup packet
+2025-11-19T00:16:37.846393667Z [err]  2025-11-19 00:16:37.841 UTC [371] LOG:  invalid length of startup packet
+2025-11-19T00:16:38.593745627Z [err]  2025-11-19 00:16:38.173 UTC [372] LOG:  invalid length of startup packet
+2025-11-19T00:16:38.593755234Z [err]  2025-11-19 00:16:38.561 UTC [373] LOG:  invalid length of startup packet
+2025-11-19T00:16:38.895392076Z [err]  2025-11-19 00:16:38.892 UTC [374] LOG:  invalid length of startup packet
+2025-11-19T00:16:39.672607582Z [err]  2025-11-19 00:16:39.223 UTC [375] LOG:  invalid length of startup packet
+2025-11-19T00:16:39.672615895Z [err]  2025-11-19 00:16:39.620 UTC [376] LOG:  invalid length of startup packet
+2025-11-19T00:16:39.954958828Z [err]  2025-11-19 00:16:39.953 UTC [377] LOG:  invalid length of startup packet
+2025-11-19T00:16:40.739445261Z [err]  2025-11-19 00:16:40.290 UTC [378] LOG:  invalid length of startup packet
+2025-11-19T00:50:57.878642930Z [err]  2025-11-19 00:50:47.500 UTC [76] LOG:  checkpoint starting: time
+2025-11-19T00:50:57.878648490Z [err]  2025-11-19 00:50:50.669 UTC [76] LOG:  checkpoint complete: wrote 32 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.124 s, sync=0.023 s, total=3.170 s; sync files=10, longest=0.022 s, average=0.003 s; distance=99 kB, estimate=1564 kB; lsn=0/1B21E30, redo lsn=0/1B21DD8

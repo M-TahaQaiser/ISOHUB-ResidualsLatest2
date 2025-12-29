@@ -1,0 +1,26 @@
+2025-11-19T11:44:57.000000000Z [inf]  Starting Container
+2025-11-19T11:44:58.479486003Z [inf]  > rest-express@1.0.0 start
+2025-11-19T11:44:58.479573470Z [inf]  11:44:58 AM [express] 🔒 Secure ISO Hub server running on port 8080
+2025-11-19T11:44:58.479583680Z [inf]  11:44:58 AM [express] 🔍 Health check: http://localhost:8080/health
+2025-11-19T11:44:58.479629221Z [inf]  11:44:58 AM [express] 📊 Metrics: http://localhost:8080/metrics
+2025-11-19T11:44:58.479631222Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T11:44:58.479638649Z [inf]  [SECURITY] Security middleware initialized
+2025-11-19T11:44:58.479645584Z [inf]  [MONITORING] Application monitoring active
+2025-11-19T11:44:58.479655870Z [inf]  [CACHE] Cache service ready
+2025-11-19T11:44:58.479660514Z [inf]  
+2025-11-19T11:44:58.479674270Z [inf]  ISO-AI sample data initialized
+2025-11-19T11:44:58.479684888Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T11:44:58.479695915Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T11:44:58.479730709Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T11:44:58.479790233Z [inf]  Security systems ready - migrations available via API
+2025-11-19T11:44:58.479825307Z [inf]  ISO-AI initialization skipped - manual setup available
+2025-11-19T11:44:58.479838447Z [inf]  📋 PreApplications router mounted at /api/preapplications
+2025-11-19T11:44:58.479849731Z [inf]  [OAuth Cleanup] Started periodic cleanup job (runs every hour)
+2025-11-19T11:44:58.480514093Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T11:44:58.480521628Z [inf]  
+2025-11-19T11:45:37.992498449Z [err]  [DB HEALTH] Health check failed (1 consecutive failures): Error: self-signed certificate in certificate chain
+2025-11-19T11:45:37.992506580Z [err]      at /app/node_modules/pg-pool/index.js:45:11
+2025-11-19T11:45:37.992513189Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-19T11:45:37.992518823Z [err]      at async Timeout._onTimeout (file:///app/dist/index.js:15076:24) {
+2025-11-19T11:45:37.992525839Z [err]    code: 'SELF_SIGNED_CERT_IN_CHAIN'
+2025-11-19T11:45:37.992532570Z [err]  }

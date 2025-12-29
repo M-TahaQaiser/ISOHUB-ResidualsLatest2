@@ -1,0 +1,299 @@
+/* Agent Viewer container */
+.agent-viewer {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--section-background);
+    box-shadow: 0 0 15px var(--shadow-color);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  /* Agent Information Section */
+  .agent-info {
+    margin-bottom: 30px;
+  }
+  
+  .agent-info p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+  }
+  
+  /* Input fields for names */
+  .name-input  {
+    width: 30% !important; /* Adjust the width of the input */
+    margin-left: 30px; /* Add space between label and input */
+  }
+  
+  .split-input  {
+    margin-left: 74px; /* Add space between label and input */
+  }
+  
+  .agent-info input {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid var(--separator-color);
+    border-radius: 5px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    box-sizing: border-box;
+    margin-top: 5px; /* Add space between label and input */
+  }
+  
+  /* Split input field styling */
+  .split-input {
+    width: 10% !important; /* Adjust the width of the input */
+    padding: 6px;
+    border: 1px solid var(--separator-color);
+    border-radius: 5px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    box-sizing: border-box;
+    margin-top: 5px;
+  }
+  
+  /* Styling for the labels (First Name, Last Name, Split) */
+  .agent-info label {
+    font-size: 1rem;
+    color: var(--text-color);
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Clients Section */
+  .clients-section {
+    margin-top: 20px;
+  }
+  
+  .clients-section h3 {
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  
+  /* Updated header layout */
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .filter-section input,
+  .filter-section label {
+    margin-right: 15px;
+  }
+  
+  /* Search input styling */
+  .search-input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--separator-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    width: 250px;
+  }
+  
+  .search-input::placeholder {
+    color: var(--text-color);
+  }
+  
+  /* Branch ID filter styling */
+  .filter-section input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  .filter-section label {
+    color: var(--text-color);
+    font-size: 1rem;
+  }
+  
+  /* Table for merchants */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+  }
+  
+  table th, table td {
+    padding: 6px 4px;
+    border: 1px solid var(--separator-color);
+    text-align: left;
+    font-size: 0.9rem;
+    word-wrap: break-word;
+  }
+  
+  /* Adjust the Actions column width */
+  .actions-column {
+    width: 60px;
+    text-align: center;
+  }
+  
+  /* Background for table cells */
+  table td {
+    background-color: var(--background-color);
+  }
+  
+  table td input {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid var(--separator-color);
+    border-radius: 5px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    box-sizing: border-box;
+  }
+  
+  /* Red Trashcan Icon for Delete Button */
+  .delete-btn {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  .delete-btn i {
+    color: red;
+    font-size: 1.2rem;
+  }
+  
+  .delete-btn:hover i {
+    opacity: 0.8;
+  }
+  
+  /* Add Merchant Button with + Icon */
+  .add-merchant-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 1rem;
+    border: none;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-merchant-btn:hover {
+    background-color: var(--accent-color2);
+  }
+  
+  .add-merchant-btn i {
+    margin-left: 8px;
+  }
+  
+  /* Save and Back Buttons */
+  .save {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+  
+  .btn-save, .btn-back {
+    padding: 8px 16px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .btn-save:hover, .btn-back:hover {
+    background-color: var(--accent-color2);
+  }
+  
+  /* Bottom buttons container */
+  .bottom-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+ 
+  /* Toggle switch container styled like the theme toggle, slightly bigger */
+  .branch-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Toggle switch styling */
+  .branch-toggle-container .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+  }
+  
+  .branch-toggle-container .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .branch-toggle-container .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--separator-color);
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+  
+  .branch-toggle-container .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+  }
+  
+  .branch-toggle-container input:checked + .slider {
+    background-color: var(--accent-color);
+  }
+  
+  .branch-toggle-container input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+  /* Rounded slider */
+  .branch-toggle-container .slider.round {
+    border-radius: 34px;
+  }
+  
+  .branch-toggle-container .slider.round:before {
+    border-radius: 50%;
+  }
+  
+  /* Label for the toggle */
+  .branch-toggle-container .toggle-label {
+    font-size: 1rem;
+    color: var(--text-color);
+    white-space: nowrap;
+  }
+  
+  /* Ensuring the text remains on the same line */
+  .branch-toggle-container .toggle-label {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+
+  

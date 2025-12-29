@@ -1,0 +1,29 @@
+2025-12-03T04:49:23.000000000Z [inf]  Starting Container
+2025-12-03T04:49:24.812731631Z [inf]  
+2025-12-03T04:49:24.813035802Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-12-03T04:49:24.813042424Z [inf]  
+2025-12-03T04:49:24.813048255Z [inf]  > rest-express@1.0.0 start
+2025-12-03T04:49:24.813053853Z [inf]  > NODE_ENV=production node dist/index.js
+2025-12-03T04:49:25.120716844Z [inf]  ISO-AI sample data initialized
+2025-12-03T04:49:25.120723831Z [inf]  🔄 Real Data Display routes initializing...
+2025-12-03T04:49:25.123096704Z [inf]  🔄 Starting database migrations...
+2025-12-03T04:49:25.754380575Z [inf]  📁 Looking for migrations in: /migrations
+2025-12-03T04:49:25.754387999Z [inf]  📁 No migrations directory found, skipping migrations
+2025-12-03T04:49:25.754395018Z [inf]  Security systems ready - migrations available via API
+2025-12-03T04:49:25.754401271Z [inf]  ISO-AI initialization skipped - manual setup available
+2025-12-03T04:49:25.754406940Z [inf]  [Startup] Running data integrity check...
+2025-12-03T04:49:25.754412985Z [inf]  [Startup] Current status: critical
+2025-12-03T04:49:25.754418029Z [inf]  [Startup] Organizations: 0, Missing required: 2
+2025-12-03T04:49:25.754424385Z [inf]  [Startup] Missing required organizations detected, seeding...
+2025-12-03T04:49:25.754433648Z [err]  [DataIntegrity] Failed to seed org-demo-isohub-2025: column "website" of relation "organizations" does not exist
+2025-12-03T04:49:25.754442259Z [err]  [DataIntegrity] Failed to seed org-86f76df1: column "website" of relation "organizations" does not exist
+2025-12-03T04:49:25.754455615Z [err]  [Startup] Errors during seeding: Failed to seed org-demo-isohub-2025: column "website" of relation "organizations" does not exist; Failed to seed org-86f76df1: column "website" of relation "organizations" does not exist
+2025-12-03T04:49:25.754462171Z [inf]  [Startup] Final data integrity status: critical
+2025-12-03T04:49:25.754468489Z [err]  [Startup] WARNING: Data integrity is in CRITICAL state!
+2025-12-03T04:49:25.754475122Z [inf]  📋 PreApplications router mounted at /api/preapplications
+2025-12-03T04:49:25.757445152Z [inf]  4:49:25 AM [express] 🔒 Secure ISO Hub server running on port 8080
+2025-12-03T04:49:25.757454659Z [inf]  4:49:25 AM [express] 🔍 Health check: http://localhost:8080/health
+2025-12-03T04:49:25.757461245Z [inf]  4:49:25 AM [express] 📊 Metrics: http://localhost:8080/metrics
+2025-12-03T04:49:25.757466173Z [inf]  [SECURITY] Security middleware initialized
+2025-12-03T04:49:25.757473834Z [inf]  [MONITORING] Application monitoring active
+2025-12-03T04:49:25.757484769Z [inf]  [CACHE] Cache service ready

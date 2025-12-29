@@ -1,0 +1,139 @@
+.report-upload-container {
+  /*max-width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--section-background);
+  box-shadow: 0 0 15px var(--shadow-color);
+  border-radius: 10px;*/
+  overflow: hidden;
+}
+
+.report-upload-container h2 {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+.report-upload-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.report-upload-table th, .report-upload-table td {
+  padding: 10px;
+  border: 1px solid var(--separator-color);
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  word-wrap: break-word;
+}
+
+.report-upload-table th {
+  background-color: #000000;
+  color: #fff;
+  border: 0;
+  border-bottom: 1px solid var(--separator-color);
+}
+.delete-btn i {
+  color: #facc15;
+}
+.report-upload-table th, .report-upload-table td {
+  padding: 10px;
+  border: 1px solid var(--separator-color);
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  word-wrap: break-word;
+  background: #000;
+  border: 0;
+  border-bottom: 1px solid var(--separator-color);
+}
+.report-upload-table td select, .report-upload-table td input[type="file"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--separator-color);
+  border-radius: 5px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  box-sizing: border-box;
+}
+
+.add-row-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+/*
+.add-row-btn button {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}*/
+
+.add-row-btn button i {
+  margin-left: 8px;
+}
+
+.add-row-btn button:hover {
+  background-color: var(--accent-color2);
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+
+.delete-btn:hover i {
+  opacity: 0.8;
+}
+/*
+.upload-btn {
+  display: block;
+  margin: 0 auto;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}*/
+
+.upload-btn:hover {
+  background-color: var(--accent-color2);
+}
+
+.upload-status {
+  margin-top: 15px;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.month-year-selection {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.month-year-selection label {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.month-year-selection select {
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid var(--separator-color);
+}

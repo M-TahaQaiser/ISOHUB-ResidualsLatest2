@@ -1,0 +1,111 @@
+/* Flexbox to align the tables side by side */
+.reports-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap; /* Allow wrapping if containers overflow */
+}
+
+.table-container {
+  flex: 1;
+  min-width: 200px;
+  max-width: 45%;
+  background-color: var(--background-color);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--shadow-color);
+  overflow-x: auto;
+}
+
+/* Styling for tables */
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+  text-align: left;
+  padding: 6px;
+  border-bottom: 1px solid var(--separator-color);
+  word-wrap: break-word;
+}
+
+.table-container th {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+
+.table-container td {
+  font-size: 0.85rem;
+}
+
+.table-container button {
+  padding: 6px 10px;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.table-container button:hover {
+  background-color: #ff9800;
+}
+
+/* Upload button container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-container button {
+  padding: 8px 18px;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+  background-color: #ffa500;
+}
+
+/* Message container for when reports are already approved */
+.message-container {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
+  /* Stack tables into one column on tablets */
+  .reports-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .table-container {
+    max-width: 100%; /* Take full width on tablets */
+  }
+
+  /* Button adjustments for tablets */
+  .table-container button,
+  .button-container button {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
+
+  /* Adjust text and padding for tables on tablets */
+  .table-container th,
+  .table-container td {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+}

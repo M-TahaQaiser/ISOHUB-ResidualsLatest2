@@ -1,0 +1,545 @@
+import nodemailer from 'nodemailer';
+import { Report } from '@shared/schema';
+
+export interface EmailTemplate {
+  subject: string;
+  htmlContent: string;
+  textContent: string;
+  attachments?: {
+    filename: string;
+    content: Buffer;
+    contentType: string;
+  }[];
+}
+
+export interface ScheduledEmail {
+  to: string[];
+  cc?: string[];
+  bcc?: string[];
+  template: EmailTemplate;
+  scheduledFor: Date;
+}
+
+export class EmailService {
+  private transporter: nodemailer.Transporter;
+
+  constructor() {
+    this.transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.GMAIL_USER || process.env.SMTP_USER || 'support@isohub.io',
+        pass: process.env.GMAIL_PASS || process.env.SMTP_PASS || 'placeholder-password',
+      },
+    });
+  }
+
+  async sendEmail(email: ScheduledEmail): Promise<void> {
+    try {
+      const mailOptions = {
+        from: process.env.FROM_EMAIL || process.env.SMTP_FROM || process.env.EMAIL_FROM || 'ISOHub <noreply@isohub.io>',
+        to: email.to.join(', '),
+        cc: email.cc?.join(', '),
+        bcc: email.bcc?.join(', '),
+        subject: email.template.subject,
+        text: email.template.textContent,
+        html: email.template.htmlContent,
+        attachments: email.template.attachments?.map(att => ({
+          filename: att.filename,
+          content: att.content,
+          contentType: att.contentType,
+        })),
+      };
+
+      const result = await this.transporter.sendMail(mailOptions);
+      console.log('Email sent successfully:', result.messageId);
+    } catch (error) {
+      throw new Error(`Failed to send email: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
+
+  async scheduleReport(
+    report: Report, 
+    recipients: string[], 
+    reportData: any,
+    customBranding?: {
+      logoUrl?: string;
+      companyName?: string;
+      brandColor?: string;
+    }
+  ): Promise<void> {
+    const template = this.generateReportTemplate(report, reportData, customBranding);
+    
+    const scheduledEmail: ScheduledEmail = {
+      to: recipients,
+      template,
+      scheduledFor: new Date(), // For now, send immediately
+    };
+
+    await this.sendEmail(scheduledEmail);
+  }
+
+  private generateReportTemplate(
+    report: Report, 
+    reportData: any,
+    branding?: {
+      logoUrl?: string;
+      companyName?: string;
+      brandColor?: string;
+    }
+  ): EmailTemplate {
+    const companyName = branding?.companyName || 'ISOHub';
+    const brandColor = branding?.brandColor || '#FFD700';
+    const logoUrl = branding?.logoUrl || '';
+
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${report.name}</title>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .header { background-color: ${brandColor}; color: white; padding: 20px; text-align: center; }
+          .content { padding: 20px; }
+          .metric { background-color: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 5px; }
+          .metric-value { font-size: 24px; font-weight: bold; color: ${brandColor}; }
+          .footer { background-color: #f8f9fa; padding: 20px; text-align: center; font-size: 12px; color: #666; }
+          table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+          th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+          th { background-color: ${brandColor}; color: white; }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          ${logoUrl ? `<img src="${logoUrl}" alt="Logo" style="height: 40px; margin-bottom: 10px;">` : ''}
+          <h1>${report.name}</h1>
+          <p>Generated on ${new Date().toLocaleDateString()}</p>
+        </div>
+        
+        <div class="content">
+          <h2>Executive Summary</h2>
+          <div class="metric">
+            <div>Total Revenue</div>
+            <div class="metric-value">$${reportData.totalRevenue || '0'}</div>
+          </div>
+          
+          <div class="metric">
+            <div>Total Merchants</div>
+            <div class="metric-value">${reportData.totalMerchants || '0'}</div>
+          </div>
+
+          ${reportData.table ? `
+            <h2>Detailed Data</h2>
+            <table>
+              <thead>
+                <tr>
+                  ${reportData.table.headers?.map((h: string) => `<th>${h}</th>`).join('') || ''}
+                </tr>
+              </thead>
+              <tbody>
+                ${reportData.table.rows?.map((row: any[]) => 
+                  `<tr>${row.map((cell: any) => `<td>${cell}</td>`).join('')}</tr>`
+                ).join('') || ''}
+              </tbody>
+            </table>
+          ` : ''}
+        </div>
+        
+        <div class="footer">
+          <p>This report was generated by ${companyName}</p>
+          <p>For questions or support, please contact your system administrator.</p>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const textContent = `
+      ${report.name}
+      Generated on ${new Date().toLocaleDateString()}
+      
+      Executive Summary:
+      Total Revenue: $${reportData.totalRevenue || '0'}
+      Total Merchants: ${reportData.totalMerchants || '0'}
+      
+      ${reportData.insights || 'No additional insights available.'}
+      
+      This report was generated by ${companyName}.
+    `;
+
+    return {
+      subject: `${report.name} - ${new Date().toLocaleDateString()}`,
+      htmlContent,
+      textContent,
+    };
+  }
+
+  generateUploadLinkTemplate(linkData: {
+    recipientName: string;
+    uploadLink: string;
+    expirationDate: string;
+    maxDownloads: number;
+    message?: string;
+    senderName: string;
+  }): EmailTemplate {
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Secure Upload Link - ISOHub</title>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+          .container { max-width: 600px; margin: 0 auto; background-color: white; }
+          .header { background: linear-gradient(135deg, #FFD700, #FFA500); color: black; padding: 30px; text-align: center; }
+          .content { padding: 30px; }
+          .upload-button { 
+            display: inline-block; 
+            background: linear-gradient(135deg, #FFD700, #FFA500); 
+            color: black; 
+            padding: 15px 30px; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            margin: 20px 0;
+          }
+          .info-box { background-color: #f8f9fa; padding: 20px; border-left: 4px solid #FFD700; margin: 20px 0; }
+          .footer { background-color: #333; color: white; padding: 20px; text-align: center; font-size: 12px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>🔐 Secure Upload Link</h1>
+            <p>ISOHub Document Portal</p>
+          </div>
+          
+          <div class="content">
+            <h2>Hello ${linkData.recipientName},</h2>
+            
+            <p>${linkData.senderName} has sent you a secure link to upload documents to the ISOHub platform.</p>
+            
+            ${linkData.message ? `
+              <div class="info-box">
+                <strong>Message:</strong><br>
+                ${linkData.message}
+              </div>
+            ` : ''}
+            
+            <p style="text-align: center;">
+              <a href="${linkData.uploadLink}" class="upload-button">
+                Upload Documents Securely
+              </a>
+            </p>
+            
+            <div class="info-box">
+              <h3>Important Details:</h3>
+              <ul>
+                <li><strong>Link expires:</strong> ${new Date(linkData.expirationDate).toLocaleDateString()}</li>
+                <li><strong>Maximum uploads:</strong> ${linkData.maxDownloads}</li>
+                <li><strong>Security:</strong> This link is unique and secure</li>
+              </ul>
+            </div>
+            
+            <p><strong>Need help?</strong> Contact your ISOHub administrator or reply to this email.</p>
+          </div>
+          
+          <div class="footer">
+            <p>This email was sent from ISOHub Secure Document Portal</p>
+            <p>© ${new Date().getFullYear()} ISOHub. All rights reserved.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const textContent = `
+      Secure Upload Link - ISOHub
+      
+      Hello ${linkData.recipientName},
+      
+      ${linkData.senderName} has sent you a secure link to upload documents to the ISOHub platform.
+      
+      ${linkData.message ? `Message: ${linkData.message}\n\n` : ''}
+      
+      Upload Link: ${linkData.uploadLink}
+      
+      Important Details:
+      - Link expires: ${new Date(linkData.expirationDate).toLocaleDateString()}
+      - Maximum uploads: ${linkData.maxDownloads}
+      - This link is unique and secure
+      
+      Need help? Contact your ISOHub administrator or reply to this email.
+      
+      © ${new Date().getFullYear()} ISOHub. All rights reserved.
+    `;
+
+    return {
+      subject: `Secure Upload Link from ${linkData.senderName} - ISOHub`,
+      htmlContent,
+      textContent,
+    };
+  }
+
+  generatePreApplicationNotificationTemplate(applicationData: {
+    dba: string;
+    businessContact: string;
+    email: string;
+    phone: string;
+    status: string;
+    agentName?: string;
+    formLink?: string;
+  }): EmailTemplate {
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pre-Application Update - ISOHub</title>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+          .container { max-width: 600px; margin: 0 auto; background-color: white; }
+          .header { background: linear-gradient(135deg, #FFD700, #FFA500); color: black; padding: 30px; text-align: center; }
+          .content { padding: 30px; }
+          .status-badge { 
+            display: inline-block; 
+            padding: 8px 16px; 
+            border-radius: 20px; 
+            font-weight: bold; 
+            text-transform: uppercase;
+            ${applicationData.status === 'approved' ? 'background: #22c55e; color: white;' : 
+              applicationData.status === 'pending' ? 'background: #f59e0b; color: white;' : 
+              'background: #ef4444; color: white;'}
+          }
+          .info-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+          .info-table td { padding: 12px; border-bottom: 1px solid #eee; }
+          .info-table td:first-child { font-weight: bold; width: 30%; }
+          .footer { background-color: #333; color: white; padding: 20px; text-align: center; font-size: 12px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>📋 Pre-Application Update</h1>
+            <p>ISOHub Payment Processing</p>
+          </div>
+          
+          <div class="content">
+            <h2>Application Status: <span class="status-badge">${applicationData.status}</span></h2>
+            
+            <p>Hello ${applicationData.businessContact},</p>
+            
+            <p>This is an update regarding your pre-application for <strong>${applicationData.dba}</strong>.</p>
+            
+            <table class="info-table">
+              <tr><td>Business Name:</td><td>${applicationData.dba}</td></tr>
+              <tr><td>Contact Person:</td><td>${applicationData.businessContact}</td></tr>
+              <tr><td>Email:</td><td>${applicationData.email}</td></tr>
+              <tr><td>Phone:</td><td>${applicationData.phone}</td></tr>
+              <tr><td>Current Status:</td><td><span class="status-badge">${applicationData.status}</span></td></tr>
+              ${applicationData.agentName ? `<tr><td>Agent:</td><td>${applicationData.agentName}</td></tr>` : ''}
+            </table>
+            
+            ${applicationData.formLink ? `
+              <p style="text-align: center; margin: 30px 0;">
+                <a href="${applicationData.formLink}" style="display: inline-block; background: linear-gradient(135deg, #FFD700, #FFA500); color: black; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                  View Application Details
+                </a>
+              </p>
+            ` : ''}
+            
+            <p>If you have any questions about your application, please contact your assigned agent or our support team.</p>
+          </div>
+          
+          <div class="footer">
+            <p>This email was sent from ISOHub Pre-Application System</p>
+            <p>© ${new Date().getFullYear()} ISOHub. All rights reserved.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const textContent = `
+      Pre-Application Update - ISOHub
+      
+      Hello ${applicationData.businessContact},
+      
+      This is an update regarding your pre-application for ${applicationData.dba}.
+      
+      Application Details:
+      - Business Name: ${applicationData.dba}
+      - Contact Person: ${applicationData.businessContact}
+      - Email: ${applicationData.email}
+      - Phone: ${applicationData.phone}
+      - Current Status: ${applicationData.status.toUpperCase()}
+      ${applicationData.agentName ? `- Agent: ${applicationData.agentName}` : ''}
+      
+      ${applicationData.formLink ? `View Application: ${applicationData.formLink}\n\n` : ''}
+      
+      If you have any questions about your application, please contact your assigned agent or our support team.
+      
+      © ${new Date().getFullYear()} ISOHub. All rights reserved.
+    `;
+
+    return {
+      subject: `Pre-Application Update: ${applicationData.dba} - Status: ${applicationData.status}`,
+      htmlContent,
+      textContent,
+    };
+  }
+
+  generateWelcomeEmailTemplate(userData: {
+    name: string;
+    email: string;
+    organization?: string;
+    loginLink?: string;
+  }): EmailTemplate {
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to ISOHub</title>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+          .container { max-width: 600px; margin: 0 auto; background-color: white; }
+          .header { background: linear-gradient(135deg, #FFD700, #FFA500); color: black; padding: 30px; text-align: center; }
+          .content { padding: 30px; }
+          .feature-box { background-color: #f8f9fa; padding: 20px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #FFD700; }
+          .login-button { display: inline-block; background: linear-gradient(135deg, #FFD700, #FFA500); color: black; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0; }
+          .footer { background-color: #333; color: white; padding: 20px; text-align: center; font-size: 12px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>🎉 Welcome to ISOHub!</h1>
+            <p>Your Complete Payment Processing Platform</p>
+          </div>
+          
+          <div class="content">
+            <h2>Hello ${userData.name}!</h2>
+            
+            <p>Welcome to ISOHub, the comprehensive payment processing and merchant services platform. We're excited to have you ${userData.organization ? `and ${userData.organization}` : ''} on board!</p>
+            
+            <div class="feature-box">
+              <h3>🚀 What You Can Do:</h3>
+              <ul>
+                <li><strong>Pre-Applications:</strong> Manage and track merchant pre-applications</li>
+                <li><strong>Secured Documents:</strong> Share documents securely with clients</li>
+                <li><strong>Marketing Materials:</strong> Access professional marketing resources</li>
+                <li><strong>Residuals Tracking:</strong> Monitor payments and commission splits</li>
+                <li><strong>AI-Powered Reports:</strong> Generate insights with natural language queries</li>
+              </ul>
+            </div>
+            
+            ${userData.loginLink ? `
+              <p style="text-align: center;">
+                <a href="${userData.loginLink}" class="login-button">
+                  Access Your Dashboard
+                </a>
+              </p>
+            ` : ''}
+            
+            <div class="feature-box">
+              <h3>📞 Need Help?</h3>
+              <p>Our support team is here to help you get started:</p>
+              <ul>
+                <li>Email: support@isohub.io</li>
+                <li>Documentation: Available in your dashboard</li>
+                <li>Training: Schedule a personalized walkthrough</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="footer">
+            <p>Welcome to the ISOHub family!</p>
+            <p>© ${new Date().getFullYear()} ISOHub. All rights reserved.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const textContent = `
+      Welcome to ISOHub!
+      
+      Hello ${userData.name}!
+      
+      Welcome to ISOHub, the comprehensive payment processing and merchant services platform. We're excited to have you ${userData.organization ? `and ${userData.organization}` : ''} on board!
+      
+      What You Can Do:
+      - Pre-Applications: Manage and track merchant pre-applications
+      - Secured Documents: Share documents securely with clients
+      - Marketing Materials: Access professional marketing resources
+      - Residuals Tracking: Monitor payments and commission splits
+      - AI-Powered Reports: Generate insights with natural language queries
+      
+      ${userData.loginLink ? `Access Your Dashboard: ${userData.loginLink}\n\n` : ''}
+      
+      Need Help?
+      Our support team is here to help you get started:
+      - Email: support@isohub.io
+      - Documentation: Available in your dashboard
+      - Training: Schedule a personalized walkthrough
+      
+      Welcome to the ISOHub family!
+      © ${new Date().getFullYear()} ISOHub. All rights reserved.
+    `;
+
+    return {
+      subject: `Welcome to ISOHub - Your Payment Processing Platform`,
+      htmlContent,
+      textContent,
+    };
+  }
+
+  async sendUploadLinkEmail(linkData: any): Promise<void> {
+    const template = this.generateUploadLinkTemplate(linkData);
+    const email: ScheduledEmail = {
+      to: [linkData.recipientEmail],
+      template,
+      scheduledFor: new Date(),
+    };
+    await this.sendEmail(email);
+  }
+
+  async sendPreApplicationNotification(applicationData: any): Promise<void> {
+    const template = this.generatePreApplicationNotificationTemplate(applicationData);
+    const email: ScheduledEmail = {
+      to: [applicationData.email],
+      template,
+      scheduledFor: new Date(),
+    };
+    await this.sendEmail(email);
+  }
+
+  async sendWelcomeEmail(userData: any): Promise<void> {
+    const template = this.generateWelcomeEmailTemplate(userData);
+    const email: ScheduledEmail = {
+      to: [userData.email],
+      template,
+      scheduledFor: new Date(),
+    };
+    await this.sendEmail(email);
+  }
+
+  async testConnection(): Promise<boolean> {
+    try {
+      await this.transporter.verify();
+      return true;
+    } catch (error) {
+      console.error('Email service connection failed:', error);
+      return false;
+    }
+  }
+}
+
+export const emailService = new EmailService();

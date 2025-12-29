@@ -1,0 +1,159 @@
+ISO Hub AI Agent: End-to-End Onboarding & Account Setup Process
+
+A comprehensive process map and context guide to help the Replit AI agent implement subaccount creation, user onboarding, vendor integration, and feature tours for a multi‑tenant SaaS platform.
+
+1. Agency/Subaccount Creation
+
+Trigger: Admin clicks Create Agency or manual invoice payment completion
+
+API Endpoint: POST /api/agencies
+
+Data Model:
+
+id: UUID
+
+name: string
+
+website: string
+
+adminContact: { name, email }
+
+UI Flow:
+
+Button click → call endpoint → on success, navigate to /agencies/{id}/onboarding
+
+Acceptance Criteria:
+
+201 response with agencyId
+
+Redirect to onboarding wizard
+
+2. Manual User Addition (Post-Sale)
+
+Trigger: Sales team marks invoice as Paid
+
+UI: Admin clicks Add New User
+
+Form Fields:
+
+Company Name, First Name, Last Name
+
+Email, Phone Number
+
+Backend: POST /api/users → 201 + { userId }
+
+Result: System sends welcome email with temporary password and activation link
+
+3. Onboarding Email & First Login
+
+Welcome Email: Contains activation link → /activate?token=...
+
+Change Password: Force user to set a new password
+
+Redirect: To onboarding wizard (/onboarding)
+
+4. Onboarding Wizard: Core Steps
+
+A multi-step wizard with validation at each step. Progress saved to /api/onboarding/{agencyId}.
+
+Instance Setup
+
+"Get Started" step-by-step setup of tenant instance
+
+Confirm terminology ("instance" vs. "workspace")
+
+Company Info
+
+Company Name, Website, Admin Contact info
+
+Org Chart Builder
+
+Drag‑and‑drop canvas (e.g. react-flow)
+
+Cards capture Name, Role, Permissions → saved to /api/org-chart
+
+Business Profile
+
+Engaging prompt: "Let us get to know your business"
+
+Collect: Ideal clients, target audience, offers, strengths, challenges, purchase motivations
+
+AI synthesizes an in-depth profile stored in /api/business-profile
+
+Vendor Selection
+
+Categories: Processors, Gateways, Hardware/POS
+
+Animated tile grid (iPhone‑style icons) → user selects one or more
+
+Persist selections to /api/vendors
+
+Docs Hub Integration
+
+SSO & OAuth flows: Google Drive, OneDrive/SharePoint, Dropbox
+
+Real-time sync via webhooks
+
+Fallback: Manual file upload option
+
+5. Admin Dashboard Tour
+
+Trigger: First login or completion of vendor step
+
+Tooltip Sequence:
+
+Highlight each main nav tab
+
+Display concise description of its function
+
+Buttons: Next, Skip Tour
+
+Persistence: Store flag in user profile so tour only appears once
+
+Fallback: Link to comprehensive User Guide page
+
+6. Users Management & Profile Completion
+
+CSV Upload:
+
+Template download + instructions (First Name, Last Name, Email)
+
+Backend parses, validates, and upserts users
+
+User Profile Card:
+
+On first login, prompt user to fill out:
+
+Profile image (upload or generate via DALL·E 3)
+
+Role & permissions assignment
+
+7. Technical & Testing Context
+
+Tech Stack:
+
+Frontend: React (Next.js), Tailwind CSS, react-hook-form, react-flow
+
+Backend: Node.js/Express (or Python/Flask on Replit), Supabase/Postgres, OAuth2 library
+
+Validation: Zod/Joi schemas for payloads (e.g. email regex)
+
+Error Handling: Friendly UI messages for network or validation failures
+
+Testing:
+
+Unit tests for API routes
+
+Integration tests for onboarding flows
+
+E2E tests (Playwright) covering agency creation to dashboard tour
+
+Clarifying Questions for Implementation
+
+Preferred term: “instance” vs. “workspace”?
+
+Choice of database (SQLite on Replit vs. Supabase/Postgres)?
+
+State management library preference (Redux, Zustand, Context)?
+
+Required SLA for file-sync latency and retry policy?

@@ -1,0 +1,29 @@
+2025-12-03T05:04:14.000000000Z [inf]  Starting Container
+2025-12-03T05:04:16.601400561Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-12-03T05:04:16.601405516Z [inf]  
+2025-12-03T05:04:16.601413354Z [inf]  > rest-express@1.0.0 start
+2025-12-03T05:04:16.601417245Z [inf]  > NODE_ENV=production node dist/index.js
+2025-12-03T05:04:16.601420931Z [inf]  
+2025-12-03T05:04:16.601425465Z [inf]  ISO-AI sample data initialized
+2025-12-03T05:04:16.601429568Z [inf]  🔄 Real Data Display routes initializing...
+2025-12-03T05:04:16.601433373Z [inf]  🔄 Starting database migrations...
+2025-12-03T05:04:16.601437880Z [inf]  📁 Looking for migrations in: /migrations
+2025-12-03T05:04:16.601442093Z [inf]  📁 No migrations directory found, skipping migrations
+2025-12-03T05:04:16.601446796Z [inf]  Security systems ready - migrations available via API
+2025-12-03T05:04:16.601451283Z [inf]  ISO-AI initialization skipped - manual setup available
+2025-12-03T05:04:16.601455472Z [inf]  [Startup] Running data integrity check...
+2025-12-03T05:04:16.601459608Z [inf]  [Startup] Current status: critical
+2025-12-03T05:04:16.601574247Z [inf]  [Startup] Organizations: 0, Missing required: 2
+2025-12-03T05:04:16.601581403Z [inf]  [Startup] Missing required organizations detected, seeding...
+2025-12-03T05:04:16.601587701Z [inf]  [DataIntegrity] Available columns in organizations: id, organization_id, name, settings, created_at
+2025-12-03T05:04:16.601593912Z [inf]  [DataIntegrity] Seeded organization: org-demo-isohub-2025 (DEMO ISO Agency)
+2025-12-03T05:04:16.601599878Z [inf]  [DataIntegrity] Seeded organization: org-86f76df1 (Tracer)
+2025-12-03T05:04:16.601604491Z [inf]  [Startup] Seeded 2 organizations: org-demo-isohub-2025, org-86f76df1
+2025-12-03T05:04:16.601608485Z [inf]  [Startup] Final data integrity status: healthy
+2025-12-03T05:04:16.601612620Z [inf]  📋 PreApplications router mounted at /api/preapplications
+2025-12-03T05:04:16.601616345Z [inf]  5:04:16 AM [express] 🔒 Secure ISO Hub server running on port 8080
+2025-12-03T05:04:17.456498070Z [inf]  [SECURITY] Security middleware initialized
+2025-12-03T05:04:17.456512177Z [inf]  5:04:16 AM [express] 🔍 Health check: http://localhost:8080/health
+2025-12-03T05:04:17.456514580Z [inf]  [MONITORING] Application monitoring active
+2025-12-03T05:04:17.456529458Z [inf]  [CACHE] Cache service ready
+2025-12-03T05:04:17.456533174Z [inf]  5:04:16 AM [express] 📊 Metrics: http://localhost:8080/metrics

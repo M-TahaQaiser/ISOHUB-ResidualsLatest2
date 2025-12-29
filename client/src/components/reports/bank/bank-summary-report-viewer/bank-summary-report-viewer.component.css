@@ -1,0 +1,49 @@
+/* Report Viewer Wrapper */
+.report-viewer {
+  padding: 20px;
+  background-color: var(--section-background);
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--shadow-color);
+  margin: 0 auto;
+  overflow-x: auto;
+  height: auto;
+}
+
+
+/* Header actions (export button on the right) */
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+/* Status and Save Button container */
+.status-save-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+/* Save button container for right-alignment */
+.save-button-container {
+  display: flex;
+  justify-content: flex-end; /* Aligns the Save button to the right */
+  width: 100%;
+}
+
+/* Status text */
+.status {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.status-approved {
+  color: green;
+}
+
+.status-needs-approval {
+  color: red;
+}

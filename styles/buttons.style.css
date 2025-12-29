@@ -1,0 +1,58 @@
+
+/* Global button hover state */
+button,
+a,
+input[type="submit"] {
+  transition: background-color 0.3s ease;
+}
+/*
+button:hover,
+a:hover,
+input[type="submit"]:hover {
+  background-color: var(--accent-color2);
+}*/
+
+.btn-view, .btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.btn-view {
+  color: var(--accent-color);
+}
+
+.btn-delete {
+  color: red;
+}
+
+/* Hover Effect for Buttons */
+.btn-edit:hover {
+    color: darkblue;
+  }
+  
+  .btn-delete:hover {
+    color: darkred;
+  }
+  
+  .btn-approve:hover {
+    color: darkgreen;
+  }
+  
+/* Export Button */
+.btn-export {
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-export:hover {
+    background-color: var(--accent-color2);
+  }
+  

@@ -1,0 +1,84 @@
+.needs-approval-container {
+  padding: 20px;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--shadow-color);
+  max-width: 100%;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.report-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.report-item {
+  padding: 10px;
+  border-bottom: 1px solid var(--separator-color);
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.report-item:last-child {
+  border-bottom: none;
+}
+
+button {
+  padding: 6px 12px;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #facc15;
+}
+button.btn-delete:hover,
+button.btn-view:hover {
+  background: transparent;
+  opacity: .7;
+}
+/* General button styling for both NeedsApproval and NeedsAudit */
+.edit-btn,
+.audit-btn {
+  padding: 6px 12px;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem; /* Ensure the same font size */
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover,
+.audit-btn:hover {
+  background-color: #facc15;
+}
+
+/* Ensure consistent display and spacing across different components */
+/*.needs-approval-container .report-item button,
+.needs-audit-container .audit-item button {
+  padding: 6px 12px;
+  background-color: var(--accent-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+*//*
+.needs-approval-container .report-item button:hover,
+.needs-audit-container .audit-item button:hover {
+  background-color: #ff7800;
+}
+*/

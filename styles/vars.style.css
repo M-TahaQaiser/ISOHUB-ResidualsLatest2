@@ -1,0 +1,35 @@
+/* Root variables for light theme */
+:root {
+    --background-color: #FAFAFA;
+    --text-color: #333333;
+    --header-background: #0044CC;
+    --section-background: #FFFFFF;
+    --accent-color: #facc15; /* Primary accent color */
+    --accent-color2: #facc15; /* Secondary accent color */
+    --sidebar-color: #EAEAEA;
+    --separator-color: rgba(0, 0, 0, 0.1); /* Light separator for table and layout elements */
+    --shadow-color: rgba(0, 0, 0, 0.2); /* Shadow for elements */
+    --sidebar-width: 250px; /* Sidebar open width */
+    --sidebar-closed-width: 70px; /* Sidebar closed width */
+  }
+  
+  /* Root variables for dark theme */
+  [data-theme='dark'] {
+    --background-color: #1C1C1C;
+    --text-color: #FAFAFA;
+    --header-background: #001F3F;
+    --section-background: #2C2C2C;
+    --accent-color: #facc15; /* Same accent color for dark theme */
+    --accent-color2: #facc15; /* Same secondary accent color */
+    --sidebar-color: #1C1C1C;
+    --separator-color: rgba(255, 255, 255, 0.1); /* Light separator for dark theme */
+    --shadow-color: rgba(0, 0, 0, 0.5); /* Darker shadow for dark theme */
+    --sidebar-width: 250px; /* Sidebar open width (dark theme) */
+    --sidebar-closed-width: 70px; /* Sidebar closed width (dark theme) */
+  }
+
+/* Add any missing styles for dark theme */
+body[data-theme='dark'] {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}

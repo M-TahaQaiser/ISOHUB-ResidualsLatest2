@@ -1,0 +1,135 @@
+/* Table Container */
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+   /* background-color: var(--background-color);*/
+    color: var(--text-color);
+    margin-top: 20px;
+}
+
+/* Table Headers and Cells */
+table th,
+table td {
+    padding: 10px;
+    border: 1px solid var(--separator-color);
+    text-align: left;
+}
+
+table th {
+    background-color: var(--section-background);
+}
+
+table td {
+    background-color: var(--background-color);
+    position: relative;
+}
+
+/* Approved Column */
+.approved-column {
+    text-align: center;
+    width: 120px;
+    position: relative;
+}
+
+.approved-column.approved {
+    color: green;
+}
+
+/* Totals Styling in Footer */
+tfoot {
+    font-weight: bold;
+}
+
+.totals-label {
+    text-align: right;
+    padding-right: 10px;
+}
+
+tfoot td {
+    background-color: var(--background-color);
+    border: 1px solid var(--separator-color);
+    padding: 10px;
+    text-align: right;
+}
+
+/* Action Buttons for Each Row */
+.action-buttons {
+    background-color: var(--section-background);
+    border-radius: 25px;
+    display: none;
+    position: absolute;
+    right: 5px;
+    transform: translateY(-50%);
+  }
+  
+/* Row Hover Effect for Action Buttons */
+.report-row:hover .action-buttons {
+    display: flex;
+}
+
+/* Approved Row Background */
+.report-row.approved {
+    background-color: lightgreen !important;
+}
+
+
+/* Filters styling for form-like elements */
+.filters {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+/* Bulk Action Container */
+.bulk-action-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* Dropdown Toggle Button */
+.dropdown-toggle {
+    padding: 10px 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--separator-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--section-background);
+    border: 1px solid var(--separator-color);
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px var(--shadow-color);
+    z-index: 100;
+    min-width: 150px;
+}
+
+/* Dropdown Item */
+.dropdown-item {
+    padding: 10px;
+    color: var(--text-color);
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.dropdown-item:hover {
+    background-color: var(--accent-color2);
+    color: white;
+}

@@ -1,0 +1,116 @@
+The script has an unsupported MIME type ('text/html').
+2025-06:1  Failed to load resource: the server responded with a status of 429 (Too Many Requests)Understand this error
+manifest.json:1 Manifest: Line: 1, column: 1, Syntax error.Understand this error
+2025-06:1  Failed to load resource: the server responded with a status of 429 (Too Many Requests)Understand this error
+residuals:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">Understand this warning
+2025-06:1  Failed to load resource: the server responded with a status of 429 (Too Many Requests)Understand this error
+2025-06:1  Failed to load resource: the server responded with a status of 429 (Too Many Requests)Understand this error
+2025-06:1  Failed to load resource: the server responded with a status of 429 (Too Many Requests)Understand this error
+2025-06:1  Failed to load resource: the server responded with a status of 429 (Too Many Requests)Understand this error
+2025-06:1  Failed to load resource: the server responded with a status of 429 (Too Many Requests)Understand this error
+2025-06:1  Failed to load resource: the server responded with a status of 429 (Too Many Requests)Understand this error
+requests.js:1  GET https://8d392a04-f812-4857-b548-d4495467f6e8-00-tupafc07smx3.kirk.replit.dev/api/real-data/status/2025-06 429 (Too Many Requests)
+s.fetch @ requests.js:1
+queryFn @ RealDataUploadGrid.tsx:70
+fetchFn @ @tanstack_react-query.js?v=029ddcf5:840
+run @ @tanstack_react-query.js?v=029ddcf5:494
+start @ @tanstack_react-query.js?v=029ddcf5:536
+fetch @ @tanstack_react-query.js?v=029ddcf5:926
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1726
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1725
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+refetchQueries @ @tanstack_react-query.js?v=029ddcf5:1724
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1716
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+invalidateQueries @ @tanstack_react-query.js?v=029ddcf5:1705
+(anonymous) @ useAutoRefresh.tsx:10Understand this error
+requests.js:1  GET https://8d392a04-f812-4857-b548-d4495467f6e8-00-tupafc07smx3.kirk.replit.dev/api/real-data/status/2025-06 429 (Too Many Requests)
+s.fetch @ requests.js:1
+queryFn @ RealDataUploadGrid.tsx:70
+fetchFn @ @tanstack_react-query.js?v=029ddcf5:840
+run @ @tanstack_react-query.js?v=029ddcf5:494
+start @ @tanstack_react-query.js?v=029ddcf5:536
+fetch @ @tanstack_react-query.js?v=029ddcf5:926
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1726
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1725
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+refetchQueries @ @tanstack_react-query.js?v=029ddcf5:1724
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1716
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+invalidateQueries @ @tanstack_react-query.js?v=029ddcf5:1705
+(anonymous) @ useAutoRefresh.tsx:10Understand this error
+requests.js:1  GET https://8d392a04-f812-4857-b548-d4495467f6e8-00-tupafc07smx3.kirk.replit.dev/api/real-data/status/2025-06 429 (Too Many Requests)
+s.fetch @ requests.js:1
+queryFn @ RealDataUploadGrid.tsx:70
+fetchFn @ @tanstack_react-query.js?v=029ddcf5:840
+run @ @tanstack_react-query.js?v=029ddcf5:494
+start @ @tanstack_react-query.js?v=029ddcf5:536
+fetch @ @tanstack_react-query.js?v=029ddcf5:926
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1726
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1725
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+refetchQueries @ @tanstack_react-query.js?v=029ddcf5:1724
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1716
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+invalidateQueries @ @tanstack_react-query.js?v=029ddcf5:1705
+(anonymous) @ useAutoRefresh.tsx:10Understand this error
+requests.js:1  GET https://8d392a04-f812-4857-b548-d4495467f6e8-00-tupafc07smx3.kirk.replit.dev/api/real-data/status/2025-06 429 (Too Many Requests)
+s.fetch @ requests.js:1
+queryFn @ RealDataUploadGrid.tsx:70
+fetchFn @ @tanstack_react-query.js?v=029ddcf5:840
+run @ @tanstack_react-query.js?v=029ddcf5:494
+start @ @tanstack_react-query.js?v=029ddcf5:536
+fetch @ @tanstack_react-query.js?v=029ddcf5:926
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1726
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1725
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+refetchQueries @ @tanstack_react-query.js?v=029ddcf5:1724
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1716
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+invalidateQueries @ @tanstack_react-query.js?v=029ddcf5:1705
+(anonymous) @ useAutoRefresh.tsx:10Understand this error
+requests.js:1  GET https://8d392a04-f812-4857-b548-d4495467f6e8-00-tupafc07smx3.kirk.replit.dev/api/real-data/status/2025-06 429 (Too Many Requests)
+s.fetch @ requests.js:1
+queryFn @ RealDataUploadGrid.tsx:70
+fetchFn @ @tanstack_react-query.js?v=029ddcf5:840
+run @ @tanstack_react-query.js?v=029ddcf5:494
+start @ @tanstack_react-query.js?v=029ddcf5:536
+fetch @ @tanstack_react-query.js?v=029ddcf5:926
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1726
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1725
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+refetchQueries @ @tanstack_react-query.js?v=029ddcf5:1724
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1716
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+invalidateQueries @ @tanstack_react-query.js?v=029ddcf5:1705
+(anonymous) @ useAutoRefresh.tsx:10Understand this error
+requests.js:1  GET https://8d392a04-f812-4857-b548-d4495467f6e8-00-tupafc07smx3.kirk.replit.dev/api/real-data/status/2025-06 429 (Too Many Requests)
+s.fetch @ requests.js:1
+queryFn @ RealDataUploadGrid.tsx:70
+fetchFn @ @tanstack_react-query.js?v=029ddcf5:840
+run @ @tanstack_react-query.js?v=029ddcf5:494
+start @ @tanstack_react-query.js?v=029ddcf5:536
+fetch @ @tanstack_react-query.js?v=029ddcf5:926
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1726
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1725
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+refetchQueries @ @tanstack_react-query.js?v=029ddcf5:1724
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1716
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+invalidateQueries @ @tanstack_react-query.js?v=029ddcf5:1705
+(anonymous) @ useAutoRefresh.tsx:10Understand this error
+requests.js:1  GET https://8d392a04-f812-4857-b548-d4495467f6e8-00-tupafc07smx3.kirk.replit.dev/api/real-data/status/2025-06 429 (Too Many Requests)
+s.fetch @ requests.js:1
+queryFn @ RealDataUploadGrid.tsx:70
+fetchFn @ @tanstack_react-query.js?v=029ddcf5:840
+run @ @tanstack_react-query.js?v=029ddcf5:494
+start @ @tanstack_react-query.js?v=029ddcf5:536
+fetch @ @tanstack_react-query.js?v=029ddcf5:926
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1726
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1725
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+refetchQueries @ @tanstack_react-query.js?v=029ddcf5:1724
+(anonymous) @ @tanstack_react-query.js?v=029ddcf5:1716
+batch @ @tanstack_react-query.js?v=029ddcf5:583
+invalidateQueries @ @tanstack_react-query.js?v=029ddcf5:1705
+(anonymous) @ useAutoRefresh.tsx:10Understand this error

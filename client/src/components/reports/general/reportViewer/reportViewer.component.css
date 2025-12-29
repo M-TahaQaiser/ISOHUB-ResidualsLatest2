@@ -1,0 +1,83 @@
+/* Report Viewer Wrapper */
+.report-viewer {
+  padding: 20px;
+  background-color: var(--section-background);
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--shadow-color);
+  margin: 0 auto;
+  height: auto;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+/* Header container */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+
+
+/* Container for Save Button and Status */
+.status-save-container {
+  display: flex;
+  justify-content: space-between; /* Align Save button to the right and Status to the left */
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Save Button */
+.btn-save {
+  padding: 10px 20px;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-save:hover {
+  background-color: var(--accent-color2);
+}
+
+/* Status text */
+.status-text {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+/* Section Title */
+.report-viewer h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+/* Paragraph styling */
+.report-viewer p {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+/* Button Styling for Consistency */
+.btn-edit, .btn-delete, .btn-approve {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-edit {
+  color: blue;
+}
+
+.btn-delete {
+  color: red;
+}
+
+.btn-approve {
+  color: green;
+}
+

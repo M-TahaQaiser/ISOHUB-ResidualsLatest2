@@ -1,0 +1,320 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ISOHub Color Variables - Light Theme - NO TRANSPARENCY */
+    --background-color: #ffffff;
+    --section-background: #ffffff;
+    --text-color: #000000;
+    --accent-color: #FFD700;
+    --separator-color: #e5e7eb;
+    --shadow-color: #FFD700;
+    
+    /* Shadcn Variables - Pure Yellow/Black/White Theme */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 45 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 30%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 85%;
+    --input: 0 0% 100%;
+    --ring: 45 100% 50%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 45 100% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 45 100% 50%;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 45 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 15%;
+    --input: 0 0% 0%;
+    --ring: 45 100% 50%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 45 100% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 45 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+}
+
+/* ISOHub Custom Styles - Chrome Effect & Pure Colors */
+@layer components {
+  .isohub-card {
+    @apply bg-white border-2 border-yellow-400 rounded-lg;
+    box-shadow: 0 4px 20px #FFD700, inset 0 1px 0 #ffffff;
+  }
+  
+  .isohub-button {
+    @apply bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded transition-all duration-200;
+    box-shadow: 0 2px 8px #FFD700, inset 0 1px 0 #FFFF80;
+    border: 2px solid #FFD700;
+  }
+  
+  .isohub-button:hover {
+    box-shadow: 0 4px 15px #FFD700, inset 0 1px 0 #FFFF80;
+    transform: translateY(-1px);
+  }
+  
+  .isohub-input {
+    @apply bg-white border-2 border-gray-300 text-black rounded px-3 py-2 focus:outline-none;
+    box-shadow: inset 0 2px 4px #e5e5e5;
+  }
+  
+  .isohub-input:focus {
+    @apply border-yellow-400;
+    box-shadow: 0 0 0 3px #FFD700, inset 0 2px 4px #e5e5e5;
+  }
+  
+  .isohub-text-primary {
+    @apply text-black;
+  }
+  
+  .isohub-text-secondary {
+    @apply text-gray-600;
+  }
+  
+  .isohub-text-accent {
+    @apply text-yellow-600;
+  }
+
+  .auth-page {
+    @apply min-h-screen bg-black flex items-center justify-center p-4;
+  }
+
+  .mobile-nav-bottom {
+    @apply fixed bottom-0 left-0 right-0 bg-black border-t-2 border-yellow-400 px-4 py-2 z-50 md:hidden;
+    box-shadow: 0 -4px 20px #FFD700;
+  }
+
+  /* Dashboard specific styles - Chrome highlights */
+  .dashboard-card {
+    @apply bg-white rounded-lg border-2 border-yellow-400 p-6 transition-all duration-200;
+    box-shadow: 0 4px 20px #FFD700, inset 0 1px 0 #ffffff;
+  }
+  
+  .dashboard-card:hover {
+    box-shadow: 0 6px 30px #FFD700, inset 0 1px 0 #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .dashboard-metric {
+    @apply text-2xl font-bold text-black;
+    text-shadow: 0 1px 2px #ffffff;
+  }
+
+  .dashboard-label {
+    @apply text-sm font-medium text-gray-600;
+  }
+  
+  /* Ensure white backgrounds for containers */
+  .main-content {
+    @apply bg-white !important;
+  }
+  
+  /* Override any dark theme classes */
+  .force-light-theme {
+    @apply bg-white text-black !important;
+  }
+
+  /* Form styles */
+  .form-group {
+    @apply space-y-2 mb-4;
+  }
+
+  .form-label {
+    @apply block font-medium text-gray-300 mb-2;
+  }
+
+  .form-input {
+    @apply w-full px-4 py-2 rounded bg-gray-700 border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent;
+  }
+
+  .btn-new {
+    @apply text-yellow-600 hover:text-yellow-400 transition-all duration-200;
+    text-shadow: 0 1px 2px #ffffff;
+  }
+
+  .error-message {
+    @apply text-red-400 text-sm mt-2;
+  }
+
+  /* PWA specific styles */
+  @media (display-mode: standalone) {
+    body {
+      /* Add safe area padding for PWA */
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+
+  /* Chrome-style highlights and effects */
+  .chrome-highlight {
+    box-shadow: 0 2px 8px #FFD700, inset 0 1px 0 #ffffff;
+  }
+  
+  .chrome-highlight:hover {
+    box-shadow: 0 4px 15px #FFD700, inset 0 1px 0 #ffffff;
+    transform: translateY(-1px);
+  }
+  
+  .chrome-glow {
+    box-shadow: 0 0 20px #FFD700;
+  }
+  
+  .white-highlight {
+    text-shadow: 0 1px 2px #ffffff;
+  }
+  
+  .yellow-glow {
+    box-shadow: 0 0 10px #FFD700;
+  }
+  
+  .no-transparency {
+    background-color: #ffffff !important;
+    border-color: #FFD700 !important;
+  }
+  
+  .pure-black {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+  
+  .pure-white {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  .pure-yellow {
+    background-color: #FFD700 !important;
+    color: #000000 !important;
+  }
+
+  /* Mobile viewport fixes */
+  @media (max-width: 768px) {
+    html, body {
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .mobile-content {
+      min-height: calc(100vh - 120px); /* Account for nav bars */
+    }
+  }
+  
+  /* Hide scrollbar for horizontal scroll areas */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Touch-friendly tap targets */
+  @media (pointer: coarse) {
+    button, a, [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+  
+  /* Snap scrolling for mobile carousels */
+  .snap-x {
+    scroll-snap-type: x mandatory;
+  }
+  
+  .snap-start {
+    scroll-snap-align: start;
+  }
+  
+  /* Active scale effect for touch feedback */
+  .active\:scale-95:active {
+    transform: scale(0.95);
+  }
+  
+  .active\:scale-98:active {
+    transform: scale(0.98);
+  }
+  
+  /* Remove any dotted background patterns - clean solid backgrounds */
+  .bg-\[#0a0a0f\],
+  .bg-zinc-900,
+  .bg-zinc-900\/80,
+  .bg-black {
+    background-image: none !important;
+    background-pattern: none !important;
+  }
+  
+  /* Ensure recharts grids don't bleed outside their containers */
+  .recharts-wrapper {
+    overflow: hidden;
+  }
+}

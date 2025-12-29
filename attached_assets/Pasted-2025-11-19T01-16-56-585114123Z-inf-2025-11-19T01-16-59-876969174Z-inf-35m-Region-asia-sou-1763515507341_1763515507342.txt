@@ -1,0 +1,187 @@
+2025-11-19T01:16:56.585114123Z [inf]  
+2025-11-19T01:16:59.876969174Z [inf]  [35m[Region: asia-southeast1][0m
+2025-11-19T01:17:00.028958395Z [inf]  
+2025-11-19T01:17:00.028982157Z [inf]  [38;2;125;86;243m╭─────────────────╮[0m
+2025-11-19T01:17:00.028986504Z [inf]  [38;2;125;86;243m│[0m Railpack 0.13.0 [38;2;125;86;243m│[0m
+2025-11-19T01:17:00.028989863Z [inf]  [38;2;125;86;243m╰─────────────────╯[0m
+2025-11-19T01:17:00.028994073Z [inf]  
+2025-11-19T01:17:00.028997307Z [inf]  [97m↳ Detected Node[0m
+2025-11-19T01:17:00.029000335Z [inf]  [97m↳ Using npm package manager[0m
+2025-11-19T01:17:00.029003389Z [inf]  
+2025-11-19T01:17:00.029006099Z [inf]  [1mPackages[0m
+2025-11-19T01:17:00.029008831Z [inf]  [38;5;238m──────────[0m
+2025-11-19T01:17:00.029011611Z [inf]  [95mnode[0m  [38;5;238m│[0m  [96m22.21.1[0m  [38;5;238m│[0m  railpack default (22)
+2025-11-19T01:17:00.029014376Z [inf]  
+2025-11-19T01:17:00.029017090Z [inf]  [1mSteps[0m
+2025-11-19T01:17:00.029022304Z [inf]  [38;5;238m──────────[0m
+2025-11-19T01:17:00.029025086Z [inf]  [95m▸ install[0m
+2025-11-19T01:17:00.029027927Z [inf]  [38;5;245m$[0m [1mnpm ci[0m
+2025-11-19T01:17:00.029031024Z [inf]  
+2025-11-19T01:17:00.029035358Z [inf]  [95m▸ build[0m
+2025-11-19T01:17:00.029039847Z [inf]  [38;5;245m$[0m [1mnpm run build[0m
+2025-11-19T01:17:00.029044399Z [inf]  
+2025-11-19T01:17:00.029048669Z [inf]  [1mDeploy[0m
+2025-11-19T01:17:00.029053278Z [inf]  [38;5;238m──────────[0m
+2025-11-19T01:17:00.029057984Z [inf]  [38;5;245m$[0m [1mnpm run start[0m
+2025-11-19T01:17:00.029062281Z [inf]  
+2025-11-19T01:17:00.029066955Z [inf]  
+2025-11-19T01:17:00.030647584Z [inf]  Successfully prepared Railpack plan for build
+2025-11-19T01:17:00.030676034Z [inf]  
+2025-11-19T01:17:00.030683685Z [inf]  
+2025-11-19T01:17:00.031092864Z [inf]  context: 2l9z-gRBU
+2025-11-19T01:17:00.168046660Z [inf]  [internal] load build definition from railpack-plan.json
+2025-11-19T01:17:00.168087789Z [inf]  [internal] load build definition from railpack-plan.json
+2025-11-19T01:17:00.168103570Z [inf]  [internal] load build definition from railpack-plan.json
+2025-11-19T01:17:00.168114640Z [inf]  [internal] load build definition from railpack-plan.json
+2025-11-19T01:17:00.176220342Z [inf]  [internal] load build definition from railpack-plan.json
+2025-11-19T01:17:00.177475387Z [inf]  resolve image config for docker-image://ghcr.io/railwayapp/railpack-frontend:v0.13.0
+2025-11-19T01:17:01.148763835Z [inf]  resolve image config for docker-image://ghcr.io/railwayapp/railpack-frontend:v0.13.0
+2025-11-19T01:17:01.148808437Z [inf]  docker-image://ghcr.io/railwayapp/railpack-frontend:v0.13.0@sha256:6abf5c09474a5a6a6d2317725bf69c99708336e5ad0e6cbae7c5e746a586cc52
+2025-11-19T01:17:01.148823515Z [inf]  docker-image://ghcr.io/railwayapp/railpack-frontend:v0.13.0@sha256:6abf5c09474a5a6a6d2317725bf69c99708336e5ad0e6cbae7c5e746a586cc52
+2025-11-19T01:17:01.152798693Z [inf]  docker-image://ghcr.io/railwayapp/railpack-frontend:v0.13.0@sha256:6abf5c09474a5a6a6d2317725bf69c99708336e5ad0e6cbae7c5e746a586cc52
+2025-11-19T01:17:01.152978837Z [inf]  docker-image://ghcr.io/railwayapp/railpack-frontend:v0.13.0@sha256:6abf5c09474a5a6a6d2317725bf69c99708336e5ad0e6cbae7c5e746a586cc52
+2025-11-19T01:17:01.245269195Z [inf]  load build definition from railpack-plan.json
+2025-11-19T01:17:01.245308255Z [inf]  load build definition from railpack-plan.json
+2025-11-19T01:17:01.245322865Z [inf]  load build definition from railpack-plan.json
+2025-11-19T01:17:01.245454640Z [inf]  load build definition from railpack-plan.json
+2025-11-19T01:17:01.255107313Z [inf]  load build definition from railpack-plan.json
+2025-11-19T01:17:01.267998089Z [inf]  copy /root/.local/state/mise
+2025-11-19T01:17:01.268026562Z [inf]  copy /etc/mise/config.toml
+2025-11-19T01:17:01.268033608Z [inf]  copy /usr/local/bin/mise
+2025-11-19T01:17:01.268043449Z [inf]  copy /mise/installs
+2025-11-19T01:17:01.268051280Z [inf]  copy /mise/shims
+2025-11-19T01:17:01.268060831Z [inf]  install mise packages: node
+2025-11-19T01:17:01.268069774Z [inf]  create mise config
+2025-11-19T01:17:01.268078037Z [inf]  mkdir /etc/mise
+2025-11-19T01:17:01.268086181Z [inf]  docker-image://ghcr.io/railwayapp/railpack-builder:latest
+2025-11-19T01:17:01.268097136Z [inf]  install apt packages: libatomic1
+2025-11-19T01:17:01.268107534Z [inf]  docker-image://ghcr.io/railwayapp/railpack-runtime:latest
+2025-11-19T01:17:01.268901453Z [inf]  npm ci
+2025-11-19T01:17:01.268919646Z [inf]  copy attached_assets/package-lock.json
+2025-11-19T01:17:01.268927222Z [inf]  [railpack] merge $packages:apt:runtime, $packages:mise, $build, $build
+2025-11-19T01:17:01.268936834Z [inf]  loading .
+2025-11-19T01:17:01.268946662Z [inf]  copy /app
+2025-11-19T01:17:01.268956047Z [inf]  npm run build
+2025-11-19T01:17:01.268964664Z [inf]  copy /root/.cache
+2025-11-19T01:17:01.268973020Z [inf]  [railpack] copy used secrets hash
+2025-11-19T01:17:01.268984766Z [inf]  [railpack] hash used secrets
+2025-11-19T01:17:01.268993057Z [inf]  [railpack] copy secrets hash
+2025-11-19T01:17:01.269000994Z [inf]  [railpack] secrets hash
+2025-11-19T01:17:01.269009599Z [inf]  copy / /app
+2025-11-19T01:17:01.269015138Z [inf]  copy /app/node_modules
+2025-11-19T01:17:01.269022451Z [inf]  mkdir -p /app/node_modules/.cache
+2025-11-19T01:17:01.269029949Z [inf]  [railpack] loading secrets
+2025-11-19T01:17:01.269038276Z [inf]  copy package.json
+2025-11-19T01:17:01.269046805Z [inf]  copy package-lock.json
+2025-11-19T01:17:01.269054723Z [inf]  copy attached_assets/package.json
+2025-11-19T01:17:01.269086394Z [inf]  docker-image://ghcr.io/railwayapp/railpack-runtime:latest
+2025-11-19T01:17:01.269095097Z [inf]  [railpack] secrets hash
+2025-11-19T01:17:01.269100784Z [inf]  loading .
+2025-11-19T01:17:01.269107155Z [inf]  docker-image://ghcr.io/railwayapp/railpack-builder:latest
+2025-11-19T01:17:01.269126477Z [inf]  [railpack] loading secrets
+2025-11-19T01:17:01.759841897Z [inf]  docker-image://ghcr.io/railwayapp/railpack-runtime:latest
+2025-11-19T01:17:01.775353755Z [inf]  docker-image://ghcr.io/railwayapp/railpack-builder:latest
+2025-11-19T01:17:02.010291279Z [inf]  [railpack] loading secrets
+2025-11-19T01:17:02.010555753Z [inf]  loading .
+2025-11-19T01:17:02.010577462Z [inf]  [railpack] secrets hash
+2025-11-19T01:17:02.019568231Z [inf]  [railpack] secrets hash
+2025-11-19T01:17:02.021374480Z [inf]  [railpack] loading secrets
+2025-11-19T01:17:02.021406861Z [inf]  [railpack] copy secrets hash
+2025-11-19T01:17:02.100790861Z [inf]  [railpack] copy secrets hash
+2025-11-19T01:17:02.101910021Z [inf]  [railpack] hash used secrets
+2025-11-19T01:17:02.155779955Z [inf]  loading .
+2025-11-19T01:17:02.193481083Z [inf]  [railpack] hash used secrets
+2025-11-19T01:17:02.200531595Z [inf]  mkdir /etc/mise
+2025-11-19T01:17:02.200564273Z [inf]  create mise config
+2025-11-19T01:17:02.200577503Z [inf]  install mise packages: node
+2025-11-19T01:17:02.200589002Z [inf]  [railpack] copy used secrets hash
+2025-11-19T01:17:02.200596515Z [inf]  mkdir -p /app/node_modules/.cache
+2025-11-19T01:17:02.200603282Z [inf]  copy package.json
+2025-11-19T01:17:02.200609579Z [inf]  copy attached_assets/package.json
+2025-11-19T01:17:02.200615598Z [inf]  copy package-lock.json
+2025-11-19T01:17:02.200622647Z [inf]  copy attached_assets/package-lock.json
+2025-11-19T01:17:02.200628948Z [inf]  npm ci
+2025-11-19T01:17:02.200641035Z [inf]  copy / /app
+2025-11-19T01:17:02.292597135Z [inf]  copy / /app
+2025-11-19T01:17:02.293588728Z [inf]  npm run build
+2025-11-19T01:17:02.469922867Z [inf]  npm warn config production Use `--omit=dev` instead.
+
+2025-11-19T01:17:02.482138696Z [inf]  
+> rest-express@1.0.0 build
+> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+
+
+2025-11-19T01:17:02.675369247Z [inf]  [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+
+2025-11-19T01:17:02.722056359Z [inf]  transforming...
+
+2025-11-19T01:17:02.911347487Z [inf]  Browserslist: browsers data (caniuse-lite) is 13 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+
+2025-11-19T01:17:06.469901183Z [inf]  [32m✓[39m 1801 modules transformed.
+
+2025-11-19T01:17:06.63285284Z [inf]  rendering chunks...
+
+2025-11-19T01:17:06.829062538Z [inf]  computing gzip size...
+
+2025-11-19T01:17:06.851272029Z [inf]  [2m../dist/public/[22m[32mindex.html                                          [39m[1m[2m  1.75 kB[22m[1m[22m[2m │ gzip:   0.80 kB[22m
+
+2025-11-19T01:17:06.851354442Z [inf]  [2m../dist/public/[22m[2massets/[22m[32mISO-HUB LOGO (1)_1763482325052-5n99E_15.png  [39m[1m[2m 65.13 kB[22m[1m[22m
+
+2025-11-19T01:17:06.851380696Z [inf]  [2m../dist/public/[22m[2massets/[22m[32mISO-HUB LOGO_1763482325053-BclzXN_P.png      [39m[1m[2m 79.86 kB[22m[1m[22m
+
+2025-11-19T01:17:06.85150022Z [inf]  [2m../dist/public/[22m[2massets/[22m[35mindex-6rJrHJul.css                           [39m[1m[2m 99.42 kB[22m[1m[22m[2m │ gzip:  16.25 kB[22m
+
+2025-11-19T01:17:06.851540975Z [inf]  [2m../dist/public/[22m[2massets/[22m[36mauth.api-aJwmlBhr.js                         [39m[1m[2m  2.05 kB[22m[1m[22m[2m │ gzip:   0.94 kB[22m
+
+2025-11-19T01:17:06.851582349Z [inf]  [2m../dist/public/[22m[2massets/[22m[36mindex-6xMbUkvr.js                            [39m[1m[33m900.30 kB[39m[22m[2m │ gzip: 235.70 kB[22m
+
+2025-11-19T01:17:06.851638163Z [inf]  [33m
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+
+2025-11-19T01:17:06.851856932Z [inf]  [32m✓ built in 4.16s[39m
+
+2025-11-19T01:17:06.891978844Z [inf]  ▲ [WARNING] Use "server/services/cacheService.ts" instead of "server/services/CacheService.ts" to avoid issues with case-sensitive file systems [different-path-case]
+
+    server/index.ts:20:32:
+      20 │ import { cacheMiddleware } from "./services/CacheService";
+         ╵                                 ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+2025-11-19T01:17:06.90102553Z [inf]  ▲ [WARNING] Use "server/services/cacheService.ts" instead of "server/services/CacheService.ts" to avoid issues with case-sensitive file systems [different-path-case]
+
+    server/routes/users.routes.ts:7:22:
+      7 │ import { cache } from '../services/CacheService';
+        ╵                       ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+2025-11-19T01:17:06.907788354Z [inf]  2 warnings
+
+  dist/index.js  563.5kb
+
+⚡ Done in 17ms
+
+2025-11-19T01:17:07.019541925Z [inf]  npm run build
+2025-11-19T01:17:10.178432129Z [inf]  copy /root/.cache
+2025-11-19T01:17:10.178466863Z [inf]  copy /mise/shims
+2025-11-19T01:17:10.178477109Z [inf]  copy /mise/installs
+2025-11-19T01:17:10.178489463Z [inf]  copy /usr/local/bin/mise
+2025-11-19T01:17:10.178500035Z [inf]  copy /etc/mise/config.toml
+2025-11-19T01:17:10.178511546Z [inf]  copy /root/.local/state/mise
+2025-11-19T01:17:10.178521720Z [inf]  install apt packages: libatomic1
+2025-11-19T01:17:10.178548057Z [inf]  copy /app/node_modules
+2025-11-19T01:17:10.178580233Z [inf]  copy /root/.cache
+2025-11-19T01:17:10.178591085Z [inf]  copy /app/node_modules
+2025-11-19T01:17:10.178614955Z [inf]  copy /root/.local/state/mise
+2025-11-19T01:17:10.178624753Z [inf]  copy /app
+2025-11-19T01:17:10.178646972Z [inf]  install apt packages: libatomic1
+2025-11-19T01:17:10.498456071Z [inf]  copy /app
+2025-11-19T01:17:10.499734927Z [inf]  [railpack] merge $packages:apt:runtime, $packages:mise, $build, $build
+2025-11-19T01:17:10.515155838Z [inf]  [railpack] merge $packages:apt:runtime, $packages:mise, $build, $build
+2025-11-19T01:17:10.720805195Z [inf]  [auth] sharing credentials for production-asia-southeast1-eqsg3a.railway-registry.com
+2025-11-19T01:17:10.720837927Z [inf]  [auth] sharing credentials for production-asia-southeast1-eqsg3a.railway-registry.com
+2025-11-19T01:17:18.080175687Z [inf]  [92mBuild time: 18.05 seconds[0m

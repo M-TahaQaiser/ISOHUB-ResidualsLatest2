@@ -1,0 +1,35 @@
+
+/* Header styling */
+.App-header {
+    background-color: var(--header-background);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+/* Header container */
+.header {
+    display: flex;
+    justify-content: space-between; /* Ensure title is on the left and button is on the right */
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Title inside the header */
+  .header-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+  }
+  
+  
+/* Header actions (export button on the right) */
+.header-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  

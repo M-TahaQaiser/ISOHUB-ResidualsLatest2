@@ -1,0 +1,33 @@
+.dashboard-container {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--section-background);
+  color: var(--text-color);
+  border-radius: 8px;
+}
+
+.dashboard-container h1, .dashboard-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between cards */
+  justify-content: space-between; /* Align items */
+}
+
+/* Individual card styling */
+.dashboard-card {
+  flex: 1;
+  min-width: 300px; /* Ensure the card doesn't shrink too much */
+  max-width: 32%; /* Ensure no card is wider than 32% of the container */
+  padding: 15px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 20px 0;
+}

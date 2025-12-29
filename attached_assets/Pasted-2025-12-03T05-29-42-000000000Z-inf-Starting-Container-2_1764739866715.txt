@@ -1,0 +1,82 @@
+2025-12-03T05:29:42.000000000Z [inf]  Starting Container
+2025-12-03T05:29:44.312425803Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-12-03T05:29:44.312436842Z [inf]  
+2025-12-03T05:29:44.312445013Z [inf]  > rest-express@1.0.0 start
+2025-12-03T05:29:44.312452909Z [inf]  > NODE_ENV=production node dist/index.js
+2025-12-03T05:29:44.312461991Z [inf]  [Startup] Running data integrity check...
+2025-12-03T05:29:44.312476448Z [inf]  [Startup] Current status: healthy
+2025-12-03T05:29:44.312477412Z [inf]  📁 Looking for migrations in: /migrations
+2025-12-03T05:29:44.312487894Z [inf]  [Startup] Organizations: 2, Missing required: 0
+2025-12-03T05:29:44.312488100Z [inf]  📁 No migrations directory found, skipping migrations
+2025-12-03T05:29:44.312498044Z [inf]  Security systems ready - migrations available via API
+2025-12-03T05:29:44.312498494Z [inf]  [Startup] All required organizations present, no seeding needed
+2025-12-03T05:29:44.312504894Z [inf]  
+2025-12-03T05:29:44.312504976Z [inf]  ISO-AI initialization skipped - manual setup available
+2025-12-03T05:29:44.312506380Z [inf]  [Startup] Demo data check: 0 merchants, 0 monthly records
+2025-12-03T05:29:44.312514624Z [inf]  [Startup] Demo data appears empty, seeding...
+2025-12-03T05:29:44.312522414Z [inf]  🌱 Starting demo data seed...
+2025-12-03T05:29:44.312529546Z [inf]  ISO-AI sample data initialized
+2025-12-03T05:29:44.312532326Z [inf]  📦 Creating demo processors...
+2025-12-03T05:29:44.312541025Z [inf]  ✅ 9 processors ready
+2025-12-03T05:29:44.312544696Z [inf]  🔄 Real Data Display routes initializing...
+2025-12-03T05:29:44.312549917Z [err]  ❌ Demo data seed failed: error: column "branch_id" does not exist
+2025-12-03T05:29:44.312555585Z [inf]  🔄 Starting database migrations...
+2025-12-03T05:29:44.312558864Z [err]      at /app/node_modules/pg-pool/index.js:45:11
+2025-12-03T05:29:44.312564646Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-03T05:29:44.315106914Z [err]      at async file:///app/node_modules/drizzle-orm/node-postgres/session.js:83:22
+2025-12-03T05:29:44.315107591Z [inf]  📋 PreApplications router mounted at /api/preapplications
+2025-12-03T05:29:44.315118384Z [err]      at async seedDemoData (file:///app/dist/index.js:4076:31)
+2025-12-03T05:29:44.315119631Z [inf]  5:29:44 AM [express] 🔒 Secure ISO Hub server running on port 8080
+2025-12-03T05:29:44.315124770Z [err]    internalPosition: undefined,
+2025-12-03T05:29:44.315125632Z [err]      at async seedDemoDataIfNeeded (file:///app/dist/index.js:22545:24)
+2025-12-03T05:29:44.315128412Z [inf]  5:29:44 AM [express] 🔍 Health check: http://localhost:8080/health
+2025-12-03T05:29:44.315133033Z [err]      at async runStartupDataSeeding (file:///app/dist/index.js:22520:5)
+2025-12-03T05:29:44.315136190Z [err]    internalQuery: undefined,
+2025-12-03T05:29:44.315140612Z [err]      at async file:///app/dist/index.js:24483:5 {
+2025-12-03T05:29:44.315143261Z [err]    where: undefined,
+2025-12-03T05:29:44.315148173Z [err]    length: 109,
+2025-12-03T05:29:44.315150165Z [err]    schema: undefined,
+2025-12-03T05:29:44.315155158Z [err]    severity: 'ERROR',
+2025-12-03T05:29:44.315158214Z [err]    table: undefined,
+2025-12-03T05:29:44.315161005Z [err]    code: '42703',
+2025-12-03T05:29:44.315165725Z [err]    column: undefined,
+2025-12-03T05:29:44.315167336Z [err]    detail: undefined,
+2025-12-03T05:29:44.315172990Z [err]    dataType: undefined,
+2025-12-03T05:29:44.315173538Z [err]    hint: undefined,
+2025-12-03T05:29:44.315179847Z [err]    position: '59',
+2025-12-03T05:29:44.315180098Z [err]    constraint: undefined,
+2025-12-03T05:29:44.315185819Z [err]    internalPosition: undefined,
+2025-12-03T05:29:44.315186106Z [err]    file: 'parse_relation.c',
+2025-12-03T05:29:44.315192056Z [err]    internalQuery: undefined,
+2025-12-03T05:29:44.315192502Z [err]    line: '3716',
+2025-12-03T05:29:44.315198039Z [err]    routine: 'errorMissingColumn'
+2025-12-03T05:29:44.315198713Z [err]    where: undefined,
+2025-12-03T05:29:44.315203466Z [err]  }
+2025-12-03T05:29:44.315205063Z [err]    schema: undefined,
+2025-12-03T05:29:44.315209749Z [inf]  [Startup] Final data integrity status: healthy
+2025-12-03T05:29:44.315211812Z [err]    table: undefined,
+2025-12-03T05:29:44.315219645Z [err]    column: undefined,
+2025-12-03T05:29:44.315225197Z [err]    dataType: undefined,
+2025-12-03T05:29:44.315230947Z [err]    constraint: undefined,
+2025-12-03T05:29:44.315236750Z [err]    file: 'parse_relation.c',
+2025-12-03T05:29:44.315243178Z [err]    line: '3716',
+2025-12-03T05:29:44.315249302Z [err]    routine: 'errorMissingColumn'
+2025-12-03T05:29:44.315255229Z [err]  }
+2025-12-03T05:29:44.315261321Z [err]  [Startup] Failed to seed demo data: error: column "branch_id" does not exist
+2025-12-03T05:29:44.315267371Z [err]      at /app/node_modules/pg-pool/index.js:45:11
+2025-12-03T05:29:44.315273207Z [err]      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-12-03T05:29:44.315279400Z [err]      at async file:///app/node_modules/drizzle-orm/node-postgres/session.js:83:22
+2025-12-03T05:29:44.315285162Z [err]      at async seedDemoData (file:///app/dist/index.js:4076:31)
+2025-12-03T05:29:44.315291379Z [err]      at async seedDemoDataIfNeeded (file:///app/dist/index.js:22545:24)
+2025-12-03T05:29:44.315297586Z [err]      at async runStartupDataSeeding (file:///app/dist/index.js:22520:5)
+2025-12-03T05:29:44.315303610Z [err]      at async file:///app/dist/index.js:24483:5 {
+2025-12-03T05:29:44.315309694Z [err]    length: 109,
+2025-12-03T05:29:44.315315620Z [err]    severity: 'ERROR',
+2025-12-03T05:29:44.315321984Z [err]    code: '42703',
+2025-12-03T05:29:44.315327734Z [err]    detail: undefined,
+2025-12-03T05:29:44.315333343Z [err]    hint: undefined,
+2025-12-03T05:29:44.315340208Z [err]    position: '59',
+2025-12-03T05:29:44.315880310Z [inf]  5:29:44 AM [express] 📊 Metrics: http://localhost:8080/metrics
+2025-12-03T05:29:44.315886762Z [inf]  [SECURITY] Security middleware initialized
+2025-12-03T05:29:44.315891629Z [inf]  [MONITORING] Application monitoring active
+2025-12-03T05:29:44.315895979Z [inf]  [CACHE] Cache service ready

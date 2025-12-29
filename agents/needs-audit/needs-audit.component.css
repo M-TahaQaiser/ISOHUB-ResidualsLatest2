@@ -1,0 +1,103 @@
+/* Container for the entire table */
+.needs-audit-table-container {
+    overflow-x: auto;
+    width: 100%;
+}
+  
+/* Table styling */
+.needs-audit-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin-top: 20px;
+}
+  
+/* Table headers */
+.needs-audit-table th {
+    padding: 10px;
+    background-color: var(--section-background);
+    border: 1px solid var(--separator-color);
+    text-align: left;
+}
+  
+/* Table cells */
+.needs-audit-table td {
+    padding: 10px;
+    border: 1px solid var(--separator-color);
+    background-color: var(--background-color);
+    position: relative;
+}
+  
+/* Action buttons container */
+.needs-audit-action-buttons {
+    display: none; /* Hidden by default; shown only on hover */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--section-background);
+    border-radius: 15px;
+    padding: 5px 10px;
+    gap: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+  
+/* Show action buttons on row hover */
+.needs-audit-table tr:hover .needs-audit-action-buttons {
+    display: flex;
+}
+  
+/* Styling individual buttons */
+.needs-audit-btn-edit,
+.needs-audit-btn-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+  
+/* Edit button styling */
+.needs-audit-btn-edit {
+    color: #007bff;
+}
+  
+.needs-audit-btn-edit:hover {
+    color: #0056b3;
+}
+  
+/* Delete button styling */
+.needs-audit-btn-delete {
+    color: #ff4d4d;
+}
+  
+.needs-audit-btn-delete:hover {
+    color: #d32f2f;
+}
+  
+
+  
+.needs-audit-pagination button {
+    padding: 5px 10px;
+    border: 1px solid var(--separator-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+  
+.needs-audit-pagination button:hover {
+    background-color: var(--section-background);
+}
+  
+.needs-audit-pagination .active {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+.delete {
+    margin-right: 10px;
+}

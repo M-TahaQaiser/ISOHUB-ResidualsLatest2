@@ -1,0 +1,114 @@
+/* Container for the uploader */
+.agent-upload-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--section-background);
+  border-radius: 10px;
+  box-shadow: 0 0 15px var(--shadow-color);
+  text-align: center;
+}
+
+/* Header */
+.agent-upload-container h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+/* File input styling */
+.file-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.file-input-container label {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.file-input-container input[type="file"] {
+  padding: 10px;
+  border: 1px solid var(--separator-color);
+  border-radius: 5px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  cursor: pointer;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* File info display */
+.file-info {
+  margin-bottom: 10px;
+  color: var(--text-color);
+  font-style: italic;
+}
+
+/* Upload button */
+/*
+.upload-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}*/
+
+.upload-btn:hover {
+  background-color: var(--accent-color2);
+}
+
+/* Upload status message */
+.upload-status {
+  margin-top: 15px;
+  color: var(--text-color);
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Loading popup container */
+.loading-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  flex-direction: column;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: var(--accent-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading-popup p {
+  color: white;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+}

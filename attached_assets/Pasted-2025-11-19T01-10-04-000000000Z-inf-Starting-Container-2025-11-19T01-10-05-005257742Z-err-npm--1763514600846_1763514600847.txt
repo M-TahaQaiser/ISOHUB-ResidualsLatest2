@@ -1,0 +1,86 @@
+2025-11-19T01:10:04.000000000Z [inf]  Starting Container
+2025-11-19T01:10:05.005257742Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T01:10:05.005261515Z [inf]  
+2025-11-19T01:10:05.005266148Z [inf]  > rest-express@1.0.0 start
+2025-11-19T01:10:05.005269896Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T01:10:05.005273809Z [inf]  
+2025-11-19T01:10:06.406249208Z [inf]  ISO-AI sample data initialized
+2025-11-19T01:10:06.406257286Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T01:10:06.406263299Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T01:10:06.406268509Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T01:10:06.406274249Z [inf]  Security systems ready - migrations available via API
+2025-11-19T01:10:06.406279799Z [inf]  ISO-AI initialization skipped - manual setup available
+2025-11-19T01:10:06.406285521Z [inf]  📋 PreApplications router mounted at /api/preapplications
+2025-11-19T01:10:06.406290955Z [inf]  [OAuth Cleanup] Started periodic cleanup job (runs every hour)
+2025-11-19T01:10:06.406297075Z [inf]  1:10:05 AM [express] 🔒 Secure ISO Hub server running on port 8080
+2025-11-19T01:10:06.406303493Z [inf]  1:10:06 AM [express] 🔍 Health check: http://localhost:8080/health
+2025-11-19T01:10:06.406309589Z [inf]  1:10:06 AM [express] 📊 Metrics: http://localhost:8080/metrics
+2025-11-19T01:10:06.406318414Z [inf]  [SECURITY] Security middleware initialized
+2025-11-19T01:10:06.406323888Z [inf]  [MONITORING] Application monitoring active
+2025-11-19T01:10:06.406328718Z [inf]  [CACHE] Cache service ready
+2025-11-19T01:10:06.412179180Z [err]  [OAuth Cleanup] Error cleaning up expired states: ErrorEvent {
+2025-11-19T01:10:06.412183599Z [err]    [Symbol(kTarget)]: WebSocket {
+2025-11-19T01:10:06.412188109Z [err]      _events: [Object: null prototype] {
+2025-11-19T01:10:06.412194699Z [err]        error: [Function],
+2025-11-19T01:10:06.412204764Z [err]        message: [Function],
+2025-11-19T01:10:06.412257674Z [err]        close: [Function],
+2025-11-19T01:10:06.412265394Z [err]        open: [Function]
+2025-11-19T01:10:06.412273425Z [err]      },
+2025-11-19T01:10:06.412279768Z [err]      _eventsCount: 4,
+2025-11-19T01:10:06.412286437Z [err]      _maxListeners: undefined,
+2025-11-19T01:10:06.412293079Z [err]      _binaryType: 'arraybuffer',
+2025-11-19T01:10:06.412299908Z [err]      _closeCode: 1006,
+2025-11-19T01:10:06.412306847Z [err]      _closeFrameReceived: false,
+2025-11-19T01:10:06.412314247Z [err]      reason: "Host: yamabiko.proxy.rlwy.net. is not in the cert's altnames: DNS:*.up.railway.app",
+2025-11-19T01:10:06.412315235Z [err]      _closeFrameSent: false,
+2025-11-19T01:10:06.412322146Z [err]      host: 'yamabiko.proxy.rlwy.net',
+2025-11-19T01:10:06.412324259Z [err]      _closeMessage: <Buffer >,
+2025-11-19T01:10:06.412331936Z [err]      _closeTimer: null,
+2025-11-19T01:10:06.412332062Z [err]      _bufferedAmount: 0,
+2025-11-19T01:10:06.412339592Z [err]      _errorEmitted: true,
+2025-11-19T01:10:06.412346299Z [err]      _extensions: {},
+2025-11-19T01:10:06.412352956Z [err]      _paused: false,
+2025-11-19T01:10:06.412359962Z [err]      _protocol: '',
+2025-11-19T01:10:06.412367733Z [err]      _isServer: false,
+2025-11-19T01:10:06.412367850Z [err]      _readyState: 3,
+2025-11-19T01:10:06.412375384Z [err]    [Symbol(kType)]: 'error',
+2025-11-19T01:10:06.412376877Z [err]      _redirects: 0,
+2025-11-19T01:10:06.412377178Z [err]      _receiver: null,
+2025-11-19T01:10:06.412385650Z [err]    [Symbol(kError)]: Error [ERR_TLS_CERT_ALTNAME_INVALID]: Hostname/IP does not match certificate's altnames: Host: yamabiko.proxy.rlwy.net. is not in the cert's altnames: DNS:*.up.railway.app
+2025-11-19T01:10:06.412386497Z [err]      _sender: null,
+2025-11-19T01:10:06.412387121Z [err]      _autoPong: true,
+2025-11-19T01:10:06.412388830Z [err]      [Symbol(shapeMode)]: false,
+2025-11-19T01:10:06.412391258Z [err]        at TLSSocket._finishInit (node:_tls_wrap:1078:8)
+2025-11-19T01:10:06.412396260Z [err]      _socket: null,
+2025-11-19T01:10:06.412396645Z [err]        at Object.checkServerIdentity (node:tls:456:12)
+2025-11-19T01:10:06.412404839Z [err]      [Symbol(kCapture)]: false
+2025-11-19T01:10:06.412407529Z [err]        at ssl.onhandshakedone (node:_tls_wrap:864:12) {
+2025-11-19T01:10:06.412408633Z [err]        at TLSSocket.onConnectSecure (node:_tls_wrap:1689:27)
+2025-11-19T01:10:06.412419672Z [err]      code: 'ERR_TLS_CERT_ALTNAME_INVALID',
+2025-11-19T01:10:06.412419752Z [err]        at TLSSocket.emit (node:events:519:28)
+2025-11-19T01:10:06.412421900Z [err]    },
+2025-11-19T01:10:06.412442307Z [err]      _url: 'wss://yamabiko.proxy.rlwy.net/v2',
+2025-11-19T01:10:06.412447980Z [err]      _req: null,
+2025-11-19T01:10:06.414459092Z [err]      cert: {
+2025-11-19T01:10:06.414468779Z [err]        subject: [Object: null prototype],
+2025-11-19T01:10:06.414474858Z [err]        issuer: [Object: null prototype],
+2025-11-19T01:10:06.414480729Z [err]        subjectaltname: 'DNS:*.up.railway.app',
+2025-11-19T01:10:06.414486773Z [err]        infoAccess: [Object: null prototype],
+2025-11-19T01:10:06.414492825Z [err]        ca: false,
+2025-11-19T01:10:06.414498412Z [err]        modulus: 'A2FF18A851B687A03CFCD4D306C7AD5C927990FD71C9095E70CAD578B49083CDDF7E63DE37B68201FEC1E396836C6848B4B4EEDD02B7607151CDBA80479C254797B3C00701DFB881FB21B2E3936FF26330B4DE5182D03C55EF66D123F8C656DBAE2245B48522593FD1F546F81B4CD762676E2655103A20FB7AB5C2029A3631B094B4A276602E7023F87E332961FAA89925C13C1FBC4322C5D7C61DAFE377708F1C92E30B05789D221172FF31A6B08A37A58BF13EC8D94D8920DA19A52ED7C9A5FFA08DCED4F9EAED78732121D90C8C5F632BBE71AD272A656EE0EDFAAEA6A8B9FAC36A9E852D920D9910CC356FD9C91DC1B5859399A2970E86C5E4E3F1AEFF555E62A448B6E1FC9E7F581DAACCA3FD4419F77A105EFE5A3C1E428E0DFA61615682CCCEF80D7486F92E32697AA251669A60EE80222DD382E10401EF78E015235A17818027ECAF94897B59BE7D51B3D2070F3E179F5A7E90778EC3B09D8619FB45785EC397DA788E0E880C7D2C201B8AB83884CA43D5823EC7E73D1DA7F8D54DB4FA53FAB01EA3C9835AFE6A2BA18F1B8B2A66770FD590BCBEE5068B114D9594372F32F320BBB2836D930E4B05E6DA6F5C326EB4E09D91A9509FA646D6DB95823D3EACE446E319A3F13946E94E10541B5F44D8153F3D37DA3D4F4FB0A25545BCDC488CF6996E45145B5760FA2FCC80EF3BB43B08B5EC247C8D6BAC031656989849',
+2025-11-19T01:10:06.414597403Z [err]        bits: 4096,
+2025-11-19T01:10:06.414602967Z [err]        exponent: '0x10001',
+2025-11-19T01:10:06.414608832Z [err]        pubkey: <Buffer 30 82 02 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 02 0f 00 30 82 02 0a 02 82 02 01 00 a2 ff 18 a8 51 b6 87 a0 3c fc d4 d3 06 c7 ad 5c 92 ... 500 more bytes>,
+2025-11-19T01:10:06.414614459Z [err]        valid_from: 'Oct  6 16:07:50 2025 GMT',
+2025-11-19T01:10:06.414620045Z [err]        valid_to: 'Jan  4 16:07:49 2026 GMT',
+2025-11-19T01:10:06.414625782Z [err]        fingerprint: '13:D9:3A:04:CB:01:E7:D5:0F:88:1B:AA:37:95:69:DB:83:9F:AA:EE',
+2025-11-19T01:10:06.414631574Z [err]        fingerprint256: '4E:E4:AD:B2:CF:F9:E4:7C:44:B4:A7:2F:C2:C1:34:58:4C:22:5C:A0:4F:FA:C2:8E:DE:02:77:63:67:F6:1C:F1',
+2025-11-19T01:10:06.414637489Z [err]        fingerprint512: 'B9:21:13:F5:1A:F3:34:72:D3:A4:76:46:EB:2E:6D:3A:D1:1C:E5:BC:6A:06:B0:C4:AE:BE:53:BE:07:0D:FD:50:D0:36:86:9A:DE:45:4A:12:08:D3:FD:CC:8D:9B:EE:92:B8:A6:F6:30:C8:FB:2D:33:7A:67:73:23:39:73:7F:DA',
+2025-11-19T01:10:06.414642187Z [err]        ext_key_usage: [Array],
+2025-11-19T01:10:06.414647015Z [err]        serialNumber: '061C067BB5EE06F3113CE6690BE9B50F603D',
+2025-11-19T01:10:06.414651985Z [err]        raw: <Buffer 30 82 05 fc 30 82 04 e4 a0 03 02 01 02 02 12 06 1c 06 7b b5 ee 06 f3 11 3c e6 69 0b e9 b5 0f 60 3d 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 33 ... 1486 more bytes>,
+2025-11-19T01:10:06.414657435Z [err]        issuerCertificate: [Object]
+2025-11-19T01:10:06.414662764Z [err]      }
+2025-11-19T01:10:06.414668092Z [err]    },
+2025-11-19T01:10:06.414673875Z [err]    [Symbol(kMessage)]: "Hostname/IP does not match certificate's altnames: Host: yamabiko.proxy.rlwy.net. is not in the cert's altnames: DNS:*.up.railway.app"
+2025-11-19T01:10:06.414679718Z [err]  }

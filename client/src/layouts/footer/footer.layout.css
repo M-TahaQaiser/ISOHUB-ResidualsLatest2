@@ -1,0 +1,95 @@
+.footer {
+    background-color: var(--section-background); /* Use section background for consistency in both themes */
+    color: var(--text-color); /* Use text color from theme */
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    width: calc(100% - var(--sidebar-closed-width)); /* Adjust width based on collapsed sidebar */
+    margin-left: var(--sidebar-closed-width); /* Offset the footer by the width of the collapsed sidebar */
+    box-sizing: border-box; /* Ensure padding doesn't add to the width */
+    transition: margin-left 0.3s ease, width 0.3s ease; /* Smooth transition when sidebar expands */
+}
+
+.sidebar.open + .footer {
+    width: calc(100% - var(--sidebar-width)); /* Adjust width when sidebar is expanded */
+    margin-left: var(--sidebar-width); /* Offset the footer by the width of the expanded sidebar */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*
+.footer-logo h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--text-color); 
+}*/
+
+.footer-links {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-links a {
+    color: var(--text-color); /* Use the theme's text color */
+    margin: 5px 15px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color2); /* Accent color on hover */
+}
+
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.footer-socials a {
+    color: var(--text-color); /* Use the theme's text color */
+    margin: 0 15px;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer-socials a:hover {
+    color: var(--accent-color); /* Accent color on hover */
+    transform: scale(1.2);
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--text-color); /* Use the theme's text color */
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer {
+        width: 100%; /* Full width on mobile */
+        margin-left: 0; /* No offset on mobile */
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-links {
+        margin: 20px 0;
+        justify-content: center;
+    }
+}

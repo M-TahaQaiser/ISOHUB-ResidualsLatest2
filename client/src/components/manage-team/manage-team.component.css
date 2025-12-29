@@ -1,0 +1,143 @@
+.manage-team-container {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--section-background);
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--shadow-color);
+  min-height: 100vh; /* Ensures the container expands to fill the page height */
+  height: auto; /* Allows the container to grow based on the content */
+}
+
+h2, h3 {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.user-table th,
+.user-table td {
+  padding: 12px 15px;
+  border: 1px solid var(--separator-color);
+  text-align: left;
+  color: var(--text-color);
+}
+
+.user-table th {
+  background-color: var(--accent-color);
+  color: var(--background-color);
+}
+
+.user-table td {
+  background-color: var(--background-color);
+}
+
+.table-actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px;
+  transition: color 0.3s ease;
+}
+
+.action-button.edit {
+  color: #facc15; /* Blue for edit */
+}
+
+.action-button.edit:hover {
+  color: #facc15;
+  background-color: var(--section-background);
+}
+
+.action-button.delete {
+  color: red; /* Red for delete */
+}
+
+.action-button.delete:hover {
+  color: darkred;
+  background-color: var(--section-background);
+}
+
+.add-user-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.popup-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--background-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--shadow-color);
+  z-index: 1000;
+  width: 400px;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+/*
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-color);
+  font-weight: bold;
+}*/
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--separator-color);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.save-button, .delete-button {
+  padding: 10px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+}

@@ -1,0 +1,1001 @@
+2025-12-03T03:29:22.253921011Z [err]      _readyState: 3,
+2025-12-03T03:29:22.253934486Z [err]      _receiver: null,
+2025-12-03T03:29:22.253946662Z [err]  [DB HEALTH] Health check failed (21 consecutive failures): ErrorEvent {
+2025-12-03T03:29:22.253947147Z [err]      _sender: null,
+2025-12-03T03:29:22.253953439Z [err]    [Symbol(kTarget)]: CustomWebSocket {
+2025-12-03T03:29:22.253958185Z [err]      _socket: null,
+2025-12-03T03:29:22.253960235Z [err]      _events: [Object: null prototype] {
+2025-12-03T03:29:22.253967140Z [err]        error: [Function],
+2025-12-03T03:29:22.253968409Z [err]      _bufferedAmount: 0,
+2025-12-03T03:29:22.253972711Z [err]        message: [Function],
+2025-12-03T03:29:22.253978886Z [err]      _isServer: false,
+2025-12-03T03:29:22.253979168Z [err]        close: [Function],
+2025-12-03T03:29:22.253986074Z [err]        open: [Function]
+2025-12-03T03:29:22.253990763Z [err]      _redirects: 0,
+2025-12-03T03:29:22.253993365Z [err]      },
+2025-12-03T03:29:22.253999148Z [err]      _eventsCount: 4,
+2025-12-03T03:29:22.254000551Z [err]      _autoPong: true,
+2025-12-03T03:29:22.254008683Z [err]      _maxListeners: undefined,
+2025-12-03T03:29:22.254009664Z [err]      _url: 'wss://yamabiko.proxy.rlwy.net/v2',
+2025-12-03T03:29:22.254014980Z [err]      _binaryType: 'arraybuffer',
+2025-12-03T03:29:22.254019292Z [err]      _req: ClientRequest {
+2025-12-03T03:29:22.254022155Z [err]      _closeCode: 1006,
+2025-12-03T03:29:22.254027372Z [err]      _closeFrameReceived: false,
+2025-12-03T03:29:22.254031446Z [err]      _closeFrameSent: false,
+2025-12-03T03:29:22.254035662Z [err]      _closeMessage: <Buffer >,
+2025-12-03T03:29:22.254040021Z [err]      _closeTimer: null,
+2025-12-03T03:29:22.254044617Z [err]      _errorEmitted: true,
+2025-12-03T03:29:22.254049141Z [err]      _extensions: {},
+2025-12-03T03:29:22.254053376Z [err]      _paused: false,
+2025-12-03T03:29:22.254057649Z [err]      _protocol: '',
+2025-12-03T03:29:22.255604313Z [err]        _headerSent: true,
+2025-12-03T03:29:22.255606246Z [err]        _events: [Object: null prototype],
+2025-12-03T03:29:22.255606763Z [err]          'Sec-WebSocket-Version: 13\r\n' +
+2025-12-03T03:29:22.255611552Z [err]        strictContentLength: false,
+2025-12-03T03:29:22.255616727Z [err]        _closed: true,
+2025-12-03T03:29:22.255617770Z [err]          'Sec-WebSocket-Key: 64KbjegLyiuuytNxtd0XCg==\r\n' +
+2025-12-03T03:29:22.255619365Z [err]        _eventsCount: 4,
+2025-12-03T03:29:22.255622984Z [err]        _contentLength: 0,
+2025-12-03T03:29:22.255628089Z [err]        socket: [TLSSocket],
+2025-12-03T03:29:22.255628390Z [err]        _maxListeners: undefined,
+2025-12-03T03:29:22.255631999Z [err]        _hasBody: true,
+2025-12-03T03:29:22.255638676Z [err]        outputData: [],
+2025-12-03T03:29:22.255639550Z [err]        _header: 'GET /v2 HTTP/1.1\r\n' +
+2025-12-03T03:29:22.255640988Z [err]        _trailer: '',
+2025-12-03T03:29:22.255644674Z [err]        shouldKeepAlive: true,
+2025-12-03T03:29:22.255647838Z [err]        outputSize: 0,
+2025-12-03T03:29:22.255650020Z [err]        finished: true,
+2025-12-03T03:29:22.255655455Z [err]        writable: true,
+2025-12-03T03:29:22.255657669Z [err]        maxRequestsOnConnectionReached: false,
+2025-12-03T03:29:22.255663795Z [err]        destroyed: true,
+2025-12-03T03:29:22.255665976Z [err]        _defaultKeepAlive: true,
+2025-12-03T03:29:22.255670529Z [err]        _last: true,
+2025-12-03T03:29:22.255673697Z [err]        useChunkedEncodingByDefault: false,
+2025-12-03T03:29:22.255677004Z [err]        chunkedEncoding: false,
+2025-12-03T03:29:22.255680694Z [err]        sendDate: false,
+2025-12-03T03:29:22.255686272Z [err]        _removedConnection: false,
+2025-12-03T03:29:22.255691704Z [err]        _removedContLen: false,
+2025-12-03T03:29:22.255698040Z [err]        _removedTE: false,
+2025-12-03T03:29:22.257770101Z [err]          'Connection: Upgrade\r\n' +
+2025-12-03T03:29:22.257772949Z [err]        host: 'yamabiko.proxy.rlwy.net',
+2025-12-03T03:29:22.257781514Z [err]        protocol: 'https:',
+2025-12-03T03:29:22.257783103Z [err]          'Upgrade: websocket\r\n' +
+2025-12-03T03:29:22.257785852Z [err]        upgradeOrConnect: false,
+2025-12-03T03:29:22.257786358Z [err]        socketPath: undefined,
+2025-12-03T03:29:22.257789022Z [err]        [Symbol(kCapture)]: false,
+2025-12-03T03:29:22.257797133Z [err]        [Symbol(kBytesWritten)]: 0,
+2025-12-03T03:29:22.257797753Z [err]        parser: null,
+2025-12-03T03:29:22.257798181Z [err]        method: 'GET',
+2025-12-03T03:29:22.257799702Z [err]          'Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits\r\n' +
+2025-12-03T03:29:22.257807868Z [err]          'Host: yamabiko.proxy.rlwy.net\r\n' +
+2025-12-03T03:29:22.257808020Z [err]        [Symbol(kNeedDrain)]: false,
+2025-12-03T03:29:22.257808383Z [err]        maxHeaderSize: undefined,
+2025-12-03T03:29:22.257808440Z [err]        maxHeadersCount: null,
+2025-12-03T03:29:22.257815733Z [err]          '\r\n',
+2025-12-03T03:29:22.257817781Z [err]        insecureHTTPParser: undefined,
+2025-12-03T03:29:22.257818591Z [err]        [Symbol(corked)]: 0,
+2025-12-03T03:29:22.257818795Z [err]        reusedSocket: false,
+2025-12-03T03:29:22.257825413Z [err]        _keepAliveTimeout: 0,
+2025-12-03T03:29:22.257827218Z [err]        joinDuplicateHeaders: undefined,
+2025-12-03T03:29:22.257833253Z [err]        _onPendingData: [Function: nop],
+2025-12-03T03:29:22.257836098Z [err]        path: '/v2',
+2025-12-03T03:29:22.257839343Z [err]        agent: undefined,
+2025-12-03T03:29:22.257844051Z [err]        _ended: true,
+2025-12-03T03:29:22.257851828Z [err]        res: [IncomingMessage],
+2025-12-03T03:29:22.257857405Z [err]        aborted: true,
+2025-12-03T03:29:22.257863290Z [err]        timeoutCb: null,
+2025-12-03T03:29:22.258836087Z [err]        [Symbol(kOutHeaders)]: [Object: null prototype],
+2025-12-03T03:29:22.258843323Z [err]        [Symbol(errored)]: null,
+2025-12-03T03:29:22.258844839Z [err]        at ClientRequest.<anonymous> (/app/node_modules/ws/lib/websocket.js:913:7)
+2025-12-03T03:29:22.258850057Z [err]        [Symbol(kHighWaterMark)]: 16384,
+2025-12-03T03:29:22.258854223Z [err]        at ClientRequest.emit (node:events:517:28)
+2025-12-03T03:29:22.258855952Z [err]        [Symbol(kRejectNonStandardBodyWrites)]: false,
+2025-12-03T03:29:22.258861024Z [err]        [Symbol(kUniqueHeaders)]: null,
+2025-12-03T03:29:22.258863885Z [err]        at HTTPParser.parserOnIncomingClient (node:_http_client:700:27)
+2025-12-03T03:29:22.258866881Z [err]        [Symbol(kAborted)]: true,
+2025-12-03T03:29:22.258872674Z [err]        [Symbol(kError)]: undefined
+2025-12-03T03:29:22.258873030Z [err]        at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+2025-12-03T03:29:22.258878794Z [err]      },
+2025-12-03T03:29:22.258881165Z [err]        at TLSSocket.socketOnData (node:_http_client:541:22)
+2025-12-03T03:29:22.258884510Z [err]      [Symbol(kCapture)]: false
+2025-12-03T03:29:22.258889483Z [err]        at TLSSocket.emit (node:events:517:28)
+2025-12-03T03:29:22.258892229Z [err]    },
+2025-12-03T03:29:22.258896598Z [err]        at addChunk (node:internal/streams/readable:368:12)
+2025-12-03T03:29:22.258897380Z [err]    [Symbol(kType)]: 'error',
+2025-12-03T03:29:22.258902522Z [err]        at readableAddChunk (node:internal/streams/readable:341:9)
+2025-12-03T03:29:22.258902642Z [err]    [Symbol(kError)]: Error: Unexpected server response: 404
+2025-12-03T03:29:22.258907962Z [err]        at Readable.push (node:internal/streams/readable:278:10)
+2025-12-03T03:29:22.258912735Z [err]        at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23),
+2025-12-03T03:29:22.258917857Z [err]    [Symbol(kMessage)]: 'Unexpected server response: 404'
+2025-12-03T03:29:22.260478608Z [err]  }
+2025-12-03T03:29:22.260485608Z [err]  [DB HEALTH] CRITICAL: Database connection issues detected
+2025-12-03T03:29:52.273171342Z [err]      _socket: null,
+2025-12-03T03:29:52.273183683Z [err]      _bufferedAmount: 0,
+2025-12-03T03:29:52.273190899Z [err]      _isServer: false,
+2025-12-03T03:29:52.273198017Z [err]      _redirects: 0,
+2025-12-03T03:29:52.273199257Z [err]  [ALERT] HIGH_ERROR_RATE: API error rate is 23.08%
+2025-12-03T03:29:52.273204992Z [err]  [ALERT] DATABASE_ERRORS: Database has 21 errors
+2025-12-03T03:29:52.273210718Z [err]  [DB HEALTH] Health check failed (22 consecutive failures): ErrorEvent {
+2025-12-03T03:29:52.273217763Z [err]    [Symbol(kTarget)]: CustomWebSocket {
+2025-12-03T03:29:52.273223969Z [err]      _events: [Object: null prototype] {
+2025-12-03T03:29:52.273230839Z [err]        error: [Function],
+2025-12-03T03:29:52.273238803Z [err]        message: [Function],
+2025-12-03T03:29:52.273245481Z [err]        close: [Function],
+2025-12-03T03:29:52.273251020Z [err]        open: [Function]
+2025-12-03T03:29:52.273258855Z [err]      },
+2025-12-03T03:29:52.273264002Z [err]      _eventsCount: 4,
+2025-12-03T03:29:52.273268102Z [err]      _maxListeners: undefined,
+2025-12-03T03:29:52.273273222Z [err]      _binaryType: 'arraybuffer',
+2025-12-03T03:29:52.273278150Z [err]      _closeCode: 1006,
+2025-12-03T03:29:52.273283660Z [err]      _closeFrameReceived: false,
+2025-12-03T03:29:52.273289586Z [err]      _closeFrameSent: false,
+2025-12-03T03:29:52.273294287Z [err]      _closeMessage: <Buffer >,
+2025-12-03T03:29:52.273299583Z [err]      _closeTimer: null,
+2025-12-03T03:29:52.273304362Z [err]      _errorEmitted: true,
+2025-12-03T03:29:52.273309445Z [err]      _extensions: {},
+2025-12-03T03:29:52.273314898Z [err]      _paused: false,
+2025-12-03T03:29:52.273320871Z [err]      _protocol: '',
+2025-12-03T03:29:52.273327332Z [err]      _readyState: 3,
+2025-12-03T03:29:52.273361122Z [err]      _receiver: null,
+2025-12-03T03:29:52.273368126Z [err]      _sender: null,
+2025-12-03T03:29:52.274603082Z [err]      _autoPong: true,
+2025-12-03T03:29:52.274613165Z [err]      _url: 'wss://yamabiko.proxy.rlwy.net/v2',
+2025-12-03T03:29:52.274621321Z [err]        outputData: [],
+2025-12-03T03:29:52.274623088Z [err]      _req: ClientRequest {
+2025-12-03T03:29:52.274625691Z [err]        socket: [TLSSocket],
+2025-12-03T03:29:52.274630459Z [err]        outputSize: 0,
+2025-12-03T03:29:52.274633098Z [err]        _events: [Object: null prototype],
+2025-12-03T03:29:52.274636718Z [err]        _defaultKeepAlive: true,
+2025-12-03T03:29:52.274637001Z [err]        _header: 'GET /v2 HTTP/1.1\r\n' +
+2025-12-03T03:29:52.274637585Z [err]        writable: true,
+2025-12-03T03:29:52.274642387Z [err]        _eventsCount: 4,
+2025-12-03T03:29:52.274644443Z [err]        destroyed: true,
+2025-12-03T03:29:52.274648614Z [err]        useChunkedEncodingByDefault: false,
+2025-12-03T03:29:52.274652826Z [err]        _removedTE: false,
+2025-12-03T03:29:52.274653109Z [err]        _maxListeners: undefined,
+2025-12-03T03:29:52.274654738Z [err]        _last: true,
+2025-12-03T03:29:52.274656635Z [err]        sendDate: false,
+2025-12-03T03:29:52.274662228Z [err]        chunkedEncoding: false,
+2025-12-03T03:29:52.274663853Z [err]        _removedConnection: false,
+2025-12-03T03:29:52.274664779Z [err]        strictContentLength: false,
+2025-12-03T03:29:52.274669185Z [err]        shouldKeepAlive: true,
+2025-12-03T03:29:52.274671513Z [err]        _removedContLen: false,
+2025-12-03T03:29:52.274675885Z [err]        _trailer: '',
+2025-12-03T03:29:52.274676007Z [err]        _contentLength: 0,
+2025-12-03T03:29:52.274676094Z [err]        maxRequestsOnConnectionReached: false,
+2025-12-03T03:29:52.274684615Z [err]        _hasBody: true,
+2025-12-03T03:29:52.274689900Z [err]        finished: true,
+2025-12-03T03:29:52.274696892Z [err]        _headerSent: true,
+2025-12-03T03:29:52.274703628Z [err]        _closed: true,
+2025-12-03T03:29:52.276310817Z [err]          'Sec-WebSocket-Version: 13\r\n' +
+2025-12-03T03:29:52.276319050Z [err]          'Sec-WebSocket-Key: YTsyKbzUNXzPsfsPYE2y1g==\r\n' +
+2025-12-03T03:29:52.276326526Z [err]          'Connection: Upgrade\r\n' +
+2025-12-03T03:29:52.276334517Z [err]          'Upgrade: websocket\r\n' +
+2025-12-03T03:29:52.276337907Z [err]        parser: null,
+2025-12-03T03:29:52.276342280Z [err]          'Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits\r\n' +
+2025-12-03T03:29:52.276349430Z [err]          'Host: yamabiko.proxy.rlwy.net\r\n' +
+2025-12-03T03:29:52.276350974Z [err]        maxHeadersCount: null,
+2025-12-03T03:29:52.276356454Z [err]          '\r\n',
+2025-12-03T03:29:52.276359795Z [err]        reusedSocket: false,
+2025-12-03T03:29:52.276366740Z [err]        _keepAliveTimeout: 0,
+2025-12-03T03:29:52.276368418Z [err]        host: 'yamabiko.proxy.rlwy.net',
+2025-12-03T03:29:52.276375022Z [err]        _onPendingData: [Function: nop],
+2025-12-03T03:29:52.276376894Z [err]        protocol: 'https:',
+2025-12-03T03:29:52.276382691Z [err]        agent: undefined,
+2025-12-03T03:29:52.276385744Z [err]        [Symbol(kCapture)]: false,
+2025-12-03T03:29:52.276389415Z [err]        socketPath: undefined,
+2025-12-03T03:29:52.276395275Z [err]        method: 'GET',
+2025-12-03T03:29:52.276401050Z [err]        maxHeaderSize: undefined,
+2025-12-03T03:29:52.276406539Z [err]        insecureHTTPParser: undefined,
+2025-12-03T03:29:52.276413638Z [err]        joinDuplicateHeaders: undefined,
+2025-12-03T03:29:52.276419321Z [err]        path: '/v2',
+2025-12-03T03:29:52.276424755Z [err]        _ended: true,
+2025-12-03T03:29:52.276431828Z [err]        res: [IncomingMessage],
+2025-12-03T03:29:52.276437517Z [err]        aborted: true,
+2025-12-03T03:29:52.276445336Z [err]        timeoutCb: null,
+2025-12-03T03:29:52.276451291Z [err]        upgradeOrConnect: false,
+2025-12-03T03:29:52.277789221Z [err]        [Symbol(kBytesWritten)]: 0,
+2025-12-03T03:29:52.277796315Z [err]        [Symbol(kNeedDrain)]: false,
+2025-12-03T03:29:52.277802330Z [err]        [Symbol(corked)]: 0,
+2025-12-03T03:29:52.277804699Z [err]        at TLSSocket.emit (node:events:517:28)
+2025-12-03T03:29:52.277809355Z [err]        [Symbol(kOutHeaders)]: [Object: null prototype],
+2025-12-03T03:29:52.277812934Z [err]        [Symbol(kError)]: undefined
+2025-12-03T03:29:52.277815429Z [err]        at addChunk (node:internal/streams/readable:368:12)
+2025-12-03T03:29:52.277817825Z [err]        [Symbol(errored)]: null,
+2025-12-03T03:29:52.277824849Z [err]        at readableAddChunk (node:internal/streams/readable:341:9)
+2025-12-03T03:29:52.277825969Z [err]      },
+2025-12-03T03:29:52.277827618Z [err]        [Symbol(kHighWaterMark)]: 16384,
+2025-12-03T03:29:52.277833357Z [err]        at Readable.push (node:internal/streams/readable:278:10)
+2025-12-03T03:29:52.277835632Z [err]      [Symbol(kCapture)]: false
+2025-12-03T03:29:52.277835883Z [err]        [Symbol(kRejectNonStandardBodyWrites)]: false,
+2025-12-03T03:29:52.277842621Z [err]        [Symbol(kUniqueHeaders)]: null,
+2025-12-03T03:29:52.277847851Z [err]        [Symbol(kAborted)]: true,
+2025-12-03T03:29:52.277853726Z [err]    },
+2025-12-03T03:29:52.277860380Z [err]    [Symbol(kType)]: 'error',
+2025-12-03T03:29:52.277868351Z [err]    [Symbol(kError)]: Error: Unexpected server response: 404
+2025-12-03T03:29:52.277875201Z [err]        at ClientRequest.<anonymous> (/app/node_modules/ws/lib/websocket.js:913:7)
+2025-12-03T03:29:52.277883410Z [err]        at ClientRequest.emit (node:events:517:28)
+2025-12-03T03:29:52.277896531Z [err]        at HTTPParser.parserOnIncomingClient (node:_http_client:700:27)
+2025-12-03T03:29:52.277903283Z [err]        at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+2025-12-03T03:29:52.277909469Z [err]        at TLSSocket.socketOnData (node:_http_client:541:22)
+2025-12-03T03:29:52.279792663Z [err]        at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23),
+2025-12-03T03:29:52.279801882Z [err]    [Symbol(kMessage)]: 'Unexpected server response: 404'
+2025-12-03T03:29:52.279814375Z [err]  }
+2025-12-03T03:29:52.279821289Z [err]  [DB HEALTH] CRITICAL: Database connection issues detected
+2025-12-03T03:30:22.283988381Z [err]      _closeMessage: <Buffer >,
+2025-12-03T03:30:22.283999236Z [err]      _closeTimer: null,
+2025-12-03T03:30:22.284003255Z [err]  [DB HEALTH] Health check failed (23 consecutive failures): ErrorEvent {
+2025-12-03T03:30:22.284008386Z [err]      _errorEmitted: true,
+2025-12-03T03:30:22.284009486Z [err]    [Symbol(kTarget)]: CustomWebSocket {
+2025-12-03T03:30:22.284017102Z [err]      _events: [Object: null prototype] {
+2025-12-03T03:30:22.284017310Z [err]      _extensions: {},
+2025-12-03T03:30:22.284023653Z [err]        error: [Function],
+2025-12-03T03:30:22.284023845Z [err]      _paused: false,
+2025-12-03T03:30:22.284029703Z [err]        message: [Function],
+2025-12-03T03:30:22.284030692Z [err]      _protocol: '',
+2025-12-03T03:30:22.284035428Z [err]        close: [Function],
+2025-12-03T03:30:22.284037942Z [err]      _readyState: 3,
+2025-12-03T03:30:22.284042854Z [err]        open: [Function]
+2025-12-03T03:30:22.284043989Z [err]      _receiver: null,
+2025-12-03T03:30:22.284048391Z [err]      },
+2025-12-03T03:30:22.284050642Z [err]      _sender: null,
+2025-12-03T03:30:22.284054096Z [err]      _eventsCount: 4,
+2025-12-03T03:30:22.284057391Z [err]      _socket: null,
+2025-12-03T03:30:22.284060423Z [err]      _maxListeners: undefined,
+2025-12-03T03:30:22.284065713Z [err]      _bufferedAmount: 0,
+2025-12-03T03:30:22.284066550Z [err]      _binaryType: 'arraybuffer',
+2025-12-03T03:30:22.284073910Z [err]      _closeCode: 1006,
+2025-12-03T03:30:22.284075338Z [err]      _isServer: false,
+2025-12-03T03:30:22.284082005Z [err]      _redirects: 0,
+2025-12-03T03:30:22.284084504Z [err]      _closeFrameReceived: false,
+2025-12-03T03:30:22.284091690Z [err]      _autoPong: true,
+2025-12-03T03:30:22.284092729Z [err]      _closeFrameSent: false,
+2025-12-03T03:30:22.284097606Z [err]      _url: 'wss://yamabiko.proxy.rlwy.net/v2',
+2025-12-03T03:30:22.284101960Z [err]      _req: ClientRequest {
+2025-12-03T03:30:22.286458552Z [err]        _events: [Object: null prototype],
+2025-12-03T03:30:22.286467584Z [err]        _removedTE: false,
+2025-12-03T03:30:22.286471456Z [err]        _eventsCount: 4,
+2025-12-03T03:30:22.286477197Z [err]        _maxListeners: undefined,
+2025-12-03T03:30:22.286485649Z [err]        outputData: [],
+2025-12-03T03:30:22.286487757Z [err]        strictContentLength: false,
+2025-12-03T03:30:22.286493796Z [err]        outputSize: 0,
+2025-12-03T03:30:22.286499903Z [err]        _contentLength: 0,
+2025-12-03T03:30:22.286504310Z [err]        writable: true,
+2025-12-03T03:30:22.286512507Z [err]        destroyed: true,
+2025-12-03T03:30:22.286515834Z [err]        _hasBody: true,
+2025-12-03T03:30:22.286525839Z [err]        _last: true,
+2025-12-03T03:30:22.286527363Z [err]        _trailer: '',
+2025-12-03T03:30:22.286538929Z [err]        chunkedEncoding: false,
+2025-12-03T03:30:22.286539038Z [err]        finished: true,
+2025-12-03T03:30:22.286549927Z [err]        _headerSent: true,
+2025-12-03T03:30:22.286552452Z [err]        shouldKeepAlive: true,
+2025-12-03T03:30:22.286563327Z [err]        maxRequestsOnConnectionReached: false,
+2025-12-03T03:30:22.286566736Z [err]        _closed: true,
+2025-12-03T03:30:22.286576214Z [err]        _defaultKeepAlive: true,
+2025-12-03T03:30:22.286580345Z [err]        socket: [TLSSocket],
+2025-12-03T03:30:22.286587653Z [err]        useChunkedEncodingByDefault: false,
+2025-12-03T03:30:22.286594908Z [err]        _header: 'GET /v2 HTTP/1.1\r\n' +
+2025-12-03T03:30:22.286602218Z [err]        sendDate: false,
+2025-12-03T03:30:22.286606633Z [err]          'Sec-WebSocket-Version: 13\r\n' +
+2025-12-03T03:30:22.286613790Z [err]        _removedConnection: false,
+2025-12-03T03:30:22.286617166Z [err]          'Sec-WebSocket-Key: 3KGmKiaog0PbyKVg6khiCQ==\r\n' +
+2025-12-03T03:30:22.286622419Z [err]        _removedContLen: false,
+2025-12-03T03:30:22.288549166Z [err]          'Connection: Upgrade\r\n' +
+2025-12-03T03:30:22.288552192Z [err]        upgradeOrConnect: false,
+2025-12-03T03:30:22.288562991Z [err]          'Upgrade: websocket\r\n' +
+2025-12-03T03:30:22.288565736Z [err]        parser: null,
+2025-12-03T03:30:22.288576433Z [err]          'Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits\r\n' +
+2025-12-03T03:30:22.288576663Z [err]        maxHeadersCount: null,
+2025-12-03T03:30:22.288587463Z [err]        reusedSocket: false,
+2025-12-03T03:30:22.288591009Z [err]          'Host: yamabiko.proxy.rlwy.net\r\n' +
+2025-12-03T03:30:22.288597043Z [err]        host: 'yamabiko.proxy.rlwy.net',
+2025-12-03T03:30:22.288602951Z [err]          '\r\n',
+2025-12-03T03:30:22.288608005Z [err]        protocol: 'https:',
+2025-12-03T03:30:22.288615302Z [err]        [Symbol(kCapture)]: false,
+2025-12-03T03:30:22.288622094Z [err]        [Symbol(kBytesWritten)]: 0,
+2025-12-03T03:30:22.288627331Z [err]        [Symbol(kNeedDrain)]: false,
+2025-12-03T03:30:22.288633483Z [err]        [Symbol(corked)]: 0,
+2025-12-03T03:30:22.288637354Z [err]        _keepAliveTimeout: 0,
+2025-12-03T03:30:22.288646175Z [err]        _onPendingData: [Function: nop],
+2025-12-03T03:30:22.288652083Z [err]        agent: undefined,
+2025-12-03T03:30:22.288657704Z [err]        socketPath: undefined,
+2025-12-03T03:30:22.288664404Z [err]        method: 'GET',
+2025-12-03T03:30:22.288669763Z [err]        maxHeaderSize: undefined,
+2025-12-03T03:30:22.288676281Z [err]        insecureHTTPParser: undefined,
+2025-12-03T03:30:22.288688751Z [err]        joinDuplicateHeaders: undefined,
+2025-12-03T03:30:22.288696092Z [err]        path: '/v2',
+2025-12-03T03:30:22.288703091Z [err]        _ended: true,
+2025-12-03T03:30:22.288708968Z [err]        res: [IncomingMessage],
+2025-12-03T03:30:22.288714499Z [err]        aborted: true,
+2025-12-03T03:30:22.288720031Z [err]        timeoutCb: null,
+2025-12-03T03:30:22.291458307Z [err]        [Symbol(kOutHeaders)]: [Object: null prototype],
+2025-12-03T03:30:22.291471008Z [err]        at ClientRequest.emit (node:events:517:28)
+2025-12-03T03:30:22.291477175Z [err]        [Symbol(errored)]: null,
+2025-12-03T03:30:22.291486080Z [err]        [Symbol(kHighWaterMark)]: 16384,
+2025-12-03T03:30:22.291490939Z [err]        at HTTPParser.parserOnIncomingClient (node:_http_client:700:27)
+2025-12-03T03:30:22.291499335Z [err]        [Symbol(kRejectNonStandardBodyWrites)]: false,
+2025-12-03T03:30:22.291507513Z [err]        at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+2025-12-03T03:30:22.291508992Z [err]        [Symbol(kUniqueHeaders)]: null,
+2025-12-03T03:30:22.291520517Z [err]        [Symbol(kAborted)]: true,
+2025-12-03T03:30:22.291522667Z [err]        at TLSSocket.socketOnData (node:_http_client:541:22)
+2025-12-03T03:30:22.291532005Z [err]        [Symbol(kError)]: undefined
+2025-12-03T03:30:22.291539802Z [err]      },
+2025-12-03T03:30:22.291546341Z [err]        at TLSSocket.emit (node:events:517:28)
+2025-12-03T03:30:22.291550575Z [err]      [Symbol(kCapture)]: false
+2025-12-03T03:30:22.291561116Z [err]    },
+2025-12-03T03:30:22.291562436Z [err]        at addChunk (node:internal/streams/readable:368:12)
+2025-12-03T03:30:22.291576191Z [err]        at readableAddChunk (node:internal/streams/readable:341:9)
+2025-12-03T03:30:22.291579356Z [err]    [Symbol(kType)]: 'error',
+2025-12-03T03:30:22.291590098Z [err]    [Symbol(kError)]: Error: Unexpected server response: 404
+2025-12-03T03:30:22.291591037Z [err]        at Readable.push (node:internal/streams/readable:278:10)
+2025-12-03T03:30:22.291599647Z [err]        at ClientRequest.<anonymous> (/app/node_modules/ws/lib/websocket.js:913:7)
+2025-12-03T03:30:22.291604859Z [err]        at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23),
+2025-12-03T03:30:22.291612974Z [err]    [Symbol(kMessage)]: 'Unexpected server response: 404'
+2025-12-03T03:30:22.292835476Z [err]  }
+2025-12-03T03:30:22.292843977Z [err]  [DB HEALTH] CRITICAL: Database connection issues detected
+2025-12-03T03:30:52.294708123Z [err]      _req: ClientRequest {
+2025-12-03T03:30:52.294718190Z [err]  [DB HEALTH] Health check failed (24 consecutive failures): ErrorEvent {
+2025-12-03T03:30:52.294722876Z [err]    [Symbol(kTarget)]: CustomWebSocket {
+2025-12-03T03:30:52.294727867Z [err]      _events: [Object: null prototype] {
+2025-12-03T03:30:52.294733193Z [err]        error: [Function],
+2025-12-03T03:30:52.294739725Z [err]        message: [Function],
+2025-12-03T03:30:52.294743859Z [err]        close: [Function],
+2025-12-03T03:30:52.294749753Z [err]        open: [Function]
+2025-12-03T03:30:52.294755460Z [err]      },
+2025-12-03T03:30:52.294759851Z [err]      _eventsCount: 4,
+2025-12-03T03:30:52.294764109Z [err]      _maxListeners: undefined,
+2025-12-03T03:30:52.294769048Z [err]      _binaryType: 'arraybuffer',
+2025-12-03T03:30:52.294773275Z [err]      _closeCode: 1006,
+2025-12-03T03:30:52.294776974Z [err]      _closeFrameReceived: false,
+2025-12-03T03:30:52.294782323Z [err]      _closeFrameSent: false,
+2025-12-03T03:30:52.294787529Z [err]      _closeMessage: <Buffer >,
+2025-12-03T03:30:52.294792240Z [err]      _closeTimer: null,
+2025-12-03T03:30:52.294800208Z [err]      _errorEmitted: true,
+2025-12-03T03:30:52.294803938Z [err]      _extensions: {},
+2025-12-03T03:30:52.294808039Z [err]      _paused: false,
+2025-12-03T03:30:52.294812102Z [err]      _protocol: '',
+2025-12-03T03:30:52.294817573Z [err]      _readyState: 3,
+2025-12-03T03:30:52.294821712Z [err]      _receiver: null,
+2025-12-03T03:30:52.294825343Z [err]      _sender: null,
+2025-12-03T03:30:52.294829512Z [err]      _socket: null,
+2025-12-03T03:30:52.294835569Z [err]      _bufferedAmount: 0,
+2025-12-03T03:30:52.294841255Z [err]      _isServer: false,
+2025-12-03T03:30:52.294846864Z [err]      _redirects: 0,
+2025-12-03T03:30:52.294852532Z [err]      _autoPong: true,
+2025-12-03T03:30:52.294858186Z [err]      _url: 'wss://yamabiko.proxy.rlwy.net/v2',
+2025-12-03T03:30:52.297523704Z [err]        _events: [Object: null prototype],
+2025-12-03T03:30:52.297537996Z [err]        _eventsCount: 4,
+2025-12-03T03:30:52.297544816Z [err]        _maxListeners: undefined,
+2025-12-03T03:30:52.297552356Z [err]        outputData: [],
+2025-12-03T03:30:52.297559612Z [err]        outputSize: 0,
+2025-12-03T03:30:52.297566343Z [err]        writable: true,
+2025-12-03T03:30:52.297572267Z [err]        destroyed: true,
+2025-12-03T03:30:52.297579517Z [err]        _last: true,
+2025-12-03T03:30:52.297586016Z [err]        chunkedEncoding: false,
+2025-12-03T03:30:52.297593141Z [err]        shouldKeepAlive: true,
+2025-12-03T03:30:52.297599527Z [err]        maxRequestsOnConnectionReached: false,
+2025-12-03T03:30:52.297605811Z [err]        _defaultKeepAlive: true,
+2025-12-03T03:30:52.297611388Z [err]        useChunkedEncodingByDefault: false,
+2025-12-03T03:30:52.297619554Z [err]        sendDate: false,
+2025-12-03T03:30:52.297627308Z [err]        _removedConnection: false,
+2025-12-03T03:30:52.297633295Z [err]        _removedContLen: false,
+2025-12-03T03:30:52.297639338Z [err]        _removedTE: false,
+2025-12-03T03:30:52.297647091Z [err]        strictContentLength: false,
+2025-12-03T03:30:52.297653541Z [err]        _contentLength: 0,
+2025-12-03T03:30:52.297660355Z [err]        _hasBody: true,
+2025-12-03T03:30:52.297666399Z [err]        _trailer: '',
+2025-12-03T03:30:52.297673444Z [err]        finished: true,
+2025-12-03T03:30:52.297679676Z [err]        _headerSent: true,
+2025-12-03T03:30:52.297686240Z [err]        _closed: true,
+2025-12-03T03:30:52.297692128Z [err]        socket: [TLSSocket],
+2025-12-03T03:30:52.297698525Z [err]        _header: 'GET /v2 HTTP/1.1\r\n' +
+2025-12-03T03:30:52.297704299Z [err]          'Sec-WebSocket-Version: 13\r\n' +
+2025-12-03T03:30:52.297710329Z [err]          'Sec-WebSocket-Key: PaHqBJsZju33vtTBuIwTCg==\r\n' +
+2025-12-03T03:30:52.298854825Z [err]          'Connection: Upgrade\r\n' +
+2025-12-03T03:30:52.298855067Z [err]        maxHeadersCount: null,
+2025-12-03T03:30:52.298866028Z [err]        reusedSocket: false,
+2025-12-03T03:30:52.298866595Z [err]          'Upgrade: websocket\r\n' +
+2025-12-03T03:30:52.298875124Z [err]          'Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits\r\n' +
+2025-12-03T03:30:52.298875295Z [err]        host: 'yamabiko.proxy.rlwy.net',
+2025-12-03T03:30:52.298883839Z [err]        protocol: 'https:',
+2025-12-03T03:30:52.298885077Z [err]          'Host: yamabiko.proxy.rlwy.net\r\n' +
+2025-12-03T03:30:52.298892834Z [err]          '\r\n',
+2025-12-03T03:30:52.298893972Z [err]        [Symbol(kCapture)]: false,
+2025-12-03T03:30:52.298901011Z [err]        _keepAliveTimeout: 0,
+2025-12-03T03:30:52.298903960Z [err]        [Symbol(kBytesWritten)]: 0,
+2025-12-03T03:30:52.298909144Z [err]        _onPendingData: [Function: nop],
+2025-12-03T03:30:52.298912025Z [err]        [Symbol(kNeedDrain)]: false,
+2025-12-03T03:30:52.298917358Z [err]        agent: undefined,
+2025-12-03T03:30:52.298920074Z [err]        [Symbol(corked)]: 0,
+2025-12-03T03:30:52.298927276Z [err]        socketPath: undefined,
+2025-12-03T03:30:52.298933968Z [err]        method: 'GET',
+2025-12-03T03:30:52.298939585Z [err]        maxHeaderSize: undefined,
+2025-12-03T03:30:52.298945747Z [err]        insecureHTTPParser: undefined,
+2025-12-03T03:30:52.298952188Z [err]        joinDuplicateHeaders: undefined,
+2025-12-03T03:30:52.298957907Z [err]        path: '/v2',
+2025-12-03T03:30:52.298964116Z [err]        _ended: true,
+2025-12-03T03:30:52.298969946Z [err]        res: [IncomingMessage],
+2025-12-03T03:30:52.298975672Z [err]        aborted: true,
+2025-12-03T03:30:52.298981959Z [err]        timeoutCb: null,
+2025-12-03T03:30:52.298987927Z [err]        upgradeOrConnect: false,
+2025-12-03T03:30:52.298994385Z [err]        parser: null,
+2025-12-03T03:30:52.300718312Z [err]        at readableAddChunk (node:internal/streams/readable:341:9)
+2025-12-03T03:30:52.300730668Z [err]        at Readable.push (node:internal/streams/readable:278:10)
+2025-12-03T03:30:52.300730929Z [err]        [Symbol(kOutHeaders)]: [Object: null prototype],
+2025-12-03T03:30:52.300738970Z [err]        at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23),
+2025-12-03T03:30:52.300748249Z [err]    [Symbol(kMessage)]: 'Unexpected server response: 404'
+2025-12-03T03:30:52.300757121Z [err]        [Symbol(errored)]: null,
+2025-12-03T03:30:52.300764945Z [err]        [Symbol(kHighWaterMark)]: 16384,
+2025-12-03T03:30:52.300773708Z [err]        [Symbol(kRejectNonStandardBodyWrites)]: false,
+2025-12-03T03:30:52.300780326Z [err]        [Symbol(kUniqueHeaders)]: null,
+2025-12-03T03:30:52.300787147Z [err]        [Symbol(kAborted)]: true,
+2025-12-03T03:30:52.300793040Z [err]        [Symbol(kError)]: undefined
+2025-12-03T03:30:52.300798942Z [err]      },
+2025-12-03T03:30:52.300806266Z [err]      [Symbol(kCapture)]: false
+2025-12-03T03:30:52.300812346Z [err]    },
+2025-12-03T03:30:52.300818432Z [err]    [Symbol(kType)]: 'error',
+2025-12-03T03:30:52.300824203Z [err]    [Symbol(kError)]: Error: Unexpected server response: 404
+2025-12-03T03:30:52.300830783Z [err]        at ClientRequest.<anonymous> (/app/node_modules/ws/lib/websocket.js:913:7)
+2025-12-03T03:30:52.300836709Z [err]        at ClientRequest.emit (node:events:517:28)
+2025-12-03T03:30:52.300842107Z [err]        at HTTPParser.parserOnIncomingClient (node:_http_client:700:27)
+2025-12-03T03:30:52.300848043Z [err]        at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+2025-12-03T03:30:52.300854285Z [err]        at TLSSocket.socketOnData (node:_http_client:541:22)
+2025-12-03T03:30:52.300860898Z [err]        at TLSSocket.emit (node:events:517:28)
+2025-12-03T03:30:52.300866336Z [err]        at addChunk (node:internal/streams/readable:368:12)
+2025-12-03T03:30:52.301711135Z [err]  }
+2025-12-03T03:30:52.301719657Z [err]  [DB HEALTH] CRITICAL: Database connection issues detected
+2025-12-03T03:31:22.369807085Z [err]      _extensions: {},
+2025-12-03T03:31:22.369815052Z [err]      _paused: false,
+2025-12-03T03:31:22.369824585Z [err]      _protocol: '',
+2025-12-03T03:31:22.369840440Z [err]      _readyState: 3,
+2025-12-03T03:31:22.369846151Z [err]      _receiver: null,
+2025-12-03T03:31:22.369854659Z [err]      _sender: null,
+2025-12-03T03:31:22.369861511Z [err]      _socket: null,
+2025-12-03T03:31:22.369866821Z [err]      _bufferedAmount: 0,
+2025-12-03T03:31:22.369871876Z [err]      _isServer: false,
+2025-12-03T03:31:22.369879521Z [err]      _redirects: 0,
+2025-12-03T03:31:22.369884397Z [err]      _autoPong: true,
+2025-12-03T03:31:22.369890464Z [err]      _url: 'wss://yamabiko.proxy.rlwy.net/v2',
+2025-12-03T03:31:22.369898331Z [err]      _req: ClientRequest {
+2025-12-03T03:31:22.369915446Z [err]        open: [Function]
+2025-12-03T03:31:22.369920702Z [err]      },
+2025-12-03T03:31:22.369925134Z [err]      _eventsCount: 4,
+2025-12-03T03:31:22.369929707Z [err]      _maxListeners: undefined,
+2025-12-03T03:31:22.369934137Z [err]      _closeFrameSent: false,
+2025-12-03T03:31:22.369936348Z [err]      _binaryType: 'arraybuffer',
+2025-12-03T03:31:22.369941143Z [err]      _closeMessage: <Buffer >,
+2025-12-03T03:31:22.369943514Z [err]      _closeCode: 1006,
+2025-12-03T03:31:22.369947691Z [err]      _closeTimer: null,
+2025-12-03T03:31:22.369949247Z [err]      _closeFrameReceived: false,
+2025-12-03T03:31:22.369953193Z [err]      _errorEmitted: true,
+2025-12-03T03:31:22.369978751Z [err]  [DB HEALTH] Health check failed (25 consecutive failures): ErrorEvent {
+2025-12-03T03:31:22.369983140Z [err]    [Symbol(kTarget)]: CustomWebSocket {
+2025-12-03T03:31:22.369989663Z [err]      _events: [Object: null prototype] {
+2025-12-03T03:31:22.369993994Z [err]        error: [Function],
+2025-12-03T03:31:22.369998456Z [err]        message: [Function],
+2025-12-03T03:31:22.370003799Z [err]        close: [Function],
+2025-12-03T03:31:22.374641950Z [err]        _events: [Object: null prototype],
+2025-12-03T03:31:22.374669864Z [err]        _eventsCount: 4,
+2025-12-03T03:31:22.374677178Z [err]        _maxListeners: undefined,
+2025-12-03T03:31:22.374685940Z [err]        outputData: [],
+2025-12-03T03:31:22.374693355Z [err]        outputSize: 0,
+2025-12-03T03:31:22.374701413Z [err]        writable: true,
+2025-12-03T03:31:22.374708138Z [err]        destroyed: true,
+2025-12-03T03:31:22.374715198Z [err]        _last: true,
+2025-12-03T03:31:22.374722136Z [err]        chunkedEncoding: false,
+2025-12-03T03:31:22.374737794Z [err]        shouldKeepAlive: true,
+2025-12-03T03:31:22.374744867Z [err]        maxRequestsOnConnectionReached: false,
+2025-12-03T03:31:22.374753213Z [err]        _defaultKeepAlive: true,
+2025-12-03T03:31:22.374780411Z [err]        useChunkedEncodingByDefault: false,
+2025-12-03T03:31:22.374794669Z [err]        sendDate: false,
+2025-12-03T03:31:22.374801030Z [err]        _removedConnection: false,
+2025-12-03T03:31:22.374807678Z [err]        _removedContLen: false,
+2025-12-03T03:31:22.374818563Z [err]        _removedTE: false,
+2025-12-03T03:31:22.374837146Z [err]        strictContentLength: false,
+2025-12-03T03:31:22.374842835Z [err]        _contentLength: 0,
+2025-12-03T03:31:22.374854669Z [err]        _hasBody: true,
+2025-12-03T03:31:22.374860901Z [err]        _trailer: '',
+2025-12-03T03:31:22.374875781Z [err]        finished: true,
+2025-12-03T03:31:22.374881178Z [err]        _headerSent: true,
+2025-12-03T03:31:22.374886584Z [err]        _closed: true,
+2025-12-03T03:31:22.374972304Z [err]        socket: [TLSSocket],
+2025-12-03T03:31:22.374978267Z [err]        _header: 'GET /v2 HTTP/1.1\r\n' +
+2025-12-03T03:31:22.374985104Z [err]          'Sec-WebSocket-Version: 13\r\n' +
+2025-12-03T03:31:22.374990574Z [err]          'Sec-WebSocket-Key: +b11PMx4wtRmT2RZpdvE8Q==\r\n' +
+2025-12-03T03:31:22.375003906Z [err]          'Connection: Upgrade\r\n' +
+2025-12-03T03:31:22.375009059Z [err]          'Upgrade: websocket\r\n' +
+2025-12-03T03:31:22.375014349Z [err]          'Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits\r\n' +
+2025-12-03T03:31:22.375019630Z [err]          'Host: yamabiko.proxy.rlwy.net\r\n' +
+2025-12-03T03:31:22.375025428Z [err]          '\r\n',
+2025-12-03T03:31:22.375031036Z [err]        _keepAliveTimeout: 0,
+2025-12-03T03:31:22.375036840Z [err]        _onPendingData: [Function: nop],
+2025-12-03T03:31:22.375042920Z [err]        agent: undefined,
+2025-12-03T03:31:22.375048973Z [err]        socketPath: undefined,
+2025-12-03T03:31:22.375057511Z [err]        method: 'GET',
+2025-12-03T03:31:22.375063491Z [err]        maxHeaderSize: undefined,
+2025-12-03T03:31:22.375069256Z [err]        insecureHTTPParser: undefined,
+2025-12-03T03:31:22.375074995Z [err]        joinDuplicateHeaders: undefined,
+2025-12-03T03:31:22.375079632Z [err]        path: '/v2',
+2025-12-03T03:31:22.375085097Z [err]        _ended: true,
+2025-12-03T03:31:22.375091056Z [err]        res: [IncomingMessage],
+2025-12-03T03:31:22.375096421Z [err]        aborted: true,
+2025-12-03T03:31:22.375102364Z [err]        timeoutCb: null,
+2025-12-03T03:31:22.375107631Z [err]        upgradeOrConnect: false,
+2025-12-03T03:31:22.375114000Z [err]        parser: null,
+2025-12-03T03:31:22.375119384Z [err]        maxHeadersCount: null,
+2025-12-03T03:31:22.375126632Z [err]        reusedSocket: false,
+2025-12-03T03:31:22.375132653Z [err]        host: 'yamabiko.proxy.rlwy.net',
+2025-12-03T03:31:22.375138053Z [err]        protocol: 'https:',
+2025-12-03T03:31:22.375144176Z [err]        [Symbol(kCapture)]: false,
+2025-12-03T03:31:22.375150353Z [err]        [Symbol(kBytesWritten)]: 0,
+2025-12-03T03:31:22.375156488Z [err]        [Symbol(kNeedDrain)]: false,
+2025-12-03T03:31:22.375162777Z [err]        [Symbol(corked)]: 0,
+2025-12-03T03:31:22.375861193Z [err]        [Symbol(kOutHeaders)]: [Object: null prototype],
+2025-12-03T03:31:22.375869567Z [err]        [Symbol(errored)]: null,
+2025-12-03T03:31:22.375876844Z [err]        [Symbol(kHighWaterMark)]: 16384,
+2025-12-03T03:31:22.375883858Z [err]        [Symbol(kRejectNonStandardBodyWrites)]: false,
+2025-12-03T03:31:22.375890741Z [err]        [Symbol(kUniqueHeaders)]: null,
+2025-12-03T03:31:22.375899364Z [err]        [Symbol(kAborted)]: true,
+2025-12-03T03:31:22.375909123Z [err]        [Symbol(kError)]: undefined
+2025-12-03T03:31:22.375916111Z [err]      },
+2025-12-03T03:31:22.375923261Z [err]      [Symbol(kCapture)]: false
+2025-12-03T03:31:22.375929205Z [err]    },
+2025-12-03T03:31:22.375936016Z [err]    [Symbol(kType)]: 'error',
+2025-12-03T03:31:22.375943954Z [err]    [Symbol(kError)]: Error: Unexpected server response: 404
+2025-12-03T03:31:22.375953647Z [err]        at ClientRequest.<anonymous> (/app/node_modules/ws/lib/websocket.js:913:7)
+2025-12-03T03:31:22.375961263Z [err]        at ClientRequest.emit (node:events:517:28)
+2025-12-03T03:31:22.375970223Z [err]        at HTTPParser.parserOnIncomingClient (node:_http_client:700:27)
+2025-12-03T03:31:22.375976953Z [err]        at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+2025-12-03T03:31:22.375983977Z [err]        at TLSSocket.socketOnData (node:_http_client:541:22)
+2025-12-03T03:31:22.375989967Z [err]        at TLSSocket.emit (node:events:517:28)
+2025-12-03T03:31:22.375996625Z [err]        at addChunk (node:internal/streams/readable:368:12)
+2025-12-03T03:31:22.376004498Z [err]        at readableAddChunk (node:internal/streams/readable:341:9)
+2025-12-03T03:31:22.376010581Z [err]        at Readable.push (node:internal/streams/readable:278:10)
+2025-12-03T03:31:22.376017237Z [err]        at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23),
+2025-12-03T03:31:22.376024118Z [err]    [Symbol(kMessage)]: 'Unexpected server response: 404'
+2025-12-03T03:31:22.376992315Z [err]  }
+2025-12-03T03:31:22.377003857Z [err]  [DB HEALTH] CRITICAL: Database connection issues detected
+2025-12-03T03:31:51.925590061Z [err]      _closeMessage: <Buffer >,
+2025-12-03T03:31:51.925590204Z [err]  [DB HEALTH] Health check failed (26 consecutive failures): ErrorEvent {
+2025-12-03T03:31:51.925590273Z [err]      _autoPong: true,
+2025-12-03T03:31:51.925601682Z [err]      _closeTimer: null,
+2025-12-03T03:31:51.925603021Z [err]    [Symbol(kTarget)]: CustomWebSocket {
+2025-12-03T03:31:51.925603050Z [err]      _url: 'wss://yamabiko.proxy.rlwy.net/v2',
+2025-12-03T03:31:51.925611579Z [err]      _errorEmitted: true,
+2025-12-03T03:31:51.925612545Z [err]      _req: ClientRequest {
+2025-12-03T03:31:51.925612893Z [err]      _events: [Object: null prototype] {
+2025-12-03T03:31:51.925619866Z [err]      _extensions: {},
+2025-12-03T03:31:51.925621218Z [err]        error: [Function],
+2025-12-03T03:31:51.925629804Z [err]      _paused: false,
+2025-12-03T03:31:51.925636362Z [err]        message: [Function],
+2025-12-03T03:31:51.925638587Z [err]      _protocol: '',
+2025-12-03T03:31:51.925645199Z [err]        close: [Function],
+2025-12-03T03:31:51.925648075Z [err]      _readyState: 3,
+2025-12-03T03:31:51.925654490Z [err]        open: [Function]
+2025-12-03T03:31:51.925659737Z [err]      _receiver: null,
+2025-12-03T03:31:51.925665072Z [err]      },
+2025-12-03T03:31:51.925671429Z [err]      _eventsCount: 4,
+2025-12-03T03:31:51.925678573Z [err]      _maxListeners: undefined,
+2025-12-03T03:31:51.925683585Z [err]      _binaryType: 'arraybuffer',
+2025-12-03T03:31:51.925688127Z [err]      _closeCode: 1006,
+2025-12-03T03:31:51.925692682Z [err]      _closeFrameReceived: false,
+2025-12-03T03:31:51.925697358Z [err]      _closeFrameSent: false,
+2025-12-03T03:31:51.925736154Z [err]      _sender: null,
+2025-12-03T03:31:51.925745027Z [err]      _socket: null,
+2025-12-03T03:31:51.925751324Z [err]      _bufferedAmount: 0,
+2025-12-03T03:31:51.925757770Z [err]      _isServer: false,
+2025-12-03T03:31:51.925764150Z [err]      _redirects: 0,
+2025-12-03T03:31:51.926947463Z [err]        _events: [Object: null prototype],
+2025-12-03T03:31:51.926953066Z [err]        strictContentLength: false,
+2025-12-03T03:31:51.926956687Z [err]        _eventsCount: 4,
+2025-12-03T03:31:51.926963905Z [err]        _maxListeners: undefined,
+2025-12-03T03:31:51.926964083Z [err]        _contentLength: 0,
+2025-12-03T03:31:51.926972930Z [err]        outputData: [],
+2025-12-03T03:31:51.926972949Z [err]        _hasBody: true,
+2025-12-03T03:31:51.926982235Z [err]        outputSize: 0,
+2025-12-03T03:31:51.926983036Z [err]        _trailer: '',
+2025-12-03T03:31:51.926990975Z [err]        writable: true,
+2025-12-03T03:31:51.926991533Z [err]        finished: true,
+2025-12-03T03:31:51.926997684Z [err]        destroyed: true,
+2025-12-03T03:31:51.926999875Z [err]        _headerSent: true,
+2025-12-03T03:31:51.927004899Z [err]        _last: true,
+2025-12-03T03:31:51.927008190Z [err]        _closed: true,
+2025-12-03T03:31:51.927013538Z [err]        chunkedEncoding: false,
+2025-12-03T03:31:51.927015766Z [err]        socket: [TLSSocket],
+2025-12-03T03:31:51.927021611Z [err]        shouldKeepAlive: true,
+2025-12-03T03:31:51.927023650Z [err]        _header: 'GET /v2 HTTP/1.1\r\n' +
+2025-12-03T03:31:51.927029713Z [err]          'Sec-WebSocket-Version: 13\r\n' +
+2025-12-03T03:31:51.927032367Z [err]        maxRequestsOnConnectionReached: false,
+2025-12-03T03:31:51.927037144Z [err]          'Sec-WebSocket-Key: oX149JM4EijlmN3dsZxb6g==\r\n' +
+2025-12-03T03:31:51.927039846Z [err]        _defaultKeepAlive: true,
+2025-12-03T03:31:51.927045989Z [err]        useChunkedEncodingByDefault: false,
+2025-12-03T03:31:51.927052265Z [err]        sendDate: false,
+2025-12-03T03:31:51.927057500Z [err]        _removedConnection: false,
+2025-12-03T03:31:51.927063714Z [err]        _removedContLen: false,
+2025-12-03T03:31:51.927068837Z [err]        _removedTE: false,
+2025-12-03T03:31:51.928676323Z [err]        maxHeaderSize: undefined,
+2025-12-03T03:31:51.928681189Z [err]        [Symbol(kNeedDrain)]: false,
+2025-12-03T03:31:51.928683791Z [err]        insecureHTTPParser: undefined,
+2025-12-03T03:31:51.928689926Z [err]        [Symbol(corked)]: 0,
+2025-12-03T03:31:51.928691135Z [err]        joinDuplicateHeaders: undefined,
+2025-12-03T03:31:51.928692866Z [err]          'Connection: Upgrade\r\n' +
+2025-12-03T03:31:51.928696364Z [err]        path: '/v2',
+2025-12-03T03:31:51.928699555Z [err]          'Upgrade: websocket\r\n' +
+2025-12-03T03:31:51.928701565Z [err]        _ended: true,
+2025-12-03T03:31:51.928705750Z [err]          'Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits\r\n' +
+2025-12-03T03:31:51.928707374Z [err]        res: [IncomingMessage],
+2025-12-03T03:31:51.928713561Z [err]        aborted: true,
+2025-12-03T03:31:51.928714724Z [err]          'Host: yamabiko.proxy.rlwy.net\r\n' +
+2025-12-03T03:31:51.928720190Z [err]        timeoutCb: null,
+2025-12-03T03:31:51.928721179Z [err]          '\r\n',
+2025-12-03T03:31:51.928726573Z [err]        _keepAliveTimeout: 0,
+2025-12-03T03:31:51.928734069Z [err]        _onPendingData: [Function: nop],
+2025-12-03T03:31:51.928739866Z [err]        upgradeOrConnect: false,
+2025-12-03T03:31:51.928741254Z [err]        agent: undefined,
+2025-12-03T03:31:51.928747566Z [err]        socketPath: undefined,
+2025-12-03T03:31:51.928754917Z [err]        method: 'GET',
+2025-12-03T03:31:51.928755760Z [err]        parser: null,
+2025-12-03T03:31:51.928916409Z [err]        maxHeadersCount: null,
+2025-12-03T03:31:51.928925871Z [err]        reusedSocket: false,
+2025-12-03T03:31:51.928935865Z [err]        host: 'yamabiko.proxy.rlwy.net',
+2025-12-03T03:31:51.928945215Z [err]        protocol: 'https:',
+2025-12-03T03:31:51.928951914Z [err]        [Symbol(kCapture)]: false,
+2025-12-03T03:31:51.928958204Z [err]        [Symbol(kBytesWritten)]: 0,
+2025-12-03T03:31:51.930304543Z [err]        [Symbol(kOutHeaders)]: [Object: null prototype],
+2025-12-03T03:31:51.930311055Z [err]        at Readable.push (node:internal/streams/readable:278:10)
+2025-12-03T03:31:51.930317415Z [err]        [Symbol(errored)]: null,
+2025-12-03T03:31:51.930325080Z [err]        [Symbol(kHighWaterMark)]: 16384,
+2025-12-03T03:31:51.930329318Z [err]        at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23),
+2025-12-03T03:31:51.930334373Z [err]        [Symbol(kRejectNonStandardBodyWrites)]: false,
+2025-12-03T03:31:51.930344600Z [err]    [Symbol(kMessage)]: 'Unexpected server response: 404'
+2025-12-03T03:31:51.930344760Z [err]        [Symbol(kUniqueHeaders)]: null,
+2025-12-03T03:31:51.930353063Z [err]        [Symbol(kAborted)]: true,
+2025-12-03T03:31:51.930358615Z [err]        [Symbol(kError)]: undefined
+2025-12-03T03:31:51.930365098Z [err]      },
+2025-12-03T03:31:51.930370573Z [err]      [Symbol(kCapture)]: false
+2025-12-03T03:31:51.930376197Z [err]    },
+2025-12-03T03:31:51.930382043Z [err]    [Symbol(kType)]: 'error',
+2025-12-03T03:31:51.930387517Z [err]    [Symbol(kError)]: Error: Unexpected server response: 404
+2025-12-03T03:31:51.930394393Z [err]        at ClientRequest.<anonymous> (/app/node_modules/ws/lib/websocket.js:913:7)
+2025-12-03T03:31:51.930399787Z [err]        at ClientRequest.emit (node:events:517:28)
+2025-12-03T03:31:51.930405708Z [err]        at HTTPParser.parserOnIncomingClient (node:_http_client:700:27)
+2025-12-03T03:31:51.930412339Z [err]        at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+2025-12-03T03:31:51.930417602Z [err]        at TLSSocket.socketOnData (node:_http_client:541:22)
+2025-12-03T03:31:51.930423918Z [err]        at TLSSocket.emit (node:events:517:28)
+2025-12-03T03:31:51.930429455Z [err]        at addChunk (node:internal/streams/readable:368:12)
+2025-12-03T03:31:51.930435257Z [err]        at readableAddChunk (node:internal/streams/readable:341:9)
+2025-12-03T03:31:51.931609973Z [err]  }
+2025-12-03T03:31:51.931619170Z [err]  [DB HEALTH] CRITICAL: Database connection issues detected
+2025-12-03T03:32:21.950293913Z [err]  [DB HEALTH] Health check failed (27 consecutive failures): ErrorEvent {
+2025-12-03T03:32:21.950299599Z [err]      _errorEmitted: true,
+2025-12-03T03:32:21.950305091Z [err]    [Symbol(kTarget)]: CustomWebSocket {
+2025-12-03T03:32:21.950312137Z [err]      _events: [Object: null prototype] {
+2025-12-03T03:32:21.950312567Z [err]      _extensions: {},
+2025-12-03T03:32:21.950319193Z [err]        error: [Function],
+2025-12-03T03:32:21.950322438Z [err]      _paused: false,
+2025-12-03T03:32:21.950326414Z [err]        message: [Function],
+2025-12-03T03:32:21.950330380Z [err]      _protocol: '',
+2025-12-03T03:32:21.950333548Z [err]        close: [Function],
+2025-12-03T03:32:21.950340311Z [err]      _readyState: 3,
+2025-12-03T03:32:21.950340702Z [err]        open: [Function]
+2025-12-03T03:32:21.950346687Z [err]      },
+2025-12-03T03:32:21.950349193Z [err]      _receiver: null,
+2025-12-03T03:32:21.950354120Z [err]      _eventsCount: 4,
+2025-12-03T03:32:21.950355517Z [err]      _sender: null,
+2025-12-03T03:32:21.950360028Z [err]      _maxListeners: undefined,
+2025-12-03T03:32:21.950362079Z [err]      _socket: null,
+2025-12-03T03:32:21.950365465Z [err]      _binaryType: 'arraybuffer',
+2025-12-03T03:32:21.950369162Z [err]      _bufferedAmount: 0,
+2025-12-03T03:32:21.950370932Z [err]      _closeCode: 1006,
+2025-12-03T03:32:21.950375883Z [err]      _closeFrameReceived: false,
+2025-12-03T03:32:21.950377415Z [err]      _isServer: false,
+2025-12-03T03:32:21.950382256Z [err]      _closeFrameSent: false,
+2025-12-03T03:32:21.950384949Z [err]      _redirects: 0,
+2025-12-03T03:32:21.950388292Z [err]      _closeMessage: <Buffer >,
+2025-12-03T03:32:21.950391395Z [err]      _autoPong: true,
+2025-12-03T03:32:21.950395625Z [err]      _closeTimer: null,
+2025-12-03T03:32:21.950398729Z [err]      _url: 'wss://yamabiko.proxy.rlwy.net/v2',
+2025-12-03T03:32:21.950405354Z [err]      _req: ClientRequest {
+2025-12-03T03:32:21.951689174Z [err]        _events: [Object: null prototype],
+2025-12-03T03:32:21.951691527Z [err]        _removedContLen: false,
+2025-12-03T03:32:21.951696547Z [err]        _last: true,
+2025-12-03T03:32:21.951702773Z [err]        _removedTE: false,
+2025-12-03T03:32:21.951707046Z [err]        _eventsCount: 4,
+2025-12-03T03:32:21.951708332Z [err]          'Sec-WebSocket-Version: 13\r\n' +
+2025-12-03T03:32:21.951708829Z [err]        chunkedEncoding: false,
+2025-12-03T03:32:21.951711561Z [err]        strictContentLength: false,
+2025-12-03T03:32:21.951716315Z [err]        _maxListeners: undefined,
+2025-12-03T03:32:21.951718311Z [err]        shouldKeepAlive: true,
+2025-12-03T03:32:21.951721182Z [err]        _contentLength: 0,
+2025-12-03T03:32:21.951722820Z [err]          'Sec-WebSocket-Key: oooPs6UtaD+Bnu2Wzx+xMQ==\r\n' +
+2025-12-03T03:32:21.951725787Z [err]        outputData: [],
+2025-12-03T03:32:21.951728997Z [err]        maxRequestsOnConnectionReached: false,
+2025-12-03T03:32:21.951731187Z [err]        _hasBody: true,
+2025-12-03T03:32:21.951734343Z [err]        outputSize: 0,
+2025-12-03T03:32:21.951738203Z [err]        _defaultKeepAlive: true,
+2025-12-03T03:32:21.951743058Z [err]        writable: true,
+2025-12-03T03:32:21.951745659Z [err]        _trailer: '',
+2025-12-03T03:32:21.951746551Z [err]        useChunkedEncodingByDefault: false,
+2025-12-03T03:32:21.951754411Z [err]        sendDate: false,
+2025-12-03T03:32:21.951754501Z [err]        destroyed: true,
+2025-12-03T03:32:21.951761633Z [err]        _removedConnection: false,
+2025-12-03T03:32:21.951770608Z [err]        finished: true,
+2025-12-03T03:32:21.951780743Z [err]        _headerSent: true,
+2025-12-03T03:32:21.951786142Z [err]        _closed: true,
+2025-12-03T03:32:21.951792413Z [err]        socket: [TLSSocket],
+2025-12-03T03:32:21.951799895Z [err]        _header: 'GET /v2 HTTP/1.1\r\n' +
+2025-12-03T03:32:21.953284248Z [err]          'Connection: Upgrade\r\n' +
+2025-12-03T03:32:21.953293051Z [err]          'Upgrade: websocket\r\n' +
+2025-12-03T03:32:21.953298731Z [err]          'Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits\r\n' +
+2025-12-03T03:32:21.953304349Z [err]          'Host: yamabiko.proxy.rlwy.net\r\n' +
+2025-12-03T03:32:21.953311069Z [err]          '\r\n',
+2025-12-03T03:32:21.953316906Z [err]        _keepAliveTimeout: 0,
+2025-12-03T03:32:21.953322784Z [err]        _onPendingData: [Function: nop],
+2025-12-03T03:32:21.953329003Z [err]        agent: undefined,
+2025-12-03T03:32:21.953335503Z [err]        socketPath: undefined,
+2025-12-03T03:32:21.953341478Z [err]        method: 'GET',
+2025-12-03T03:32:21.953346543Z [err]        maxHeaderSize: undefined,
+2025-12-03T03:32:21.953351658Z [err]        insecureHTTPParser: undefined,
+2025-12-03T03:32:21.953356856Z [err]        joinDuplicateHeaders: undefined,
+2025-12-03T03:32:21.953362290Z [err]        path: '/v2',
+2025-12-03T03:32:21.953368399Z [err]        _ended: true,
+2025-12-03T03:32:21.953374079Z [err]        res: [IncomingMessage],
+2025-12-03T03:32:21.953381024Z [err]        aborted: true,
+2025-12-03T03:32:21.953386555Z [err]        timeoutCb: null,
+2025-12-03T03:32:21.953393686Z [err]        upgradeOrConnect: false,
+2025-12-03T03:32:21.953398846Z [err]        parser: null,
+2025-12-03T03:32:21.953404855Z [err]        maxHeadersCount: null,
+2025-12-03T03:32:21.953409907Z [err]        reusedSocket: false,
+2025-12-03T03:32:21.953414950Z [err]        host: 'yamabiko.proxy.rlwy.net',
+2025-12-03T03:32:21.953421526Z [err]        protocol: 'https:',
+2025-12-03T03:32:21.953429111Z [err]        [Symbol(kCapture)]: false,
+2025-12-03T03:32:21.953438074Z [err]        [Symbol(kBytesWritten)]: 0,
+2025-12-03T03:32:21.953446473Z [err]        [Symbol(kNeedDrain)]: false,
+2025-12-03T03:32:21.953451926Z [err]        [Symbol(corked)]: 0,
+2025-12-03T03:32:21.956013252Z [err]        at HTTPParser.parserOnIncomingClient (node:_http_client:700:27)
+2025-12-03T03:32:21.956023171Z [err]        at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+2025-12-03T03:32:21.956028841Z [err]        at TLSSocket.socketOnData (node:_http_client:541:22)
+2025-12-03T03:32:21.956033620Z [err]        at TLSSocket.emit (node:events:517:28)
+2025-12-03T03:32:21.956038709Z [err]        at addChunk (node:internal/streams/readable:368:12)
+2025-12-03T03:32:21.956044643Z [err]        at readableAddChunk (node:internal/streams/readable:341:9)
+2025-12-03T03:32:21.956048936Z [err]        at Readable.push (node:internal/streams/readable:278:10)
+2025-12-03T03:32:21.956055679Z [err]        at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23),
+2025-12-03T03:32:21.956061277Z [err]    [Symbol(kMessage)]: 'Unexpected server response: 404'
+2025-12-03T03:32:21.956078174Z [err]        [Symbol(kOutHeaders)]: [Object: null prototype],
+2025-12-03T03:32:21.956087772Z [err]        [Symbol(errored)]: null,
+2025-12-03T03:32:21.956098411Z [err]        [Symbol(kHighWaterMark)]: 16384,
+2025-12-03T03:32:21.956104338Z [err]        [Symbol(kRejectNonStandardBodyWrites)]: false,
+2025-12-03T03:32:21.956110470Z [err]        [Symbol(kUniqueHeaders)]: null,
+2025-12-03T03:32:21.956116453Z [err]        [Symbol(kAborted)]: true,
+2025-12-03T03:32:21.956123058Z [err]        [Symbol(kError)]: undefined
+2025-12-03T03:32:21.956128533Z [err]      },
+2025-12-03T03:32:21.956134785Z [err]      [Symbol(kCapture)]: false
+2025-12-03T03:32:21.956141072Z [err]    },
+2025-12-03T03:32:21.956147839Z [err]    [Symbol(kType)]: 'error',
+2025-12-03T03:32:21.956153970Z [err]    [Symbol(kError)]: Error: Unexpected server response: 404
+2025-12-03T03:32:21.956160603Z [err]        at ClientRequest.<anonymous> (/app/node_modules/ws/lib/websocket.js:913:7)
+2025-12-03T03:32:21.956171448Z [err]        at ClientRequest.emit (node:events:517:28)
+2025-12-03T03:32:21.956749290Z [err]  }
+2025-12-03T03:32:21.956757950Z [err]  [DB HEALTH] CRITICAL: Database connection issues detected
+2025-12-03T03:32:51.959769102Z [err]      _readyState: 3,
+2025-12-03T03:32:51.959782117Z [err]      _receiver: null,
+2025-12-03T03:32:51.959787461Z [err]  [DB HEALTH] Health check failed (28 consecutive failures): ErrorEvent {
+2025-12-03T03:32:51.959790446Z [err]      _sender: null,
+2025-12-03T03:32:51.959793830Z [err]    [Symbol(kTarget)]: CustomWebSocket {
+2025-12-03T03:32:51.959799256Z [err]      _events: [Object: null prototype] {
+2025-12-03T03:32:51.959800014Z [err]      _socket: null,
+2025-12-03T03:32:51.959804943Z [err]        error: [Function],
+2025-12-03T03:32:51.959808261Z [err]      _bufferedAmount: 0,
+2025-12-03T03:32:51.959814340Z [err]        message: [Function],
+2025-12-03T03:32:51.959816967Z [err]      _isServer: false,
+2025-12-03T03:32:51.959820017Z [err]        close: [Function],
+2025-12-03T03:32:51.959825647Z [err]      _redirects: 0,
+2025-12-03T03:32:51.959825744Z [err]        open: [Function]
+2025-12-03T03:32:51.959831048Z [err]      },
+2025-12-03T03:32:51.959834711Z [err]      _autoPong: true,
+2025-12-03T03:32:51.959836824Z [err]      _eventsCount: 4,
+2025-12-03T03:32:51.959842102Z [err]      _url: 'wss://yamabiko.proxy.rlwy.net/v2',
+2025-12-03T03:32:51.959843011Z [err]      _maxListeners: undefined,
+2025-12-03T03:32:51.959849920Z [err]      _binaryType: 'arraybuffer',
+2025-12-03T03:32:51.959851741Z [err]      _req: ClientRequest {
+2025-12-03T03:32:51.959854854Z [err]      _closeCode: 1006,
+2025-12-03T03:32:51.959859334Z [err]      _closeFrameReceived: false,
+2025-12-03T03:32:51.959864991Z [err]      _closeFrameSent: false,
+2025-12-03T03:32:51.959869201Z [err]      _closeMessage: <Buffer >,
+2025-12-03T03:32:51.959873600Z [err]      _closeTimer: null,
+2025-12-03T03:32:51.959878847Z [err]      _errorEmitted: true,
+2025-12-03T03:32:51.959883289Z [err]      _extensions: {},
+2025-12-03T03:32:51.959887538Z [err]      _paused: false,
+2025-12-03T03:32:51.959891988Z [err]      _protocol: '',
+2025-12-03T03:32:51.961308900Z [err]          'Sec-WebSocket-Key: boUwcy9+wHC3Rcad2r8I7A==\r\n' +
+2025-12-03T03:32:51.961309419Z [err]        _removedContLen: false,
+2025-12-03T03:32:51.961318839Z [err]        _removedTE: false,
+2025-12-03T03:32:51.961325694Z [err]        strictContentLength: false,
+2025-12-03T03:32:51.961331296Z [err]        _last: true,
+2025-12-03T03:32:51.961333262Z [err]        _contentLength: 0,
+2025-12-03T03:32:51.961336606Z [err]        _events: [Object: null prototype],
+2025-12-03T03:32:51.961341255Z [err]        _hasBody: true,
+2025-12-03T03:32:51.961345339Z [err]        chunkedEncoding: false,
+2025-12-03T03:32:51.961347110Z [err]        _eventsCount: 4,
+2025-12-03T03:32:51.961356628Z [err]        _maxListeners: undefined,
+2025-12-03T03:32:51.961356771Z [err]        shouldKeepAlive: true,
+2025-12-03T03:32:51.961365482Z [err]        outputData: [],
+2025-12-03T03:32:51.961366257Z [err]        finished: true,
+2025-12-03T03:32:51.961366765Z [err]        maxRequestsOnConnectionReached: false,
+2025-12-03T03:32:51.961371697Z [err]        _trailer: '',
+2025-12-03T03:32:51.961375395Z [err]        outputSize: 0,
+2025-12-03T03:32:51.961376478Z [err]        _defaultKeepAlive: true,
+2025-12-03T03:32:51.961385387Z [err]        writable: true,
+2025-12-03T03:32:51.961385633Z [err]        useChunkedEncodingByDefault: false,
+2025-12-03T03:32:51.961387034Z [err]        _headerSent: true,
+2025-12-03T03:32:51.961394135Z [err]        sendDate: false,
+2025-12-03T03:32:51.961394783Z [err]        destroyed: true,
+2025-12-03T03:32:51.961397905Z [err]        _closed: true,
+2025-12-03T03:32:51.961401805Z [err]        _removedConnection: false,
+2025-12-03T03:32:51.961407716Z [err]        socket: [TLSSocket],
+2025-12-03T03:32:51.961425805Z [err]        _header: 'GET /v2 HTTP/1.1\r\n' +
+2025-12-03T03:32:51.961432602Z [err]          'Sec-WebSocket-Version: 13\r\n' +
+2025-12-03T03:32:51.963028494Z [err]        joinDuplicateHeaders: undefined,
+2025-12-03T03:32:51.963029653Z [err]          'Connection: Upgrade\r\n' +
+2025-12-03T03:32:51.963030330Z [err]        [Symbol(kCapture)]: false,
+2025-12-03T03:32:51.963036608Z [err]        path: '/v2',
+2025-12-03T03:32:51.963039934Z [err]          'Upgrade: websocket\r\n' +
+2025-12-03T03:32:51.963040854Z [err]        [Symbol(kBytesWritten)]: 0,
+2025-12-03T03:32:51.963043847Z [err]        _ended: true,
+2025-12-03T03:32:51.963048145Z [err]          'Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits\r\n' +
+2025-12-03T03:32:51.963049204Z [err]        [Symbol(kNeedDrain)]: false,
+2025-12-03T03:32:51.963051962Z [err]        res: [IncomingMessage],
+2025-12-03T03:32:51.963058306Z [err]          'Host: yamabiko.proxy.rlwy.net\r\n' +
+2025-12-03T03:32:51.963059040Z [err]        [Symbol(corked)]: 0,
+2025-12-03T03:32:51.963060349Z [err]        aborted: true,
+2025-12-03T03:32:51.963066789Z [err]          '\r\n',
+2025-12-03T03:32:51.963066845Z [err]        timeoutCb: null,
+2025-12-03T03:32:51.963072827Z [err]        upgradeOrConnect: false,
+2025-12-03T03:32:51.963074905Z [err]        _keepAliveTimeout: 0,
+2025-12-03T03:32:51.963078588Z [err]        parser: null,
+2025-12-03T03:32:51.963080675Z [err]        _onPendingData: [Function: nop],
+2025-12-03T03:32:51.963084691Z [err]        maxHeadersCount: null,
+2025-12-03T03:32:51.963086612Z [err]        agent: undefined,
+2025-12-03T03:32:51.963090340Z [err]        reusedSocket: false,
+2025-12-03T03:32:51.963092208Z [err]        socketPath: undefined,
+2025-12-03T03:32:51.963096757Z [err]        host: 'yamabiko.proxy.rlwy.net',
+2025-12-03T03:32:51.963099219Z [err]        method: 'GET',
+2025-12-03T03:32:51.963104019Z [err]        protocol: 'https:',
+2025-12-03T03:32:51.963104749Z [err]        maxHeaderSize: undefined,
+2025-12-03T03:32:51.963109413Z [err]        insecureHTTPParser: undefined,
+2025-12-03T03:32:51.966710995Z [err]    },
+2025-12-03T03:32:51.966712745Z [err]        at readableAddChunk (node:internal/streams/readable:341:9)
+2025-12-03T03:32:51.966718614Z [err]    [Symbol(kType)]: 'error',
+2025-12-03T03:32:51.966724432Z [err]        at Readable.push (node:internal/streams/readable:278:10)
+2025-12-03T03:32:51.966725496Z [err]    [Symbol(kError)]: Error: Unexpected server response: 404
+2025-12-03T03:32:51.966731352Z [err]        at ClientRequest.<anonymous> (/app/node_modules/ws/lib/websocket.js:913:7)
+2025-12-03T03:32:51.966732883Z [err]        at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23),
+2025-12-03T03:32:51.966738144Z [err]        at ClientRequest.emit (node:events:517:28)
+2025-12-03T03:32:51.966740188Z [err]        [Symbol(kOutHeaders)]: [Object: null prototype],
+2025-12-03T03:32:51.966741280Z [err]    [Symbol(kMessage)]: 'Unexpected server response: 404'
+2025-12-03T03:32:51.966745157Z [err]        at HTTPParser.parserOnIncomingClient (node:_http_client:700:27)
+2025-12-03T03:32:51.966748265Z [err]        [Symbol(errored)]: null,
+2025-12-03T03:32:51.966751601Z [err]        at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+2025-12-03T03:32:51.966756060Z [err]        [Symbol(kHighWaterMark)]: 16384,
+2025-12-03T03:32:51.966758860Z [err]        at TLSSocket.socketOnData (node:_http_client:541:22)
+2025-12-03T03:32:51.966763079Z [err]        [Symbol(kRejectNonStandardBodyWrites)]: false,
+2025-12-03T03:32:51.966765363Z [err]        at TLSSocket.emit (node:events:517:28)
+2025-12-03T03:32:51.966770031Z [err]        [Symbol(kUniqueHeaders)]: null,
+2025-12-03T03:32:51.966770446Z [err]        at addChunk (node:internal/streams/readable:368:12)
+2025-12-03T03:32:51.966776281Z [err]        [Symbol(kAborted)]: true,
+2025-12-03T03:32:51.966781682Z [err]        [Symbol(kError)]: undefined
+2025-12-03T03:32:51.966787135Z [err]      },
+2025-12-03T03:32:51.966792639Z [err]      [Symbol(kCapture)]: false
+2025-12-03T03:32:51.968040313Z [err]  }
+2025-12-03T03:32:51.968048200Z [err]  [DB HEALTH] CRITICAL: Database connection issues detected
+2025-12-03T03:33:21.969183630Z [err]      _receiver: null,
+2025-12-03T03:33:21.969186857Z [err]      _redirects: 0,
+2025-12-03T03:33:21.969190977Z [err]  [DB HEALTH] Health check failed (29 consecutive failures): ErrorEvent {
+2025-12-03T03:33:21.969197074Z [err]      _sender: null,
+2025-12-03T03:33:21.969197309Z [err]      _closeFrameSent: false,
+2025-12-03T03:33:21.969203044Z [err]      _autoPong: true,
+2025-12-03T03:33:21.969210540Z [err]      _socket: null,
+2025-12-03T03:33:21.969211553Z [err]    [Symbol(kTarget)]: CustomWebSocket {
+2025-12-03T03:33:21.969212161Z [err]      _closeMessage: <Buffer >,
+2025-12-03T03:33:21.969212795Z [err]      _url: 'wss://yamabiko.proxy.rlwy.net/v2',
+2025-12-03T03:33:21.969219928Z [err]      _bufferedAmount: 0,
+2025-12-03T03:33:21.969221919Z [err]      _events: [Object: null prototype] {
+2025-12-03T03:33:21.969221977Z [err]      _req: ClientRequest {
+2025-12-03T03:33:21.969224726Z [err]      _closeTimer: null,
+2025-12-03T03:33:21.969229592Z [err]      _isServer: false,
+2025-12-03T03:33:21.969230573Z [err]        error: [Function],
+2025-12-03T03:33:21.969233839Z [err]      _errorEmitted: true,
+2025-12-03T03:33:21.969239825Z [err]        message: [Function],
+2025-12-03T03:33:21.969241799Z [err]      _extensions: {},
+2025-12-03T03:33:21.969242014Z [err]      _binaryType: 'arraybuffer',
+2025-12-03T03:33:21.969249285Z [err]        close: [Function],
+2025-12-03T03:33:21.969250328Z [err]      _paused: false,
+2025-12-03T03:33:21.969251180Z [err]      _closeCode: 1006,
+2025-12-03T03:33:21.969259605Z [err]      _closeFrameReceived: false,
+2025-12-03T03:33:21.969259964Z [err]      _protocol: '',
+2025-12-03T03:33:21.969260719Z [err]        open: [Function]
+2025-12-03T03:33:21.969269625Z [err]      _readyState: 3,
+2025-12-03T03:33:21.969269706Z [err]      },
+2025-12-03T03:33:21.969277524Z [err]      _eventsCount: 4,
+2025-12-03T03:33:21.969284004Z [err]      _maxListeners: undefined,
+2025-12-03T03:33:21.971987239Z [err]        _events: [Object: null prototype],
+2025-12-03T03:33:21.971988060Z [err]        socket: [TLSSocket],
+2025-12-03T03:33:21.971998789Z [err]        _header: 'GET /v2 HTTP/1.1\r\n' +
+2025-12-03T03:33:21.972002258Z [err]        _eventsCount: 4,
+2025-12-03T03:33:21.972007077Z [err]          'Sec-WebSocket-Version: 13\r\n' +
+2025-12-03T03:33:21.972010742Z [err]        _maxListeners: undefined,
+2025-12-03T03:33:21.972015905Z [err]          'Sec-WebSocket-Key: xL1Nc7u4NC22b2gh+33HcQ==\r\n' +
+2025-12-03T03:33:21.972018988Z [err]        outputData: [],
+2025-12-03T03:33:21.972025394Z [err]        outputSize: 0,
+2025-12-03T03:33:21.972032549Z [err]        writable: true,
+2025-12-03T03:33:21.972038512Z [err]        destroyed: true,
+2025-12-03T03:33:21.972044776Z [err]        _last: true,
+2025-12-03T03:33:21.972051187Z [err]        chunkedEncoding: false,
+2025-12-03T03:33:21.972057708Z [err]        shouldKeepAlive: true,
+2025-12-03T03:33:21.972063217Z [err]        maxRequestsOnConnectionReached: false,
+2025-12-03T03:33:21.972069724Z [err]        _defaultKeepAlive: true,
+2025-12-03T03:33:21.972076543Z [err]        useChunkedEncodingByDefault: false,
+2025-12-03T03:33:21.972082590Z [err]        sendDate: false,
+2025-12-03T03:33:21.972088899Z [err]        _removedConnection: false,
+2025-12-03T03:33:21.972094935Z [err]        _removedContLen: false,
+2025-12-03T03:33:21.972101287Z [err]        _removedTE: false,
+2025-12-03T03:33:21.972108402Z [err]        strictContentLength: false,
+2025-12-03T03:33:21.972117342Z [err]        _contentLength: 0,
+2025-12-03T03:33:21.972123440Z [err]        _hasBody: true,
+2025-12-03T03:33:21.972128600Z [err]        _trailer: '',
+2025-12-03T03:33:21.972133712Z [err]        finished: true,
+2025-12-03T03:33:21.972139823Z [err]        _headerSent: true,
+2025-12-03T03:33:21.972145787Z [err]        _closed: true,
+2025-12-03T03:33:21.976158982Z [err]          'Connection: Upgrade\r\n' +
+2025-12-03T03:33:21.976163840Z [err]        path: '/v2',
+2025-12-03T03:33:21.976168353Z [err]          'Upgrade: websocket\r\n' +
+2025-12-03T03:33:21.976174987Z [err]          'Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits\r\n' +
+2025-12-03T03:33:21.976177236Z [err]        _ended: true,
+2025-12-03T03:33:21.976180873Z [err]          'Host: yamabiko.proxy.rlwy.net\r\n' +
+2025-12-03T03:33:21.976185832Z [err]        res: [IncomingMessage],
+2025-12-03T03:33:21.976188928Z [err]          '\r\n',
+2025-12-03T03:33:21.976193979Z [err]        aborted: true,
+2025-12-03T03:33:21.976198405Z [err]        _keepAliveTimeout: 0,
+2025-12-03T03:33:21.976202220Z [err]        timeoutCb: null,
+2025-12-03T03:33:21.976207758Z [err]        _onPendingData: [Function: nop],
+2025-12-03T03:33:21.976212466Z [err]        upgradeOrConnect: false,
+2025-12-03T03:33:21.976218671Z [err]        agent: undefined,
+2025-12-03T03:33:21.976222034Z [err]        parser: null,
+2025-12-03T03:33:21.976228081Z [err]        socketPath: undefined,
+2025-12-03T03:33:21.976230474Z [err]        maxHeadersCount: null,
+2025-12-03T03:33:21.976236948Z [err]        reusedSocket: false,
+2025-12-03T03:33:21.976242380Z [err]        method: 'GET',
+2025-12-03T03:33:21.976244774Z [err]        host: 'yamabiko.proxy.rlwy.net',
+2025-12-03T03:33:21.976251209Z [err]        maxHeaderSize: undefined,
+2025-12-03T03:33:21.976252437Z [err]        protocol: 'https:',
+2025-12-03T03:33:21.976259171Z [err]        [Symbol(kCapture)]: false,
+2025-12-03T03:33:21.976261351Z [err]        insecureHTTPParser: undefined,
+2025-12-03T03:33:21.976268171Z [err]        [Symbol(kBytesWritten)]: 0,
+2025-12-03T03:33:21.976268280Z [err]        joinDuplicateHeaders: undefined,
+2025-12-03T03:33:21.976276150Z [err]        [Symbol(kNeedDrain)]: false,
+2025-12-03T03:33:21.976282596Z [err]        [Symbol(corked)]: 0,
+2025-12-03T03:33:21.978777667Z [err]        [Symbol(kOutHeaders)]: [Object: null prototype],
+2025-12-03T03:33:21.978778317Z [err]        at TLSSocket.socketOnData (node:_http_client:541:22)
+2025-12-03T03:33:21.978788715Z [err]        [Symbol(errored)]: null,
+2025-12-03T03:33:21.978788867Z [err]        at TLSSocket.emit (node:events:517:28)
+2025-12-03T03:33:21.978797587Z [err]        [Symbol(kHighWaterMark)]: 16384,
+2025-12-03T03:33:21.978798866Z [err]        at addChunk (node:internal/streams/readable:368:12)
+2025-12-03T03:33:21.978805147Z [err]        at readableAddChunk (node:internal/streams/readable:341:9)
+2025-12-03T03:33:21.978806407Z [err]        [Symbol(kRejectNonStandardBodyWrites)]: false,
+2025-12-03T03:33:21.978813796Z [err]        [Symbol(kUniqueHeaders)]: null,
+2025-12-03T03:33:21.978815278Z [err]        at Readable.push (node:internal/streams/readable:278:10)
+2025-12-03T03:33:21.978820952Z [err]        at TLSWrap.onStreamRead (node:internal/stream_base_commons:190:23),
+2025-12-03T03:33:21.978823145Z [err]        [Symbol(kAborted)]: true,
+2025-12-03T03:33:21.978826430Z [err]    [Symbol(kMessage)]: 'Unexpected server response: 404'
+2025-12-03T03:33:21.978830590Z [err]        [Symbol(kError)]: undefined
+2025-12-03T03:33:21.978837798Z [err]      },
+2025-12-03T03:33:21.978843358Z [err]      [Symbol(kCapture)]: false
+2025-12-03T03:33:21.978849312Z [err]    },
+2025-12-03T03:33:21.978855332Z [err]    [Symbol(kType)]: 'error',
+2025-12-03T03:33:21.978860885Z [err]    [Symbol(kError)]: Error: Unexpected server response: 404
+2025-12-03T03:33:21.978875840Z [err]        at ClientRequest.<anonymous> (/app/node_modules/ws/lib/websocket.js:913:7)
+2025-12-03T03:33:21.978881595Z [err]        at ClientRequest.emit (node:events:517:28)
+2025-12-03T03:33:21.978886700Z [err]        at HTTPParser.parserOnIncomingClient (node:_http_client:700:27)
+2025-12-03T03:33:21.978892768Z [err]        at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+2025-12-03T03:33:21.980450530Z [err]  }
+2025-12-03T03:33:21.980456842Z [err]  [DB HEALTH] CRITICAL: Database connection issues detected

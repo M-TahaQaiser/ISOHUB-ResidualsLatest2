@@ -1,0 +1,125 @@
+/* agent-details.component.css */
+
+.agent-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 800px; /* Set a maximum width for better responsiveness */
+    margin: 0 auto;
+    background-color: var(--background-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.agent-details-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Main Agent Card */
+.main-card {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--section-background);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.split-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Cards Section */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.details-card {
+    flex: 1;
+    min-width: 250px; /* Ensure the cards don't shrink too much */
+    padding: 20px;
+    background-color: var(--section-background);
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Input Styles */
+.input {
+    width: 90%; /* Adjust to fit inside cards */
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid var(--text-color);
+    border-radius: 6px;
+    background-color: var(--input-background);
+    color: var(--text-color);
+}
+
+/* Small Inputs for Split Values */
+.small-input {
+    width: 80px; /* Adjusted for smaller split input */
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid var(--text-color);
+    border-radius: 6px;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    text-align: right; /* Align text to the right for numbers */
+    position: relative;
+}
+
+.small-input::after {
+    content: '%'; /* Append % inside the input */
+    position: absolute;
+    right: 10px;
+    color: var(--text-color);
+}
+
+/* Save Button */
+.save-btn-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.save-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #facc15;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save-btn:hover {
+    background-color: #facc15;
+}
+
+/* Media Queries for Better Responsiveness */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column; /* Stack cards on smaller screens */
+    }
+
+    .agent-details-container {
+        width: 95%;
+    }
+}

@@ -1,0 +1,78 @@
+/*.needs-upload-container {
+    padding: 20px;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--shadow-color);
+    max-width: 100%;
+  }
+  */
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .report-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  .report-item {
+    /* padding: 10px; */
+    /* border-bottom: 1px solid var(--separator-color); */
+    /* font-size: 1rem; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+  .report-item:last-child {
+    border-bottom: none;
+  }
+  
+  /* Pagination styling */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .pagination-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--accent-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pagination-btn.active {
+    background-color: #facc15;
+}
+  
+  .pagination-btn:hover {
+    background-color: #facc15;
+    color: #000;
+  }
+  
+  .upload-button-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  /*
+  .upload-btn {
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .upload-btn:hover {
+    background-color: var(--accent-color2);
+  }
+  */

@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResidualTracker Pro - Merchant Services Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1976D2',
+                        secondary: '#FF6B35',
+                        success: '#4CAF50',
+                        warning: '#FF9800',
+                        error: '#F44336'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50 font-sans">
+    <!-- @COMPONENT: Header Navigation -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-primary">ResidualTracker Pro</h1>
+                    </div>
+                    <nav class="hidden md:ml-10 md:flex md:space-x-8">
+                        <a href="#dashboard" class="text-primary border-b-2 border-primary px-1 pb-1 text-sm font-medium">Dashboard</a>
+                        <a href="#uploads" class="text-gray-500 hover:text-gray-700 px-1 pb-1 text-sm font-medium">Data Uploads</a>
+                        <a href="#reports" class="text-gray-500 hover:text-gray-700 px-1 pb-1 text-sm font-medium">Reports</a>
+                        <a href="#settings" class="text-gray-500 hover:text-gray-700 px-1 pb-1 text-sm font-medium">Settings</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-plus mr-2"></i>New Upload
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=32&h=32" alt="User avatar">
+                        <span class="text-sm font-medium text-gray-700" data-mock="true">Christy G Milton</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header Navigation -->
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- @COMPONENT: Monthly Data Management Sections -->
+        <div class="space-y-8">
+            
+            <!-- May 2025 Section (Active) -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-primary to-blue-600 text-white rounded-t-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-semibold">May 2025 Data Processing</h2>
+                            <p class="text-blue-100 mt-1">Upload processor files and lead sheets for matching</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold">7/10</div>
+                            <div class="text-blue-100">Files Uploaded</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Upload Grid -->
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <!-- Lead Sheet Upload -->
+                        <div class="border-2 border-dashed border-success bg-green-50 rounded-lg p-4 relative">
+                            <div class="absolute top-2 right-2">
+                                <i class="fas fa-check-circle text-success text-xl"></i>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-file-csv text-3xl text-success mb-3"></i>
+                                <h3 class="font-semibold text-gray-900">Lead Sheet (CRM)</h3>
+                                <p class="text-sm text-gray-600 mt-2" data-mock="true">MyLeads_2025-07-16.csv</p>
+                                <p class="text-xs text-success mt-1">971 records processed</p>
+                            </div>
+                        </div>
+
+                        <!-- Processor Files -->
+                        <div class="border-2 border-dashed border-success bg-green-50 rounded-lg p-4 relative">
+                            <div class="absolute top-2 right-2">
+                                <i class="fas fa-check-circle text-success text-xl"></i>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-file-csv text-3xl text-success mb-3"></i>
+                                <h3 class="font-semibold text-gray-900">Payment Advisors</h3>
+                                <p class="text-sm text-gray-600 mt-2" data-mock="true">Payment_Advisors_May2025.csv</p>
+                                <p class="text-xs text-success mt-1">4 MIDs processed</p>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-dashed border-success bg-green-50 rounded-lg p-4 relative">
+                            <div class="absolute top-2 right-2">
+                                <i class="fas fa-check-circle text-success text-xl"></i>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-file-csv text-3xl text-success mb-3"></i>
+                                <h3 class="font-semibold text-gray-900">Clearent</h3>
+                                <p class="text-sm text-gray-600 mt-2" data-mock="true">Clearent_May2025.csv</p>
+                                <p class="text-xs text-success mt-1">121 MIDs processed</p>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-dashed border-success bg-green-50 rounded-lg p-4 relative">
+                            <div class="absolute top-2 right-2">
+                                <i class="fas fa-check-circle text-success text-xl"></i>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-file-csv text-3xl text-success mb-3"></i>
+                                <h3 class="font-semibold text-gray-900">Micamp Solutions</h3>
+                                <p class="text-sm text-gray-600 mt-2" data-mock="true">Micamp_May2025.csv</p>
+                                <p class="text-xs text-success mt-1">40 MIDs processed</p>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-dashed border-success bg-green-50 rounded-lg p-4 relative">
+                            <div class="absolute top-2 right-2">
+                                <i class="fas fa-check-circle text-success text-xl"></i>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-file-csv text-3xl text-success mb-3"></i>
+                                <h3 class="font-semibold text-gray-900">Merchant Lynx</h3>
+                                <p class="text-sm text-gray-600 mt-2" data-mock="true">MerchantLynx_May2025.csv</p>
+                                <p class="text-xs text-success mt-1">25 MIDs processed</p>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-dashed border-success bg-green-50 rounded-lg p-4 relative">
+                            <div class="absolute top-2 right-2">
+                                <i class="fas fa-check-circle text-success text-xl"></i>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-file-csv text-3xl text-success mb-3"></i>
+                                <h3 class="font-semibold text-gray-900">Global Payments TSYS</h3>
+                                <p class="text-sm text-gray-600 mt-2" data-mock="true">TSYS_May2025.csv</p>
+                                <p class="text-xs text-success mt-1">18 MIDs processed</p>
+                            </div>
+                        </div>
+
+                        <!-- Pending Upload Slots -->
+                        <div class="border-2 border-dashed border-gray-300 bg-gray-50 rounded-lg p-4 hover:border-primary hover:bg-blue-50 transition-colors cursor-pointer">
+                            <div class="text-center">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-3"></i>
+                                <h3 class="font-semibold text-gray-900">First Data</h3>
+                                <p class="text-sm text-gray-500 mt-2">Click to upload CSV file</p>
+                                <button class="mt-3 bg-primary text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors">
+                                    Select File
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-dashed border-gray-300 bg-gray-50 rounded-lg p-4 hover:border-primary hover:bg-blue-50 transition-colors cursor-pointer">
+                            <div class="text-center">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-3"></i>
+                                <h3 class="font-semibold text-gray-900">Square</h3>
+                                <p class="text-sm text-gray-500 mt-2">Click to upload CSV file</p>
+                                <button class="mt-3 bg-primary text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors">
+                                    Select File
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-dashed border-gray-300 bg-gray-50 rounded-lg p-4 hover:border-primary hover:bg-blue-50 transition-colors cursor-pointer">
+                            <div class="text-center">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-3"></i>
+                                <h3 class="font-semibold text-gray-900">Stripe</h3>
+                                <p class="text-sm text-gray-500 mt-2">Click to upload CSV file</p>
+                                <button class="mt-3 bg-primary text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors">
+                                    Select File
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Processing Summary -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-lg text-white">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-blue-100">Total MIDs Matched</p>
+                                    <p class="text-3xl font-bold" data-mock="true">208</p>
+                                </div>
+                                <i class="fas fa-link text-3xl text-blue-200"></i>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-green-500 to-green-600 p-6 rounded-lg text-white">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-green-100">Revenue Processed</p>
+                                    <p class="text-3xl font-bold" data-mock="true">$47,892</p>
+                                </div>
+                                <i class="fas fa-dollar-sign text-3xl text-green-200"></i>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-orange-500 to-orange-600 p-6 rounded-lg text-white">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-orange-100">Pending Assignments</p>
+                                    <p class="text-3xl font-bold" data-mock="true">12</p>
+                                </div>
+                                <i class="fas fa-exclamation-triangle text-3xl text-orange-200"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MID Matching Table -->
+                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-lg font-semibold text-gray-900">MID Matching & Assignment Status</h3>
+                                <div class="flex items-center space-x-4">
+                                    <select class="border border-gray-300 rounded-md px-3 py-2 text-sm">
+                                        <option>All Processors</option>
+                                        <option>Payment Advisors</option>
+                                        <option>Clearent</option>
+                                        <option>Micamp Solutions</option>
+                                    </select>
+                                    <button class="bg-primary text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors">
+                                        <i class="fas fa-download mr-2"></i>Export
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">MID</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Merchant Name</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Processor</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Revenue</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assignment Status</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <!-- @MAP: processedMIDs.map(mid => ( -->
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900" data-mock="true">50110225086</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" data-mock="true">MYGENICS</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800" data-mock="true">
+                                                Payment Advisors
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" data-mock="true">$32.30</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                <i class="fas fa-check mr-1"></i>Complete
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <button class="text-primary hover:text-blue-700 mr-3">View</button>
+                                            <button class="text-gray-600 hover:text-gray-900">Edit</button>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900" data-mock="true">6588000002455723</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" data-mock="true">A-1 CHIMNEY PRO, INC.</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800" data-mock="true">
+                                                Clearent
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" data-mock="true">$25.83</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                <i class="fas fa-exclamation-triangle mr-1"></i>Pending Assignment
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <button class="text-primary hover:text-blue-700 mr-3">Assign</button>
+                                            <button class="text-gray-600 hover:text-gray-900">View</button>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900" data-mock="true">820100009480</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" data-mock="true">ARKANSAS USA WRESTLING</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" data-mock="true">
+                                                Micamp Solutions
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" data-mock="true">$9.78</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                                <i class="fas fa-times mr-1"></i>Split Error (95%)
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <button class="text-red-600 hover:text-red-700 mr-3">Fix Split</button>
+                                            <button class="text-gray-600 hover:text-gray-900">View</button>
+                                        </td>
+                                    </tr>
+                                    <!-- @END_MAP )) -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+                            <div class="flex items-center justify-between">
+                                <div class="text-sm text-gray-700">
+                                    Showing <span class="font-medium">1</span> to <span class="font-medium">10</span> of <span class="font-medium">208</span> results
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-500 hover:bg-gray-50">Previous</button>
+                                    <button class="px-3 py-2 bg-primary text-white rounded-md text-sm hover:bg-blue-700">1</button>
+                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">2</button>
+                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">3</button>
+                                    <button class="px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-500 hover:bg-gray-50">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- June 2025 Section (Future) -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 opacity-60">
+                <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-gray-400 to-gray-500 text-white rounded-t-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-semibold">June 2025 Data Processing</h2>
+                            <p class="text-gray-200 mt-1">Available after May 2025 processing complete</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold">0/10</div>
+                            <div class="text-gray-200">Files Uploaded</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="text-center py-12">
+                        <i class="fas fa-lock text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-500">Complete May 2025 processing to unlock June 2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- July 2025 Section (Future) -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 opacity-40">
+                <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-gray-300 to-gray-400 text-white rounded-t-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-semibold">July 2025 Data Processing</h2>
+                            <p class="text-gray-200 mt-1">Available after June 2025 processing complete</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold">0/10</div>
+                            <div class="text-gray-200">Files Uploaded</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="text-center py-12">
+                        <i class="fas fa-lock text-4xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-400">Complete June 2025 processing to unlock July 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: Monthly Data Management Sections -->
+
+        <!-- @COMPONENT: Audit & Validation Section -->
+        <div class="mt-12 bg-white rounded-lg shadow-sm border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-semibold text-gray-900">Data Audit & Validation</h2>
+                    <button class="bg-warning text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-yellow-600 transition-colors">
+                        <i class="fas fa-search mr-2"></i>Run Full Audit
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-circle text-red-500 text-2xl mr-3"></i>
+                            <div>
+                                <p class="text-lg font-semibold text-red-700" data-mock="true">3</p>
+                                <p class="text-sm text-red-600">Split Errors</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-question-circle text-yellow-500 text-2xl mr-3"></i>
+                            <div>
+                                <p class="text-lg font-semibold text-yellow-700" data-mock="true">12</p>
+                                <p class="text-sm text-yellow-600">Missing Assignments</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-link text-blue-500 text-2xl mr-3"></i>
+                            <div>
+                                <p class="text-lg font-semibold text-blue-700" data-mock="true">5</p>
+                                <p class="text-sm text-blue-600">Unmatched MIDs</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 text-2xl mr-3"></i>
+                            <div>
+                                <p class="text-lg font-semibold text-green-700" data-mock="true">188</p>
+                                <p class="text-sm text-green-600">Valid Records</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audit Issues Table -->
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                        <h3 class="text-lg font-semibold text-gray-900">Issues Requiring Attention</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Priority</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">MID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Issue Type</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                            High
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900" data-mock="true">820100009480</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Split Error</td>
+                                    <td class="px-6 py-4 text-sm text-gray-900">Percentage splits total 95% (missing 5%)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-primary hover:text-blue-700">Fix Split</button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                            Medium
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900" data-mock="true">6588000002455723</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Missing Assignment</td>
+                                    <td class="px-6 py-4 text-sm text-gray-900">No role assignments configured</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-primary hover:text-blue-700">Assign Roles</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: Audit & Validation Section -->
+
+        <!-- @COMPONENT: Advanced Reporting Section -->
+        <div class="mt-12 bg-white rounded-lg shadow-sm border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-secondary to-orange-600 text-white rounded-t-lg">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-semibold">Advanced Reporting & Analytics</h2>
+                        <p class="text-orange-100 mt-1">AI-powered report generation and visualization</p>
+                    </div>
+                    <button class="bg-white text-secondary px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-robot mr-2"></i>AI Assistant
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <!-- AI Chat Interface -->
+                <div class="mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                                <i class="fas fa-robot text-white"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Ask AI to Generate Reports</h3>
+                            <div class="relative">
+                                <input type="text" 
+                                       placeholder="e.g., 'Show me revenue by agent for May 2025' or 'Generate a split analysis report for Clearent processor'"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" 
+                                       data-implementation="Should integrate with AI service for natural language query processing">
+                                <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <button class="px-3 py-1 bg-white border border-gray-300 rounded-full text-sm text-gray-600 hover:bg-gray-50">
+                                    Revenue by Agent
+                                </button>
+                                <button class="px-3 py-1 bg-white border border-gray-300 rounded-full text-sm text-gray-600 hover:bg-gray-50">
+                                    Split Analysis
+                                </button>
+                                <button class="px-3 py-1 bg-white border border-gray-300 rounded-full text-sm text-gray-600 hover:bg-gray-50">
+                                    Processor Performance
+                                </button>
+                                <button class="px-3 py-1 bg-white border border-gray-300 rounded-full text-sm text-gray-600 hover:bg-gray-50">
+                                    Monthly Trends
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Builder -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Filter Configuration -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Report Configuration</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Report Type</label>
+                                <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option>Revenue Analysis</option>
+                                    <option>Agent Performance</option>
+                                    <option>Processor Comparison</option>
+                                    <option>Split Validation</option>
+                                    <option>Monthly Trends</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Time Period</label>
+                                <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option>May 2025</option>
+                                    <option>Q2 2025</option>
+                                    <option>YTD 2025</option>
+                                    <option>Custom Range</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Processors</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded border-gray-300 text-primary focus:ring-primary">
+                                        <span class="ml-2 text-sm text-gray-700">All Processors</span>
+                                    </label>
+                                    <label class="flex items-center ml-4">
+                                        <input type="checkbox" checked class="rounded border-gray-300 text-primary focus:ring-primary">
+                                        <span class="ml-2 text-sm text-gray-600">Payment Advisors</span>
+                                    </label>
+                                    <label class="flex items-center ml-4">
+                                        <input type="checkbox" checked class="rounded border-gray-300 text-primary focus:ring-primary">
+                                        <span class="ml-2 text-sm text-gray-600">Clearent</span>
+                                    </label>
+                                    <label class="flex items-center ml-4">
+                                        <input type="checkbox" checked class="rounded border-gray-300 text-primary focus:ring-primary">
+                                        <span class="ml-2 text-sm text-gray-600">Micamp Solutions</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Visualization Type</label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button class="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-primary">
+                                        <i class="fas fa-chart-bar text-2xl text-gray-400 mb-2"></i>
+                                        <p class="text-sm">Bar Chart</p>
+                                    </button>
+                                    <button class="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-primary">
+                                        <i class="fas fa-chart-pie text-2xl text-gray-400 mb-2"></i>
+                                        <p class="text-sm">Pie Chart</p>
+                                    </button>
+                                    <button class="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-primary">
+                                        <i class="fas fa-chart-line text-2xl text-gray-400 mb-2"></i>
+                                        <p class="text-sm">Line Chart</p>
+                                    </button>
+                                    <button class="p-3 border border-primary bg-blue-50 rounded-lg">
+                                        <i class="fas fa-table text-2xl text-primary mb-2"></i>
+                                        <p class="text-sm text-primary font-medium">Table</p>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button class="w-full bg-primary text-white py-3 px-4 rounded-md font-medium hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-chart-bar mr-2"></i>Generate Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Preview/Results -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Report Preview</h3>
+                        <div class="bg-gray-50 rounded-lg p-6 border border-gray-200 min-h-96">
+                            <!-- Sample Revenue Chart -->
+                            <!-- Financial dashboard visualization showing revenue by processor -->
+                            <div class="relative h-80 bg-white rounded-lg p-4 shadow-sm border">
+                                <h4 class="text-md font-semibold text-gray-800 mb-4">Revenue by Processor - May 2025</h4>
+                                
+                                <!-- Mock Chart Data -->
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-4 h-4 bg-blue-500 rounded"></div>
+                                            <span class="text-sm text-gray-700">Clearent</span>
+                                        </div>
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-48 bg-gray-200 rounded-full h-3">
+                                                <div class="bg-blue-500 h-3 rounded-full" style="width: 65%"></div>
+                                            </div>
+                                            <span class="text-sm font-medium text-gray-900" data-mock="true">$31,200</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-4 h-4 bg-green-500 rounded"></div>
+                                            <span class="text-sm text-gray-700">Micamp Solutions</span>
+                                        </div>
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-48 bg-gray-200 rounded-full h-3">
+                                                <div class="bg-green-500 h-3 rounded-full" style="width: 25%"></div>
+                                            </div>
+                                            <span class="text-sm font-medium text-gray-900" data-mock="true">$12,150</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-4 h-4 bg-purple-500 rounded"></div>
+                                            <span class="text-sm text-gray-700">Global Payments TSYS</span>
+                                        </div>
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-48 bg-gray-200 rounded-full h-3">
+                                                <div class="bg-purple-500 h-3 rounded-full" style="width: 8%"></div>
+                                            </div>
+                                            <span class="text-sm font-medium text-gray-900" data-mock="true">$3,842</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-4 h-4 bg-orange-500 rounded"></div>
+                                            <span class="text-sm text-gray-700">Merchant Lynx</span>
+                                        </div>
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-48 bg-gray-200 rounded-full h-3">
+                                                <div class="bg-orange-500 h-3 rounded-full" style="width: 6%"></div>
+                                            </div>
+                                            <span class="text-sm font-medium text-gray-900" data-mock="true">$2,700</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 pt-4 border-t border-gray-200">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm font-medium text-gray-700">Total Revenue:</span>
+                                        <span class="text-lg font-bold text-gray-900" data-mock="true">$47,892</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 flex space-x-3">
+                                <button class="flex-1 bg-secondary text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-orange-600 transition-colors">
+                                    <i class="fas fa-palette mr-2"></i>Customize Branding
+                                </button>
+                                <button class="flex-1 bg-gray-600 text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">
+                                    <i class="fas fa-calendar mr-2"></i>Schedule Email
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: Advanced Reporting Section -->
+    </div>
+
+    <!-- @COMPONENT: Role Assignment Modal (Hidden by default) -->
+    <div class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="roleAssignmentModal">
+        <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900">Assign Roles & Splits</h3>
+                    <button class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- MID Info -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <span class="font-medium text-gray-700">MID:</span>
+                                <span class="ml-2 font-mono" data-mock="true">6588000002455723</span>
+                            </div>
+                            <div>
+                                <span class="font-medium text-gray-700">Merchant:</span>
+                                <span class="ml-2" data-mock="true">A-1 CHIMNEY PRO, INC.</span>
+                            </div>
+                            <div>
+                                <span class="font-medium text-gray-700">Processor:</span>
+                                <span class="ml-2" data-mock="true">Clearent</span>
+                            </div>
+                            <div>
+                                <span class="font-medium text-gray-700">Revenue:</span>
+                                <span class="ml-2" data-mock="true">$25.83</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Role Assignments -->
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Company</label>
+                                <div class="flex space-x-2">
+                                    <select class="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <option>Select Company</option>
+                                        <option data-mock="true">CoCard 0827</option>
+                                    </select>
+                                    <input type="number" placeholder="%" 
+                                           class="w-20 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                           data-mock="true" value="40">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Sales Manager</label>
+                                <div class="flex space-x-2">
+                                    <select class="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <option>Select Sales Manager</option>
+                                        <option data-mock="true">Christy G Milton</option>
+                                        <option data-mock="true">Mark Pierce</option>
+                                    </select>
+                                    <input type="number" placeholder="%" 
+                                           class="w-20 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                           data-mock="true" value="15">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Agent</label>
+                                <div class="flex space-x-2">
+                                    <select class="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <option>Select Agent</option>
+                                        <option data-mock="true">Troy Esentan</option>
+                                        <option data-mock="true">Cody Burnell</option>
+                                        <option data-mock="true">James Carner</option>
+                                    </select>
+                                    <input type="number" placeholder="%" 
+                                           class="w-20 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                           data-mock="true" value="25">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Partner</label>
+                                <div class="flex space-x-2">
+                                    <select class="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <option>Select Partner</option>
+                                        <option data-mock="true">HBS Partner 0827</option>
+                                        <option data-mock="true">C2FS Partner 0827</option>
+                                    </select>
+                                    <input type="number" placeholder="%" 
+                                           class="w-20 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                           data-mock="true" value="15">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Association</label>
+                                <div class="flex space-x-2">
+                                    <select class="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <option>Select Association</option>
+                                        <option data-mock="true">Tracer CoCard</option>
+                                    </select>
+                                    <input type="number" placeholder="%" 
+                                           class="w-20 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                                           data-mock="true" value="5">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Split Validation -->
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-calculator text-yellow-500 mr-2"></i>
+                                    <span class="text-sm font-medium text-yellow-800">Total Split:</span>
+                                </div>
+                                <div class="text-lg font-bold text-yellow-800" data-mock="true">100%</div>
+                            </div>
+                            <div class="mt-2 text-xs text-yellow-700">
+                                ✓ Split validation passed - all percentages total 100%
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+                        <button class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            Cancel
+                        </button>
+                        <button class="px-4 py-2 bg-primary text-white rounded-md text-sm font-medium hover:bg-blue-700">
+                            Save Assignment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: Role Assignment Modal -->
+
+    <!-- @COMPONENT: JavaScript for Interactivity -->
+    <script>
+        (function() {
+            // TODO: Implement business logic, API calls, or state management
+            
+            // File upload simulation
+            document.addEventListener('DOMContentLoaded', function() {
+                const uploadSlots = document.querySelectorAll('.border-dashed');
+                
+                uploadSlots.forEach(slot => {
+                    if (slot.classList.contains('border-gray-300')) {
+                        slot.addEventListener('click', function() {
+                            // TODO: Implement file upload functionality
+                            console.log('File upload clicked');
+                        });
+                    }
+                });
+
+                // Modal functionality
+                const assignButtons = document.querySelectorAll('button[data-action="assign"]');
+                const modal = document.getElementById('roleAssignmentModal');
+                
+                assignButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        if (modal) {
+                            modal.classList.remove('hidden');
+                        }
+                    });
+                });
+
+                // Close modal
+                const closeButtons = modal?.querySelectorAll('.fas.fa-times');
+                closeButtons?.forEach(button => {
+                    button.addEventListener('click', function() {
+                        modal.classList.add('hidden');
+                    });
+                });
+
+                // Split calculation
+                const percentInputs = document.querySelectorAll('input[type="number"]');
+                percentInputs.forEach(input => {
+                    input.addEventListener('input', function() {
+                        // TODO: Implement real-time split calculation
+                        console.log('Split calculation needed');
+                    });
+                });
+            });
+        })();
+    </script>
+    <!-- @END_COMPONENT: JavaScript for Interactivity -->
+</body>
+</html>

@@ -1,0 +1,216 @@
+dashboard:1 Loading the script 'https://replit.com/public/js/replit-dev-banner.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.
+index-BgeYPrMV.js:40 TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at index-BgeYPrMV.js:740:20970
+    at Array.filter (<anonymous>)
+    at lG (index-BgeYPrMV.js:740:20939)
+    at E1 (index-BgeYPrMV.js:38:17018)
+    at pw (index-BgeYPrMV.js:40:3139)
+    at s3 (index-BgeYPrMV.js:40:44833)
+    at t3 (index-BgeYPrMV.js:40:39790)
+    at l9 (index-BgeYPrMV.js:40:39718)
+    at Sx (index-BgeYPrMV.js:40:39570)
+    at Cw (index-BgeYPrMV.js:40:35934)
+fw @ index-BgeYPrMV.js:40
+index-BgeYPrMV.js:38 Uncaught TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at index-BgeYPrMV.js:740:20970
+    at Array.filter (<anonymous>)
+    at lG (index-BgeYPrMV.js:740:20939)
+    at E1 (index-BgeYPrMV.js:38:17018)
+    at pw (index-BgeYPrMV.js:40:3139)
+    at s3 (index-BgeYPrMV.js:40:44833)
+    at t3 (index-BgeYPrMV.js:40:39790)
+    at l9 (index-BgeYPrMV.js:40:39718)
+    at Sx (index-BgeYPrMV.js:40:39570)
+    at Cw (index-BgeYPrMV.js:40:35934)
+api/initialize:1  Failed to load resource: the server responded with a status of 401 ()
+dashboard:29 SW registration failed:  SecurityError: Failed to register a ServiceWorker for scope ('https://brilliant-bravery-production.up.railway.app/') with script ('https://brilliant-bravery-production.up.railway.app/sw.js'): The script has an unsupported MIME type ('text/html').
+manifest.json:1 Manifest: Line: 1, column: 1, Syntax error.
+guidde.js:2 Fetch finished loading: POST "https://o999875.ingest.sentry.io/api/6006079/envelope/?sentry_key=650ad5569e6b44168c6750dad16368a8&sentry_version=7&sentry_client=sentry.javascript.react%2F7.120.0".
+e @ guidde.js:2
+(anonymous) @ quickActionService.js:2
+(anonymous) @ quickActionService.js:2
+add @ quickActionService.js:2
+o @ quickActionService.js:2
+_sendEnvelope @ quickActionService.js:2
+_flushOutcomes @ quickActionService.js:2
+(anonymous) @ quickActionService.js:2
+Navigated to https://brilliant-bravery-production.up.railway.app/
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+(index):1 Loading the script 'https://replit.com/public/js/replit-dev-banner.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.
+The script has an unsupported MIME type ('text/html').
+(index):29 SW registration failed:  SecurityError: Failed to register a ServiceWorker for scope ('https://brilliant-bravery-production.up.railway.app/') with script ('https://brilliant-bravery-production.up.railway.app/sw.js'): The script has an unsupported MIME type ('text/html').
+manifest.json:1 Manifest: Line: 1, column: 1, Syntax error.
+index-BgeYPrMV.js:837 Starting login process...
+Navigated to https://brilliant-bravery-production.up.railway.app/dashboard
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+dashboard:1 Loading the script 'https://replit.com/public/js/replit-dev-banner.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.
+index-BgeYPrMV.js:48 Fetch finished loading: GET "https://brilliant-bravery-production.up.railway.app/api/organizations/list".
+Ve @ index-BgeYPrMV.js:48
+queryFn @ index-BgeYPrMV.js:740
+i @ index-BgeYPrMV.js:48
+x @ index-BgeYPrMV.js:48
+start @ index-BgeYPrMV.js:48
+fetch @ index-BgeYPrMV.js:48
+im @ index-BgeYPrMV.js:48
+onSubscribe @ index-BgeYPrMV.js:48
+subscribe @ index-BgeYPrMV.js:48
+(anonymous) @ index-BgeYPrMV.js:48
+bM @ index-BgeYPrMV.js:38
+g0 @ index-BgeYPrMV.js:40
+Hc @ index-BgeYPrMV.js:40
+bk @ index-BgeYPrMV.js:40
+Uo @ index-BgeYPrMV.js:38
+d9 @ index-BgeYPrMV.js:40
+nl @ index-BgeYPrMV.js:40
+ZM @ index-BgeYPrMV.js:40
+N @ index-BgeYPrMV.js:25
+O @ index-BgeYPrMV.js:25
+index-BgeYPrMV.js:40 TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at index-BgeYPrMV.js:740:20970
+    at Array.filter (<anonymous>)
+    at lG (index-BgeYPrMV.js:740:20939)
+    at E1 (index-BgeYPrMV.js:38:17018)
+    at pw (index-BgeYPrMV.js:40:3139)
+    at s3 (index-BgeYPrMV.js:40:44833)
+    at t3 (index-BgeYPrMV.js:40:39790)
+    at l9 (index-BgeYPrMV.js:40:39718)
+    at Sx (index-BgeYPrMV.js:40:39570)
+    at Cw (index-BgeYPrMV.js:40:35934)
+fw @ index-BgeYPrMV.js:40
+r.callback @ index-BgeYPrMV.js:40
+tk @ index-BgeYPrMV.js:38
+gk @ index-BgeYPrMV.js:40
+XM @ index-BgeYPrMV.js:40
+a9 @ index-BgeYPrMV.js:40
+d9 @ index-BgeYPrMV.js:40
+nl @ index-BgeYPrMV.js:40
+bk @ index-BgeYPrMV.js:40
+Uo @ index-BgeYPrMV.js:38
+(anonymous) @ index-BgeYPrMV.js:40
+setTimeout
+a @ index-BgeYPrMV.js:48
+o @ index-BgeYPrMV.js:48
+batch @ index-BgeYPrMV.js:48
+Ya @ index-BgeYPrMV.js:48
+setData @ index-BgeYPrMV.js:48
+onSuccess @ index-BgeYPrMV.js:48
+m @ index-BgeYPrMV.js:48
+Promise.then
+x @ index-BgeYPrMV.js:48
+start @ index-BgeYPrMV.js:48
+fetch @ index-BgeYPrMV.js:48
+im @ index-BgeYPrMV.js:48
+onSubscribe @ index-BgeYPrMV.js:48
+subscribe @ index-BgeYPrMV.js:48
+(anonymous) @ index-BgeYPrMV.js:48
+bM @ index-BgeYPrMV.js:38
+g0 @ index-BgeYPrMV.js:40
+Hc @ index-BgeYPrMV.js:40
+bk @ index-BgeYPrMV.js:40
+Uo @ index-BgeYPrMV.js:38
+d9 @ index-BgeYPrMV.js:40
+nl @ index-BgeYPrMV.js:40
+ZM @ index-BgeYPrMV.js:40
+N @ index-BgeYPrMV.js:25
+O @ index-BgeYPrMV.js:25
+index-BgeYPrMV.js:740 Uncaught TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at index-BgeYPrMV.js:740:20970
+    at Array.filter (<anonymous>)
+    at lG (index-BgeYPrMV.js:740:20939)
+    at E1 (index-BgeYPrMV.js:38:17018)
+    at pw (index-BgeYPrMV.js:40:3139)
+    at s3 (index-BgeYPrMV.js:40:44833)
+    at t3 (index-BgeYPrMV.js:40:39790)
+    at l9 (index-BgeYPrMV.js:40:39718)
+    at Sx (index-BgeYPrMV.js:40:39570)
+    at Cw (index-BgeYPrMV.js:40:35934)
+(anonymous) @ index-BgeYPrMV.js:740
+lG @ index-BgeYPrMV.js:740
+E1 @ index-BgeYPrMV.js:38
+pw @ index-BgeYPrMV.js:40
+s3 @ index-BgeYPrMV.js:40
+t3 @ index-BgeYPrMV.js:40
+l9 @ index-BgeYPrMV.js:40
+Sx @ index-BgeYPrMV.js:40
+Cw @ index-BgeYPrMV.js:40
+bk @ index-BgeYPrMV.js:40
+Uo @ index-BgeYPrMV.js:38
+(anonymous) @ index-BgeYPrMV.js:40
+setTimeout
+a @ index-BgeYPrMV.js:48
+o @ index-BgeYPrMV.js:48
+batch @ index-BgeYPrMV.js:48
+Ya @ index-BgeYPrMV.js:48
+setData @ index-BgeYPrMV.js:48
+onSuccess @ index-BgeYPrMV.js:48
+m @ index-BgeYPrMV.js:48
+Promise.then
+x @ index-BgeYPrMV.js:48
+start @ index-BgeYPrMV.js:48
+fetch @ index-BgeYPrMV.js:48
+im @ index-BgeYPrMV.js:48
+onSubscribe @ index-BgeYPrMV.js:48
+subscribe @ index-BgeYPrMV.js:48
+(anonymous) @ index-BgeYPrMV.js:48
+bM @ index-BgeYPrMV.js:38
+g0 @ index-BgeYPrMV.js:40
+Hc @ index-BgeYPrMV.js:40
+bk @ index-BgeYPrMV.js:40
+Uo @ index-BgeYPrMV.js:38
+d9 @ index-BgeYPrMV.js:40
+nl @ index-BgeYPrMV.js:40
+ZM @ index-BgeYPrMV.js:40
+N @ index-BgeYPrMV.js:25
+O @ index-BgeYPrMV.js:25
+index-BgeYPrMV.js:812 Fetch failed loading: POST "https://brilliant-bravery-production.up.railway.app/api/initialize".
+queryFn @ index-BgeYPrMV.js:812
+i @ index-BgeYPrMV.js:48
+x @ index-BgeYPrMV.js:48
+start @ index-BgeYPrMV.js:48
+fetch @ index-BgeYPrMV.js:48
+im @ index-BgeYPrMV.js:48
+onSubscribe @ index-BgeYPrMV.js:48
+subscribe @ index-BgeYPrMV.js:48
+(anonymous) @ index-BgeYPrMV.js:48
+bM @ index-BgeYPrMV.js:38
+g0 @ index-BgeYPrMV.js:40
+Hc @ index-BgeYPrMV.js:40
+bk @ index-BgeYPrMV.js:40
+Uo @ index-BgeYPrMV.js:38
+d9 @ index-BgeYPrMV.js:40
+nl @ index-BgeYPrMV.js:40
+ZM @ index-BgeYPrMV.js:40
+N @ index-BgeYPrMV.js:25
+O @ index-BgeYPrMV.js:25
+index-BgeYPrMV.js:812  POST https://brilliant-bravery-production.up.railway.app/api/initialize 401 (Unauthorized)
+queryFn @ index-BgeYPrMV.js:812
+i @ index-BgeYPrMV.js:48
+x @ index-BgeYPrMV.js:48
+start @ index-BgeYPrMV.js:48
+fetch @ index-BgeYPrMV.js:48
+im @ index-BgeYPrMV.js:48
+onSubscribe @ index-BgeYPrMV.js:48
+subscribe @ index-BgeYPrMV.js:48
+(anonymous) @ index-BgeYPrMV.js:48
+bM @ index-BgeYPrMV.js:38
+g0 @ index-BgeYPrMV.js:40
+Hc @ index-BgeYPrMV.js:40
+bk @ index-BgeYPrMV.js:40
+Uo @ index-BgeYPrMV.js:38
+d9 @ index-BgeYPrMV.js:40
+nl @ index-BgeYPrMV.js:40
+ZM @ index-BgeYPrMV.js:40
+N @ index-BgeYPrMV.js:25
+O @ index-BgeYPrMV.js:25
+manifest.json:1 Manifest: Line: 1, column: 1, Syntax error.
+The script has an unsupported MIME type ('text/html').
+dashboard:29 SW registration failed:  SecurityError: Failed to register a ServiceWorker for scope ('https://brilliant-bravery-production.up.railway.app/') with script ('https://brilliant-bravery-production.up.railway.app/sw.js'): The script has an unsupported MIME type ('text/html').

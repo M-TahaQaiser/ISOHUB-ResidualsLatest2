@@ -1,0 +1,33 @@
+2025-12-11T07:12:17.000000000Z [inf]  Starting Container
+2025-12-11T07:12:18.704558815Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-12-11T07:12:18.704566567Z [inf]  
+2025-12-11T07:12:18.704573227Z [inf]  > rest-express@1.0.0 start
+2025-12-11T07:12:18.704580827Z [inf]  > NODE_ENV=production node dist/index.js
+2025-12-11T07:12:18.704585307Z [inf]  
+2025-12-11T07:12:18.787464069Z [err]  [EMAIL SERVICE] WARNING: Email credentials not configured. Email functionality will be disabled.
+2025-12-11T07:12:18.789517973Z [inf]  ISO-AI sample data initialized
+2025-12-11T07:12:18.791249267Z [inf]  [ToolRegistry] Initialized with 12 tools
+2025-12-11T07:12:18.793494107Z [err]  [EMAIL SERVICE] WARNING: Email credentials not configured. Email functionality will be disabled.
+2025-12-11T07:12:18.799236511Z [err]  [EMAIL SERVICE] WARNING: Email credentials not configured. Email functionality will be disabled.
+2025-12-11T07:12:18.799241938Z [err]  [EMAIL SERVICE] WARNING: Email credentials not configured. Email functionality will be disabled.
+2025-12-11T07:12:18.803557908Z [inf]  🔄 Real Data Display routes initializing...
+2025-12-11T07:12:18.803567427Z [err]  [EMAIL SERVICE] WARNING: Email credentials not configured. Email functionality will be disabled.
+2025-12-11T07:12:18.810513717Z [inf]  🔄 Starting database migrations...
+2025-12-11T07:12:18.880439824Z [inf]  📁 Looking for migrations in: /migrations
+2025-12-11T07:12:18.880446943Z [inf]  📁 No migrations directory found, skipping migrations
+2025-12-11T07:12:18.880451760Z [inf]  Security systems ready - migrations available via API
+2025-12-11T07:12:18.880458495Z [inf]  ISO-AI initialization skipped - manual setup available
+2025-12-11T07:12:18.880463166Z [inf]  [Startup] Running data integrity check...
+2025-12-11T07:12:18.891340751Z [inf]  [Startup] Current status: healthy
+2025-12-11T07:12:18.891348822Z [inf]  [Startup] Organizations: 2, Missing required: 0
+2025-12-11T07:12:18.891356360Z [inf]  [Startup] All required organizations present, no seeding needed
+2025-12-11T07:12:18.898163631Z [inf]  [Startup] Demo data check: 40 merchants, 771 monthly records
+2025-12-11T07:12:18.898170841Z [inf]  [Startup] Demo data already exists, skipping seed
+2025-12-11T07:12:18.898178220Z [inf]  [Startup] Final data integrity status: healthy
+2025-12-11T07:12:18.900920818Z [inf]  📋 PreApplications router mounted at /api/preapplications
+2025-12-11T07:12:18.931806118Z [inf]  7:12:18 AM [express] 🔒 Secure ISO Hub server running on port 8080
+2025-12-11T07:12:18.931814765Z [inf]  7:12:18 AM [express] 🔍 Health check: http://localhost:8080/health
+2025-12-11T07:12:18.931820259Z [inf]  7:12:18 AM [express] 📊 Metrics: http://localhost:8080/metrics
+2025-12-11T07:12:18.931826424Z [inf]  [SECURITY] Security middleware initialized
+2025-12-11T07:12:18.931833301Z [inf]  [MONITORING] Application monitoring active
+2025-12-11T07:12:18.931839606Z [inf]  [CACHE] Cache service ready

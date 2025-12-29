@@ -1,0 +1,159 @@
+/* Dashboard Container */
+.dashboard-container {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--section-background);
+  color: var(--text-color);
+  border-radius: 8px;
+}
+
+.dashboard-container h1, .dashboard-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+/* Individual card styling */
+.dashboard-card {
+  flex: 1;
+  min-width: 300px;
+  max-width: 32%;
+  padding: 0; /* Remove padding since Card component handles it */
+}
+
+/* Reports Section Tables */
+.reports-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.table-container {
+  flex: 1;
+  min-width: 200px;
+  max-width: 45%;
+  background-color: var(--background-color);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--shadow-color);
+  overflow-x: auto;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+  text-align: left;
+  padding: 6px;
+  border-bottom: 1px solid var(--separator-color);
+  word-wrap: break-word;
+}
+
+.table-container th {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+
+.table-container td {
+  font-size: 0.85rem;
+}
+
+.table-container button {
+  padding: 6px 10px;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.table-container button:hover {
+  background-color: #ff9800;
+}
+
+/* Upload button container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-container button {
+  padding: 8px 18px;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+  background-color: #ffa500;
+}
+
+/* Message container for when reports are already approved */
+.message-container {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 20px 0;
+}
+
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
+  .reports-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .table-container {
+    max-width: 100%;
+  }
+
+  .dashboard-card {
+    max-width: 100%;
+  }
+
+  .table-container button,
+  .button-container button {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
+
+  .table-container th,
+  .table-container td {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .dashboard-grid {
+    flex-direction: column;
+  }
+
+  .dashboard-card {
+    max-width: 100%;
+    min-width: 100%;
+  }
+}

@@ -1,0 +1,142 @@
+/* Agent Summary Report Viewer Wrapper */
+.report-viewer {
+  padding: 20px;
+  background-color: var(--section-background);
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--shadow-color);
+  margin: 0 auto;
+  height: auto;
+  overflow-x: auto;
+}
+
+/* Header container */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Title inside the header */
+.header-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+/* Export and Save button styling */
+.btn-export, .btn-save {
+  padding: 12px 20px;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-export:hover, .btn-save:hover {
+  background-color: var(--accent-color2);
+}
+
+/* Status and Save Button container */
+.status-save-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Status text */
+.status-text {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+/* Approved status styling */
+.status-approved {
+  color: green;
+}
+
+/* Needs approval status styling */
+.status-needs-approval {
+  color: red;
+}
+
+/* Table container */
+.table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* Table headers */
+table th,
+table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid var(--separator-color);
+  font-size: 0.9rem;
+}
+
+table th {
+  background-color: var(--section-background);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+table td {
+  background-color: var(--background-color);
+}
+
+/* Totals Row Styling */
+tfoot td {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  text-align: right;
+}
+
+/* Report Row Styling */
+.report-row {
+  position: relative;
+}
+
+/* Approved row background */
+.report-row.approved {
+  background-color: lightgreen !important;
+}
+
+/* Button styles */
+.btn-approve {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: green;
+  padding: 5px 10px;
+  transition: color 0.3s ease;
+}
+
+/* Hover effects for approval buttons */
+.btn-approve:hover {
+  color: darkgreen;
+}
+
+/* Approved column styling */
+.approved-column {
+  text-align: center;
+  width: 120px;
+  color: green;
+}
+

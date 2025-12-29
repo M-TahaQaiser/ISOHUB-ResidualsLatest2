@@ -1,0 +1,30 @@
+brilliant-bravery-production.up.railway.app/:1 Loading the script 'https://replit.com/public/js/replit-dev-banner.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.
+index-6xMbUkvr.js:40 Framing 'https://api.leadconnectorhq.com/' violates the following Content Security Policy directive: "frame-src 'none'". The request has been blocked.
+
+index-6xMbUkvr.js:40 Framing 'https://api.leadconnectorhq.com/' violates the following Content Security Policy directive: "frame-src 'none'". The request has been blocked.
+
+VM49:10 SW registration failed:  SecurityError: Failed to register a ServiceWorker for scope ('https://brilliant-bravery-production.up.railway.app/') with script ('https://brilliant-bravery-production.up.railway.app/sw.js'): The script has an unsupported MIME type ('text/html').
+manifest.json:1 Manifest: Line: 1, column: 1, Syntax error.
+brilliant-bravery-production.up.railway.app/:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+index-6xMbUkvr.js:552 Starting login process...
+auth.api-aJwmlBhr.js:1 Starting login process...
+api/auth/login:1  Failed to load resource: the server responded with a status of 401 ()
+auth.api-aJwmlBhr.js:1 Login error: Error: Login failed: 
+    at l (auth.api-aJwmlBhr.js:1:1303)
+    at async j (index-6xMbUkvr.js:552:200785)
+l @ auth.api-aJwmlBhr.js:1
+index-6xMbUkvr.js:552 Login failed: Error: Login failed: 
+    at l (auth.api-aJwmlBhr.js:1:1303)
+    at async j (index-6xMbUkvr.js:552:200785)
+j @ index-6xMbUkvr.js:552
+index-6xMbUkvr.js:552 Starting login process...
+auth.api-aJwmlBhr.js:1 Starting login process...
+api/auth/login:1  Failed to load resource: the server responded with a status of 401 ()
+auth.api-aJwmlBhr.js:1 Login error: Error: Login failed: 
+    at l (auth.api-aJwmlBhr.js:1:1303)
+    at async j (index-6xMbUkvr.js:552:200785)
+l @ auth.api-aJwmlBhr.js:1
+index-6xMbUkvr.js:552 Login failed: Error: Login failed: 
+    at l (auth.api-aJwmlBhr.js:1:1303)
+    at async j (index-6xMbUkvr.js:552:200785)
+j @ index-6xMbUkvr.js:552

@@ -1,0 +1,256 @@
+/* Sidebar General Layout */
+.sidebar {
+  width: 70px;
+  height: 100vh;
+  background-color: var(--sidebar-color);
+  color: var(--text-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /*padding: 20px;*/
+  box-sizing: border-box;
+  transition: width 0.3s ease, background 0.3s ease;
+  z-index: 1000;
+  box-shadow: 4px 0 8px var(--shadow-color);
+}
+
+.sidebar.hovered {
+  width: 250px;
+}
+
+/* Sidebar Logo */
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 0.1em;
+  color: var(--accent-color);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.hovered .logo {
+  opacity: 1;
+}
+
+/* Sidebar Links */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+/*
+.nav a {
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 12px 0; 
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: background 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+*/
+/*
+.sidebar.hovered .nav a {
+  justify-content: flex-start;
+  padding-left: 20px; 
+}
+*/
+.nav-icon {
+  font-size: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  transition: margin 0.3s ease;
+}
+
+.sidebar.hovered .nav-icon {
+  margin-right: 10px;
+  margin-left: 0;
+}
+
+.nav-text {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.hovered .nav-text {
+  display: inline;
+  opacity: 1;
+}
+
+/* Dropdown Arrow */
+.chevron {
+  margin-left: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar.hovered .chevron {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* Sidebar Footer */
+.sidebar-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--separator-color);
+  padding-bottom: 20px;
+}
+
+/* Sidebar Footer with Username and Settings Icon */
+.sidebar-footer .wallet-info {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the content (including the cog icon) */
+  width: 100%;
+  position: relative; /* Use relative positioning for centering adjustments */
+}
+
+.wallet-info span {
+  flex-grow: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar.hovered .wallet-info span {
+  opacity: 1;
+  visibility: visible;
+}
+
+.settings-icon {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  position: absolute; /* Allows fine-tuned positioning */
+  left: 50%;
+  padding-right: 5px;
+  transform: translateX(-50%); /* Centers the icon horizontally */
+}
+
+.sidebar.hovered .settings-icon {
+  position: static; /* Resets positioning when sidebar is expanded */
+  transform: none;
+  margin-left: 10px;
+}
+
+/* Logout Button */
+.logout-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.sidebar.hovered .logout-button {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Theme Toggle Container */
+.theme-toggle-container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar.hovered .theme-toggle-container {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  z-index: 1010; /* Ensure it stays on top */
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #facc15;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #facc15;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Theme label */
+.theme-label {
+  color: var(--text-color);
+  font-size: 1rem;
+  white-space: nowrap;
+}

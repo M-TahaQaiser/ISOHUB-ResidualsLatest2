@@ -1,0 +1,45 @@
+iso-ai:1 Loading the script 'https://replit.com/public/js/replit-dev-banner.js' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.
+chunk-RPCDYKBN.js?v=b5301440:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+manifest.json:1 Manifest: Line: 1, column: 1, Syntax error.
+chunk-LRFMKSKN.js:2 Fetch finished loading: POST "https://o999875.ingest.sentry.io/api/6006079/envelope/?sentry_key=650ad5569e6b44168c6750dad16368a8&sentry_version=7&sentry_client=sentry.javascript.react%2F7.120.0".
+e @ chunk-LRFMKSKN.js:2
+(anonymous) @ chunk-JENJKWHP.js:2
+(anonymous) @ chunk-JENJKWHP.js:2
+add @ chunk-JENJKWHP.js:2
+o @ chunk-JENJKWHP.js:2
+_sendEnvelope @ chunk-JENJKWHP.js:2
+_flushOutcomes @ chunk-JENJKWHP.js:2
+(anonymous) @ chunk-JENJKWHP.js:2
+chunk-BCG2KUGW.js:560 [vite] server connection lost. Polling for restart...
+C2iECVZW.js:1  GET https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.dev/ 502 (Bad Gateway)
+s.fetch @ C2iECVZW.js:1
+ping @ chunk-BCG2KUGW.js:736
+waitForSuccessfulPing @ chunk-BCG2KUGW.js:749
+(anonymous) @ chunk-BCG2KUGW.js:561
+chunk-BCG2KUGW.js:562  GET https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.dev/iso-ai 502 (Bad Gateway)
+(anonymous) @ chunk-BCG2KUGW.js:562
+Navigated to https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.dev/iso-ai
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+favicon.ico:1  GET https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.dev/favicon.ico 502 (Bad Gateway)
+Navigated to https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.dev/iso-ai
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+Fetch finished loading: POST "<URL>".
+chunk-RPCDYKBN.js?v=b5301440:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+manifest.json:1 Manifest: Line: 1, column: 1, Syntax error.
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".

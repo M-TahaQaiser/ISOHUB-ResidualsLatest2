@@ -1,0 +1,232 @@
+2025-11-19T00:22:10.000000000Z [inf]  Starting Container
+2025-11-19T00:22:11.609071713Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T00:22:11.609073329Z [err]  Node.js v22.21.1
+2025-11-19T00:22:11.609080421Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T00:22:11.609082684Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T00:22:11.609086561Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T00:22:11.609092087Z [err]  file:///app/dist/index.js:18051
+2025-11-19T00:22:11.609097329Z [err]      throw new Error("JWT_SECRET environment variable is required for session security");
+2025-11-19T00:22:11.609101540Z [err]            ^
+2025-11-19T00:22:11.609106294Z [err]  
+2025-11-19T00:22:11.609111538Z [err]  Error: JWT_SECRET environment variable is required for session security
+2025-11-19T00:22:11.609115861Z [err]      at getSessionSecret (file:///app/dist/index.js:18051:11)
+2025-11-19T00:22:11.609121226Z [err]      at file:///app/dist/index.js:18064:11
+2025-11-19T00:22:11.609126905Z [err]      at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+2025-11-19T00:22:11.609131171Z [err]      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+2025-11-19T00:22:11.609135818Z [err]      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+2025-11-19T00:22:11.609140441Z [err]  
+2025-11-19T00:22:11.609264481Z [inf]  
+2025-11-19T00:22:11.609271470Z [inf]  > rest-express@1.0.0 start
+2025-11-19T00:22:11.609277434Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T00:22:11.609286107Z [inf]  
+2025-11-19T00:22:11.609292109Z [inf]  ISO-AI sample data initialized
+2025-11-19T00:22:13.018477071Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T00:22:13.044748559Z [inf]  
+2025-11-19T00:22:13.044754860Z [inf]  > rest-express@1.0.0 start
+2025-11-19T00:22:13.044761286Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T00:22:13.044767122Z [inf]  
+2025-11-19T00:22:14.033935776Z [inf]  ISO-AI sample data initialized
+2025-11-19T00:22:14.042107329Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T00:22:14.042110844Z [err]      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+2025-11-19T00:22:14.042115344Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T00:22:14.042123003Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T00:22:14.042126173Z [err]      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+2025-11-19T00:22:14.042130177Z [err]  file:///app/dist/index.js:18051
+2025-11-19T00:22:14.042135708Z [err]  
+2025-11-19T00:22:14.042137949Z [err]      throw new Error("JWT_SECRET environment variable is required for session security");
+2025-11-19T00:22:14.042143766Z [err]            ^
+2025-11-19T00:22:14.042146033Z [err]  Node.js v22.21.1
+2025-11-19T00:22:14.042149677Z [err]  
+2025-11-19T00:22:14.042155704Z [err]  Error: JWT_SECRET environment variable is required for session security
+2025-11-19T00:22:14.042160410Z [err]      at getSessionSecret (file:///app/dist/index.js:18051:11)
+2025-11-19T00:22:14.042166740Z [err]      at file:///app/dist/index.js:18064:11
+2025-11-19T00:22:14.042172035Z [err]      at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+2025-11-19T00:22:15.778981482Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T00:22:15.778988622Z [inf]  
+2025-11-19T00:22:15.778997949Z [inf]  > rest-express@1.0.0 start
+2025-11-19T00:22:15.779005002Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T00:22:15.779011196Z [inf]  
+2025-11-19T00:22:16.761926951Z [err]  file:///app/dist/index.js:18051
+2025-11-19T00:22:16.761934994Z [err]      throw new Error("JWT_SECRET environment variable is required for session security");
+2025-11-19T00:22:16.761945373Z [inf]  ISO-AI sample data initialized
+2025-11-19T00:22:16.761953487Z [err]  Error: JWT_SECRET environment variable is required for session security
+2025-11-19T00:22:16.761954207Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T00:22:16.761961481Z [err]      at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+2025-11-19T00:22:16.761962096Z [err]      at getSessionSecret (file:///app/dist/index.js:18051:11)
+2025-11-19T00:22:16.761969599Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T00:22:16.761970416Z [err]      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+2025-11-19T00:22:16.761971757Z [err]      at file:///app/dist/index.js:18064:11
+2025-11-19T00:22:16.761974167Z [err]            ^
+2025-11-19T00:22:16.761981547Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T00:22:16.761986245Z [err]      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+2025-11-19T00:22:16.761989187Z [err]  
+2025-11-19T00:22:16.761993530Z [err]  
+2025-11-19T00:22:16.761999102Z [err]  Node.js v22.21.1
+2025-11-19T00:22:17.913118884Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T00:22:17.950639815Z [inf]  
+2025-11-19T00:22:17.950648247Z [inf]  > rest-express@1.0.0 start
+2025-11-19T00:22:17.950657110Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T00:22:17.950664523Z [inf]  
+2025-11-19T00:22:18.896240495Z [inf]  ISO-AI sample data initialized
+2025-11-19T00:22:18.904971021Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T00:22:18.904978706Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T00:22:18.904983426Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T00:22:18.904988085Z [err]  file:///app/dist/index.js:18051
+2025-11-19T00:22:18.904993191Z [err]      throw new Error("JWT_SECRET environment variable is required for session security");
+2025-11-19T00:22:18.905000113Z [err]            ^
+2025-11-19T00:22:18.905004426Z [err]  
+2025-11-19T00:22:18.905008458Z [err]  Error: JWT_SECRET environment variable is required for session security
+2025-11-19T00:22:18.905013053Z [err]      at getSessionSecret (file:///app/dist/index.js:18051:11)
+2025-11-19T00:22:18.905017323Z [err]      at file:///app/dist/index.js:18064:11
+2025-11-19T00:22:18.905023030Z [err]      at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+2025-11-19T00:22:18.905027520Z [err]      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+2025-11-19T00:22:18.905032417Z [err]      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+2025-11-19T00:22:18.905036434Z [err]  
+2025-11-19T00:22:18.905041678Z [err]  Node.js v22.21.1
+2025-11-19T00:22:20.252221497Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T00:22:20.280290812Z [inf]  
+2025-11-19T00:22:20.280305190Z [inf]  > rest-express@1.0.0 start
+2025-11-19T00:22:20.280313150Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T00:22:20.280320058Z [inf]  
+2025-11-19T00:22:21.257900933Z [inf]  ISO-AI sample data initialized
+2025-11-19T00:22:21.257909332Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T00:22:21.257916667Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T00:22:21.257925130Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T00:22:21.257933466Z [err]  file:///app/dist/index.js:18051
+2025-11-19T00:22:21.257941592Z [err]      throw new Error("JWT_SECRET environment variable is required for session security");
+2025-11-19T00:22:21.257949289Z [err]            ^
+2025-11-19T00:22:21.257960809Z [err]  
+2025-11-19T00:22:21.257967634Z [err]  Error: JWT_SECRET environment variable is required for session security
+2025-11-19T00:22:21.257972176Z [err]      at getSessionSecret (file:///app/dist/index.js:18051:11)
+2025-11-19T00:22:21.257976308Z [err]      at file:///app/dist/index.js:18064:11
+2025-11-19T00:22:21.257983650Z [err]      at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+2025-11-19T00:22:21.257988989Z [err]      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+2025-11-19T00:22:21.257993556Z [err]      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+2025-11-19T00:22:21.257998114Z [err]  
+2025-11-19T00:22:21.258003296Z [err]  Node.js v22.21.1
+2025-11-19T00:22:22.786260570Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T00:22:22.786273272Z [inf]  
+2025-11-19T00:22:22.786336545Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T00:22:22.786345298Z [inf]  
+2025-11-19T00:22:22.786352747Z [inf]  > rest-express@1.0.0 start
+2025-11-19T00:22:23.770229346Z [err]  Node.js v22.21.1
+2025-11-19T00:22:23.770268420Z [inf]  ISO-AI sample data initialized
+2025-11-19T00:22:23.770276793Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T00:22:23.770284163Z [err]      at getSessionSecret (file:///app/dist/index.js:18051:11)
+2025-11-19T00:22:23.770284172Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T00:22:23.770293725Z [err]      at file:///app/dist/index.js:18064:11
+2025-11-19T00:22:23.770296773Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T00:22:23.770303355Z [err]  file:///app/dist/index.js:18051
+2025-11-19T00:22:23.770303422Z [err]      at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+2025-11-19T00:22:23.770311187Z [err]      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+2025-11-19T00:22:23.770316781Z [err]      throw new Error("JWT_SECRET environment variable is required for session security");
+2025-11-19T00:22:23.770321076Z [err]      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+2025-11-19T00:22:23.770325873Z [err]            ^
+2025-11-19T00:22:23.770329068Z [err]  
+2025-11-19T00:22:23.770334490Z [err]  
+2025-11-19T00:22:23.770341147Z [err]  Error: JWT_SECRET environment variable is required for session security
+2025-11-19T00:22:25.113675785Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T00:22:25.144939964Z [inf]  
+2025-11-19T00:22:25.144947847Z [inf]  > rest-express@1.0.0 start
+2025-11-19T00:22:25.144952329Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T00:22:25.144957555Z [inf]  
+2025-11-19T00:22:26.159444419Z [inf]  ISO-AI sample data initialized
+2025-11-19T00:22:26.169620799Z [err]  file:///app/dist/index.js:18051
+2025-11-19T00:22:26.169633016Z [err]      throw new Error("JWT_SECRET environment variable is required for session security");
+2025-11-19T00:22:26.169641103Z [err]            ^
+2025-11-19T00:22:26.169648577Z [err]  
+2025-11-19T00:22:26.169655979Z [err]  Error: JWT_SECRET environment variable is required for session security
+2025-11-19T00:22:26.169663895Z [err]      at getSessionSecret (file:///app/dist/index.js:18051:11)
+2025-11-19T00:22:26.169670671Z [err]      at file:///app/dist/index.js:18064:11
+2025-11-19T00:22:26.169677510Z [err]      at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+2025-11-19T00:22:26.169684654Z [err]      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+2025-11-19T00:22:26.169686900Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T00:22:26.169692145Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T00:22:26.169693169Z [err]      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+2025-11-19T00:22:26.169698462Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T00:22:26.169700624Z [err]  
+2025-11-19T00:22:26.169706443Z [err]  Node.js v22.21.1
+2025-11-19T00:22:27.821255702Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T00:22:27.821266134Z [inf]  
+2025-11-19T00:22:27.821275549Z [inf]  > rest-express@1.0.0 start
+2025-11-19T00:22:27.821285486Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T00:22:27.821293567Z [inf]  
+2025-11-19T00:22:28.826563275Z [inf]  ISO-AI sample data initialized
+2025-11-19T00:22:28.826571586Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T00:22:28.826579054Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T00:22:28.826583915Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T00:22:28.826589501Z [err]  file:///app/dist/index.js:18051
+2025-11-19T00:22:28.826597798Z [err]      throw new Error("JWT_SECRET environment variable is required for session security");
+2025-11-19T00:22:28.826603367Z [err]            ^
+2025-11-19T00:22:28.826607732Z [err]  
+2025-11-19T00:22:28.826613095Z [err]  Error: JWT_SECRET environment variable is required for session security
+2025-11-19T00:22:28.826618008Z [err]      at getSessionSecret (file:///app/dist/index.js:18051:11)
+2025-11-19T00:22:28.826622583Z [err]      at file:///app/dist/index.js:18064:11
+2025-11-19T00:22:28.826628436Z [err]      at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+2025-11-19T00:22:28.826634236Z [err]      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+2025-11-19T00:22:28.826639296Z [err]      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+2025-11-19T00:22:28.826644340Z [err]  
+2025-11-19T00:22:28.826649864Z [err]  Node.js v22.21.1
+2025-11-19T00:22:30.876579342Z [inf]  
+2025-11-19T00:22:30.876590339Z [inf]  > rest-express@1.0.0 start
+2025-11-19T00:22:30.876597064Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T00:22:30.876602395Z [inf]  
+2025-11-19T00:22:30.876780498Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T00:22:31.843523954Z [inf]  ISO-AI sample data initialized
+2025-11-19T00:22:31.843529825Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T00:22:31.843533897Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T00:22:31.843538184Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T00:22:31.843542968Z [err]  file:///app/dist/index.js:18051
+2025-11-19T00:22:31.843548288Z [err]      throw new Error("JWT_SECRET environment variable is required for session security");
+2025-11-19T00:22:31.843552363Z [err]            ^
+2025-11-19T00:22:31.843556595Z [err]  
+2025-11-19T00:22:31.843560955Z [err]  Error: JWT_SECRET environment variable is required for session security
+2025-11-19T00:22:31.843565450Z [err]      at getSessionSecret (file:///app/dist/index.js:18051:11)
+2025-11-19T00:22:31.843571426Z [err]      at file:///app/dist/index.js:18064:11
+2025-11-19T00:22:31.843575725Z [err]      at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+2025-11-19T00:22:31.843580393Z [err]      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+2025-11-19T00:22:31.843584673Z [err]      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+2025-11-19T00:22:31.843589264Z [err]  
+2025-11-19T00:22:31.843594185Z [err]  Node.js v22.21.1
+2025-11-19T00:22:33.184345256Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T00:22:33.207941347Z [inf]  
+2025-11-19T00:22:33.207947794Z [inf]  > rest-express@1.0.0 start
+2025-11-19T00:22:33.207953568Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T00:22:33.207959734Z [inf]  
+2025-11-19T00:22:34.227316261Z [inf]  ISO-AI sample data initialized
+2025-11-19T00:22:34.235011843Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T00:22:34.237295356Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T00:22:34.237296230Z [err]  Node.js v22.21.1
+2025-11-19T00:22:34.237296932Z [err]      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+2025-11-19T00:22:34.237306240Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T00:22:34.237308981Z [err]      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+2025-11-19T00:22:34.237314379Z [err]  file:///app/dist/index.js:18051
+2025-11-19T00:22:34.237321207Z [err]  
+2025-11-19T00:22:34.237321517Z [err]      throw new Error("JWT_SECRET environment variable is required for session security");
+2025-11-19T00:22:34.237328401Z [err]            ^
+2025-11-19T00:22:34.237333833Z [err]  
+2025-11-19T00:22:34.237338988Z [err]  Error: JWT_SECRET environment variable is required for session security
+2025-11-19T00:22:34.237344547Z [err]      at getSessionSecret (file:///app/dist/index.js:18051:11)
+2025-11-19T00:22:34.237349104Z [err]      at file:///app/dist/index.js:18064:11
+2025-11-19T00:22:34.237353945Z [err]      at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+2025-11-19T00:22:35.958273299Z [err]  npm warn config production Use `--omit=dev` instead.
+2025-11-19T00:22:35.958281090Z [inf]  
+2025-11-19T00:22:35.958286988Z [inf]  > rest-express@1.0.0 start
+2025-11-19T00:22:35.958292513Z [inf]  > NODE_ENV=production node dist/index.js
+2025-11-19T00:22:35.958299835Z [inf]  
+2025-11-19T00:22:36.898874376Z [err]  
+2025-11-19T00:22:36.898886263Z [err]  Node.js v22.21.1
+2025-11-19T00:22:36.898888157Z [err]  Error: JWT_SECRET environment variable is required for session security
+2025-11-19T00:22:36.898900100Z [err]      at getSessionSecret (file:///app/dist/index.js:18051:11)
+2025-11-19T00:22:36.898902362Z [inf]  ISO-AI sample data initialized
+2025-11-19T00:22:36.898905761Z [err]      at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+2025-11-19T00:22:36.898910442Z [err]      at file:///app/dist/index.js:18064:11
+2025-11-19T00:22:36.898914981Z [err]      at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+2025-11-19T00:22:36.898922489Z [err]      at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+2025-11-19T00:22:36.898926607Z [inf]  🔄 Real Data Display routes initializing...
+2025-11-19T00:22:36.898934193Z [inf]  [CACHE] Starting cache warm-up...
+2025-11-19T00:22:36.898939881Z [inf]  [CACHE] Cache warm-up completed
+2025-11-19T00:22:36.898946177Z [err]  file:///app/dist/index.js:18051
+2025-11-19T00:22:36.898952330Z [err]      throw new Error("JWT_SECRET environment variable is required for session security");
+2025-11-19T00:22:36.898958781Z [err]            ^
+2025-11-19T00:22:36.898966665Z [err]  

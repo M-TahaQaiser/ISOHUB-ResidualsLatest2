@@ -1,0 +1,103 @@
+.user-settings-container {
+  padding: 20px;
+  background-color: var(--section-background);
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--shadow-color);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.user-settings-container h2,
+.user-settings-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+/*
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}*/
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--separator-color);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.save-button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+
+
+.toggle-password-button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.theme-label {
+  margin-left: 10px;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.manage-users-link {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.manage-team-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+
+
+
+/* Media queries for responsiveness */
+@media (max-width: 600px) {
+  .user-settings-container {
+    max-width: 100%; /* Full width on smaller screens */
+    padding: 15px; /* Adjust padding */
+  }
+
+  .save-button, .manage-team-button {
+    font-size: 0.9rem; /* Slightly smaller font for buttons */
+  }
+}

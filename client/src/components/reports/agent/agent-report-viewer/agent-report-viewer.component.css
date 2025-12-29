@@ -1,0 +1,67 @@
+/* Report Viewer Wrapper */
+.report-viewer {
+  padding: 20px;
+  background-color: var(--section-background);
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--shadow-color);
+  margin: 0 auto;
+  height: auto;
+  overflow-x: auto;
+}
+
+/* Header container */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Title inside the header */
+.header-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+/* Export button styling */
+.btn-export {
+  padding: 12px 20px;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-export:hover {
+  background-color: var(--accent-color2);
+}
+
+/* Status and Save Button container */
+.status-save-container {
+  display: flex;
+  justify-content: space-between; /* Align Status and Save button */
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Status text */
+.status-text {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+/* Approved status styling */
+.status-approved {
+  color: green;
+}
+
+/* Needs approval status styling */
+.status-needs-approval {
+  color: red;
+}
+

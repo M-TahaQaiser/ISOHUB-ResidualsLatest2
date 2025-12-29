@@ -1,0 +1,44 @@
+
+chunk-WERSD76P.js?v=80eee361:8438 Refused to frame 'https://api.leadconnectorhq.com/' because it violates the following Content Security Policy directive: "frame-src 'none'".
+The script has an unsupported MIME type ('text/html').
+(index):153 SW registration failed:  SecurityError: Failed to register a ServiceWorker for scope ('https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.dev/') with script ('https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.dev/sw.js'): The script has an unsupported MIME type ('text/html').
+manifest.json:1 Manifest: Line: 1, column: 1, Syntax error.
+b27ab482-47e7-49eb-9….worf.replit.dev/:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">
+Login.tsx:30 Starting login process...
+auth.api.ts:34 Starting login process...
+2
+Dashboard.tsx:46 Dashboard initialization - saved decision: unified
+2
+Dashboard.tsx:46 Dashboard initialization - saved decision: unified
+chunk-WERSD76P.js?v=80eee361:521 Warning: validateDOMNesting(...): <a> cannot appear as a descendant of <a>.
+    at a
+    at a
+    at https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.d…/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=80eee361:337:18
+    at nav
+    at Breadcrumbs (https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.dev/src/components/Breadcrumbs.tsx:20:39)
+    at div
+    at div
+    at Dashboard (https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.dev/src/pages/Dashboard.tsx:50:27)
+    at Route (https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.d…/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=80eee361:323:16)
+    at Switch (https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.d…/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=80eee361:379:17)
+    at div
+    at div
+    at div
+    at div
+    at Route (https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.d…/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=80eee361:323:16)
+    at Switch (https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.d…/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=80eee361:379:17)
+    at Router (https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.dev/src/App.tsx?v=5U3wYQOE5PyHgqUNi0QJc:65:35)
+    at Provider (https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.d…unner/workspace/node_modules/.vite/deps/chunk-PLT6GTVM.js?v=80eee361:38:15)
+    at TooltipProvider (https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.d…rkspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=80eee361:63:5)
+    at QueryClientProvider (https://b27ab482-47e7-49eb-9893-ddeb6fcb5664-00-16q8xqkmwd7at.worf.replit.d…rkspace/node_modules/.vite/deps/@tanstack_react-query.js?v=80eee361:2805:3)
+    at App
+﻿
+
+Preconnected origins in 'Network dependency tree' insight
+The 'Network dependency tree' insight now shows you a list of used or unused preconnected origins and preconnect candidates, if any.
+
+Server response and redirection times in 'Document request latency' insight
+The 'Document request latency' insight now shows you server response time and, if any, redirection time.
+
+Geolocation accuracy parameter in Sensors
+The Sensors panel now lets you set accuracy in geolocation emulation, so you can test the handling of different levels of GPS accuracy.

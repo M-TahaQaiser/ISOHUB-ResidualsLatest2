@@ -1,0 +1,78 @@
+/* src/components/Image-with-text/Image-with-text.component.css */
+
+.Image-with-text-container {
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.Image-with-text-content {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch; /* Ensure both the image and text align vertically */
+    gap: 40px;
+    position: relative;
+}
+
+.image-wrapper {
+    flex: 1; /* Match the image size proportionally with the text */
+    max-width: 50%; /* Limit the max width for large screens */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image {
+    width: auto; /* Allow width to scale based on height */
+    max-height: 400px; /* Constrain the height */
+    object-fit: cover; /* Ensure the image fills the space proportionally */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px var(--shadow-color);
+}
+
+
+.text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center-align the text vertically */
+    color: var(--text-color);
+}
+
+.title {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.description {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .Image-with-text-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .image-wrapper {
+        max-width: 100%;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+}
