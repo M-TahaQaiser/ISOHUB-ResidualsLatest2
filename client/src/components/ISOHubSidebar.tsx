@@ -131,19 +131,20 @@ export default function ISOHubSidebar({ username, isAdmin, userRole = 'user', on
 
             {/* ISO AI Section */}
             <div className="pt-4 border-t border-yellow-400/20">
-              <Link href="/iso-ai">
-                <div className={`
+              <a
+                href="https://jacc-final-version-keanonbiz.replit.app/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`
                   group flex items-center px-3 py-3 text-sm font-medium rounded-md transition-colors
-                  ${isActivePath('/iso-ai')
-                    ? 'text-yellow-400 bg-yellow-400/10 border-l-4 border-yellow-400'
-                    : 'text-gray-300 hover:text-yellow-400 hover:bg-yellow-400/5 hover:border-l-4 hover:border-yellow-400'
-                  }
-                `}>
-                  <Brain className="h-5 w-5 mr-3 text-yellow-400" />
-                  <span>ISO-AI</span>
-                  <span className="ml-auto text-xs bg-yellow-400 text-black px-1.5 py-0.5 rounded">NEW</span>
-                </div>
-              </Link>
+                  text-gray-300 hover:text-yellow-400 hover:bg-yellow-400/5 hover:border-l-4 hover:border-yellow-400
+                `}
+              >
+                <Brain className="h-5 w-5 mr-3 text-yellow-400" />
+                <span>ISO-AI</span>
+                <span className="ml-auto text-xs bg-yellow-400 text-black px-1.5 py-0.5 rounded">NEW</span>
+              </a>
               <Link href="/iso-sign">
                 <div className={`
                   group flex items-center px-3 py-3 text-sm font-medium rounded-md transition-colors
