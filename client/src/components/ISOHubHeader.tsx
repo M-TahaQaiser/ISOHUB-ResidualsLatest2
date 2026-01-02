@@ -140,12 +140,6 @@ export default function ISOHubHeader({ username, onLogout }: ISOHubHeaderProps) 
       description: "Access processor logins"
     },
     { 
-      label: "Document Center", 
-      icon: FileText, 
-      href: "/documents",
-      description: "Document management"
-    },
-    { 
       label: "Pre-Applications", 
       icon: Archive, 
       href: "/pre-applications",

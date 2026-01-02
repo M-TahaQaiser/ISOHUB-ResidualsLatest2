@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { Request, Response } from 'express';
-import { authenticateToken, requireReauth, AuthenticatedRequest } from './middleware/auth';
+import type { AuthenticatedRequest } from './middleware/auth';
+// Note: authenticateToken and requireReauth are intentionally imported dynamically inside routes
+// to avoid pulling in DB-heavy modules at import time (useful for tests).
 
 const router = Router();
 
@@ -246,6 +248,9 @@ router.get('/:id', (req: Request, res: Response) => {
   }
 });
 
+// In-memory store for upload links (for demo/dev only)
+const uploadLinks: Record<string, { expirationDate: string; maxDownloads: number; organizationId: string; used: number }> = {};
+
 // POST /api/secured-docs/send-upload-link - Send secure upload link
 router.post('/send-upload-link', async (req: Request, res: Response) => {
   try {
@@ -271,7 +276,15 @@ router.post('/send-upload-link', async (req: Request, res: Response) => {
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + expirationDays);
 
-    // In a real implementation, this would:
+    // Persist the link metadata in memory (demo only; production should use DB)
+    uploadLinks[uploadLinkId] = {
+      expirationDate: expirationDate.toISOString(),
+      maxDownloads,
+      organizationId,
+      used: 0
+    };
+
+    // In a real implementation, this would also:
     // 1. Store the upload link details in database
     // 2. Send an email with the secure upload link
     // 3. Set up proper access controls and expiration
@@ -317,9 +330,9 @@ router.post('/send-upload-link', async (req: Request, res: Response) => {
   }
 });
 
-// POST /api/secured-docs/upload - Handle file upload (from secure link)
-// SECURITY: Step-up auth required - documents may contain SSN, bank statements, or other PII
-router.post('/upload', authenticateToken, requireReauth(), async (req: AuthenticatedRequest, res: Response) => {
+// POST /api/secured-docs/upload - Handle file upload (from secure link or authenticated user)
+// SECURITY: Allow uploads via a valid upload link (public recipient) OR authenticated + reauthenticated users
+router.post('/upload', async (req: AuthenticatedRequest, res: Response) => {
   try {
     const {
       filename,
@@ -329,8 +342,55 @@ router.post('/upload', authenticateToken, requireReauth(), async (req: Authentic
       fileSize,
       fileType,
       uploadLinkId,
-      organizationId = 'org-1'
-    } = req.body;
+      organizationId: bodyOrganizationId
+    } = req.body as any;
+
+    // If no uploadLinkId is provided, require auth + reauth
+    let organizationId = bodyOrganizationId || 'org-1';
+
+    if (!uploadLinkId) {
+      // require Authorization header
+      if (!req.headers?.authorization?.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+
+        // Dynamically import auth middleware so unit tests don't require DB access
+      try {
+        const { authenticateToken, requireReauth } = await import('./middleware/auth');
+
+        await new Promise<void>((resolve, reject) => {
+          authenticateToken(req as any, res as any, (err?: any) => err ? reject(err) : resolve());
+        });
+
+        await new Promise<void>((resolve, reject) => {
+          requireReauth()(req as any, res as any, (err?: any) => err ? reject(err) : resolve());
+        });
+
+        // If authenticated, prefer user's organizationId
+        if (req.user?.organizationId) {
+          organizationId = req.user.organizationId;
+        }
+      } catch (authErr) {
+        console.error('Authentication/reauth failed for upload:', authErr);
+        return res.status(401).json({ error: 'Authentication required' });
+      }
+    } else {
+      // Validate upload link
+      const link = uploadLinks[uploadLinkId];
+      if (!link) {
+        return res.status(403).json({ error: 'Invalid upload link' });
+      }
+      if (new Date(link.expirationDate) < new Date()) {
+        return res.status(403).json({ error: 'Upload link expired' });
+      }
+      if (link.used >= link.maxDownloads) {
+        return res.status(403).json({ error: 'Upload link has reached maximum uploads' });
+      }
+      // Use organization from the link
+      organizationId = link.organizationId;
+      // mark as used
+      link.used += 1;
+    }
 
     // Validate required fields
     if (!filename || !senderName || !senderEmail) {
@@ -338,8 +398,8 @@ router.post('/upload', authenticateToken, requireReauth(), async (req: Authentic
     }
 
     // In a real implementation, this would:
-    // 1. Validate the upload link is still valid
-    // 2. Handle the actual file upload to secure storage
+    // 1. Handle the actual file upload to secure storage
+    // 2. Validate file type and size
     // 3. Update download counters and expiration tracking
 
     const newDocument = {
