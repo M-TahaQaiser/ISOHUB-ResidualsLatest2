@@ -89,13 +89,15 @@ export default function DataManagement() {
   const organizationId = getAgencyId();
 
   // Generate available months dynamically - will include user-added months
-  const { data: availableMonths = [] } = useQuery<{ value: string; label: string }[]>({
+  const { data: availableMonths = [], refetch: refetchMonths } = useQuery<{ value: string; label: string }[]>({
     queryKey: ['/api/available-months', organizationId],
     queryFn: async () => {
+      console.log('[DataManagement] Fetching available months for organizationId:', organizationId);
       const response = await fetch(`/api/available-months?organizationId=${organizationId}`, {
         credentials: 'include'
       });
       if (!response.ok) {
+        console.error('[DataManagement] Failed to fetch available months:', response.status, response.statusText);
         // Fallback to default months if API fails
         return [
           { value: "2025-11", label: "November 2025" },
@@ -105,7 +107,9 @@ export default function DataManagement() {
           { value: "2025-07", label: "July 2025" }
         ];
       }
-      return response.json();
+      const data = await response.json();
+      console.log('[DataManagement] Available months fetched:', data);
+      return data;
     }
   });
 
@@ -145,6 +149,7 @@ export default function DataManagement() {
   const addMonthMutation = useMutation({
     mutationFn: async ({ month, year }: { month: string; year: string }) => {
       const monthValue = `${year}-${month}`;
+      console.log('[DataManagement] Adding month:', monthValue, 'for organizationId:', organizationId);
       const response = await apiRequest('/api/available-months', {
         method: 'POST',
         body: { 
@@ -152,18 +157,23 @@ export default function DataManagement() {
           organizationId
         }
       });
+      console.log('[DataManagement] Month add response:', response);
       return response;
     },
-    onSuccess: (_, variables) => {
+    onSuccess: async (_, variables) => {
       const monthLabel = `${monthNames.find(m => m.value === variables.month)?.label} ${variables.year}`;
       toast({
         title: "Month Added",
         description: `${monthLabel} has been added to your available months`,
       });
       setAddMonthDialogOpen(false);
-      queryClient.invalidateQueries({ queryKey: ['/api/available-months', organizationId] });
+      // Invalidate and refetch the months query
+      await queryClient.invalidateQueries({ queryKey: ['/api/available-months', organizationId] });
+      await refetchMonths();
+      console.log('[DataManagement] Months refetched after adding');
     },
     onError: (error: Error) => {
+      console.error('[DataManagement] Failed to add month:', error);
       toast({
         title: "Failed to Add Month",
         description: error.message,

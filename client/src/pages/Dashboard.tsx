@@ -674,7 +674,7 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Activity & System Status */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
           {/* Recent Activity Feed */}
           <Card className="bg-zinc-900/80 border-yellow-400/20 hover:border-yellow-400/40 hover:shadow-lg hover:shadow-yellow-400/10 transition-all duration-300">
             <CardHeader>
@@ -702,52 +702,6 @@ export default function Dashboard() {
                     No recent activity to display
                   </div>
                 )}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Quick Actions */}
-          <Card className="bg-zinc-900/80 border-yellow-400/20 hover:border-yellow-400/40 hover:shadow-lg hover:shadow-yellow-400/10 transition-all duration-300">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-white">
-                <Zap className="h-5 w-5 text-yellow-400" />
-                Quick Actions
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 gap-3">
-                <Button 
-                  variant="outline" 
-                  className="h-20 flex flex-col items-center justify-center gap-2 border-yellow-400/30 text-gray-300 hover:border-yellow-400 hover:text-yellow-400 hover:bg-yellow-400/5"
-                  onClick={() => setLocation('/agent-management')}
-                >
-                  <Users className="h-5 w-5" />
-                  <span className="text-sm">Add Agent</span>
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="h-20 flex flex-col items-center justify-center gap-2 border-yellow-400/30 text-gray-300 hover:border-yellow-400 hover:text-yellow-400 hover:bg-yellow-400/5"
-                  onClick={() => setLocation('/uploads')}
-                >
-                  <FileText className="h-5 w-5" />
-                  <span className="text-sm">Upload Data</span>
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="h-20 flex flex-col items-center justify-center gap-2 border-yellow-400/30 text-gray-300 hover:border-yellow-400 hover:text-yellow-400 hover:bg-yellow-400/5"
-                  onClick={() => setLocation('/reports')}
-                >
-                  <BarChart3 className="h-5 w-5" />
-                  <span className="text-sm">Generate Report</span>
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="h-20 flex flex-col items-center justify-center gap-2 border-yellow-400/30 text-gray-300 hover:border-yellow-400 hover:text-yellow-400 hover:bg-yellow-400/5"
-                  onClick={() => setLocation('/pre-applications')}
-                >
-                  <Calendar className="h-5 w-5" />
-                  <span className="text-sm">Pre-Apps</span>
-                </Button>
               </div>
             </CardContent>
           </Card>

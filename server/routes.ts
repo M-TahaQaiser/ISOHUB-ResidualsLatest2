@@ -10,7 +10,7 @@ import { EmailService } from "./services/emailService";
 import { TenancyService } from "./services/tenancyService";
 import { db } from "./db";
 import { monthlyData } from "@shared/schema";
-import { sql, and, eq } from "drizzle-orm";
+import { sql, and, eq, desc } from "drizzle-orm";
 
 const emailService = new EmailService();
 import preApplicationsRouter from "./preApplications.routes";
@@ -969,6 +969,182 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(mockMonthlyStatus);
     } catch (error) {
       res.status(500).json({ error: (error as Error).message });
+    }
+  });
+
+  // Get available months for an organization
+  app.get("/api/available-months", async (req, res) => {
+    try {
+      res.setHeader('Content-Type', 'application/json');
+      const { organizationId } = req.query;
+      
+      if (!organizationId) {
+        return res.status(400).json({ error: "organizationId is required" });
+      }
+
+      // Resolve organizationId to agencyId
+      let agencyId = await TenancyService.resolveAgencyId(String(organizationId));
+      
+      // Fallback: if organizationId is numeric, treat it as agencyId directly
+      if (agencyId === null && /^\d+$/.test(String(organizationId))) {
+        agencyId = parseInt(String(organizationId));
+        console.log(`[available-months] Using organizationId ${organizationId} as agencyId directly`);
+      }
+      
+      if (agencyId === null) {
+        return res.status(404).json({ error: "Organization not found" });
+      }
+
+      // Get distinct months from monthly_data for this agency
+      const monthsResult = await db
+        .select({ month: monthlyData.month })
+        .from(monthlyData)
+        .where(eq(monthlyData.agencyId, agencyId))
+        .groupBy(monthlyData.month)
+        .orderBy(desc(monthlyData.month));
+
+      // Format months for display
+      const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+
+      const formattedMonths = monthsResult.map(row => {
+        const [year, month] = row.month.split('-');
+        const monthIndex = parseInt(month) - 1;
+        return {
+          value: row.month,
+          label: `${monthNames[monthIndex]} ${year}`
+        };
+      });
+
+      // If no months exist, return default months
+      if (formattedMonths.length === 0) {
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth();
+        const defaultMonths = [];
+        
+        for (let i = 0; i < 6; i++) {
+          const monthIndex = currentMonth - i;
+          const year = currentYear + Math.floor(monthIndex / 12);
+          const month = ((monthIndex % 12) + 12) % 12;
+          const monthValue = `${year}-${String(month + 1).padStart(2, '0')}`;
+          defaultMonths.push({
+            value: monthValue,
+            label: `${monthNames[month]} ${year}`
+          });
+        }
+        
+        return res.status(200).json(defaultMonths);
+      }
+
+      return res.status(200).json(formattedMonths);
+    } catch (error) {
+      console.error("Error fetching available months:", error);
+      return res.status(500).json({ error: "Failed to fetch available months" });
+    }
+  });
+
+  // Add a new month for an organization
+  app.post("/api/available-months", async (req, res) => {
+    try {
+      res.setHeader('Content-Type', 'application/json');
+      const { month, organizationId } = req.body;
+      
+      if (!month || !organizationId) {
+        return res.status(400).json({ error: "month and organizationId are required" });
+      }
+
+      // Validate month format (YYYY-MM)
+      if (!/^\d{4}-\d{2}$/.test(month)) {
+        return res.status(400).json({ error: "Invalid month format. Expected YYYY-MM" });
+      }
+
+      // Resolve organizationId to agencyId
+      let agencyId = await TenancyService.resolveAgencyId(String(organizationId));
+      
+      // Fallback: if organizationId is numeric, treat it as agencyId directly
+      if (agencyId === null && /^\d+$/.test(String(organizationId))) {
+        agencyId = parseInt(String(organizationId));
+        console.log(`[available-months POST] Using organizationId ${organizationId} as agencyId directly`);
+      }
+      
+      if (agencyId === null) {
+        return res.status(404).json({ error: "Organization not found" });
+      }
+
+      // Check if month already exists for this agency
+      const existingMonth = await db
+        .select({ month: monthlyData.month })
+        .from(monthlyData)
+        .where(and(
+          eq(monthlyData.month, month),
+          eq(monthlyData.agencyId, agencyId)
+        ))
+        .limit(1);
+
+      if (existingMonth.length > 0) {
+        return res.status(200).json({ 
+          success: true, 
+          message: "Month already exists",
+          month 
+        });
+      }
+
+      // Create a placeholder entry so the month appears in the available months list
+      // This will be populated with actual data when files are uploaded
+      try {
+        // Get or create a placeholder merchant and processor
+        const merchantResult = await db.execute(sql`
+          SELECT id FROM merchants WHERE mid = 'PLACEHOLDER' LIMIT 1
+        `);
+        
+        let merchantId: number;
+        if (merchantResult.rows.length === 0) {
+          const insertResult = await db.execute(sql`
+            INSERT INTO merchants (mid, dba, legal_name, agency_id, is_active)
+            VALUES ('PLACEHOLDER', 'Placeholder - Upload Data', 'Placeholder Merchant', ${agencyId}, false)
+            RETURNING id
+          `);
+          merchantId = insertResult.rows[0].id as number;
+        } else {
+          merchantId = merchantResult.rows[0].id as number;
+        }
+
+        const processorResult = await db.execute(sql`
+          SELECT id FROM processors WHERE name = 'Placeholder' LIMIT 1
+        `);
+        
+        let processorId: number;
+        if (processorResult.rows.length === 0) {
+          const insertResult = await db.execute(sql`
+            INSERT INTO processors (name) VALUES ('Placeholder') RETURNING id
+          `);
+          processorId = insertResult.rows[0].id as number;
+        } else {
+          processorId = processorResult.rows[0].id as number;
+        }
+
+        // Insert placeholder monthly_data entry
+        await db.execute(sql`
+          INSERT INTO monthly_data (agency_id, merchant_id, processor_id, month, sales_amount, net, transactions)
+          VALUES (${agencyId}, ${merchantId}, ${processorId}, ${month}, 0, 0, 0)
+        `);
+
+        console.log(`[available-months] Created placeholder entry for month ${month}, agency ${agencyId}`);
+      } catch (insertError) {
+        console.error('[available-months] Failed to create placeholder entry:', insertError);
+        // Continue anyway - the month can still be used for uploads
+      }
+
+      return res.status(200).json({ 
+        success: true, 
+        message: "Month added successfully. Upload data to populate it.",
+        month 
+      });
+    } catch (error) {
+      console.error("Error adding month:", error);
+      return res.status(500).json({ error: "Failed to add month" });
     }
   });
 

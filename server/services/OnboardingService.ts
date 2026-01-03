@@ -15,7 +15,7 @@ import {
   type UserActivation,
   type InsertUserActivation,
 } from '@shared/onboarding-schema';
-import { users, type InsertUser } from '@shared/schema';
+import { users, agencies, type InsertUser } from '@shared/schema';
 import { EmailService } from './emailService';
 import bcrypt from 'bcrypt';
 
@@ -46,7 +46,26 @@ export class OnboardingService {
     const activationToken = crypto.randomBytes(32).toString('hex');
     const tokenExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
-    // Create organization
+    // First, create an agency entry for this organization (for data isolation)
+    let agencyId: number | null = null;
+    try {
+      const [agency] = await db.insert(agencies).values({
+        companyName: orgData.name,
+        contactName: orgData.adminContactName,
+        email: orgData.adminContactEmail,
+        phone: orgData.adminContactPhone,
+        website: orgData.website,
+        industry: orgData.industry,
+        status: 'setup',
+        adminUsername: orgData.adminContactEmail,
+      }).returning();
+      agencyId = agency.id;
+      console.log(`[OnboardingService] Created agency ${agencyId} for organization ${orgData.name}`);
+    } catch (agencyError) {
+      console.error('[OnboardingService] Failed to create agency, continuing without:', agencyError);
+    }
+
+    // Create organization with link to agency
     const [organization] = await db.insert(organizations).values({
       organizationId,
       name: orgData.name,
@@ -55,6 +74,7 @@ export class OnboardingService {
       adminContactEmail: orgData.adminContactEmail,
       adminContactPhone: orgData.adminContactPhone,
       industry: orgData.industry,
+      agencyId, // Link to the agency for data isolation
       status: 'setup',
       activationToken,
       tokenExpiry,
