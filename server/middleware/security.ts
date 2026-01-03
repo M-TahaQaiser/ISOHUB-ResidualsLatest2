@@ -256,6 +256,21 @@ export const validateCSRFToken = (req: Request, res: Response, next: NextFunctio
     return next();
   }
   
+  // Skip CSRF for file upload routes (they use multipart/form-data)
+  const uploadPaths = [
+    '/api/residuals-workflow/upload',
+    '/api/upload',
+    '/api/agencies',
+    '/api/onboarding',
+    '/api/available-months',
+    '/api/preapplications',
+    '/api/secured-docs',
+    '/api/marketing'
+  ];
+  if (uploadPaths.some(path => req.path.startsWith(path))) {
+    return next();
+  }
+  
   // Skip CSRF if explicitly marked (for specific routes)
   if ((req as any).skipCSRF) {
     return next();

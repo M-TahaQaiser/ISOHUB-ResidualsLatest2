@@ -220,9 +220,9 @@ export default function DataManagement() {
     momRevenueChangePercent: number | null;
     netAccountGrowth: number;
   }>({
-    queryKey: ['/api/analytics/metrics', selectedMonth],
+    queryKey: ['/api/analytics/metrics', selectedMonth, organizationId],
     queryFn: async () => {
-      const response = await fetch(`/api/analytics/metrics/${selectedMonth}`, {
+      const response = await fetch(`/api/analytics/metrics/${selectedMonth}?organizationId=${organizationId}`, {
         credentials: 'include'
       });
       if (!response.ok) {
@@ -300,10 +300,29 @@ export default function DataManagement() {
         ? `/api/residuals-workflow/upload-lead-sheet/${month}`
         : `/api/residuals-workflow/upload/${month}/${processorId}`;
 
+      // Get CSRF token from cookie
+      const getCsrfToken = () => {
+        const cookies = document.cookie.split(';');
+        for (const cookie of cookies) {
+          const [name, value] = cookie.trim().split('=');
+          if (name === 'csrf-token') {
+            return decodeURIComponent(value);
+          }
+        }
+        return null;
+      };
+
+      const csrfToken = getCsrfToken();
+      const headers: HeadersInit = {};
+      if (csrfToken) {
+        headers['X-CSRF-Token'] = csrfToken;
+      }
+
       const response = await fetch(endpoint, {
         method: 'POST',
         body: formData,
-        credentials: 'include'
+        credentials: 'include',
+        headers
       });
 
       if (!response.ok) {
