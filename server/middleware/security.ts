@@ -265,7 +265,8 @@ export const validateCSRFToken = (req: Request, res: Response, next: NextFunctio
     '/api/available-months',
     '/api/preapplications',
     '/api/secured-docs',
-    '/api/marketing'
+    '/api/marketing',
+    '/api/organizations'
   ];
   if (uploadPaths.some(path => req.path.startsWith(path))) {
     return next();

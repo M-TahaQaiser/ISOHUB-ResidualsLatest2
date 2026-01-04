@@ -48,6 +48,8 @@ import analyticsRouter from "./routes/analytics.routes";
 import mtRouter from "./routes/mt.routes";
 import ssoRouter from "./routes/sso.routes";
 import processorMappingsRouter from "./routes/processorMappings.routes";
+import bulkImportRouter from "./routes/bulkImport.routes";
+import organizationDeleteRouter from "./routes/organizationDelete.routes";
 import healthRouter from "./routes/health.routes";
 import multer from "multer";
 import path from "path";
@@ -1436,6 +1438,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // ISO-AI Chat routes - Full chat system with streaming, flows, folders
   app.use("/api/jacc", jaccRouter);
   app.use("/api/processor-mappings", processorMappingsRouter);
+  app.use("/api/bulk-import", bulkImportRouter);
+  app.use("/api/organizations", organizationDeleteRouter);
 
   // Document Center routes - JACC integration for document storage and search
   app.use("/api/documents", (await import("./routes/documentCenter.routes")).default);

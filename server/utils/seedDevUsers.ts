@@ -12,6 +12,7 @@ export async function seedDevUsers(): Promise<void> {
     const devUsers = [
       { username: 'dev', password: 'dev123', role: 'Users/Reps', email: 'dev@local' },
       { username: 'admin', password: 'admin123', role: 'SuperAdmin', email: 'admin@local' },
+      { username: 'superadmin', password: 'superadmin123', role: 'SuperAdmin', email: 'superadmin@local' },
       { username: 'test', password: 'test123', role: 'Users/Reps', email: 'test@local' }
     ];
 

@@ -148,13 +148,18 @@ export class DatabaseStorage implements IStorage {
     return updated;
   }
 
-  async getMonthlyData(month: string): Promise<(MonthlyData & { merchant: Merchant; processor: Processor })[]> {
+  async getMonthlyData(month: string, agencyId?: number): Promise<(MonthlyData & { merchant: Merchant; processor: Processor })[]> {
+    const conditions = [eq(monthlyData.month, month)];
+    if (agencyId !== undefined) {
+      conditions.push(eq(monthlyData.agencyId, agencyId));
+    }
+    
     return await db
       .select()
       .from(monthlyData)
       .innerJoin(merchants, eq(monthlyData.merchantId, merchants.id))
       .innerJoin(processors, eq(monthlyData.processorId, processors.id))
-      .where(eq(monthlyData.month, month))
+      .where(and(...conditions))
       .orderBy(desc(monthlyData.net));
   }
 

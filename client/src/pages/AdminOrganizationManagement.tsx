@@ -12,7 +12,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Plus, Building2, Users, CheckCircle2, AlertCircle, Copy, ExternalLink, Settings, Eye, UserCheck, Mail, MailOpen, MousePointerClick, Clock, Send, CheckCheck } from 'lucide-react';
+import { Loader2, Plus, Building2, Users, CheckCircle2, AlertCircle, Copy, ExternalLink, Settings, Eye, UserCheck, Mail, MailOpen, MousePointerClick, Clock, Send, CheckCheck, Trash2, AlertTriangle } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useToast } from '@/hooks/use-toast';
 import { useLocation } from 'wouter';
@@ -66,6 +66,8 @@ const safeClipboardWrite = async (text: string): Promise<boolean> => {
 
 export default function AdminOrganizationManagement() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [organizationToDelete, setOrganizationToDelete] = useState<any>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [, navigate] = useLocation();
@@ -176,6 +178,51 @@ export default function AdminOrganizationManagement() {
   const handleManageOrganization = (organizationId: string) => {
     // Navigate to organization settings/management page
     navigate(`/org/${organizationId}/settings`);
+  };
+
+  // Delete organization mutation
+  const deleteMutation = useMutation({
+    mutationFn: async (organizationId: string) => {
+      const response = await fetch(`/api/organizations/${organizationId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to delete organization');
+      }
+      
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/onboarding/organizations'] });
+      setDeleteDialogOpen(false);
+      setOrganizationToDelete(null);
+      
+      toast({
+        title: "Organization Deleted",
+        description: "The organization and all its data have been permanently deleted.",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Delete Failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleDeleteClick = (org: any) => {
+    setOrganizationToDelete(org);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (organizationToDelete) {
+      deleteMutation.mutate(organizationToDelete.organizationId);
+    }
   };
 
   const getStatusBadge = (status: string) => {
@@ -540,6 +587,17 @@ export default function AdminOrganizationManagement() {
                           <Settings className="h-3 w-3 mr-2" />
                           Manage Settings
                         </Button>
+                        
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="border-red-600 text-red-400 hover:bg-red-900/20"
+                          onClick={() => handleDeleteClick(org)}
+                          data-testid={`button-delete-${org.organizationId}`}
+                        >
+                          <Trash2 className="h-3 w-3 mr-2" />
+                          Delete
+                        </Button>
                       </div>
                     </div>
                   </CardContent>
@@ -618,6 +676,73 @@ export default function AdminOrganizationManagement() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Delete Confirmation Dialog */}
+        <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+          <DialogContent className="bg-zinc-900 border-red-500/50">
+            <DialogHeader>
+              <DialogTitle className="text-white flex items-center gap-2">
+                <AlertTriangle className="h-5 w-5 text-red-500" />
+                Delete Organization
+              </DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
+              <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-4">
+                <p className="text-red-400 font-semibold mb-2">⚠️ Warning: This action cannot be undone!</p>
+                <p className="text-gray-300 text-sm">
+                  Deleting this organization will permanently remove:
+                </p>
+                <ul className="text-gray-400 text-sm mt-2 space-y-1 list-disc list-inside">
+                  <li>All monthly data and revenue records</li>
+                  <li>All merchants and their information</li>
+                  <li>All upload progress and lead sheets</li>
+                  <li>All assignments and workflow data</li>
+                  <li>All users associated with this organization</li>
+                </ul>
+              </div>
+              
+              {organizationToDelete && (
+                <div className="bg-zinc-800 rounded-lg p-4">
+                  <p className="text-gray-400 text-sm mb-2">You are about to delete:</p>
+                  <p className="text-white font-semibold text-lg">{organizationToDelete.name}</p>
+                  <p className="text-gray-400 text-sm">Organization ID: {organizationToDelete.organizationId}</p>
+                </div>
+              )}
+              
+              <p className="text-gray-300 text-sm">
+                Please confirm that you want to permanently delete this organization and all its associated data.
+              </p>
+            </div>
+            <div className="flex justify-end gap-2 mt-4">
+              <Button
+                variant="outline"
+                onClick={() => setDeleteDialogOpen(false)}
+                disabled={deleteMutation.isPending}
+                className="border-gray-600 text-gray-300 hover:bg-zinc-700"
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={handleConfirmDelete}
+                disabled={deleteMutation.isPending}
+                className="bg-red-600 hover:bg-red-700"
+              >
+                {deleteMutation.isPending ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Deleting...
+                  </>
+                ) : (
+                  <>
+                    <Trash2 className="h-4 w-4 mr-2" />
+                    Delete Permanently
+                  </>
+                )}
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
