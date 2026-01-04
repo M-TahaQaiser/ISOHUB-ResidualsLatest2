@@ -147,15 +147,115 @@ router.post('/upload-lead-sheet/:month', upload.single('file'), async (req, res)
       month: month
     });
     
-    // Simple approach: Just track the upload in upload_progress
-    // Update all processors to show lead sheet is validated
+    // Parse CSV file
+    let parsedData: any[] = [];
+    let recordCount = 0;
+    
     try {
+      const fileContent = fs.readFileSync(file.path, 'utf-8');
+      const lines = fileContent.split('\n').filter(line => line.trim());
+      
+      if (lines.length < 2) {
+        throw new Error('CSV file is empty or has no data rows');
+      }
+      
+      // Parse header
+      const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+      console.log('CSV Headers:', headers);
+      
+      // Parse data rows
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
+        if (values.length >= headers.length && values[0]) {
+          const row: any = {};
+          headers.forEach((header, index) => {
+            row[header] = values[index] || '';
+          });
+          parsedData.push(row);
+        }
+      }
+      
+      recordCount = parsedData.length;
+      console.log(`Parsed ${recordCount} records from lead sheet`);
+      
+      // Get organizationId from request or use default
+      const organizationId = req.body.organizationId || req.query.organizationId || 'org-demo-isohub-2025';
+      
+      // Resolve to agencyId
+      const orgResult = await db.execute(sql`
+        SELECT agency_id FROM organizations WHERE organization_id = ${organizationId} LIMIT 1
+      `);
+      
+      let agencyId = 1; // Default to demo agency
+      if (orgResult.rows.length > 0 && orgResult.rows[0].agency_id) {
+        agencyId = orgResult.rows[0].agency_id as number;
+      }
+      
+      console.log(`Storing lead sheet data for agency ${agencyId}, month ${month}`);
+      
+      // Store each record in master_lead_sheets table
+      let insertedCount = 0;
+      for (const record of parsedData) {
+        try {
+          // Extract key fields (adjust based on actual CSV structure)
+          const mid = record['MID'] || record['Merchant ID'] || record['mid'] || '';
+          const dba = record['DBA'] || record['Business Name'] || record['dba'] || '';
+          const processorName = record['Processor'] || record['processor'] || '';
+          
+          if (!mid) continue; // Skip rows without MID
+          
+          // Find or create merchant
+          let merchantResult = await db.execute(sql`
+            SELECT id FROM merchants WHERE mid = ${mid} AND agency_id = ${agencyId} LIMIT 1
+          `);
+          
+          let merchantId: number;
+          if (merchantResult.rows.length === 0) {
+            const insertMerchant = await db.execute(sql`
+              INSERT INTO merchants (mid, dba, legal_name, agency_id, is_active, created_at)
+              VALUES (${mid}, ${dba}, ${dba}, ${agencyId}, true, NOW())
+              RETURNING id
+            `);
+            merchantId = insertMerchant.rows[0].id as number;
+          } else {
+            merchantId = merchantResult.rows[0].id as number;
+          }
+          
+          // Find processor
+          let processorResult = await db.execute(sql`
+            SELECT id FROM processors WHERE name ILIKE ${processorName} LIMIT 1
+          `);
+          
+          let processorId: number | null = null;
+          if (processorResult.rows.length > 0) {
+            processorId = processorResult.rows[0].id as number;
+          }
+          
+          // Insert into master_lead_sheets
+          await db.execute(sql`
+            INSERT INTO master_lead_sheets (
+              month, merchant_id, processor_id, agency_id, raw_data, created_at
+            ) VALUES (
+              ${month}, ${merchantId}, ${processorId}, ${agencyId}, ${JSON.stringify(record)}::jsonb, NOW()
+            )
+            ON CONFLICT (month, merchant_id) DO UPDATE 
+            SET processor_id = ${processorId}, raw_data = ${JSON.stringify(record)}::jsonb, updated_at = NOW()
+          `);
+          
+          insertedCount++;
+        } catch (rowError) {
+          console.error('Error inserting lead sheet row:', rowError);
+        }
+      }
+      
+      console.log(`Inserted/updated ${insertedCount} lead sheet records`);
+      
+      // Update upload progress for all processors
       const activeProcessors = await db.select({ id: processors.id, name: processors.name })
         .from(processors)
         .where(eq(processors.isActive, true));
       
       for (const processor of activeProcessors) {
-        // Upsert upload progress record
         await db.execute(sql`
           INSERT INTO upload_progress (month, processor_id, processor_name, lead_sheet_status, last_updated)
           VALUES (${month}, ${processor.id}, ${processor.name}, 'validated', NOW())
@@ -164,10 +264,9 @@ router.post('/upload-lead-sheet/:month', upload.single('file'), async (req, res)
         `);
       }
       
-      console.log(`Lead sheet status updated for ${activeProcessors.length} processors`);
-    } catch (dbError) {
-      console.error('Failed to update upload progress:', dbError);
-      // Continue anyway - file was uploaded successfully
+    } catch (parseError) {
+      console.error('Failed to parse lead sheet:', parseError);
+      throw parseError;
     }
 
     // Clean up uploaded file
@@ -179,12 +278,13 @@ router.post('/upload-lead-sheet/:month', upload.single('file'), async (req, res)
 
     res.json({
       success: true,
-      message: 'Lead sheet uploaded successfully',
+      message: 'Lead sheet uploaded and processed successfully',
       results: {
         fileName: file.originalname,
         fileSize: file.size,
         month: month,
-        status: 'validated'
+        status: 'validated',
+        recordCount: recordCount
       }
     });
 

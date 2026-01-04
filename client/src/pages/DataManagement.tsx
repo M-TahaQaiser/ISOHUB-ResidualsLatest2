@@ -277,11 +277,12 @@ export default function DataManagement() {
       lastUpdated: p.lastUpdated
     })) || [];
 
-  const leadSheetProgress = uploadProgressData?.find((p: any) => !p.processorId);
-  const leadSheetStatus = leadSheetProgress?.leadSheetStatus || 'needs_upload';
+  // Check if lead sheet is uploaded by checking if any processor has validated lead sheet status
+  const hasValidatedLeadSheet = uploadProgressData?.some((p: any) => p.leadSheetStatus === 'validated') || false;
+  const leadSheetStatus = hasValidatedLeadSheet ? 'validated' : 'needs_upload';
 
   // Calculate step completions (guard against loading state)
-  const leadSheetComplete = progressLoading ? false : (leadSheetStatus === 'validated');
+  const leadSheetComplete = progressLoading ? false : hasValidatedLeadSheet;
   const processorsComplete = progressLoading ? false : (processors.length > 0 && processors.every((p: any) => p.uploadStatus === 'validated'));
   const assignmentsComplete = approvalLoading ? false : (monthApprovalData?.assignmentsComplete || false);
   const auditComplete = approvalLoading ? false : (monthApprovalData?.auditComplete || false);
@@ -1171,8 +1172,8 @@ export default function DataManagement() {
                     <div>
                       <p className="font-medium text-white">Master Lead Sheet</p>
                       <p className="text-sm text-gray-400">
-                        {leadSheetProgress?.recordCount > 0 
-                          ? `${leadSheetProgress.recordCount} records` 
+                        {leadSheetComplete 
+                          ? 'Uploaded successfully' 
                           : 'Not uploaded'}
                       </p>
                     </div>
