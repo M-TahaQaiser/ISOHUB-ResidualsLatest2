@@ -341,7 +341,13 @@ export default function DataManagement() {
       });
       setSelectedFile(null);
       setUploadDialogOpen(false);
+      
+      // Invalidate all queries to refresh data instantly
       queryClient.invalidateQueries({ queryKey: ['/api/residuals-workflow/progress', selectedMonth] });
+      queryClient.invalidateQueries({ queryKey: ['/api/analytics/metrics', selectedMonth, organizationId] });
+      queryClient.invalidateQueries({ queryKey: [`/api/month-approval/${selectedMonth}/${organizationId}`] });
+      queryClient.invalidateQueries({ queryKey: [`/api/month-approval/${selectedMonth}/${organizationId}/merchant-lifecycle`] });
+      queryClient.invalidateQueries({ queryKey: ['/api/available-months', organizationId] });
     },
     onError: (error) => {
       toast({
