@@ -1235,6 +1235,142 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Month approval endpoints for Data Management
+  app.get("/api/month-approval/:month/:organizationId", async (req, res) => {
+    try {
+      const { month, organizationId } = req.params;
+      
+      // Resolve organizationId to agencyId
+      let agencyId = await TenancyService.resolveAgencyId(organizationId);
+      if (!agencyId && /^\d+$/.test(organizationId)) {
+        agencyId = parseInt(organizationId);
+      }
+      
+      if (!agencyId) {
+        return res.status(404).json({ error: "Organization not found" });
+      }
+
+      // Return approval status for the month
+      res.json({
+        month,
+        organizationId,
+        agencyId,
+        approvalStatus: 'pending',
+        canApprove: true,
+        approvedBy: null,
+        approvedAt: null
+      });
+    } catch (error) {
+      console.error('Month approval fetch error:', error);
+      res.status(500).json({ error: 'Failed to fetch approval status' });
+    }
+  });
+
+  app.get("/api/month-approval/:month/:organizationId/merchant-lifecycle", async (req, res) => {
+    try {
+      const { month, organizationId } = req.params;
+      
+      // Resolve organizationId to agencyId
+      let agencyId = await TenancyService.resolveAgencyId(organizationId);
+      if (!agencyId && /^\d+$/.test(organizationId)) {
+        agencyId = parseInt(organizationId);
+      }
+      
+      if (!agencyId) {
+        return res.status(404).json({ error: "Organization not found" });
+      }
+
+      // Get current month data
+      const currentMonthData = await db.execute(sql`
+        SELECT DISTINCT m.id as merchant_id, m.mid, m.dba, m.legal_name,
+               md.sales_amount, md.net
+        FROM merchants m
+        LEFT JOIN monthly_data md ON m.id = md.merchant_id 
+          AND md.month = ${month}
+          AND md.agency_id = ${agencyId}
+        WHERE m.agency_id = ${agencyId}
+        ORDER BY m.mid
+      `);
+
+      // Get previous month for comparison
+      const [year, monthNum] = month.split('-').map(Number);
+      const prevDate = new Date(year, monthNum - 2, 1); // -2 because months are 0-indexed
+      const prevMonth = `${prevDate.getFullYear()}-${String(prevDate.getMonth() + 1).padStart(2, '0')}`;
+      
+      const prevMonthData = await db.execute(sql`
+        SELECT DISTINCT merchant_id
+        FROM monthly_data
+        WHERE month = ${prevMonth}
+          AND agency_id = ${agencyId}
+      `);
+
+      const prevMerchantIds = new Set(prevMonthData.rows.map((r: any) => r.merchant_id));
+      
+      const newMerchants: any[] = [];
+      const retainedMerchants: any[] = [];
+      const lostMerchants: any[] = [];
+
+      // Categorize merchants
+      currentMonthData.rows.forEach((merchant: any) => {
+        const merchantData = {
+          merchantId: merchant.merchant_id,
+          mid: merchant.mid,
+          dba: merchant.dba || merchant.legal_name,
+          revenue: parseFloat(merchant.sales_amount || 0),
+          net: parseFloat(merchant.net || 0)
+        };
+
+        if (merchant.sales_amount && parseFloat(merchant.sales_amount) > 0) {
+          if (prevMerchantIds.has(merchant.merchant_id)) {
+            retainedMerchants.push(merchantData);
+          } else {
+            newMerchants.push(merchantData);
+          }
+        }
+      });
+
+      // Find lost merchants (in previous month but not in current)
+      for (const prevMerchantId of prevMerchantIds) {
+        const foundInCurrent = currentMonthData.rows.some((r: any) => 
+          r.merchant_id === prevMerchantId && r.sales_amount && parseFloat(r.sales_amount) > 0
+        );
+        if (!foundInCurrent) {
+          const merchantInfo = await db.execute(sql`
+            SELECT m.id, m.mid, m.dba, m.legal_name
+            FROM merchants m
+            WHERE m.id = ${prevMerchantId}
+          `);
+          if (merchantInfo.rows.length > 0) {
+            const m = merchantInfo.rows[0];
+            lostMerchants.push({
+              merchantId: m.id,
+              mid: m.mid,
+              dba: m.dba || m.legal_name,
+              revenue: 0,
+              net: 0
+            });
+          }
+        }
+      }
+
+      res.json({
+        month,
+        organizationId,
+        counts: {
+          new: newMerchants.length,
+          retained: retainedMerchants.length,
+          lost: lostMerchants.length
+        },
+        newMerchants,
+        retainedMerchants,
+        lostMerchants
+      });
+    } catch (error) {
+      console.error('Merchant lifecycle fetch error:', error);
+      res.status(500).json({ error: 'Failed to fetch merchant lifecycle data' });
+    }
+  });
+
   // Mount routers
   app.use("/api/health", healthRouter);
   app.use("/api/status", statusRouter);
