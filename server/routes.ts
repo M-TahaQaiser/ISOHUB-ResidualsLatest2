@@ -1252,7 +1252,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ error: "Organization not found" });
       }
 
-      // Return approval status for the month
+      // Fetch persisted approval if exists
+      const persisted = await (await import('./services/approvalService')).getMonthApproval(month, agencyId);
+
+      if (persisted) {
+        return res.json({
+          month,
+          organizationId,
+          agencyId,
+          approvalStatus: persisted.approvalStatus,
+          canApprove: true,
+          assignmentsComplete: persisted.assignmentsComplete,
+          auditComplete: persisted.auditComplete,
+          approvedBy: persisted.approvedBy,
+          approvedAt: persisted.updatedAt
+        });
+      }
+
+      // Default when not persisted
       res.json({
         month,
         organizationId,
@@ -1370,6 +1387,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Merchant lifecycle fetch error:', error);
       res.status(500).json({ error: 'Failed to fetch merchant lifecycle data' });
+    }
+  });
+
+  // Update month approval (accept POST to update assignments/audit completion)
+  const monthApprovalAuthMiddleware = (req: any, res: any, next: any) => {
+    // Allow unauthenticated requests in development for easier local testing
+    if (process.env.NODE_ENV === 'development') return next();
+    return authenticateToken(req, res, next);
+  };
+
+  app.post("/api/month-approval", monthApprovalAuthMiddleware, async (req: any, res) => {
+    try {
+      const { month, agencyId, assignmentsComplete, auditComplete } = req.body || {};
+
+      if (!month || !agencyId) {
+        return res.status(400).json({ error: 'month and agencyId are required' });
+      }
+
+      const approvedBy = req.user?.id || null;
+
+      // Persist approval
+      const persisted = await (await import('./services/approvalService')).upsertMonthApproval(month, parseInt(agencyId), Boolean(assignmentsComplete), Boolean(auditComplete), approvedBy);
+
+      res.json(persisted);
+    } catch (error) {
+      console.error('Month approval update error:', error);
+      res.status(500).json({ error: 'Failed to update month approval' });
     }
   });
 

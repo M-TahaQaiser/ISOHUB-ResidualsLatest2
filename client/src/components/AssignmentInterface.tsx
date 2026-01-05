@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import RoleAssignmentModal from "@/components/RoleAssignmentModal";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -22,54 +24,94 @@ interface AssignmentInterfaceProps {
 
 export default function AssignmentInterface({ selectedMonth, organizationId }: AssignmentInterfaceProps) {
   const [selectedMerchant, setSelectedMerchant] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMerchant, setModalMerchant] = useState<any | null>(null);
+  const queryClient = useQueryClient();
 
-  // Fetch assignment data
-  const { data: assignmentData, isLoading } = useQuery({
-    queryKey: ['/api/assignments'],
-    select: (data: any) => data || {
-      totalMerchants: 204,
-      assignedMerchants: 156,
-      unassignedMerchants: 48,
-      totalRevenue: 33649.43,
-      assignedRevenue: 28945.12,
-      availableAgents: 12,
-      availablePartners: 6
-    }
+  const month = selectedMonth || '2025-05';
+
+  // Fetch merchants (with revenue) for the month
+  const { data: merchantsData, isLoading: merchantsLoading } = useQuery({
+    queryKey: ['/api/assignments/merchants', month],
+    queryFn: () => apiRequest(`/api/assignments/merchants?month=${month}`),
+    enabled: !!month
   });
 
-  const assignments = [
-    {
-      merchantId: "MID001",
-      businessName: "BLU SUSHI",
-      revenue: 2013.75,
-      processor: "Clearent",
-      assignments: [
-        { role: "Agent", name: "Cody Burnell", percentage: 60 },
-        { role: "Sales Manager", name: "Christy G Milton", percentage: 25 },
-        { role: "Partner", name: "C2FS Partners", percentage: 15 }
-      ],
-      status: "assigned"
-    },
-    {
-      merchantId: "MID002", 
-      businessName: "True Builders Inc.",
-      revenue: 966.77,
-      processor: "Clearent",
-      assignments: [
-        { role: "Agent", name: "James Carner", percentage: 70 },
-        { role: "Sales Manager", name: "Mark Pierce", percentage: 30 }
-      ],
-      status: "assigned"
-    },
-    {
-      merchantId: "MID003",
-      businessName: "GYROTONIC",
-      revenue: 975.13,
-      processor: "Global Payments TSYS",
-      assignments: [],
-      status: "unassigned"
-    }
-  ];
+  // Fetch assignments (detailed) for the month
+  const { data: assignmentsData, isLoading: assignmentsLoading } = useQuery({
+    queryKey: ['/api/assignments', month],
+    queryFn: () => apiRequest(`/api/assignments?month=${month}`),
+    enabled: !!month
+  });
+
+  // Fetch monthly data (to pass into modal for merchant context)
+  const { data: monthlyData } = useQuery({
+    queryKey: ['/api/monthly-data', month],
+    queryFn: () => apiRequest(`/api/monthly-data/${month}`),
+    enabled: !!month
+  });
+
+  const merchants = merchantsData || [];
+  const assignments = assignmentsData || [];
+
+  // Merge merchants with assignment summaries
+  const merchantList = merchants.map((m: any) => {
+    const mAssignments = assignments.filter((a: any) => a.merchantId === m.id);
+    return {
+      id: m.id,
+      merchantId: m.mid || m.id,
+      businessName: m.dba || m.legalName || m.mid || `MID ${m.mid || m.id}`,
+      revenue: m.revenue || m.net || 0,
+      processor: m.processor?.name || m.processor || '',
+      assignments: mAssignments.map((a: any) => ({
+        role: a.role?.name || '',
+        name: a.role?.name || '',
+        percentage: parseFloat(a.percentage || '0')
+      })),
+      status: mAssignments.length > 0 ? 'assigned' : 'unassigned'
+    };
+  });
+
+  // Compute overview metrics used by the cards (avoid referencing undefined variables)
+  const assignedMerchantIds = new Set(assignments.map((a: any) => a.merchantId));
+  const totalMerchants = merchants.length;
+  const assignedMerchantsCount = assignedMerchantIds.size;
+  const unassignedMerchantsCount = Math.max(0, totalMerchants - assignedMerchantsCount);
+  const assignedRevenue = merchants.reduce((sum: number, m: any) => {
+    const mAssignments = assignments.filter((a: any) => a.merchantId === m.id);
+    if (mAssignments.length === 0) return sum;
+    const totalPct = mAssignments.reduce((s: number, a: any) => s + (parseFloat(a.percentage || '0') || 0), 0);
+    const net = parseFloat(m.revenue || m.net || '0') || 0;
+    return sum + (net * (Math.min(totalPct, 100) / 100));
+  }, 0);
+
+  const assignmentData = {
+    totalMerchants,
+    assignedMerchants: assignedMerchantsCount,
+    unassignedMerchants: unassignedMerchantsCount,
+    assignedRevenue,
+    availableAgents: 0,
+    availablePartners: 0
+  };
+
+  const openModalForMerchant = (merchant: any) => {
+    setModalMerchant(merchant);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setModalMerchant(null);
+  };
+
+  const onModalSaveSuccess = async () => {
+    // Refresh all relevant data
+    await queryClient.invalidateQueries({ queryKey: ['/api/assignments'] });
+    await queryClient.invalidateQueries({ queryKey: ['/api/assignments/merchants'] });
+    await queryClient.invalidateQueries({ queryKey: ['/api/monthly-data', month] });
+    await queryClient.invalidateQueries({ queryKey: ['/api/audit-issues', month] });
+    closeModal();
+  };
 
   return (
     <div className="space-y-6">
@@ -153,7 +195,7 @@ export default function AssignmentInterface({ selectedMonth, organizationId }: A
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {assignments.map((merchant) => (
+                  {merchantList.map((merchant) => (
                     <TableRow 
                       key={merchant.merchantId}
                       className={selectedMerchant === merchant.merchantId ? "bg-yellow-400/10 border-yellow-400/20" : "border-yellow-400/10"}
@@ -181,7 +223,10 @@ export default function AssignmentInterface({ selectedMonth, organizationId }: A
                           variant="outline" 
                           size="sm"
                           className="border-yellow-400/50 text-yellow-400 hover:bg-yellow-400 hover:text-black"
-                          onClick={() => setSelectedMerchant(merchant.merchantId)}
+                          onClick={() => {
+                            setSelectedMerchant(merchant.merchantId);
+                            openModalForMerchant(merchant);
+                          }}
                           data-testid={`button-assign-${merchant.merchantId}`}
                         >
                           {merchant.status === 'assigned' ? 'Edit' : 'Assign'}
@@ -208,7 +253,7 @@ export default function AssignmentInterface({ selectedMonth, organizationId }: A
               {selectedMerchant ? (
                 <div className="space-y-4">
                   {(() => {
-                    const merchant = assignments.find(m => m.merchantId === selectedMerchant);
+                    const merchant = merchantList.find((m: any) => m.merchantId === selectedMerchant);
                     if (!merchant) return null;
                     
                     return (
@@ -226,14 +271,14 @@ export default function AssignmentInterface({ selectedMonth, organizationId }: A
                             {merchant.assignments.map((assignment, index) => (
                               <div key={index} className="flex items-center justify-between p-2 bg-zinc-800/50 rounded border border-yellow-400/20">
                                 <div>
-                                  <div className="font-medium text-sm text-white">{assignment.name}</div>
+                                  <div className="font-medium text-sm text-white">{assignment.name || assignment.role}</div>
                                   <div className="text-xs text-gray-400">{assignment.role}</div>
                                 </div>
                                 <Badge className="bg-yellow-400 text-black">{assignment.percentage}%</Badge>
                               </div>
                             ))}
                             <div className="pt-2">
-                              <Button variant="outline" size="sm" className="w-full border-yellow-400/50 text-yellow-400 hover:bg-yellow-400 hover:text-black">
+                              <Button variant="outline" size="sm" className="w-full border-yellow-400/50 text-yellow-400 hover:bg-yellow-400 hover:text-black" onClick={() => openModalForMerchant(merchant)}>
                                 Edit Assignments
                               </Button>
                             </div>
@@ -242,7 +287,7 @@ export default function AssignmentInterface({ selectedMonth, organizationId }: A
                           <div className="text-center py-4">
                             <AlertCircle className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
                             <p className="text-sm text-gray-400 mb-3">No assignments yet</p>
-                            <Button size="sm" className="w-full bg-yellow-400 hover:bg-yellow-500 text-black">
+                            <Button size="sm" className="w-full bg-yellow-400 hover:bg-yellow-500 text-black" onClick={() => openModalForMerchant(merchant)}>
                               <PlusCircle className="h-4 w-4 mr-1" />
                               Assign Agent
                             </Button>
@@ -262,6 +307,19 @@ export default function AssignmentInterface({ selectedMonth, organizationId }: A
           </Card>
         </div>
       </div>
+
+      {/* Role Assignment Modal */}
+      {modalMerchant && (
+        <RoleAssignmentModal
+          merchant={{ id: modalMerchant.id, mid: modalMerchant.merchantId, dba: modalMerchant.businessName }}
+          monthlyData={(monthlyData || []).find((d: any) => d.merchantId === modalMerchant.id || (d.merchant && d.merchant.id === modalMerchant.id))}
+          month={month}
+          isOpen={modalOpen}
+          onClose={closeModal}
+          onSuccess={onModalSaveSuccess}
+        />
+      )}
+
     </div>
   );
 }

@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { X, Calculator, Plus, Trash2, Zap, Copy, Target } from "lucide-react";
+import { apiRequest } from "@/lib/queryClient";
 
 interface RoleAssignmentModalProps {
   merchant: any;
@@ -84,7 +85,8 @@ export default function RoleAssignmentModal({
 
   const { data: existingAssignments } = useQuery({
     queryKey: ["/api/assignments", merchant?.id, month],
-    enabled: !!merchant?.id && isOpen,
+    queryFn: () => apiRequest(`/api/assignments/${merchant?.id}/${month}`),
+    enabled: !!merchant?.id && !!month && isOpen,
   });
 
   const saveAssignmentsMutation = useMutation({
@@ -111,6 +113,8 @@ export default function RoleAssignmentModal({
       toast({ title: "Assignments saved successfully" });
       queryClient.invalidateQueries({ queryKey: ["/api/assignments"] });
       queryClient.invalidateQueries({ queryKey: ["/api/audit-issues"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/assignments/merchants"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/monthly-data"] });
       onSuccess();
     },
     onError: (error: Error) => {
