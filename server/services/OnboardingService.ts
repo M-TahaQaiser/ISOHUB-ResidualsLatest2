@@ -16,7 +16,7 @@ import {
   type InsertUserActivation,
 } from '@shared/onboarding-schema';
 import { users, agencies, type InsertUser } from '@shared/schema';
-import { EmailService } from './emailService';
+import { EmailService } from './EmailService';
 import bcrypt from 'bcrypt';
 
 export class OnboardingService {

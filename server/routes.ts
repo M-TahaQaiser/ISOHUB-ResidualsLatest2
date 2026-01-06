@@ -6,7 +6,7 @@ import { authenticateToken, requireRole } from "./middleware/auth";
 import { CSVParser } from "./services/csvParser";
 import { MIDMatcher } from "./services/midMatcher";
 import { AIReportingService } from "./services/aiReporting";
-import { EmailService } from "./services/emailService";
+import { EmailService } from "./services/EmailService";
 import { TenancyService } from "./services/tenancyService";
 import { db } from "./db";
 import { monthlyData } from "@shared/schema";

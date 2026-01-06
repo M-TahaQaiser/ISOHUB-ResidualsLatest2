@@ -3,7 +3,7 @@ import { db } from '../db';
 import { preApplications } from '@shared/schema';
 import { eq, and } from 'drizzle-orm';
 import { v4 as uuidv4 } from 'uuid';
-import { EmailService } from '../services/emailService';
+import { EmailService } from '../services/EmailService';
 import { authenticateToken, requireReauth, AuthenticatedRequest } from '../middleware/auth';
 import { Response } from 'express';
 
