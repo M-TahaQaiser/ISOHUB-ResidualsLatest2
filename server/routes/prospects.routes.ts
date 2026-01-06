@@ -13,7 +13,7 @@ const router = Router();
 
 // Apply authentication to all routes - SuperAdmin or Admin only
 router.use(authenticateToken);
-router.use(requireRole(['superadmin', 'admin']));
+router.use(requireRole(['SuperAdmin', 'Admin', 'superadmin', 'admin']));
 
 // Generate unique prospect ID
 function generateProspectId(): string {
