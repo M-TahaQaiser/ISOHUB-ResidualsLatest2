@@ -862,38 +862,39 @@ export default function AgencyOnboarding() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="mb-4">
-          <h1 className="text-2xl font-bold text-white mb-1">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-white mb-2">
             Agency Setup & Onboarding
           </h1>
-        <p className="text-gray-400 text-sm">
+        <p className="text-gray-400">
           Complete the step-by-step setup process to configure your agency in the ISO Hub system
         </p>
       </div>
 
-      <Card className="mb-4 bg-zinc-900/80 border-yellow-400/20">
-        <CardHeader className="pb-2">
+      <Card className="mb-8 bg-zinc-900/80 border-yellow-400/20">
+        <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-lg text-white">Setup Progress</CardTitle>
-              <p className="text-xs text-gray-400">
+              <CardTitle className="text-xl text-white">Setup Progress</CardTitle>
+              <p className="text-sm text-gray-400 mt-1">
                 {completedSteps} of {displaySteps.length} steps completed
               </p>
             </div>
-            <Badge variant={progressPercentage === 100 ? "default" : "secondary"} className={`text-xs ${progressPercentage === 100 ? 'bg-green-500 text-white' : 'bg-zinc-700 text-gray-300'}`}>
+            <Badge variant={progressPercentage === 100 ? "default" : "secondary"} className={`text-sm ${progressPercentage === 100 ? 'bg-green-500 text-white' : 'bg-zinc-700 text-gray-300'}`}>
               {progressPercentage === 100 ? "Completed" : "In Progress"}
             </Badge>
           </div>
+          <Progress value={progressPercentage} className="mt-4" />
         </CardHeader>
-        <CardContent className="pt-2">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {displaySteps.map((step, index) => {
               const IconComponent = stepIcons[step.stepName as keyof typeof stepIcons] || Settings;
               return (
                 <div
                   key={step.id}
-                  className={`p-3 rounded-lg border transition-colors cursor-pointer hover:shadow-md ${
+                  className={`p-4 rounded-lg border transition-colors cursor-pointer hover:shadow-md ${
                     step.isCompleted 
                       ? 'bg-green-500/10 border-green-500/30'
                       : index === currentStepIndex
@@ -903,12 +904,12 @@ export default function AgencyOnboarding() {
                   onClick={() => setCurrentStepIndex(index)}
                 >
                   <div className="flex items-start space-x-3">
-                    <div className={`w-10 h-10 flex items-center justify-center rounded-full border-2 ${
+                    <div className={`p-2 rounded-lg ${
                       step.isCompleted 
-                        ? 'bg-green-500/20 border-green-500 text-green-400'
+                        ? 'bg-green-500/20 text-green-400'
                         : index === currentStepIndex
-                        ? 'bg-yellow-400/20 border-yellow-400 text-yellow-400'
-                        : 'bg-zinc-800 border-zinc-600 text-gray-500'
+                        ? 'bg-yellow-400/20 text-yellow-400'
+                        : 'bg-zinc-700 text-gray-500'
                     }`}>
                       {step.isCompleted ? (
                         <CheckCircle className="h-5 w-5" />

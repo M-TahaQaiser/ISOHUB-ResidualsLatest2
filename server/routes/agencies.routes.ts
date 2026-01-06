@@ -5,8 +5,7 @@ import { eq, and } from 'drizzle-orm';
 import bcrypt from 'bcrypt';
 import { AuthService } from '../services/AuthService';
 import multer from 'multer';
-import { EmailService } from '../services/EmailService';
-const emailService = new EmailService();
+import { emailService } from '../services/EmailService';
 import { v4 as uuidv4 } from 'uuid';
 import { authenticateToken, requireRole, AuthenticatedRequest } from '../middleware/auth';
 
