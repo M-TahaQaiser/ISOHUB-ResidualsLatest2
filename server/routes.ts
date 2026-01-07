@@ -21,6 +21,7 @@ import dashboardRouter from "./dashboard.routes";
 import reportsRouter from "./reports.routes";
 import assignmentsRouter from "./assignments.routes";
 import agenciesRouter from "./routes/agencies.routes";
+import agencyOnboardingRouter from "./routes/agencyOnboarding.routes";
 import bulkAssignmentsRouter from "./routes/bulk-assignments.routes";
 import isoAIRouter from "./iso-ai.routes";
 import jaccRouter from "./routes/isoAI.routes";
@@ -1433,6 +1434,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use("/api/reports", reportsRouter);
   app.use("/api/assignments", assignmentsRouter);
   app.use("/api/agencies", agenciesRouter);
+  app.use("/api/agencies", agencyOnboardingRouter); // Onboarding routes
   app.use("/api/organizations", agenciesRouter); // Alias for organizations terminology
   app.use("/api/bulk-assignments", bulkAssignmentsRouter);
   app.use("/api/iso-ai", isoAIRouter);

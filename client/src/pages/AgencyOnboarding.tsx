@@ -76,12 +76,25 @@ const stepDescriptions = {
 };
 
 function CompanyInfoStep({ onComplete, isCompleted, initialData }: any) {
+  const { toast } = useToast();
+  
+  // Fetch prospect data to pre-fill form
+  const { data: prospectData } = useQuery({
+    queryKey: ['/api/preapplications'],
+    queryFn: async () => {
+      const response = await fetch('/api/preapplications', { credentials: 'include' });
+      if (!response.ok) return [];
+      const data = await response.json();
+      return data.length > 0 ? data[0] : null; // Get first prospect
+    }
+  });
+  
   const [formData, setFormData] = useState<AgencyData>({
-    companyName: initialData?.companyName || '',
-    contactName: initialData?.contactName || '',
-    email: initialData?.email || '',
-    phone: initialData?.phone || '',
-    website: initialData?.website || '',
+    companyName: initialData?.companyName || prospectData?.dba || prospectData?.businessName || '',
+    contactName: initialData?.contactName || prospectData?.businessContactName || '',
+    email: initialData?.email || prospectData?.email || '',
+    phone: initialData?.phone || prospectData?.phone || '',
+    website: initialData?.website || prospectData?.website || '',
     industry: initialData?.industry || '',
     isWhitelabel: initialData?.isWhitelabel || false,
     domainType: initialData?.domainType || 'standard',
@@ -142,6 +155,17 @@ function CompanyInfoStep({ onComplete, isCompleted, initialData }: any) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.companyName || !formData.contactName || !formData.email) {
+      toast({
+        title: "Required Fields Missing",
+        description: "Please fill in Company Name, Contact Name, and Email Address",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     const agencyData = {
       ...formData,
       agencyCode,
@@ -396,10 +420,13 @@ function CompanyInfoStep({ onComplete, isCompleted, initialData }: any) {
         )}
       </div>
 
-      <div className="flex justify-end space-x-3">
-        <Button type="submit" className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">
-          <Save className="h-4 w-4 mr-2" />
-          {isCompleted ? 'Update Information' : 'Continue'}
+      <div className="flex justify-end">
+        <Button 
+          type="submit" 
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+          disabled={!formData.companyName || !formData.contactName || !formData.email}
+        >
+          {isCompleted ? 'Update & Continue' : 'Continue to Next Step'}
         </Button>
       </div>
     </form>
@@ -655,10 +682,9 @@ function DomainEmailStep({ onComplete, isCompleted, initialData }: any) {
         </div>
       </div>
 
-      <div className="flex justify-end space-x-3">
+      <div className="flex justify-end">
         <Button type="submit" className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">
-          <Save className="h-4 w-4 mr-2" />
-          {isCompleted ? 'Update Configuration' : 'Continue'}
+          {isCompleted ? 'Update & Continue' : 'Continue to Next Step'}
         </Button>
       </div>
     </form>
@@ -669,42 +695,42 @@ function SubscriptionStep({ onComplete, isCompleted }: any) {
   if (isCompleted) {
     return <div className="text-center py-8"><CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" /><p className="text-white">Subscription configured</p></div>;
   }
-  return <div className="text-center py-8"><p className="text-gray-300">Subscription plan selection form will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue</Button></div>;
+  return <div className="text-center py-8"><p className="text-gray-300">Subscription plan selection form will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue to Next Step</Button></div>;
 }
 
 function UserSetupStep({ onComplete, isCompleted }: any) {
   if (isCompleted) {
     return <div className="text-center py-8"><CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" /><p className="text-white">User setup complete</p></div>;
   }
-  return <div className="text-center py-8"><p className="text-gray-300">User setup form will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue</Button></div>;
+  return <div className="text-center py-8"><p className="text-gray-300">User setup form will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue to Next Step</Button></div>;
 }
 
 function ProcessorStep({ onComplete, isCompleted }: any) {
   if (isCompleted) {
     return <div className="text-center py-8"><CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" /><p className="text-white">Processors configured</p></div>;
   }
-  return <div className="text-center py-8"><p className="text-gray-300">Processor configuration will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue</Button></div>;
+  return <div className="text-center py-8"><p className="text-gray-300">Processor configuration will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue to Next Step</Button></div>;
 }
 
 function DataImportStep({ onComplete, isCompleted }: any) {
   if (isCompleted) {
     return <div className="text-center py-8"><CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" /><p className="text-white">Data import complete</p></div>;
   }
-  return <div className="text-center py-8"><p className="text-gray-300">Data import options will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue</Button></div>;
+  return <div className="text-center py-8"><p className="text-gray-300">Data import options will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue to Next Step</Button></div>;
 }
 
 function CommissionStep({ onComplete, isCompleted }: any) {
   if (isCompleted) {
     return <div className="text-center py-8"><CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" /><p className="text-white">Commission structure set</p></div>;
   }
-  return <div className="text-center py-8"><p className="text-gray-300">Commission setup will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue</Button></div>;
+  return <div className="text-center py-8"><p className="text-gray-300">Commission setup will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue to Next Step</Button></div>;
 }
 
 function ReportingStep({ onComplete, isCompleted }: any) {
   if (isCompleted) {
     return <div className="text-center py-8"><CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" /><p className="text-white">Reporting configured</p></div>;
   }
-  return <div className="text-center py-8"><p className="text-gray-300">Reporting setup will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue</Button></div>;
+  return <div className="text-center py-8"><p className="text-gray-300">Reporting setup will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Complete Setup</Button></div>;
 }
 
 export default function AgencyOnboarding() {
@@ -862,116 +888,71 @@ export default function AgencyOnboarding() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        {/* Compact Header */}
+        <div className="mb-4">
+          <h1 className="text-2xl font-bold text-white mb-1">
             Agency Setup & Onboarding
           </h1>
-        <p className="text-gray-400">
+        <p className="text-gray-400 text-sm">
           Complete the step-by-step setup process to configure your agency in the ISO Hub system
         </p>
       </div>
 
-      <Card className="mb-8 bg-zinc-900/80 border-yellow-400/20">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="text-xl text-white">Setup Progress</CardTitle>
-              <p className="text-sm text-gray-400 mt-1">
-                {completedSteps} of {displaySteps.length} steps completed
-              </p>
-            </div>
-            <Badge variant={progressPercentage === 100 ? "default" : "secondary"} className={`text-sm ${progressPercentage === 100 ? 'bg-green-500 text-white' : 'bg-zinc-700 text-gray-300'}`}>
-              {progressPercentage === 100 ? "Completed" : "In Progress"}
-            </Badge>
+      {/* Horizontal Step Icons - Circles Only */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <h2 className="text-lg font-semibold text-white">Setup Progress</h2>
+            <p className="text-xs text-gray-400">
+              {completedSteps} of {displaySteps.length} steps completed
+            </p>
           </div>
-          <Progress value={progressPercentage} className="mt-4" />
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {displaySteps.map((step, index) => {
-              const IconComponent = stepIcons[step.stepName as keyof typeof stepIcons] || Settings;
-              return (
-                <div
-                  key={step.id}
-                  className={`p-4 rounded-lg border transition-colors cursor-pointer hover:shadow-md ${
-                    step.isCompleted 
-                      ? 'bg-green-500/10 border-green-500/30'
-                      : index === currentStepIndex
-                      ? 'bg-yellow-400/10 border-yellow-400 ring-2 ring-yellow-400'
-                      : 'bg-zinc-800 border-yellow-400/20'
-                  }`}
-                  onClick={() => setCurrentStepIndex(index)}
-                >
-                  <div className="flex items-start space-x-3">
-                    <div className={`p-2 rounded-lg ${
-                      step.isCompleted 
-                        ? 'bg-green-500/20 text-green-400'
-                        : index === currentStepIndex
-                        ? 'bg-yellow-400/20 text-yellow-400'
-                        : 'bg-zinc-700 text-gray-500'
-                    }`}>
-                      {step.isCompleted ? (
-                        <CheckCircle className="h-5 w-5" />
-                      ) : (
-                        <IconComponent className="h-5 w-5" />
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-sm text-white truncate">
-                        Step {index + 1}: {step.stepName}
-                      </h3>
-                      <p className="text-xs text-gray-400 mt-1">
-                        {stepDescriptions[step.stepName as keyof typeof stepDescriptions]}
-                      </p>
-                      {step.isCompleted && (
-                        <p className="text-xs text-green-400 mt-1">
-                          ✓ Completed
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </CardContent>
-      </Card>
+          <Badge variant={progressPercentage === 100 ? "default" : "secondary"} className={`text-xs ${progressPercentage === 100 ? 'bg-green-500 text-white' : 'bg-zinc-700 text-gray-300'}`}>
+            {progressPercentage === 100 ? "Completed" : "In Progress"}
+          </Badge>
+        </div>
+        
+        {/* Single horizontal line of circular icons */}
+        <div className="flex items-center justify-center gap-4 py-4">
+          {displaySteps.map((step, index) => {
+            const IconComponent = stepIcons[step.stepName as keyof typeof stepIcons] || Settings;
+            return (
+              <button
+                key={step.id}
+                onClick={() => setCurrentStepIndex(index)}
+                className={`w-12 h-12 flex items-center justify-center rounded-full border-2 transition-all ${
+                  step.isCompleted 
+                    ? 'bg-green-500/20 border-green-500 text-green-400'
+                    : index === currentStepIndex
+                    ? 'bg-yellow-400/20 border-yellow-400 text-yellow-400 scale-110'
+                    : 'bg-zinc-800 border-zinc-600 text-gray-500'
+                }`}
+                title={`Step ${index + 1}: ${step.stepName}`}
+              >
+                {step.isCompleted ? (
+                  <CheckCircle className="h-6 w-6" />
+                ) : (
+                  <IconComponent className="h-6 w-6" />
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
 
       {currentStep && (
         <Card className="bg-zinc-900/80 border-yellow-400/20">
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-yellow-400/20 rounded-lg">
-                  <ArrowRight className="h-5 w-5 text-yellow-400" />
-                </div>
-                <div>
-                  <CardTitle className="text-white">Step {currentStepIndex + 1}: {currentStep.stepName}</CardTitle>
-                  <p className="text-sm text-gray-400 mt-1">
-                    {stepDescriptions[currentStep.stepName as keyof typeof stepDescriptions]}
-                  </p>
-                </div>
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-yellow-400/20 rounded-lg">
+                <ArrowRight className="h-5 w-5 text-yellow-400" />
               </div>
-              <div className="flex gap-2">
-                {currentStepIndex > 0 && (
-                  <Button
-                    variant="outline"
-                    onClick={() => setCurrentStepIndex(currentStepIndex - 1)}
-                    className="text-sm border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/10"
-                  >
-                    Previous
-                  </Button>
-                )}
-                {currentStepIndex < displaySteps.length - 1 && (
-                  <Button
-                    variant="outline" 
-                    onClick={() => setCurrentStepIndex(currentStepIndex + 1)}
-                    className="text-sm border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/10"
-                  >
-                    Next Step
-                  </Button>
-                )}
+              <div>
+                <CardTitle className="text-white">Step {currentStepIndex + 1}: {currentStep.stepName}</CardTitle>
+                <p className="text-sm text-gray-400 mt-1">
+                  {stepDescriptions[currentStep.stepName as keyof typeof stepDescriptions]}
+                </p>
               </div>
             </div>
           </CardHeader>
