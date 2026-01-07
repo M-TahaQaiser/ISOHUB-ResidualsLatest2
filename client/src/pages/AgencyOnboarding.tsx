@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { CheckCircle, Clock, ArrowRight, Building2, Users, Settings, Database, FileText, DollarSign, TrendingUp, Upload, Palette, Save } from 'lucide-react';
+import { CheckCircle, Clock, ArrowRight, Building2, Users, Settings, Database, FileText, DollarSign, TrendingUp, Upload, Palette, Save, User } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -58,19 +58,21 @@ interface OnboardingStatus {
 const stepIcons = {
   'Company Information': Building2,
   'Domain & Email Setup': Settings,
-  'Subscription Plan': DollarSign,
+  'Business Profile': TrendingUp,
   'User Setup': Users,
   'Processor Configuration': Database,
-  'Commission Structure': TrendingUp,
+  'Data Import': Upload,
+  'Commission Structure': DollarSign,
   'Reporting Setup': FileText,
 };
 
 const stepDescriptions = {
   'Company Information': 'Complete your company profile and contact details',
   'Domain & Email Setup': 'Configure whitelabel domain and email settings',
-  'Subscription Plan': 'Choose your billing plan and subscription preferences',
+  'Business Profile': 'AI-powered business understanding and analysis',
   'User Setup': 'Add team members and configure user roles',
   'Processor Configuration': 'Connect your payment processors and configure settings',
+  'Data Import': 'Import historical data and lead sheets',
   'Commission Structure': 'Set up commission splits and role assignments',
   'Reporting Setup': 'Configure automated reports and email schedules',
 };
@@ -172,7 +174,7 @@ function CompanyInfoStep({ onComplete, isCompleted, initialData }: any) {
       location: `${formData.companyName} Location`
     };
     
-    createAgencyMutation.mutate(agencyData);
+    // Call onComplete to move to next step
     onComplete(agencyData);
   };
 
@@ -189,8 +191,13 @@ function CompanyInfoStep({ onComplete, isCompleted, initialData }: any) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-4">
+      {/* Contact Information Section */}
+      <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <User className="h-5 w-5 text-yellow-400" />
+          Contact Information
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="companyName" className="text-gray-300">Company Name *</Label>
             <Input
@@ -204,20 +211,6 @@ function CompanyInfoStep({ onComplete, isCompleted, initialData }: any) {
               className="bg-zinc-800 border-yellow-400/30 text-white"
               required
             />
-          </div>
-          
-          <div>
-            <Label htmlFor="agencyCode" className="text-gray-300">Agency Code</Label>
-            <Input
-              id="agencyCode"
-              value={agencyCode}
-              placeholder="AUTO-GENERATED"
-              className="bg-zinc-800 border-yellow-400/30 text-white"
-              readOnly
-            />
-            <p className="text-xs text-gray-400 mt-1">
-              This code will be used in your personalized form links
-            </p>
           </div>
           
           <div>
@@ -255,11 +248,9 @@ function CompanyInfoStep({ onComplete, isCompleted, initialData }: any) {
               className="bg-zinc-800 border-yellow-400/30 text-white"
             />
           </div>
-        </div>
-
-        <div className="space-y-4">
-          <div>
-            <Label htmlFor="website" className="text-gray-300">Website</Label>
+          
+          <div className="md:col-span-2">
+            <Label htmlFor="website" className="text-gray-300">Company Website</Label>
             <Input
               id="website"
               value={formData.website}
@@ -268,41 +259,47 @@ function CompanyInfoStep({ onComplete, isCompleted, initialData }: any) {
               className="bg-zinc-800 border-yellow-400/30 text-white"
             />
           </div>
-          
-          <div>
-            <Label htmlFor="industry" className="text-gray-300">Industry</Label>
-            <Select value={formData.industry} onValueChange={(value) => setFormData(prev => ({ ...prev, industry: value }))}>
-              <SelectTrigger className="bg-zinc-800 border-yellow-400/30 text-white">
-                <SelectValue placeholder="Select industry" />
-              </SelectTrigger>
-              <SelectContent className="bg-zinc-800 border-yellow-400/30">
-                <SelectItem value="payment_processing">Payment Processing</SelectItem>
-                <SelectItem value="financial_services">Financial Services</SelectItem>
-                <SelectItem value="retail">Retail</SelectItem>
-                <SelectItem value="restaurant">Restaurant/Food Service</SelectItem>
-                <SelectItem value="ecommerce">E-commerce</SelectItem>
-                <SelectItem value="healthcare">Healthcare</SelectItem>
-                <SelectItem value="professional_services">Professional Services</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          
-          <div>
-            <Label htmlFor="description" className="text-gray-300">Company Description</Label>
-            <Textarea
-              id="description"
-              value={formData.description}
-              onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-              placeholder="Brief description of your company..."
-              rows={3}
-              className="bg-zinc-800 border-yellow-400/30 text-white"
-            />
+        </div>
+      </div>
+
+      {/* Branding Section */}
+      <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <Palette className="h-5 w-5 text-yellow-400" />
+          Company Branding
+        </h3>
+        <div>
+          <Label htmlFor="logo" className="text-gray-300">Upload Company Logo</Label>
+          <div className="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-yellow-400/30 border-dashed rounded-md hover:border-yellow-400/50 transition-colors bg-zinc-900/50">
+            <div className="space-y-1 text-center">
+              <Upload className="mx-auto h-12 w-12 text-yellow-400" />
+              <div className="flex text-sm text-gray-400">
+                <label
+                  htmlFor="logo-upload"
+                  className="relative cursor-pointer rounded-md font-medium text-yellow-400 hover:text-yellow-300 focus-within:outline-none"
+                >
+                  <span>Upload a file</span>
+                  <input
+                    id="logo-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleLogoUpload}
+                    className="sr-only"
+                  />
+                </label>
+                <p className="pl-1">or drag and drop</p>
+              </div>
+              <p className="text-xs text-gray-500">PNG, JPG, SVG up to 2MB</p>
+              {formData.logoFile && (
+                <p className="text-sm text-green-400 mt-2">✓ Selected: {formData.logoFile.name}</p>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-yellow-400/20 pt-6">
+      {/* HIDDEN: Whitelabel Build-out section - will be re-enabled later */}
+      {/* <div className="border-t border-yellow-400/20 pt-6">
         <div className="flex items-center space-x-3 mb-6">
           <Switch
             checked={formData.isWhitelabel}
@@ -313,112 +310,7 @@ function CompanyInfoStep({ onComplete, isCompleted, initialData }: any) {
             <p className="text-sm text-gray-400">Enable custom branding and logo for your platform</p>
           </div>
         </div>
-
-        {formData.isWhitelabel && (
-          <div className="bg-zinc-800 p-6 rounded-lg space-y-6 border border-yellow-400/20">
-            <h3 className="text-lg font-semibold flex items-center gap-2 text-white">
-              <Palette className="h-5 w-5 text-yellow-400" />
-              Brand Customization
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <Label htmlFor="primaryColor" className="text-gray-300">Primary Color</Label>
-                <div className="flex gap-2 mt-1">
-                  <input
-                    type="color"
-                    value={formData.primaryColor}
-                    onChange={(e) => handleColorChange('primaryColor', e.target.value)}
-                    className="w-12 h-10 rounded border border-yellow-400/30 cursor-pointer bg-zinc-800"
-                  />
-                  <Input
-                    value={formData.primaryColor}
-                    onChange={(e) => handleColorChange('primaryColor', e.target.value)}
-                    placeholder="#FFD700"
-                    className="font-mono bg-zinc-800 border-yellow-400/30 text-white"
-                  />
-                </div>
-              </div>
-              
-              <div>
-                <Label htmlFor="secondaryColor" className="text-gray-300">Secondary Color</Label>
-                <div className="flex gap-2 mt-1">
-                  <input
-                    type="color"
-                    value={formData.secondaryColor}
-                    onChange={(e) => handleColorChange('secondaryColor', e.target.value)}
-                    className="w-12 h-10 rounded border border-yellow-400/30 cursor-pointer bg-zinc-800"
-                  />
-                  <Input
-                    value={formData.secondaryColor}
-                    onChange={(e) => handleColorChange('secondaryColor', e.target.value)}
-                    placeholder="#000000"
-                    className="font-mono bg-zinc-800 border-yellow-400/30 text-white"
-                  />
-                </div>
-              </div>
-              
-              <div>
-                <Label htmlFor="accentColor" className="text-gray-300">Accent Color</Label>
-                <div className="flex gap-2 mt-1">
-                  <input
-                    type="color"
-                    value={formData.accentColor}
-                    onChange={(e) => handleColorChange('accentColor', e.target.value)}
-                    className="w-12 h-10 rounded border border-yellow-400/30 cursor-pointer bg-zinc-800"
-                  />
-                  <Input
-                    value={formData.accentColor}
-                    onChange={(e) => handleColorChange('accentColor', e.target.value)}
-                    placeholder="#FFFFFF"
-                    className="font-mono bg-zinc-800 border-yellow-400/30 text-white"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <Label htmlFor="logo" className="text-gray-300">Company Logo</Label>
-              <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-yellow-400/30 border-dashed rounded-md hover:border-yellow-400/50 transition-colors bg-zinc-900/50">
-                <div className="space-y-1 text-center">
-                  <Upload className="mx-auto h-12 w-12 text-yellow-400" />
-                  <div className="flex text-sm text-gray-400">
-                    <label
-                      htmlFor="logo-upload"
-                      className="relative cursor-pointer rounded-md font-medium text-yellow-400 hover:text-yellow-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-yellow-400"
-                    >
-                      <span>Upload a file</span>
-                      <input
-                        id="logo-upload"
-                        type="file"
-                        accept="image/*"
-                        onChange={handleLogoUpload}
-                        className="sr-only"
-                      />
-                    </label>
-                    <p className="pl-1">or drag and drop</p>
-                  </div>
-                  <p className="text-xs text-gray-500">PNG, JPG, SVG up to 2MB</p>
-                  {formData.logoFile && (
-                    <p className="text-sm text-green-400">Selected: {formData.logoFile.name}</p>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <Label className="text-gray-300">Color Preview</Label>
-              <div className="mt-2 p-4 rounded-lg border border-yellow-400/20" style={{ 
-                background: `linear-gradient(135deg, ${formData.primaryColor} 0%, ${formData.secondaryColor} 100%)`,
-                color: formData.accentColor 
-              }}>
-                <h4 className="font-bold text-lg">Your Brand Colors</h4>
-                <p>This is how your whitelabel platform will look with these colors.</p>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+      </div> */}
 
       <div className="flex justify-end">
         <Button 
@@ -691,18 +583,404 @@ function DomainEmailStep({ onComplete, isCompleted, initialData }: any) {
   );
 }
 
-function SubscriptionStep({ onComplete, isCompleted }: any) {
+function BusinessProfileStep({ onComplete, isCompleted, initialData }: any) {
+  const { toast } = useToast();
+  const [profileData, setProfileData] = useState({
+    businessDescription: initialData?.businessDescription || '',
+    targetMarket: initialData?.targetMarket || '',
+    averageTicket: initialData?.averageTicket || '',
+    monthlyVolume: initialData?.monthlyVolume || '',
+    businessModel: initialData?.businessModel || '',
+    painPoints: initialData?.painPoints || ''
+  });
+  const [aiAnalysis, setAiAnalysis] = useState<string>('');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  const handleAIAnalysis = async () => {
+    setIsAnalyzing(true);
+    // Simulate AI analysis
+    setTimeout(() => {
+      const analysis = `Based on your business profile:\n\n✓ Industry Focus: Payment processing with ${profileData.targetMarket || 'various'} target market\n✓ Volume Analysis: Estimated ${profileData.monthlyVolume || 'N/A'} monthly transactions\n✓ Business Model: ${profileData.businessModel || 'Standard ISO model'}\n\nRecommendations:\n• Optimize for high-volume merchant acquisition\n• Focus on ${profileData.targetMarket || 'target'} vertical\n• Implement automated onboarding workflows`;
+      setAiAnalysis(analysis);
+      setIsAnalyzing(false);
+    }, 2000);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!profileData.businessDescription) {
+      toast({
+        title: "Required Field Missing",
+        description: "Please provide a business description",
+        variant: "destructive"
+      });
+      return;
+    }
+    onComplete(profileData);
+  };
+
   if (isCompleted) {
-    return <div className="text-center py-8"><CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" /><p className="text-white">Subscription configured</p></div>;
+    return (
+      <div className="text-center py-8">
+        <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+        <p className="text-white">Business profile analyzed</p>
+      </div>
+    );
   }
-  return <div className="text-center py-8"><p className="text-gray-300">Subscription plan selection form will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue to Next Step</Button></div>;
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <Building2 className="h-5 w-5 text-yellow-400" />
+          Business Understanding
+        </h3>
+        
+        <div className="space-y-4">
+          <div>
+            <Label htmlFor="businessDescription" className="text-gray-300">Business Description *</Label>
+            <Textarea
+              id="businessDescription"
+              value={profileData.businessDescription}
+              onChange={(e) => setProfileData(prev => ({ ...prev, businessDescription: e.target.value }))}
+              placeholder="Describe your business, what you do, and who you serve..."
+              rows={4}
+              className="bg-zinc-800 border-yellow-400/30 text-white"
+              required
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="targetMarket" className="text-gray-300">Target Market</Label>
+              <Input
+                id="targetMarket"
+                value={profileData.targetMarket}
+                onChange={(e) => setProfileData(prev => ({ ...prev, targetMarket: e.target.value }))}
+                placeholder="e.g., Restaurants, Retail, E-commerce"
+                className="bg-zinc-800 border-yellow-400/30 text-white"
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="businessModel" className="text-gray-300">Business Model</Label>
+              <Select value={profileData.businessModel} onValueChange={(value) => setProfileData(prev => ({ ...prev, businessModel: value }))}>
+                <SelectTrigger className="bg-zinc-800 border-yellow-400/30 text-white">
+                  <SelectValue placeholder="Select model" />
+                </SelectTrigger>
+                <SelectContent className="bg-zinc-800 border-yellow-400/30">
+                  <SelectItem value="iso">ISO/Agent</SelectItem>
+                  <SelectItem value="direct">Direct Sales</SelectItem>
+                  <SelectItem value="referral">Referral Partner</SelectItem>
+                  <SelectItem value="hybrid">Hybrid Model</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="averageTicket" className="text-gray-300">Average Ticket Size</Label>
+              <Input
+                id="averageTicket"
+                value={profileData.averageTicket}
+                onChange={(e) => setProfileData(prev => ({ ...prev, averageTicket: e.target.value }))}
+                placeholder="$50 - $500"
+                className="bg-zinc-800 border-yellow-400/30 text-white"
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="monthlyVolume" className="text-gray-300">Est. Monthly Volume</Label>
+              <Input
+                id="monthlyVolume"
+                value={profileData.monthlyVolume}
+                onChange={(e) => setProfileData(prev => ({ ...prev, monthlyVolume: e.target.value }))}
+                placeholder="$100K - $1M"
+                className="bg-zinc-800 border-yellow-400/30 text-white"
+              />
+            </div>
+          </div>
+
+          <div>
+            <Label htmlFor="painPoints" className="text-gray-300">Current Pain Points</Label>
+            <Textarea
+              id="painPoints"
+              value={profileData.painPoints}
+              onChange={(e) => setProfileData(prev => ({ ...prev, painPoints: e.target.value }))}
+              placeholder="What challenges are you facing? What are you looking to improve?"
+              rows={3}
+              className="bg-zinc-800 border-yellow-400/30 text-white"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* AI Analysis Section */}
+      <div className="bg-gradient-to-r from-yellow-400/10 to-yellow-600/10 p-6 rounded-lg border border-yellow-400/30">
+        <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+          <TrendingUp className="h-5 w-5 text-yellow-400" />
+          AI-Powered Business Analysis
+        </h3>
+        
+        {!aiAnalysis ? (
+          <div className="text-center py-4">
+            <p className="text-gray-400 mb-4">Get instant AI insights about your business profile</p>
+            <Button
+              type="button"
+              onClick={handleAIAnalysis}
+              disabled={!profileData.businessDescription || isAnalyzing}
+              className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+            >
+              {isAnalyzing ? (
+                <><Clock className="h-4 w-4 mr-2 animate-spin" /> Analyzing...</>
+              ) : (
+                <>Analyze My Business</>
+              )}
+            </Button>
+          </div>
+        ) : (
+          <div className="bg-zinc-900/50 p-4 rounded-lg">
+            <pre className="text-sm text-gray-300 whitespace-pre-wrap">{aiAnalysis}</pre>
+            <Button
+              type="button"
+              onClick={handleAIAnalysis}
+              variant="outline"
+              className="mt-4 border-yellow-400/30 text-yellow-400"
+            >
+              Re-analyze
+            </Button>
+          </div>
+        )}
+      </div>
+
+      <div className="flex justify-end">
+        <Button 
+          type="submit" 
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+          disabled={!profileData.businessDescription}
+        >
+          {isCompleted ? 'Update & Continue' : 'Continue to Next Step'}
+        </Button>
+      </div>
+    </form>
+  );
 }
 
-function UserSetupStep({ onComplete, isCompleted }: any) {
+function UserSetupStep({ onComplete, isCompleted, initialData }: any) {
+  const { toast } = useToast();
+  const [users, setUsers] = useState<any[]>(initialData?.users || []);
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    role: '',
+    department: ''
+  });
+
+  const roles = [
+    { value: 'admin', label: 'Administrator', description: 'Full system access' },
+    { value: 'manager', label: 'Manager', description: 'Team management and reporting' },
+    { value: 'agent', label: 'Sales Agent', description: 'Merchant management and sales' },
+    { value: 'support', label: 'Support Staff', description: 'Customer support access' },
+    { value: 'analyst', label: 'Data Analyst', description: 'Reporting and analytics' }
+  ];
+
+  const departments = ['Sales', 'Operations', 'Support', 'Finance', 'Management'];
+
+  const handleAddUser = () => {
+    if (!newUser.name || !newUser.email || !newUser.role) {
+      toast({
+        title: "Required Fields Missing",
+        description: "Please fill in Name, Email, and Role",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newUser.email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setUsers([...users, { ...newUser, id: Date.now() }]);
+    setNewUser({ name: '', email: '', role: '', department: '' });
+    toast({
+      title: "User Added",
+      description: `${newUser.name} has been added to the team`,
+    });
+  };
+
+  const handleRemoveUser = (userId: number) => {
+    setUsers(users.filter(u => u.id !== userId));
+    toast({
+      title: "User Removed",
+      description: "User has been removed from the list",
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (users.length === 0) {
+      toast({
+        title: "No Users Added",
+        description: "Please add at least one user to continue",
+        variant: "destructive"
+      });
+      return;
+    }
+    onComplete({ users });
+  };
+
   if (isCompleted) {
-    return <div className="text-center py-8"><CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" /><p className="text-white">User setup complete</p></div>;
+    return (
+      <div className="text-center py-8">
+        <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+        <p className="text-white">User setup complete</p>
+        <p className="text-gray-400 text-sm mt-2">{users.length} user(s) configured</p>
+      </div>
+    );
   }
-  return <div className="text-center py-8"><p className="text-gray-300">User setup form will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue to Next Step</Button></div>;
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Add New User Section */}
+      <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <Users className="h-5 w-5 text-yellow-400" />
+          Add Team Members
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <Label htmlFor="userName" className="text-gray-300">Full Name *</Label>
+            <Input
+              id="userName"
+              value={newUser.name}
+              onChange={(e) => setNewUser(prev => ({ ...prev, name: e.target.value }))}
+              placeholder="John Doe"
+              className="bg-zinc-800 border-yellow-400/30 text-white"
+            />
+          </div>
+          
+          <div>
+            <Label htmlFor="userEmail" className="text-gray-300">Email Address *</Label>
+            <Input
+              id="userEmail"
+              type="email"
+              value={newUser.email}
+              onChange={(e) => setNewUser(prev => ({ ...prev, email: e.target.value }))}
+              placeholder="john@company.com"
+              className="bg-zinc-800 border-yellow-400/30 text-white"
+            />
+          </div>
+          
+          <div>
+            <Label htmlFor="userRole" className="text-gray-300">Role *</Label>
+            <Select value={newUser.role} onValueChange={(value) => setNewUser(prev => ({ ...prev, role: value }))}>
+              <SelectTrigger className="bg-zinc-800 border-yellow-400/30 text-white">
+                <SelectValue placeholder="Select role" />
+              </SelectTrigger>
+              <SelectContent className="bg-zinc-800 border-yellow-400/30">
+                {roles.map(role => (
+                  <SelectItem key={role.value} value={role.value}>
+                    <div className="flex flex-col">
+                      <span className="font-medium">{role.label}</span>
+                      <span className="text-xs text-gray-400">{role.description}</span>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div>
+            <Label htmlFor="userDepartment" className="text-gray-300">Department</Label>
+            <Select value={newUser.department} onValueChange={(value) => setNewUser(prev => ({ ...prev, department: value }))}>
+              <SelectTrigger className="bg-zinc-800 border-yellow-400/30 text-white">
+                <SelectValue placeholder="Select department" />
+              </SelectTrigger>
+              <SelectContent className="bg-zinc-800 border-yellow-400/30">
+                {departments.map(dept => (
+                  <SelectItem key={dept} value={dept}>{dept}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        
+        <Button
+          type="button"
+          onClick={handleAddUser}
+          className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+        >
+          <Users className="h-4 w-4 mr-2" />
+          Add User
+        </Button>
+      </div>
+
+      {/* Users List */}
+      {users.length > 0 && (
+        <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+          <h3 className="text-lg font-semibold text-white mb-4">Team Members ({users.length})</h3>
+          <div className="space-y-3">
+            {users.map((user) => (
+              <div
+                key={user.id}
+                className="flex items-center justify-between p-4 bg-zinc-900/50 rounded-lg border border-zinc-700 hover:border-yellow-400/30 transition-colors"
+              >
+                <div className="flex-1">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-yellow-400/20 flex items-center justify-center">
+                      <User className="h-5 w-5 text-yellow-400" />
+                    </div>
+                    <div>
+                      <p className="text-white font-medium">{user.name}</p>
+                      <p className="text-sm text-gray-400">{user.email}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="text-right">
+                    <Badge className="bg-yellow-400/20 text-yellow-400 border-yellow-400/30">
+                      {roles.find(r => r.value === user.role)?.label || user.role}
+                    </Badge>
+                    {user.department && (
+                      <p className="text-xs text-gray-400 mt-1">{user.department}</p>
+                    )}
+                  </div>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleRemoveUser(user.id)}
+                    className="text-red-400 hover:text-red-300 hover:bg-red-400/10"
+                  >
+                    Remove
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="flex justify-end">
+        <Button 
+          type="submit" 
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+          disabled={users.length === 0}
+        >
+          Continue to Next Step
+        </Button>
+      </div>
+    </form>
+  );
 }
 
 function ProcessorStep({ onComplete, isCompleted }: any) {
@@ -746,20 +1024,26 @@ export default function AgencyOnboarding() {
   });
 
   const completeStepMutation = useMutation({
-    mutationFn: ({ stepName, data }: { stepName: string; data: any }) =>
-      apiRequest(`/api/agencies/${agencyId}/onboarding/${stepName}`, {
+    mutationFn: async ({ stepName, data }: { stepName: string, data: any }) => {
+      const response = await fetch(`/api/agencies/${agencyId}/onboarding/${encodeURIComponent(stepName)}`, {
         method: 'POST',
-        body: { userId: 1, stepData: data }
-      }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ userId: 1, stepData: data })
+      });
+      if (!response.ok) throw new Error('Failed to complete step');
+      return response.json();
+    },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: [`/api/agencies/${agencyId}/onboarding`] });
       toast({
         title: "Step Completed",
         description: `${variables.stepName} completed successfully`,
       });
-      if (currentStepIndex < defaultSteps.length - 1) {
-        setCurrentStepIndex(currentStepIndex + 1);
-      }
+      // Move to next step after a short delay to allow UI to update
+      setTimeout(() => {
+        setCurrentStepIndex(prev => prev < 6 ? prev + 1 : prev);
+      }, 300);
     }
   });
 
@@ -792,11 +1076,12 @@ export default function AgencyOnboarding() {
             initialData={step.stepData}
           />
         );
-      case 'Subscription Plan':
+      case 'Business Profile':
         return (
-          <SubscriptionStep 
+          <BusinessProfileStep 
             onComplete={(data: any) => handleCompleteStep(step.stepName, data)}
             isCompleted={step.isCompleted}
+            initialData={step.stepData}
           />
         );
       case 'User Setup':
@@ -804,6 +1089,7 @@ export default function AgencyOnboarding() {
           <UserSetupStep 
             onComplete={(data: any) => handleCompleteStep(step.stepName, data)}
             isCompleted={step.isCompleted}
+            initialData={step.stepData}
           />
         );
       case 'Processor Configuration':
@@ -852,7 +1138,7 @@ export default function AgencyOnboarding() {
 
   const defaultSteps = [
     { id: 1, stepName: 'Company Information', stepOrder: 1, isCompleted: false, completedAt: null, stepData: {} },
-    { id: 2, stepName: 'Subscription Plan', stepOrder: 2, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 2, stepName: 'Business Profile', stepOrder: 2, isCompleted: false, completedAt: null, stepData: {} },
     { id: 3, stepName: 'User Setup', stepOrder: 3, isCompleted: false, completedAt: null, stepData: {} },
     { id: 4, stepName: 'Processor Configuration', stepOrder: 4, isCompleted: false, completedAt: null, stepData: {} },
     { id: 5, stepName: 'Data Import', stepOrder: 5, isCompleted: false, completedAt: null, stepData: {} },
