@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { CheckCircle, Clock, ArrowRight, Building2, Users, Settings, Database, FileText, DollarSign, TrendingUp, Upload, Palette, Save, User } from 'lucide-react';
+import { CheckCircle, Clock, ArrowRight, Building2, Users, Settings, Database, FileText, DollarSign, TrendingUp, Upload, Palette, Save, User, FolderOpen, Sparkles, LayoutDashboard, Shield, BookOpen, Image } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -60,10 +60,13 @@ const stepIcons = {
   'Domain & Email Setup': Settings,
   'Business Profile': TrendingUp,
   'User Setup': Users,
-  'Processor Configuration': Database,
-  'Data Import': Upload,
-  'Commission Structure': DollarSign,
-  'Reporting Setup': FileText,
+  'Vendor Selection': Database,
+  'Processor & Lead Sheet Setup': Upload,
+  'FAQ Upload': FileText,
+  'Document Center': FolderOpen,
+  'ISO-AI Preferences': Sparkles,
+  'Residual Upload': DollarSign,
+  'Dashboard Tour': LayoutDashboard,
 };
 
 const stepDescriptions = {
@@ -71,10 +74,13 @@ const stepDescriptions = {
   'Domain & Email Setup': 'Configure whitelabel domain and email settings',
   'Business Profile': 'AI-powered business understanding and analysis',
   'User Setup': 'Add team members and configure user roles',
-  'Processor Configuration': 'Connect your payment processors and configure settings',
-  'Data Import': 'Import historical data and lead sheets',
-  'Commission Structure': 'Set up commission splits and role assignments',
-  'Reporting Setup': 'Configure automated reports and email schedules',
+  'Vendor Selection': 'Select processors, gateways, and hardware/POS vendors',
+  'Processor & Lead Sheet Setup': 'Upload lead sheets, map processor data, and import historical data',
+  'FAQ Upload': 'Upload FAQ document for ISO-AI knowledge base',
+  'Document Center': 'Upload essential documents and resources',
+  'ISO-AI Preferences': 'Configure your AI assistant settings',
+  'Residual Upload': 'Import historical residual data',
+  'Dashboard Tour': 'Quick tour of your new dashboard',
 };
 
 function CompanyInfoStep({ onComplete, isCompleted, initialData }: any) {
@@ -983,32 +989,1393 @@ function UserSetupStep({ onComplete, isCompleted, initialData }: any) {
   );
 }
 
-function ProcessorStep({ onComplete, isCompleted }: any) {
+function VendorSelectionStep({ onComplete, isCompleted, initialData }: any) {
+  const { toast } = useToast();
+  const [currentMicroStep, setCurrentMicroStep] = useState(0);
+  const [selectedProcessors, setSelectedProcessors] = useState<number[]>(initialData?.processors || []);
+  const [selectedGateways, setSelectedGateways] = useState<number[]>(initialData?.gateways || []);
+  const [selectedHardware, setSelectedHardware] = useState<number[]>(initialData?.hardware || []);
+
+  // Fetch vendors from API
+  const { data: vendors, isLoading } = useQuery({
+    queryKey: ['/api/vendors'],
+    queryFn: async () => {
+      const response = await fetch('/api/vendors', { credentials: 'include' });
+      if (!response.ok) return [];
+      return response.json();
+    }
+  });
+
+  const processors = vendors?.filter((v: any) => v.category === 'Processors') || [];
+  const gateways = vendors?.filter((v: any) => v.category === 'Gateways') || [];
+  const hardware = vendors?.filter((v: any) => v.category === 'Hardware/Equipment') || [];
+
+  const microSteps = [
+    { title: 'Processors', data: processors, selected: selectedProcessors, setSelected: setSelectedProcessors },
+    { title: 'Gateways', data: gateways, selected: selectedGateways, setSelected: setSelectedGateways },
+    { title: 'Hardware/POS', data: hardware, selected: selectedHardware, setSelected: setSelectedHardware }
+  ];
+
+  const currentStep = microSteps[currentMicroStep];
+
+  const toggleVendor = (vendorId: number) => {
+    const isSelected = currentStep.selected.includes(vendorId);
+    if (isSelected) {
+      currentStep.setSelected(currentStep.selected.filter((id: number) => id !== vendorId));
+    } else {
+      currentStep.setSelected([...currentStep.selected, vendorId]);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentStep.selected.length === 0) {
+      toast({
+        title: "No Selection",
+        description: `Please select at least one ${currentStep.title.toLowerCase()} option`,
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (currentMicroStep < microSteps.length - 1) {
+      setCurrentMicroStep(currentMicroStep + 1);
+      toast({
+        title: "Selection Saved",
+        description: `${currentStep.selected.length} ${currentStep.title.toLowerCase()} selected`,
+      });
+    } else {
+      // Final step - complete
+      onComplete({
+        processors: selectedProcessors,
+        gateways: selectedGateways,
+        hardware: selectedHardware
+      });
+    }
+  };
+
+  const handleBack = () => {
+    if (currentMicroStep > 0) {
+      setCurrentMicroStep(currentMicroStep - 1);
+    }
+  };
+
   if (isCompleted) {
-    return <div className="text-center py-8"><CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" /><p className="text-white">Processors configured</p></div>;
+    const totalSelected = selectedProcessors.length + selectedGateways.length + selectedHardware.length;
+    return (
+      <div className="text-center py-8">
+        <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+        <p className="text-white">Vendor selection complete</p>
+        <p className="text-gray-400 text-sm mt-2">{totalSelected} vendor(s) selected</p>
+      </div>
+    );
   }
-  return <div className="text-center py-8"><p className="text-gray-300">Processor configuration will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue to Next Step</Button></div>;
+
+  if (isLoading) {
+    return (
+      <div className="text-center py-8">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mx-auto"></div>
+        <p className="text-gray-400 mt-4">Loading vendors...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Micro-step Progress */}
+      <div className="flex items-center justify-center gap-2 mb-6">
+        {microSteps.map((step, index) => (
+          <div key={index} className="flex items-center">
+            <div className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
+              index === currentMicroStep
+                ? 'bg-yellow-400/20 border-2 border-yellow-400'
+                : index < currentMicroStep
+                ? 'bg-green-500/20 border-2 border-green-500'
+                : 'bg-zinc-800 border-2 border-zinc-600'
+            }`}>
+              {index < currentMicroStep ? (
+                <CheckCircle className="h-4 w-4 text-green-400" />
+              ) : (
+                <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                  index === currentMicroStep ? 'bg-yellow-400 text-black' : 'bg-zinc-700 text-gray-400'
+                }`}>
+                  {index + 1}
+                </div>
+              )}
+              <span className={`text-sm font-medium ${
+                index === currentMicroStep ? 'text-yellow-400' : index < currentMicroStep ? 'text-green-400' : 'text-gray-500'
+              }`}>
+                {step.title}
+              </span>
+            </div>
+            {index < microSteps.length - 1 && (
+              <ArrowRight className="h-4 w-4 text-gray-600 mx-2" />
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Current Step Content */}
+      <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+        <div className="mb-6">
+          <h3 className="text-xl font-semibold text-white mb-2">
+            Select {currentStep.title}
+          </h3>
+          <p className="text-gray-400 text-sm">
+            Choose all {currentStep.title.toLowerCase()} you work with (multi-select)
+          </p>
+          <p className="text-yellow-400 text-sm mt-1">
+            {currentStep.selected.length} selected
+          </p>
+        </div>
+
+        {/* Vendor Grid - Circular Logos */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
+          {currentStep.data.map((vendor: any) => {
+            const isSelected = currentStep.selected.includes(vendor.id);
+            return (
+              <button
+                key={vendor.id}
+                type="button"
+                onClick={() => toggleVendor(vendor.id)}
+                className={`flex flex-col items-center p-4 rounded-lg border-2 transition-all hover:scale-105 ${
+                  isSelected
+                    ? 'bg-yellow-400/20 border-yellow-400 shadow-lg shadow-yellow-400/20'
+                    : 'bg-zinc-900/50 border-zinc-700 hover:border-yellow-400/50'
+                }`}
+              >
+                <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-3 transition-all ${
+                  isSelected
+                    ? 'bg-yellow-400/30 ring-4 ring-yellow-400/50'
+                    : 'bg-zinc-800'
+                }`}>
+                  {/* Placeholder for logo - using first letter */}
+                  <span className={`text-2xl font-bold ${
+                    isSelected ? 'text-yellow-400' : 'text-gray-500'
+                  }`}>
+                    {vendor.name.charAt(0)}
+                  </span>
+                </div>
+                <span className={`text-sm font-medium text-center line-clamp-2 ${
+                  isSelected ? 'text-white' : 'text-gray-400'
+                }`}>
+                  {vendor.name}
+                </span>
+                {isSelected && (
+                  <CheckCircle className="h-5 w-5 text-yellow-400 mt-2" />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {currentStep.data.length === 0 && (
+          <div className="text-center py-8 text-gray-400">
+            No {currentStep.title.toLowerCase()} available
+          </div>
+        )}
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className="flex justify-between">
+        <Button
+          type="button"
+          onClick={handleBack}
+          disabled={currentMicroStep === 0}
+          variant="outline"
+          className="border-yellow-400/30 text-yellow-400"
+        >
+          Back
+        </Button>
+        <Button
+          type="button"
+          onClick={handleNext}
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+          disabled={currentStep.selected.length === 0}
+        >
+          {currentMicroStep === microSteps.length - 1 ? 'Complete Selection' : 'Next'}
+        </Button>
+      </div>
+    </div>
+  );
 }
 
-function DataImportStep({ onComplete, isCompleted }: any) {
+function ProcessorDataSetupStep({ onComplete, isCompleted, initialData }: any) {
+  const { toast } = useToast();
+  const [currentSubStep, setCurrentSubStep] = useState(0);
+  const [leadSheetFile, setLeadSheetFile] = useState<File | null>(initialData?.leadSheetFile || null);
+  const [processorMappings, setProcessorMappings] = useState<any[]>(initialData?.processorMappings || []);
+  const [uploadedData, setUploadedData] = useState<any[]>(initialData?.uploadedData || []);
+
+  // Get selected processors from previous step
+  const selectedProcessorIds = initialData?.selectedProcessors || [];
+  
+  const { data: vendors } = useQuery({
+    queryKey: ['/api/vendors'],
+    queryFn: async () => {
+      const response = await fetch('/api/vendors', { credentials: 'include' });
+      if (!response.ok) return [];
+      return response.json();
+    }
+  });
+
+  const selectedProcessors = vendors?.filter((v: any) => 
+    selectedProcessorIds.includes(v.id) && v.category === 'Processors'
+  ) || [];
+
+  const subSteps = [
+    { title: 'Lead Sheet Upload', icon: Upload },
+    { title: 'Processor Mapping', icon: Database },
+    { title: 'Upload Past Data', icon: FileText }
+  ];
+
+  // Sub-step 5.1: Lead Sheet Upload
+  const renderLeadSheetUpload = () => {
+    const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setLeadSheetFile(file);
+        toast({
+          title: "File Selected",
+          description: `${file.name} ready for upload`,
+        });
+      }
+    };
+
+    return (
+      <div className="space-y-6">
+        <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <Upload className="h-5 w-5 text-yellow-400" />
+            Upload Lead Sheet
+          </h3>
+          <p className="text-gray-400 text-sm mb-4">
+            Upload your master lead sheet that cross-references MID numbers and branch numbers for processor reports.
+          </p>
+
+          <div className="mt-4 flex justify-center px-6 pt-5 pb-6 border-2 border-yellow-400/30 border-dashed rounded-md hover:border-yellow-400/50 transition-colors bg-zinc-900/50">
+            <div className="space-y-1 text-center">
+              <Upload className="mx-auto h-12 w-12 text-yellow-400" />
+              <div className="flex text-sm text-gray-400">
+                <label
+                  htmlFor="lead-sheet-upload"
+                  className="relative cursor-pointer rounded-md font-medium text-yellow-400 hover:text-yellow-300 focus-within:outline-none"
+                >
+                  <span>Upload a file</span>
+                  <input
+                    id="lead-sheet-upload"
+                    type="file"
+                    accept=".csv,.xlsx,.xls"
+                    onChange={handleFileUpload}
+                    className="sr-only"
+                  />
+                </label>
+                <p className="pl-1">or drag and drop</p>
+              </div>
+              <p className="text-xs text-gray-500">CSV or Excel files</p>
+              {leadSheetFile && (
+                <div className="mt-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+                  <p className="text-sm text-green-400 flex items-center justify-center gap-2">
+                    <CheckCircle className="h-4 w-4" />
+                    {leadSheetFile.name}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-end">
+          <Button
+            onClick={() => {
+              if (!leadSheetFile) {
+                toast({
+                  title: "No File Selected",
+                  description: "Please upload a lead sheet to continue",
+                  variant: "destructive"
+                });
+                return;
+              }
+              setCurrentSubStep(1);
+              toast({
+                title: "Lead Sheet Uploaded",
+                description: "Proceeding to processor mapping",
+              });
+            }}
+            className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+            disabled={!leadSheetFile}
+          >
+            Continue to Mapping
+          </Button>
+        </div>
+      </div>
+    );
+  };
+
+  // Sub-step 5.2: Processor Mapping
+  const renderProcessorMapping = () => {
+    const [selectedProcessor, setSelectedProcessor] = useState<any>(null);
+    const [mappingFile, setMappingFile] = useState<File | null>(null);
+    const [columnMappings, setColumnMappings] = useState<any>({});
+
+    const sampleColumns = ['MID', 'DBA Name', 'Monthly Volume', 'Transaction Count', 'Fees', 'Date'];
+    const targetFields = ['merchant_id', 'business_name', 'volume', 'transactions', 'fees', 'statement_date'];
+
+    const handleProcessorSelect = (processor: any) => {
+      setSelectedProcessor(processor);
+      setMappingFile(null);
+      setColumnMappings({});
+    };
+
+    const handleMappingFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setMappingFile(file);
+        toast({
+          title: "Sample File Uploaded",
+          description: "Ready for column mapping",
+        });
+      }
+    };
+
+    const handleSaveMapping = () => {
+      if (!selectedProcessor || !mappingFile) {
+        toast({
+          title: "Incomplete Mapping",
+          description: "Please select a processor and upload a sample file",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      const newMapping = {
+        processorId: selectedProcessor.id,
+        processorName: selectedProcessor.name,
+        file: mappingFile,
+        columns: columnMappings,
+        completed: true
+      };
+
+      setProcessorMappings([...processorMappings, newMapping]);
+      setSelectedProcessor(null);
+      setMappingFile(null);
+      setColumnMappings({});
+      
+      toast({
+        title: "Mapping Saved",
+        description: `${selectedProcessor.name} mapping configured`,
+      });
+    };
+
+    const allProcessorsMapped = selectedProcessors.length > 0 && 
+      processorMappings.length === selectedProcessors.length;
+
+    return (
+      <div className="space-y-6">
+        <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <Database className="h-5 w-5 text-yellow-400" />
+            Processor Data Mapping
+          </h3>
+          <p className="text-gray-400 text-sm mb-4">
+            Configure column mapping for each processor selected in Step 4.
+          </p>
+
+          {/* Processor List */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+            {selectedProcessors.map((processor: any) => {
+              const isMapped = processorMappings.some((m: any) => m.processorId === processor.id);
+              const isSelected = selectedProcessor?.id === processor.id;
+              
+              return (
+                <button
+                  key={processor.id}
+                  onClick={() => handleProcessorSelect(processor)}
+                  className={`p-4 rounded-lg border-2 transition-all text-left ${
+                    isMapped
+                      ? 'bg-green-500/10 border-green-500 cursor-default'
+                      : isSelected
+                      ? 'bg-yellow-400/20 border-yellow-400'
+                      : 'bg-zinc-900/50 border-zinc-700 hover:border-yellow-400/50'
+                  }`}
+                  disabled={isMapped}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className={`font-medium ${
+                      isMapped ? 'text-green-400' : isSelected ? 'text-white' : 'text-gray-400'
+                    }`}>
+                      {processor.name}
+                    </span>
+                    {isMapped && <CheckCircle className="h-5 w-5 text-green-400" />}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Mapping Interface */}
+          {selectedProcessor && (
+            <div className="mt-6 p-4 bg-zinc-900/50 rounded-lg border border-yellow-400/30">
+              <h4 className="text-white font-medium mb-4">
+                Mapping for {selectedProcessor.name}
+              </h4>
+
+              <div className="mb-4">
+                <Label className="text-gray-300">Upload Sample File</Label>
+                <div className="mt-2 flex justify-center px-6 pt-4 pb-4 border-2 border-dashed rounded-md border-yellow-400/30 bg-zinc-800/50">
+                  <div className="text-center">
+                    <Upload className="mx-auto h-8 w-8 text-yellow-400" />
+                    <div className="mt-2">
+                      <label
+                        htmlFor="mapping-file-upload"
+                        className="cursor-pointer text-sm text-yellow-400 hover:text-yellow-300"
+                      >
+                        Upload CSV/Excel
+                        <input
+                          id="mapping-file-upload"
+                          type="file"
+                          accept=".csv,.xlsx,.xls"
+                          onChange={handleMappingFileUpload}
+                          className="sr-only"
+                        />
+                      </label>
+                    </div>
+                    {mappingFile && (
+                      <p className="text-xs text-green-400 mt-2">✓ {mappingFile.name}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {mappingFile && (
+                <div className="space-y-3">
+                  <p className="text-sm text-gray-400">Map your columns to system fields:</p>
+                  {sampleColumns.map((col, idx) => (
+                    <div key={idx} className="flex items-center gap-3">
+                      <div className="flex-1 p-2 bg-zinc-800 rounded border border-zinc-700">
+                        <span className="text-sm text-gray-300">{col}</span>
+                      </div>
+                      <ArrowRight className="h-4 w-4 text-yellow-400" />
+                      <div className="flex-1">
+                        <Select
+                          value={columnMappings[col] || ''}
+                          onValueChange={(value) => setColumnMappings({ ...columnMappings, [col]: value })}
+                        >
+                          <SelectTrigger className="bg-zinc-800 border-yellow-400/30 text-white">
+                            <SelectValue placeholder="Select field" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-zinc-800 border-yellow-400/30">
+                            {targetFields.map(field => (
+                              <SelectItem key={field} value={field}>{field}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <Button
+                onClick={handleSaveMapping}
+                className="w-full mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+                disabled={!mappingFile}
+              >
+                Save Mapping
+              </Button>
+            </div>
+          )}
+        </div>
+
+        <div className="flex justify-between">
+          <Button
+            onClick={() => setCurrentSubStep(0)}
+            variant="outline"
+            className="border-yellow-400/30 text-yellow-400"
+          >
+            Back
+          </Button>
+          <Button
+            onClick={() => {
+              if (!allProcessorsMapped) {
+                toast({
+                  title: "Incomplete Mappings",
+                  description: "Please map all selected processors",
+                  variant: "destructive"
+                });
+                return;
+              }
+              setCurrentSubStep(2);
+            }}
+            className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+            disabled={!allProcessorsMapped}
+          >
+            Continue to Upload
+          </Button>
+        </div>
+      </div>
+    );
+  };
+
+  // Sub-step 5.3: Upload Past Data
+  const renderUploadPastData = () => {
+    const [uploadingProcessor, setUploadingProcessor] = useState<any>(null);
+    const [dataFile, setDataFile] = useState<File | null>(null);
+
+    const handleDataUpload = (processor: any) => {
+      setUploadingProcessor(processor);
+      setDataFile(null);
+    };
+
+    const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setDataFile(file);
+      }
+    };
+
+    const handleProcessData = () => {
+      if (!dataFile || !uploadingProcessor) return;
+
+      // Simulate data processing
+      toast({
+        title: "Processing Data",
+        description: "Parsing and auditing uploaded data...",
+      });
+
+      setTimeout(() => {
+        const newUpload = {
+          processorId: uploadingProcessor.id,
+          processorName: uploadingProcessor.name,
+          file: dataFile,
+          processed: true,
+          recordCount: Math.floor(Math.random() * 1000) + 100
+        };
+
+        setUploadedData([...uploadedData, newUpload]);
+        setUploadingProcessor(null);
+        setDataFile(null);
+
+        toast({
+          title: "Data Uploaded Successfully",
+          description: `${newUpload.recordCount} records parsed and saved to master data table`,
+        });
+      }, 2000);
+    };
+
+    const allDataUploaded = processorMappings.length > 0 && 
+      uploadedData.length === processorMappings.length;
+
+    return (
+      <div className="space-y-6">
+        <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <FileText className="h-5 w-5 text-yellow-400" />
+            Upload Historical Data
+          </h3>
+          <p className="text-gray-400 text-sm mb-4">
+            Upload past data for each mapped processor. Data will be parsed by month/year and added to your master table.
+          </p>
+
+          <div className="space-y-3">
+            {processorMappings.map((mapping: any) => {
+              const isUploaded = uploadedData.some((u: any) => u.processorId === mapping.processorId);
+              const isUploading = uploadingProcessor?.id === mapping.processorId;
+
+              return (
+                <div
+                  key={mapping.processorId}
+                  className={`p-4 rounded-lg border-2 transition-all ${
+                    isUploaded
+                      ? 'bg-green-500/10 border-green-500'
+                      : isUploading
+                      ? 'bg-yellow-400/20 border-yellow-400'
+                      : 'bg-zinc-900/50 border-zinc-700'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                        isUploaded ? 'bg-green-500/20' : 'bg-yellow-400/20'
+                      }`}>
+                        {isUploaded ? (
+                          <CheckCircle className="h-5 w-5 text-green-400" />
+                        ) : (
+                          <Upload className="h-5 w-5 text-yellow-400" />
+                        )}
+                      </div>
+                      <div>
+                        <p className="text-white font-medium">{mapping.processorName}</p>
+                        {isUploaded && (
+                          <p className="text-xs text-green-400">
+                            {uploadedData.find((u: any) => u.processorId === mapping.processorId)?.recordCount} records uploaded
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    {!isUploaded && !isUploading && (
+                      <Button
+                        onClick={() => handleDataUpload(mapping)}
+                        size="sm"
+                        className="bg-yellow-400 hover:bg-yellow-500 text-black"
+                      >
+                        Upload Data
+                      </Button>
+                    )}
+                  </div>
+
+                  {isUploading && (
+                    <div className="mt-3 p-3 bg-zinc-800/50 rounded border border-yellow-400/30">
+                      <input
+                        type="file"
+                        accept=".csv,.xlsx,.xls"
+                        onChange={handleFileSelect}
+                        className="mb-3 text-sm text-gray-400"
+                      />
+                      {dataFile && (
+                        <Button
+                          onClick={handleProcessData}
+                          className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+                        >
+                          Process & Upload
+                        </Button>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="flex justify-between">
+          <Button
+            onClick={() => setCurrentSubStep(1)}
+            variant="outline"
+            className="border-yellow-400/30 text-yellow-400"
+          >
+            Back
+          </Button>
+          <Button
+            onClick={() => {
+              if (!allDataUploaded) {
+                toast({
+                  title: "Incomplete Uploads",
+                  description: "Please upload data for all processors",
+                  variant: "destructive"
+                });
+                return;
+              }
+              onComplete({
+                leadSheetFile,
+                processorMappings,
+                uploadedData
+              });
+            }}
+            className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+            disabled={!allDataUploaded}
+          >
+            Complete Data Setup
+          </Button>
+        </div>
+      </div>
+    );
+  };
+
   if (isCompleted) {
-    return <div className="text-center py-8"><CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" /><p className="text-white">Data import complete</p></div>;
+    return (
+      <div className="text-center py-8">
+        <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+        <p className="text-white">Processor data setup complete</p>
+        <p className="text-gray-400 text-sm mt-2">
+          {uploadedData.length} processor(s) configured with historical data
+        </p>
+      </div>
+    );
   }
-  return <div className="text-center py-8"><p className="text-gray-300">Data import options will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue to Next Step</Button></div>;
+
+  return (
+    <div className="space-y-6">
+      {/* Sub-step Progress */}
+      <div className="flex items-center justify-center gap-2 mb-6">
+        {subSteps.map((step, index) => {
+          const Icon = step.icon;
+          return (
+            <div key={index} className="flex items-center">
+              <div className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
+                index === currentSubStep
+                  ? 'bg-yellow-400/20 border-2 border-yellow-400'
+                  : index < currentSubStep
+                  ? 'bg-green-500/20 border-2 border-green-500'
+                  : 'bg-zinc-800 border-2 border-zinc-600'
+              }`}>
+                {index < currentSubStep ? (
+                  <CheckCircle className="h-4 w-4 text-green-400" />
+                ) : (
+                  <Icon className={`h-4 w-4 ${
+                    index === currentSubStep ? 'text-yellow-400' : 'text-gray-500'
+                  }`} />
+                )}
+                <span className={`text-sm font-medium ${
+                  index === currentSubStep ? 'text-yellow-400' : index < currentSubStep ? 'text-green-400' : 'text-gray-500'
+                }`}>
+                  {step.title}
+                </span>
+              </div>
+              {index < subSteps.length - 1 && (
+                <ArrowRight className="h-4 w-4 text-gray-600 mx-2" />
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Render current sub-step */}
+      {currentSubStep === 0 && renderLeadSheetUpload()}
+      {currentSubStep === 1 && renderProcessorMapping()}
+      {currentSubStep === 2 && renderUploadPastData()}
+    </div>
+  );
 }
 
-function CommissionStep({ onComplete, isCompleted }: any) {
+// Task 3.6: FAQ Upload
+function FAQUploadStep({ onComplete, isCompleted, initialData }: any) {
+  const { toast } = useToast();
+  const [faqFile, setFaqFile] = useState<File | null>(initialData?.faqFile || null);
+  const [faqCount, setFaqCount] = useState(initialData?.faqCount || 0);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFaqFile(file);
+      toast({
+        title: "FAQ File Selected",
+        description: `${file.name} ready for processing`,
+      });
+    }
+  };
+
+  const handleProcessFAQ = () => {
+    if (!faqFile) return;
+
+    setIsProcessing(true);
+    toast({
+      title: "Processing FAQ",
+      description: "Parsing and indexing FAQ entries...",
+    });
+
+    setTimeout(() => {
+      const count = Math.floor(Math.random() * 50) + 20;
+      setFaqCount(count);
+      setIsProcessing(false);
+      toast({
+        title: "FAQ Processed Successfully",
+        description: `${count} FAQ entries indexed for ISO-AI`,
+      });
+    }, 2000);
+  };
+
   if (isCompleted) {
-    return <div className="text-center py-8"><CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" /><p className="text-white">Commission structure set</p></div>;
+    return (
+      <div className="text-center py-8">
+        <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+        <p className="text-white">FAQ uploaded and indexed</p>
+        <p className="text-gray-400 text-sm mt-2">{faqCount} FAQ entries available</p>
+      </div>
+    );
   }
-  return <div className="text-center py-8"><p className="text-gray-300">Commission setup will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Continue to Next Step</Button></div>;
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <FileText className="h-5 w-5 text-yellow-400" />
+          Upload FAQ Document
+        </h3>
+        <p className="text-gray-400 text-sm mb-4">
+          Upload your company FAQ document. ISO-AI will index these entries to provide accurate answers to your team and clients.
+        </p>
+
+        <div className="mt-4 flex justify-center px-6 pt-5 pb-6 border-2 border-yellow-400/30 border-dashed rounded-md hover:border-yellow-400/50 transition-colors bg-zinc-900/50">
+          <div className="space-y-1 text-center">
+            <Upload className="mx-auto h-12 w-12 text-yellow-400" />
+            <div className="flex text-sm text-gray-400">
+              <label
+                htmlFor="faq-upload"
+                className="relative cursor-pointer rounded-md font-medium text-yellow-400 hover:text-yellow-300"
+              >
+                <span>Upload FAQ file</span>
+                <input
+                  id="faq-upload"
+                  type="file"
+                  accept=".pdf,.doc,.docx,.txt"
+                  onChange={handleFileUpload}
+                  className="sr-only"
+                />
+              </label>
+              <p className="pl-1">or drag and drop</p>
+            </div>
+            <p className="text-xs text-gray-500">PDF, DOC, DOCX, or TXT</p>
+            {faqFile && (
+              <div className="mt-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+                <p className="text-sm text-green-400 flex items-center justify-center gap-2">
+                  <CheckCircle className="h-4 w-4" />
+                  {faqFile.name}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {faqFile && faqCount === 0 && (
+          <Button
+            onClick={handleProcessFAQ}
+            className="w-full mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+            disabled={isProcessing}
+          >
+            {isProcessing ? 'Processing...' : 'Process & Index FAQ'}
+          </Button>
+        )}
+
+        {faqCount > 0 && (
+          <div className="mt-4 p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+            <p className="text-green-400 font-medium text-center">
+              ✓ {faqCount} FAQ entries indexed successfully
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div className="flex justify-end">
+        <Button
+          onClick={() => onComplete({ faqFile, faqCount })}
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+          disabled={faqCount === 0}
+        >
+          Continue to Next Step
+        </Button>
+      </div>
+    </div>
+  );
 }
 
-function ReportingStep({ onComplete, isCompleted }: any) {
+// Task 3.7: Document Center Setup
+function DocumentCenterStep({ onComplete, isCompleted, initialData }: any) {
+  const { toast } = useToast();
+  const [documents, setDocuments] = useState<any[]>(initialData?.documents || []);
+  const [uploadingCategory, setUploadingCategory] = useState<string | null>(null);
+
+  const categories = [
+    { name: 'Contracts & Agreements', icon: FileText, description: 'Service agreements, merchant contracts' },
+    { name: 'Compliance Documents', icon: Shield, description: 'PCI compliance, regulatory docs' },
+    { name: 'Training Materials', icon: BookOpen, description: 'Onboarding guides, training videos' },
+    { name: 'Marketing Assets', icon: Image, description: 'Brochures, presentations, logos' }
+  ];
+
+  const handleFileUpload = (category: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length > 0) {
+      const newDocs = files.map(file => ({
+        id: Date.now() + Math.random(),
+        category,
+        name: file.name,
+        size: (file.size / 1024).toFixed(2) + ' KB',
+        uploadedAt: new Date().toISOString()
+      }));
+      setDocuments([...documents, ...newDocs]);
+      setUploadingCategory(null);
+      toast({
+        title: "Documents Uploaded",
+        description: `${files.length} file(s) added to ${category}`,
+      });
+    }
+  };
+
+  const removeDocument = (docId: number) => {
+    setDocuments(documents.filter(d => d.id !== docId));
+    toast({
+      title: "Document Removed",
+      description: "Document deleted from center",
+    });
+  };
+
   if (isCompleted) {
-    return <div className="text-center py-8"><CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" /><p className="text-white">Reporting configured</p></div>;
+    return (
+      <div className="text-center py-8">
+        <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+        <p className="text-white">Document center configured</p>
+        <p className="text-gray-400 text-sm mt-2">{documents.length} document(s) uploaded</p>
+      </div>
+    );
   }
-  return <div className="text-center py-8"><p className="text-gray-300">Reporting setup will go here</p><Button onClick={() => onComplete({})} className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">Complete Setup</Button></div>;
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <FolderOpen className="h-5 w-5 text-yellow-400" />
+          Document Center Setup
+        </h3>
+        <p className="text-gray-400 text-sm mb-6">
+          Upload essential documents for your team. These will be accessible in the Document Center.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {categories.map((category) => {
+            const Icon = category.icon;
+            const categoryDocs = documents.filter(d => d.category === category.name);
+            const isUploading = uploadingCategory === category.name;
+
+            return (
+              <div key={category.name} className="p-4 bg-zinc-900/50 rounded-lg border border-zinc-700">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-full bg-yellow-400/20 flex items-center justify-center flex-shrink-0">
+                    <Icon className="h-5 w-5 text-yellow-400" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-white font-medium text-sm">{category.name}</h4>
+                    <p className="text-xs text-gray-500 mt-1">{category.description}</p>
+                  </div>
+                </div>
+
+                {categoryDocs.length > 0 && (
+                  <div className="space-y-2 mb-3">
+                    {categoryDocs.map(doc => (
+                      <div key={doc.id} className="flex items-center justify-between p-2 bg-zinc-800 rounded text-xs">
+                        <span className="text-gray-300 truncate flex-1">{doc.name}</span>
+                        <button
+                          onClick={() => removeDocument(doc.id)}
+                          className="text-red-400 hover:text-red-300 ml-2"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <label className="block">
+                  <input
+                    type="file"
+                    multiple
+                    onChange={(e) => handleFileUpload(category.name, e)}
+                    className="sr-only"
+                  />
+                  <div className="cursor-pointer text-center py-2 px-3 border border-yellow-400/30 rounded text-xs text-yellow-400 hover:bg-yellow-400/10 transition-colors">
+                    + Add Files ({categoryDocs.length})
+                  </div>
+                </label>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="flex justify-end">
+        <Button
+          onClick={() => onComplete({ documents })}
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+        >
+          Continue to Next Step
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+// Task 3.8: ISO-AI Preferences
+function ISOAIPreferencesStep({ onComplete, isCompleted, initialData }: any) {
+  const { toast } = useToast();
+  const [preferences, setPreferences] = useState({
+    enableAI: initialData?.enableAI ?? true,
+    autoRespond: initialData?.autoRespond ?? false,
+    tone: initialData?.tone || 'professional',
+    language: initialData?.language || 'en',
+    knowledgeBase: initialData?.knowledgeBase ?? true,
+    learningMode: initialData?.learningMode ?? true
+  });
+
+  if (isCompleted) {
+    return (
+      <div className="text-center py-8">
+        <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+        <p className="text-white">ISO-AI preferences configured</p>
+        <p className="text-gray-400 text-sm mt-2">AI assistant ready</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <Sparkles className="h-5 w-5 text-yellow-400" />
+          ISO-AI Assistant Preferences
+        </h3>
+        <p className="text-gray-400 text-sm mb-6">
+          Configure your AI assistant to match your company's needs and communication style.
+        </p>
+
+        <div className="space-y-6">
+          {/* Enable AI */}
+          <div className="flex items-center justify-between p-4 bg-zinc-900/50 rounded-lg">
+            <div>
+              <p className="text-white font-medium">Enable ISO-AI Assistant</p>
+              <p className="text-xs text-gray-400 mt-1">Activate AI-powered support and automation</p>
+            </div>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={preferences.enableAI}
+                onChange={(e) => setPreferences({ ...preferences, enableAI: e.target.checked })}
+                className="sr-only peer"
+              />
+              <div className="w-11 h-6 bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-400"></div>
+            </label>
+          </div>
+
+          {/* Auto Respond */}
+          <div className="flex items-center justify-between p-4 bg-zinc-900/50 rounded-lg">
+            <div>
+              <p className="text-white font-medium">Auto-Respond to Inquiries</p>
+              <p className="text-xs text-gray-400 mt-1">Let AI handle routine questions automatically</p>
+            </div>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={preferences.autoRespond}
+                onChange={(e) => setPreferences({ ...preferences, autoRespond: e.target.checked })}
+                className="sr-only peer"
+              />
+              <div className="w-11 h-6 bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-400"></div>
+            </label>
+          </div>
+
+          {/* Communication Tone */}
+          <div className="p-4 bg-zinc-900/50 rounded-lg">
+            <Label className="text-white font-medium mb-3 block">Communication Tone</Label>
+            <Select value={preferences.tone} onValueChange={(value) => setPreferences({ ...preferences, tone: value })}>
+              <SelectTrigger className="bg-zinc-800 border-yellow-400/30 text-white">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-zinc-800 border-yellow-400/30">
+                <SelectItem value="professional">Professional</SelectItem>
+                <SelectItem value="friendly">Friendly</SelectItem>
+                <SelectItem value="casual">Casual</SelectItem>
+                <SelectItem value="formal">Formal</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Knowledge Base */}
+          <div className="flex items-center justify-between p-4 bg-zinc-900/50 rounded-lg">
+            <div>
+              <p className="text-white font-medium">Use Company Knowledge Base</p>
+              <p className="text-xs text-gray-400 mt-1">Reference uploaded FAQs and documents</p>
+            </div>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={preferences.knowledgeBase}
+                onChange={(e) => setPreferences({ ...preferences, knowledgeBase: e.target.checked })}
+                className="sr-only peer"
+              />
+              <div className="w-11 h-6 bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-400"></div>
+            </label>
+          </div>
+
+          {/* Learning Mode */}
+          <div className="flex items-center justify-between p-4 bg-zinc-900/50 rounded-lg">
+            <div>
+              <p className="text-white font-medium">Continuous Learning Mode</p>
+              <p className="text-xs text-gray-400 mt-1">AI learns from interactions to improve responses</p>
+            </div>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={preferences.learningMode}
+                onChange={(e) => setPreferences({ ...preferences, learningMode: e.target.checked })}
+                className="sr-only peer"
+              />
+              <div className="w-11 h-6 bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-400"></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-end">
+        <Button
+          onClick={() => {
+            toast({
+              title: "Preferences Saved",
+              description: "ISO-AI configured successfully",
+            });
+            onComplete(preferences);
+          }}
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+        >
+          Continue to Next Step
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+// Task 3.9: Residual Upload
+function ResidualUploadStep({ onComplete, isCompleted, initialData }: any) {
+  const { toast } = useToast();
+  const [residualFile, setResidualFile] = useState<File | null>(initialData?.residualFile || null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [uploadStats, setUploadStats] = useState<any>(initialData?.uploadStats || null);
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setResidualFile(file);
+      toast({
+        title: "Residual File Selected",
+        description: `${file.name} ready for processing`,
+      });
+    }
+  };
+
+  const handleProcessResiduals = () => {
+    if (!residualFile) return;
+
+    setIsProcessing(true);
+    toast({
+      title: "Processing Residuals",
+      description: "Parsing and calculating residual data...",
+    });
+
+    setTimeout(() => {
+      const stats = {
+        totalRecords: Math.floor(Math.random() * 500) + 100,
+        totalAmount: (Math.random() * 50000 + 10000).toFixed(2),
+        merchants: Math.floor(Math.random() * 100) + 20,
+        months: Math.floor(Math.random() * 6) + 1
+      };
+      setUploadStats(stats);
+      setIsProcessing(false);
+      toast({
+        title: "Residuals Processed Successfully",
+        description: `${stats.totalRecords} records imported`,
+      });
+    }, 2500);
+  };
+
+  if (isCompleted) {
+    return (
+      <div className="text-center py-8">
+        <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+        <p className="text-white">Residual data uploaded</p>
+        {uploadStats && (
+          <p className="text-gray-400 text-sm mt-2">
+            ${uploadStats.totalAmount} across {uploadStats.merchants} merchants
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <DollarSign className="h-5 w-5 text-yellow-400" />
+          Upload Residual Data
+        </h3>
+        <p className="text-gray-400 text-sm mb-4">
+          Upload your historical residual data. The system will parse and calculate splits automatically.
+        </p>
+
+        <div className="mt-4 flex justify-center px-6 pt-5 pb-6 border-2 border-yellow-400/30 border-dashed rounded-md hover:border-yellow-400/50 transition-colors bg-zinc-900/50">
+          <div className="space-y-1 text-center">
+            <Upload className="mx-auto h-12 w-12 text-yellow-400" />
+            <div className="flex text-sm text-gray-400">
+              <label
+                htmlFor="residual-upload"
+                className="relative cursor-pointer rounded-md font-medium text-yellow-400 hover:text-yellow-300"
+              >
+                <span>Upload residual file</span>
+                <input
+                  id="residual-upload"
+                  type="file"
+                  accept=".csv,.xlsx,.xls"
+                  onChange={handleFileUpload}
+                  className="sr-only"
+                />
+              </label>
+              <p className="pl-1">or drag and drop</p>
+            </div>
+            <p className="text-xs text-gray-500">CSV or Excel files</p>
+            {residualFile && (
+              <div className="mt-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+                <p className="text-sm text-green-400 flex items-center justify-center gap-2">
+                  <CheckCircle className="h-4 w-4" />
+                  {residualFile.name}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {residualFile && !uploadStats && (
+          <Button
+            onClick={handleProcessResiduals}
+            className="w-full mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+            disabled={isProcessing}
+          >
+            {isProcessing ? 'Processing...' : 'Process Residuals'}
+          </Button>
+        )}
+
+        {uploadStats && (
+          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-center">
+              <p className="text-2xl font-bold text-green-400">{uploadStats.totalRecords}</p>
+              <p className="text-xs text-gray-400 mt-1">Records</p>
+            </div>
+            <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-center">
+              <p className="text-2xl font-bold text-green-400">${uploadStats.totalAmount}</p>
+              <p className="text-xs text-gray-400 mt-1">Total Amount</p>
+            </div>
+            <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-center">
+              <p className="text-2xl font-bold text-green-400">{uploadStats.merchants}</p>
+              <p className="text-xs text-gray-400 mt-1">Merchants</p>
+            </div>
+            <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-center">
+              <p className="text-2xl font-bold text-green-400">{uploadStats.months}</p>
+              <p className="text-xs text-gray-400 mt-1">Months</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="flex justify-end">
+        <Button
+          onClick={() => onComplete({ residualFile, uploadStats })}
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+          disabled={!uploadStats}
+        >
+          Continue to Next Step
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+// Task 3.10: Dashboard Tour
+function DashboardTourStep({ onComplete, isCompleted }: any) {
+  const { toast } = useToast();
+  const [currentTourStep, setCurrentTourStep] = useState(0);
+
+  const tourSteps = [
+    {
+      title: 'Welcome to Your Dashboard',
+      description: 'Your central hub for managing merchants, residuals, and team performance.',
+      icon: LayoutDashboard
+    },
+    {
+      title: 'Analytics & Insights',
+      description: 'Track revenue, merchant growth, and key performance metrics in real-time.',
+      icon: TrendingUp
+    },
+    {
+      title: 'Merchant Management',
+      description: 'View and manage all your merchants, applications, and onboarding status.',
+      icon: Users
+    },
+    {
+      title: 'Residual Reports',
+      description: 'Access monthly residual reports, splits, and payment tracking.',
+      icon: DollarSign
+    },
+    {
+      title: 'ISO-AI Assistant',
+      description: 'Get instant answers and automate routine tasks with your AI assistant.',
+      icon: Sparkles
+    },
+    {
+      title: 'Document Center',
+      description: 'Access contracts, compliance docs, and marketing materials anytime.',
+      icon: FolderOpen
+    }
+  ];
+
+  const currentStep = tourSteps[currentTourStep];
+  const Icon = currentStep.icon;
+
+  if (isCompleted) {
+    return (
+      <div className="text-center py-8">
+        <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+        <p className="text-white text-xl font-semibold">Setup Complete!</p>
+        <p className="text-gray-400 text-sm mt-2">Your agency is ready to go</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-zinc-800/50 p-8 rounded-lg border border-yellow-400/20">
+        <div className="text-center mb-8">
+          <div className="w-20 h-20 rounded-full bg-yellow-400/20 flex items-center justify-center mx-auto mb-4">
+            <Icon className="h-10 w-10 text-yellow-400" />
+          </div>
+          <h3 className="text-2xl font-bold text-white mb-3">{currentStep.title}</h3>
+          <p className="text-gray-400 max-w-md mx-auto">{currentStep.description}</p>
+        </div>
+
+        {/* Tour Progress */}
+        <div className="flex items-center justify-center gap-2 mb-8">
+          {tourSteps.map((_, index) => (
+            <div
+              key={index}
+              className={`h-2 rounded-full transition-all ${
+                index === currentTourStep
+                  ? 'w-8 bg-yellow-400'
+                  : index < currentTourStep
+                  ? 'w-2 bg-green-400'
+                  : 'w-2 bg-zinc-700'
+              }`}
+            />
+          ))}
+        </div>
+
+        <div className="text-center text-sm text-gray-500">
+          Step {currentTourStep + 1} of {tourSteps.length}
+        </div>
+      </div>
+
+      <div className="flex justify-between">
+        <Button
+          onClick={() => setCurrentTourStep(Math.max(0, currentTourStep - 1))}
+          disabled={currentTourStep === 0}
+          variant="outline"
+          className="border-yellow-400/30 text-yellow-400"
+        >
+          Previous
+        </Button>
+        <Button
+          onClick={() => {
+            if (currentTourStep < tourSteps.length - 1) {
+              setCurrentTourStep(currentTourStep + 1);
+            } else {
+              toast({
+                title: "Onboarding Complete!",
+                description: "Welcome to ISOHub - let's get started!",
+              });
+              onComplete({});
+            }
+          }}
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+        >
+          {currentTourStep === tourSteps.length - 1 ? 'Complete Setup' : 'Next'}
+        </Button>
+      </div>
+    </div>
+  );
 }
 
 export default function AgencyOnboarding() {
@@ -1092,30 +2459,57 @@ export default function AgencyOnboarding() {
             initialData={step.stepData}
           />
         );
-      case 'Processor Configuration':
+      case 'Vendor Selection':
         return (
-          <ProcessorStep 
+          <VendorSelectionStep 
             onComplete={(data: any) => handleCompleteStep(step.stepName, data)}
             isCompleted={step.isCompleted}
+            initialData={step.stepData}
           />
         );
-      case 'Data Import':
+      case 'Processor & Lead Sheet Setup':
         return (
-          <DataImportStep 
+          <ProcessorDataSetupStep 
             onComplete={(data: any) => handleCompleteStep(step.stepName, data)}
             isCompleted={step.isCompleted}
+            initialData={step.stepData}
           />
         );
-      case 'Commission Structure':
+      case 'FAQ Upload':
         return (
-          <CommissionStep 
+          <FAQUploadStep 
             onComplete={(data: any) => handleCompleteStep(step.stepName, data)}
             isCompleted={step.isCompleted}
+            initialData={step.stepData}
           />
         );
-      case 'Reporting Setup':
+      case 'Document Center':
         return (
-          <ReportingStep 
+          <DocumentCenterStep 
+            onComplete={(data: any) => handleCompleteStep(step.stepName, data)}
+            isCompleted={step.isCompleted}
+            initialData={step.stepData}
+          />
+        );
+      case 'ISO-AI Preferences':
+        return (
+          <ISOAIPreferencesStep 
+            onComplete={(data: any) => handleCompleteStep(step.stepName, data)}
+            isCompleted={step.isCompleted}
+            initialData={step.stepData}
+          />
+        );
+      case 'Residual Upload':
+        return (
+          <ResidualUploadStep 
+            onComplete={(data: any) => handleCompleteStep(step.stepName, data)}
+            isCompleted={step.isCompleted}
+            initialData={step.stepData}
+          />
+        );
+      case 'Dashboard Tour':
+        return (
+          <DashboardTourStep 
             onComplete={(data: any) => handleCompleteStep(step.stepName, data)}
             isCompleted={step.isCompleted}
           />
@@ -1140,10 +2534,13 @@ export default function AgencyOnboarding() {
     { id: 1, stepName: 'Company Information', stepOrder: 1, isCompleted: false, completedAt: null, stepData: {} },
     { id: 2, stepName: 'Business Profile', stepOrder: 2, isCompleted: false, completedAt: null, stepData: {} },
     { id: 3, stepName: 'User Setup', stepOrder: 3, isCompleted: false, completedAt: null, stepData: {} },
-    { id: 4, stepName: 'Processor Configuration', stepOrder: 4, isCompleted: false, completedAt: null, stepData: {} },
-    { id: 5, stepName: 'Data Import', stepOrder: 5, isCompleted: false, completedAt: null, stepData: {} },
-    { id: 6, stepName: 'Commission Structure', stepOrder: 6, isCompleted: false, completedAt: null, stepData: {} },
-    { id: 7, stepName: 'Reporting Setup', stepOrder: 7, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 4, stepName: 'Vendor Selection', stepOrder: 4, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 5, stepName: 'Processor & Lead Sheet Setup', stepOrder: 5, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 6, stepName: 'FAQ Upload', stepOrder: 6, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 7, stepName: 'Document Center', stepOrder: 7, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 8, stepName: 'ISO-AI Preferences', stepOrder: 8, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 9, stepName: 'Residual Upload', stepOrder: 9, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 10, stepName: 'Dashboard Tour', stepOrder: 10, isCompleted: false, completedAt: null, stepData: {} },
   ];
 
   const displaySteps = status.steps.length > 0 ? status.steps : defaultSteps;
