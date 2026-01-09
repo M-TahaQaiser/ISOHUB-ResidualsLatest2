@@ -395,7 +395,7 @@ router.post('/forgot-password',
       }
 
       // Import email service
-      const { EmailService } = await import('../services/emailService');
+      const { EmailService } = await import('../services/EmailService');
       const emailService = new EmailService();
 
       // Send password reset email

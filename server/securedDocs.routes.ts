@@ -278,7 +278,7 @@ router.post('/send-upload-link', async (req: Request, res: Response) => {
     
     // Send email with the secure upload link
     try {
-      const { emailService } = await import('./services/emailService');
+      const { emailService } = await import('./services/EmailService');
       
       console.log(`🔗 Sending secure upload link email to: ${recipientEmail}`);
       console.log(`📧 Upload link: ${uploadLink}`);
