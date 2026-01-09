@@ -256,55 +256,37 @@ export default function OnboardingWizard() {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Step Navigation Sidebar */}
-          <div className="lg:col-span-1">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Setup Steps</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {ONBOARDING_STEPS.map((step, index) => (
-                  <button
-                    key={step.id}
-                    onClick={() => handleSkipToStep(step.id)}
-                    className={`w-full text-left p-3 rounded-lg transition-colors ${
-                      currentStep === step.id
-                        ? 'bg-yellow-100 border-2 border-yellow-300'
-                        : completedSteps[index]
-                        ? 'bg-green-50 border border-green-200 hover:bg-green-100'
-                        : 'bg-gray-50 border border-gray-200 hover:bg-gray-100'
-                    }`}
-                    disabled={!completedSteps[index] && step.id !== currentStep}
-                  >
-                    <div className="flex items-center">
-                      {completedSteps[index] ? (
-                        <CheckCircle2 className="h-5 w-5 text-green-600 mr-3" />
-                      ) : (
-                        <Circle className={`h-5 w-5 mr-3 ${
-                          currentStep === step.id ? 'text-yellow-600' : 'text-gray-400'
-                        }`} />
-                      )}
-                      <div>
-                        <div className={`font-medium text-sm ${
-                          currentStep === step.id ? 'text-yellow-800' : 'text-gray-900'
-                        }`}>
-                          {step.title}
-                        </div>
-                        <div className="text-xs text-gray-500 mt-1">
-                          Step {step.id} of {ONBOARDING_STEPS.length}
-                        </div>
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
+      {/* Horizontal Step Icons */}
+      <div className="max-w-4xl mx-auto px-4 py-6">
+        <div className="flex items-center justify-center gap-4 mb-8">
+          {ONBOARDING_STEPS.map((step, index) => (
+            <button
+              key={step.id}
+              onClick={() => handleSkipToStep(step.id)}
+              className={`w-12 h-12 flex items-center justify-center rounded-full border-2 transition-all ${
+                currentStep === step.id
+                  ? 'bg-yellow-400/20 border-yellow-400 text-yellow-600 scale-110'
+                  : completedSteps[index]
+                  ? 'bg-green-500/20 border-green-500 text-green-600'
+                  : 'bg-gray-100 border-gray-300 text-gray-400'
+              }`}
+              disabled={!completedSteps[index] && step.id !== currentStep}
+              title={step.title}
+            >
+              {completedSteps[index] ? (
+                <CheckCircle2 className="h-6 w-6" />
+              ) : (
+                <Circle className="h-6 w-6" />
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
 
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-3">
+          <div>
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">

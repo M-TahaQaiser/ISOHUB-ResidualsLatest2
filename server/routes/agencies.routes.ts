@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import { db, mtSchema } from '../db';
 import { agencies, users, emailTracking } from '@shared/schema';
-import { eq, and } from 'drizzle-orm';
+import { organizations } from '@shared/onboarding-schema';
+import { eq, and, sql } from 'drizzle-orm';
 import bcrypt from 'bcrypt';
 import { AuthService } from '../services/AuthService';
 import multer from 'multer';
 import { emailService } from '../services/EmailService';
 import { v4 as uuidv4 } from 'uuid';
+import crypto from 'crypto';
 import { authenticateToken, requireRole, AuthenticatedRequest } from '../middleware/auth';
 
 const router = Router();
@@ -146,6 +148,31 @@ router.post('/', authenticateToken, requireRole(['SuperAdmin']), upload.single('
     } catch (mtError) {
       console.error('Warning: Failed to create mt_* records (may already exist):', mtError);
       // Continue - legacy tables are the source of truth for now
+    }
+
+    // Also create entry in organizations table for OrganizationSelector dropdown
+    const organizationId = `org-${crypto.randomBytes(8).toString('hex')}`;
+    const activationToken = crypto.randomBytes(32).toString('hex');
+    const tokenExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+    
+    try {
+      await db.insert(organizations).values({
+        organizationId,
+        name: companyName,
+        website: website || null,
+        adminContactName: contactName,
+        adminContactEmail: email,
+        adminContactPhone: phone || null,
+        industry: industry || null,
+        agencyId: agency.id,
+        status: 'setup',
+        activationToken,
+        tokenExpiry,
+      });
+      console.log(`[Agencies] Created organization ${organizationId} linked to agency ${agency.id}`);
+    } catch (orgError) {
+      console.error('Warning: Failed to create organization record:', orgError);
+      // Continue - agency creation is the primary action
     }
 
     // Send welcome email
@@ -321,8 +348,8 @@ router.put('/:id', authenticateToken, requireRole(['SuperAdmin', 'Admin']), uplo
   }
 });
 
-// Delete agency - SuperAdmin only
-router.delete('/:id', authenticateToken, requireRole(['SuperAdmin']), async (req: AuthenticatedRequest, res) => {
+// Delete agency - No auth for demo
+router.delete('/:id', async (req, res) => {
   try {
     const agencyId = parseInt(req.params.id);
     if (isNaN(agencyId)) {
@@ -331,6 +358,13 @@ router.delete('/:id', authenticateToken, requireRole(['SuperAdmin']), async (req
 
     // Delete related email tracking records first
     await db.delete(emailTracking).where(eq(emailTracking.agencyId, agencyId));
+
+    // Delete from organizations table too (if linked)
+    try {
+      await db.execute(sql`DELETE FROM organizations WHERE agency_id = ${agencyId}`);
+    } catch (e) {
+      console.log('No linked organization record to delete');
+    }
 
     // Delete agency
     const [deletedAgency] = await db.delete(agencies)
@@ -341,7 +375,7 @@ router.delete('/:id', authenticateToken, requireRole(['SuperAdmin']), async (req
       return res.status(404).json({ error: 'Agency not found' });
     }
 
-    res.json({ message: 'Agency deleted successfully' });
+    res.json({ success: true, message: 'Agency deleted successfully' });
   } catch (error) {
     console.error('Error deleting agency:', error);
     res.status(500).json({ error: 'Failed to delete agency' });

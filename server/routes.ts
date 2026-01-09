@@ -21,11 +21,15 @@ import dashboardRouter from "./dashboard.routes";
 import reportsRouter from "./reports.routes";
 import assignmentsRouter from "./assignments.routes";
 import agenciesRouter from "./routes/agencies.routes";
+import agencyOnboardingRouter from "./routes/agencyOnboarding.routes";
 import bulkAssignmentsRouter from "./routes/bulk-assignments.routes";
 import isoAIRouter from "./iso-ai.routes";
 import jaccRouter from "./routes/isoAI.routes";
 import { vendorsRouter } from "./vendors.routes";
 import { initializeVendors } from "./initialize-vendors";
+import vendorMappingsRouter from "./routes/vendorMappings.routes";
+import leadSheetMappingsRouter from "./routes/leadSheetMappings.routes";
+import onboardingMetricsRouter from "./routes/onboardingMetrics.routes";
 import preApplicationsRouterNew from "./routes/preApplications.routes";
 import domainRouter from "./routes/domain.routes";
 import emailRouter from "./routes/email.routes";
@@ -1434,10 +1438,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use("/api/reports", reportsRouter);
   app.use("/api/assignments", assignmentsRouter);
   app.use("/api/agencies", agenciesRouter);
+  app.use("/api/agencies", agencyOnboardingRouter); // Onboarding routes
   app.use("/api/organizations", agenciesRouter); // Alias for organizations terminology
   app.use("/api/bulk-assignments", bulkAssignmentsRouter);
   app.use("/api/iso-ai", isoAIRouter);
   app.use("/api/vendors", vendorsRouter);
+  app.use("/api/vendor-mappings", vendorMappingsRouter);
+  app.use("/api/lead-sheet-mappings", leadSheetMappingsRouter);
+  app.use("/api/onboarding-metrics", onboardingMetricsRouter);
   app.use("/api/preapplications", preApplicationsRouter);
   console.log("📋 PreApplications router mounted at /api/preapplications");
   app.use("/api/domain", domainRouter);

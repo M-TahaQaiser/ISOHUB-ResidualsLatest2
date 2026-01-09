@@ -122,6 +122,16 @@ export default function Dashboard() {
     enabled: hasSelectedOrganization
   });
 
+  // Fetch onboarding metrics (from uploaded vendor/lead sheet data)
+  const { data: onboardingMetrics } = useQuery({
+    queryKey: ['/api/onboarding-metrics/1'],
+    queryFn: async () => {
+      const response = await fetch('/api/onboarding-metrics/1');
+      return response.json();
+    },
+    select: (data: any) => data?.metrics || {}
+  });
+
   // Strategic decision dialog is now handled in the initialization useEffect above
 
   // Initialize default data on first load
@@ -136,18 +146,36 @@ export default function Dashboard() {
 
   // Removed loading animations as requested
 
-  // Calculate performance metrics - no hardcoded fallbacks, show real data or 0
-  const totalAgents = hasSelectedOrganization ? (isoMetrics?.totalAgents || 0) : 0;
-  const totalMerchants = hasSelectedOrganization ? (isoMetrics?.totalMerchants || 0) : 0;
-  const totalReports = hasSelectedOrganization ? (isoMetrics?.totalReports || 0) : 0;
-  const approvedReports = hasSelectedOrganization ? (isoMetrics?.approvedReports || 0) : 0;
-  const pendingApprovals = hasSelectedOrganization ? (isoMetrics?.pendingApprovals || 0) : 0;
-  const approvalRate = totalReports > 0 ? Math.round((approvedReports / totalReports) * 100) : 0;
+  // Calculate performance metrics - combine ISO metrics with onboarding data
+  const totalAgents = hasSelectedOrganization 
+    ? (isoMetrics?.totalAgents || onboardingMetrics?.totalAgents || 0) 
+    : (onboardingMetrics?.totalAgents || 0);
+  const totalMerchants = hasSelectedOrganization 
+    ? (isoMetrics?.totalMerchants || onboardingMetrics?.totalMerchants || 0) 
+    : (onboardingMetrics?.totalMerchants || 0);
+  const totalReports = hasSelectedOrganization 
+    ? (isoMetrics?.totalReports || onboardingMetrics?.reportsGenerated || 0) 
+    : (onboardingMetrics?.reportsGenerated || 0);
+  const approvedReports = hasSelectedOrganization 
+    ? (isoMetrics?.approvedReports || totalReports) 
+    : totalReports;
+  const pendingApprovals = hasSelectedOrganization 
+    ? (isoMetrics?.pendingApprovals || onboardingMetrics?.pendingApprovals || 0) 
+    : (onboardingMetrics?.pendingApprovals || 0);
+  const approvalRate = onboardingMetrics?.approvalRate || (totalReports > 0 ? Math.round((approvedReports / totalReports) * 100) : 0);
 
-  // Calculate revenue metrics from residual system - no hardcoded fallbacks
-  const totalRevenue = hasSelectedOrganization ? ((stats as any)?.totalRevenue || 0) : 0;
-  const totalMids = hasSelectedOrganization ? ((stats as any)?.totalMids || 0) : 0;
+  // Calculate revenue metrics from residual system + onboarding data
+  const totalRevenue = hasSelectedOrganization 
+    ? ((stats as any)?.totalRevenue || onboardingMetrics?.monthlyRevenue || 0) 
+    : (onboardingMetrics?.monthlyRevenue || 0);
+  const totalMids = hasSelectedOrganization 
+    ? ((stats as any)?.totalMids || onboardingMetrics?.activeAccounts || 0) 
+    : (onboardingMetrics?.activeAccounts || 0);
   const avgRevenuePerMid = totalMids > 0 ? (totalRevenue / totalMids) : 0;
+
+  // Additional onboarding-derived metrics
+  const activeProcessors = onboardingMetrics?.activeProcessors || 0;
+  const performanceScore = onboardingMetrics?.performanceScore || 'N/A';
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
@@ -500,7 +528,7 @@ export default function Dashboard() {
               <CreditCard className="h-4 w-4 text-indigo-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-indigo-400">{(processors as any)?.length || 7}</div>
+              <div className="text-2xl font-bold text-indigo-400">{activeProcessors || (processors as any)?.length || 0}</div>
               <p className="text-xs text-gray-500">
                 Payment processors connected
               </p>
@@ -528,9 +556,9 @@ export default function Dashboard() {
               <Award className="h-4 w-4 text-rose-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-rose-400">A+</div>
+              <div className="text-2xl font-bold text-rose-400">{performanceScore}</div>
               <p className="text-xs text-gray-500">
-                System health: Excellent
+                System health: {performanceScore === 'A+' ? 'Excellent' : performanceScore === 'A' ? 'Very Good' : 'Good'}
               </p>
             </CardContent>
           </Card>
