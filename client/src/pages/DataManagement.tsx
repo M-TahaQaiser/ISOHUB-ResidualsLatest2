@@ -89,15 +89,13 @@ export default function DataManagement() {
   const organizationId = getAgencyId();
 
   // Generate available months dynamically - will include user-added months
-  const { data: availableMonths = [], refetch: refetchMonths } = useQuery<{ value: string; label: string }[]>({
+  const { data: availableMonths = [] } = useQuery<{ value: string; label: string }[]>({
     queryKey: ['/api/available-months', organizationId],
     queryFn: async () => {
-      console.log('[DataManagement] Fetching available months for organizationId:', organizationId);
       const response = await fetch(`/api/available-months?organizationId=${organizationId}`, {
         credentials: 'include'
       });
       if (!response.ok) {
-        console.error('[DataManagement] Failed to fetch available months:', response.status, response.statusText);
         // Fallback to default months if API fails
         return [
           { value: "2025-11", label: "November 2025" },
@@ -107,9 +105,7 @@ export default function DataManagement() {
           { value: "2025-07", label: "July 2025" }
         ];
       }
-      const data = await response.json();
-      console.log('[DataManagement] Available months fetched:', data);
-      return data;
+      return response.json();
     }
   });
 
@@ -149,7 +145,6 @@ export default function DataManagement() {
   const addMonthMutation = useMutation({
     mutationFn: async ({ month, year }: { month: string; year: string }) => {
       const monthValue = `${year}-${month}`;
-      console.log('[DataManagement] Adding month:', monthValue, 'for organizationId:', organizationId);
       const response = await apiRequest('/api/available-months', {
         method: 'POST',
         body: { 
@@ -157,23 +152,18 @@ export default function DataManagement() {
           organizationId
         }
       });
-      console.log('[DataManagement] Month add response:', response);
       return response;
     },
-    onSuccess: async (_, variables) => {
+    onSuccess: (_, variables) => {
       const monthLabel = `${monthNames.find(m => m.value === variables.month)?.label} ${variables.year}`;
       toast({
         title: "Month Added",
         description: `${monthLabel} has been added to your available months`,
       });
       setAddMonthDialogOpen(false);
-      // Invalidate and refetch the months query
-      await queryClient.invalidateQueries({ queryKey: ['/api/available-months', organizationId] });
-      await refetchMonths();
-      console.log('[DataManagement] Months refetched after adding');
+      queryClient.invalidateQueries({ queryKey: ['/api/available-months', organizationId] });
     },
     onError: (error: Error) => {
-      console.error('[DataManagement] Failed to add month:', error);
       toast({
         title: "Failed to Add Month",
         description: error.message,
@@ -220,9 +210,9 @@ export default function DataManagement() {
     momRevenueChangePercent: number | null;
     netAccountGrowth: number;
   }>({
-    queryKey: ['/api/analytics/metrics', selectedMonth, organizationId],
+    queryKey: ['/api/analytics/metrics', selectedMonth],
     queryFn: async () => {
-      const response = await fetch(`/api/analytics/metrics/${selectedMonth}?organizationId=${organizationId}`, {
+      const response = await fetch(`/api/analytics/metrics/${selectedMonth}`, {
         credentials: 'include'
       });
       if (!response.ok) {
@@ -277,12 +267,11 @@ export default function DataManagement() {
       lastUpdated: p.lastUpdated
     })) || [];
 
-  // Check if lead sheet is uploaded by checking if any processor has validated lead sheet status
-  const hasValidatedLeadSheet = uploadProgressData?.some((p: any) => p.leadSheetStatus === 'validated') || false;
-  const leadSheetStatus = hasValidatedLeadSheet ? 'validated' : 'needs_upload';
+  const leadSheetProgress = uploadProgressData?.find((p: any) => !p.processorId);
+  const leadSheetStatus = leadSheetProgress?.leadSheetStatus || 'needs_upload';
 
   // Calculate step completions (guard against loading state)
-  const leadSheetComplete = progressLoading ? false : hasValidatedLeadSheet;
+  const leadSheetComplete = progressLoading ? false : (leadSheetStatus === 'validated');
   const processorsComplete = progressLoading ? false : (processors.length > 0 && processors.every((p: any) => p.uploadStatus === 'validated'));
   const assignmentsComplete = approvalLoading ? false : (monthApprovalData?.assignmentsComplete || false);
   const auditComplete = approvalLoading ? false : (monthApprovalData?.auditComplete || false);
@@ -301,29 +290,10 @@ export default function DataManagement() {
         ? `/api/residuals-workflow/upload-lead-sheet/${month}`
         : `/api/residuals-workflow/upload/${month}/${processorId}`;
 
-      // Get CSRF token from cookie
-      const getCsrfToken = () => {
-        const cookies = document.cookie.split(';');
-        for (const cookie of cookies) {
-          const [name, value] = cookie.trim().split('=');
-          if (name === 'csrf-token') {
-            return decodeURIComponent(value);
-          }
-        }
-        return null;
-      };
-
-      const csrfToken = getCsrfToken();
-      const headers: HeadersInit = {};
-      if (csrfToken) {
-        headers['X-CSRF-Token'] = csrfToken;
-      }
-
       const response = await fetch(endpoint, {
         method: 'POST',
         body: formData,
-        credentials: 'include',
-        headers
+        credentials: 'include'
       });
 
       if (!response.ok) {
@@ -341,13 +311,7 @@ export default function DataManagement() {
       });
       setSelectedFile(null);
       setUploadDialogOpen(false);
-      
-      // Invalidate all queries to refresh data instantly
       queryClient.invalidateQueries({ queryKey: ['/api/residuals-workflow/progress', selectedMonth] });
-      queryClient.invalidateQueries({ queryKey: ['/api/analytics/metrics', selectedMonth, organizationId] });
-      queryClient.invalidateQueries({ queryKey: [`/api/month-approval/${selectedMonth}/${organizationId}`] });
-      queryClient.invalidateQueries({ queryKey: [`/api/month-approval/${selectedMonth}/${organizationId}/merchant-lifecycle`] });
-      queryClient.invalidateQueries({ queryKey: ['/api/available-months', organizationId] });
     },
     onError: (error) => {
       toast({
@@ -1178,8 +1142,8 @@ export default function DataManagement() {
                     <div>
                       <p className="font-medium text-white">Master Lead Sheet</p>
                       <p className="text-sm text-gray-400">
-                        {leadSheetComplete 
-                          ? 'Uploaded successfully' 
+                        {leadSheetProgress?.recordCount > 0 
+                          ? `${leadSheetProgress.recordCount} records` 
                           : 'Not uploaded'}
                       </p>
                     </div>

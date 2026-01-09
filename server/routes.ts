@@ -6,7 +6,7 @@ import { authenticateToken, requireRole } from "./middleware/auth";
 import { CSVParser } from "./services/csvParser";
 import { MIDMatcher } from "./services/midMatcher";
 import { AIReportingService } from "./services/aiReporting";
-import { EmailService } from "./services/emailService";
+import { EmailService } from "./services/EmailService";
 import { TenancyService } from "./services/tenancyService";
 import { db } from "./db";
 import { monthlyData } from "@shared/schema";
@@ -55,6 +55,7 @@ import processorMappingsRouter from "./routes/processorMappings.routes";
 import bulkImportRouter from "./routes/bulkImport.routes";
 import organizationDeleteRouter from "./routes/organizationDelete.routes";
 import healthRouter from "./routes/health.routes";
+import prospectsRouter, { publicProspectRouter } from "./routes/prospects.routes";
 import multer from "multer";
 import path from "path";
 import {
@@ -1453,6 +1454,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use("/api/real-data", realDataDisplayRouter);
   app.use("/s", shortUrlRouter);
   app.use("/api/onboarding", onboardingRouter);
+  app.use("/api/prospects", prospectsRouter);
+  app.use("/api/prospects/public", publicProspectRouter);
   app.use("/api/help", helpRouter);
   app.use("/api", repMetricsRouter);
   app.use("/api", testRolesRouter);

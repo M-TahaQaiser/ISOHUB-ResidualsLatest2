@@ -15,8 +15,8 @@ import {
   type UserActivation,
   type InsertUserActivation,
 } from '@shared/onboarding-schema';
-import { users, agencies, type InsertUser } from '@shared/schema';
-import { EmailService } from './emailService';
+import { users, type InsertUser } from '@shared/schema';
+import { EmailService } from './EmailService';
 import bcrypt from 'bcrypt';
 
 export class OnboardingService {
@@ -46,26 +46,7 @@ export class OnboardingService {
     const activationToken = crypto.randomBytes(32).toString('hex');
     const tokenExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
-    // First, create an agency entry for this organization (for data isolation)
-    let agencyId: number | null = null;
-    try {
-      const [agency] = await db.insert(agencies).values({
-        companyName: orgData.name,
-        contactName: orgData.adminContactName,
-        email: orgData.adminContactEmail,
-        phone: orgData.adminContactPhone,
-        website: orgData.website,
-        industry: orgData.industry,
-        status: 'setup',
-        adminUsername: orgData.adminContactEmail,
-      }).returning();
-      agencyId = agency.id;
-      console.log(`[OnboardingService] Created agency ${agencyId} for organization ${orgData.name}`);
-    } catch (agencyError) {
-      console.error('[OnboardingService] Failed to create agency, continuing without:', agencyError);
-    }
-
-    // Create organization with link to agency
+    // Create organization
     const [organization] = await db.insert(organizations).values({
       organizationId,
       name: orgData.name,
@@ -74,34 +55,31 @@ export class OnboardingService {
       adminContactEmail: orgData.adminContactEmail,
       adminContactPhone: orgData.adminContactPhone,
       industry: orgData.industry,
-      agencyId, // Link to the agency for data isolation
       status: 'setup',
       activationToken,
       tokenExpiry,
     }).returning();
 
-    // Create onboarding progress record using raw SQL for compatibility
-    try {
-      await db.execute(sql`
-        INSERT INTO onboarding_progress (organization_id, current_step, created_at, updated_at)
-        VALUES (${organizationId}, 1, NOW(), NOW())
-      `);
-    } catch (progressError) {
-      console.error('[OnboardingService] Failed to create onboarding progress:', progressError);
-    }
+    // Create onboarding progress record
+    await db.insert(onboardingProgress).values({
+      organizationId,
+      currentStep: 1,
+    });
 
-    // Create user activation record using raw SQL for compatibility
+    // Create user activation record
     const tempPassword = this.generateSecurePassword();
     const hashedTempPassword = await bcrypt.hash(tempPassword, 10);
 
-    try {
-      await db.execute(sql`
-        INSERT INTO user_activations (organization_id, email, activation_token, activation_expiry, created_at, updated_at)
-        VALUES (${organizationId}, ${orgData.adminContactEmail}, ${activationToken}, ${tokenExpiry}, NOW(), NOW())
-      `);
-    } catch (activationError) {
-      console.error('[OnboardingService] Failed to create user activation:', activationError);
-    }
+    await db.insert(userActivations).values({
+      organizationId,
+      email: orgData.adminContactEmail,
+      activationToken,
+      activationExpiry: tokenExpiry,
+      tempPassword: hashedTempPassword,
+      firstName: orgData.adminContactName.split(' ')[0],
+      lastName: orgData.adminContactName.split(' ').slice(1).join(' '),
+      role: 'Admin',
+    });
 
     // Generate activation link
     const activationLink = `{{FRONTEND_URL}}/activate?token=${activationToken}`;

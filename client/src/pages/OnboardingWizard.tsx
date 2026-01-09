@@ -21,50 +21,62 @@ import DashboardTourStep from '@/components/onboarding/DashboardTourStep';
 const ONBOARDING_STEPS = [
   {
     id: 1,
-    title: 'Instance Setup',
-    description: 'Configure your workspace terminology and preferences',
-    component: InstanceSetupStep,
+    title: 'Contact Info & Branding',
+    description: 'Set up your company details, logo, and contact information',
+    component: CompanyInfoStep, // Merged instance setup + company info
   },
   {
     id: 2,
-    title: 'Company Information',
-    description: 'Set up your company details and contact information',
-    component: CompanyInfoStep,
+    title: 'Business Profile',
+    description: 'Tell us about your business to get personalized insights',
+    component: BusinessProfileStep, // Moved up per user request
   },
   {
     id: 3,
     title: 'Organization Chart',
     description: 'Build your team structure with roles and permissions',
-    component: OrgChartStep,
+    component: OrgChartStep, // Now after Business Profile
   },
   {
     id: 4,
-    title: 'Business Profile',
-    description: 'Tell us about your business to get personalized insights',
-    component: BusinessProfileStep,
-  },
-  {
-    id: 5,
     title: 'Vendor Selection',
     description: 'Choose your processors, gateways, and hardware partners',
     component: VendorSelectionStep,
   },
   {
-    id: 6,
-    title: 'Processor Report Setup',
-    description: 'Configure how your processor reports map to our system',
+    id: 5,
+    title: 'Processor & Lead Sheet Setup',
+    description: 'Configure column mappings for each processor and lead sheet templates',
     component: ProcessorMappingStep,
   },
   {
+    id: 6,
+    title: 'FAQ Upload',
+    description: 'Import your FAQ from Google Sheets or upload manually',
+    component: DocsHubStep, // Temporary - will create dedicated component
+  },
+  {
     id: 7,
-    title: 'Document Hub',
-    description: 'Connect your cloud storage for seamless document management',
+    title: 'Document Center',
+    description: 'Connect cloud storage (Google Drive, Dropbox, OneDrive)',
     component: DocsHubStep,
   },
   {
     id: 8,
+    title: 'ISO-AI Preferences',
+    description: 'Configure your AI assistant tone and behavior',
+    component: InstanceSetupStep, // Temporary - will create dedicated component
+  },
+  {
+    id: 9,
+    title: 'Residuals Upload',
+    description: 'Upload processor residual templates and multi-month data',
+    component: DocsHubStep, // Temporary - will create dedicated component
+  },
+  {
+    id: 10,
     title: 'Dashboard Tour',
-    description: 'Learn your new workspace with an interactive guide',
+    description: 'Interactive guide with AI confirmation of all uploaded data',
     component: DashboardTourStep,
   },
 ];

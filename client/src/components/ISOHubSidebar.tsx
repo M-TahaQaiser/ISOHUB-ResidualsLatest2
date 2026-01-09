@@ -16,7 +16,8 @@ import {
   DollarSign,
   CreditCard,
   Receipt,
-  FileSignature
+  FileSignature,
+  UserPlus
 } from "lucide-react";
 
 type UserRole = 'SuperAdmin' | 'Admin' | 'Manager' | 'Agent' | 'user';
@@ -54,6 +55,7 @@ export default function ISOHubSidebar({ username, isAdmin, userRole = 'user', on
   // SuperAdmin-only tools (first 3 items)
   const superAdminItems = [
     { path: "/super-admin", icon: Settings, label: "Super Admin" },
+    { path: "/prospects", icon: UserPlus, label: "Prospects" },
     { path: "/organizations", icon: Globe, label: "Organizations" },
     { path: "/billing", icon: Settings, label: "Billing" },
   ];

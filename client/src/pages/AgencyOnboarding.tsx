@@ -303,20 +303,6 @@ function CompanyInfoStep({ onComplete, isCompleted, initialData }: any) {
         </div>
       </div>
 
-      {/* HIDDEN: Whitelabel Build-out section - will be re-enabled later */}
-      {/* <div className="border-t border-yellow-400/20 pt-6">
-        <div className="flex items-center space-x-3 mb-6">
-          <Switch
-            checked={formData.isWhitelabel}
-            onCheckedChange={(checked) => setFormData(prev => ({ ...prev, isWhitelabel: checked }))}
-          />
-          <div>
-            <Label className="text-base font-medium text-white">Whitelabel Build-out</Label>
-            <p className="text-sm text-gray-400">Enable custom branding and logo for your platform</p>
-          </div>
-        </div>
-      </div> */}
-
       <div className="flex justify-end">
         <Button 
           type="submit" 

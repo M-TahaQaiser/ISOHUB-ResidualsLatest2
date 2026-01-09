@@ -2,7 +2,7 @@ import express from 'express';
 import { db } from '../db';
 import { users, agencies } from '../../shared/schema';
 import { eq, and } from 'drizzle-orm';
-import { EmailService } from '../services/emailService';
+import { EmailService } from '../services/EmailService';
 import { AuthService } from '../services/AuthService';
 import crypto from 'crypto';
 import { authenticateToken, requireRole, requireReauth, AuthenticatedRequest } from '../middleware/auth';
