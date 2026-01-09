@@ -11,40 +11,42 @@ const VENDOR_CATEGORIES = ["Processors", "Gateways", "Hardware/Equipment", "Inte
 
 const DEFAULT_VENDORS = [
   // Processors
-  { name: "Payment Advisors", category: "Processors", description: "Full-service payment processing solutions", logoUrl: "/logos/payment-advisors.png", loginUrl: "https://pa.paymentadvisors.com", status: "active" },
+  { name: "Other (+ another)", category: "Processors", description: "Custom processor option", logoUrl: "/logos/other.png", loginUrl: "", status: "active" },
+  { name: "Adyen", category: "Processors", description: "Global payment platform", logoUrl: "/logos/adyen.png", loginUrl: "https://ca-live.adyen.com", status: "active" },
+  { name: "Affinipay", category: "Processors", description: "Payment solutions for professionals", logoUrl: "/logos/affinipay.png", loginUrl: "https://www.affinipay.com", status: "active" },
+  { name: "CardConnect", category: "Processors", description: "Payment processing solutions", logoUrl: "/logos/cardconnect.png", loginUrl: "https://cardconnect.com", status: "active" },
+  { name: "Chase", category: "Processors", description: "Chase payment processing", logoUrl: "/logos/chase.png", loginUrl: "https://www.chase.com", status: "active" },
   { name: "Clearent", category: "Processors", description: "Secure payment processing platform", logoUrl: "/logos/clearent.png", loginUrl: "https://portal.clearent.com", status: "active" },
-  { name: "Global Payments TSYS", category: "Processors", description: "Global payment technology solutions", logoUrl: "/logos/global-payments.png", loginUrl: "https://tsysacquiring.com", status: "active" },
-  { name: "Merchant Lynx", category: "Processors", description: "Merchant services and payment solutions", logoUrl: "/logos/merchant-lynx.png", loginUrl: "https://portal.merchantlynx.com", status: "active" },
-  { name: "First Data", category: "Processors", description: "Payment processing and merchant services", logoUrl: "/logos/first-data.png", loginUrl: "https://www.firstdata.com", status: "active" },
-  { name: "Shift4", category: "Processors", description: "Payment processing solutions", logoUrl: "/logos/shift4.png", loginUrl: "https://shift4.com", status: "active" },
+  { name: "Elavon", category: "Processors", description: "Payment processing services", logoUrl: "/logos/elavon.png", loginUrl: "https://www.elavon.com", status: "active" },
+  { name: "FiServ", category: "Processors", description: "Financial services technology", logoUrl: "/logos/fiserv.png", loginUrl: "https://www.fiserv.com", status: "active" },
+  { name: "Global / TSYS", category: "Processors", description: "Global payment technology solutions", logoUrl: "/logos/global-payments.png", loginUrl: "https://tsysacquiring.com", status: "active" },
   { name: "Heartland", category: "Processors", description: "Payment processing and point-of-sale solutions", logoUrl: "/logos/heartland.png", loginUrl: "https://www.heartlandpaymentsystems.com", status: "active" },
+  { name: "Leap Payments", category: "Processors", description: "Payment processing platform", logoUrl: "/logos/leap-payments.png", loginUrl: "https://www.leappayments.com", status: "active" },
+  { name: "MerchantLynx", category: "Processors", description: "Merchant services and payment solutions", logoUrl: "/logos/merchant-lynx.png", loginUrl: "https://portal.merchantlynx.com", status: "active" },
+  { name: "MiCamp", category: "Processors", description: "Payment processing services", logoUrl: "/logos/micamp.png", loginUrl: "https://www.micamp.com", status: "active" },
+  { name: "North American Bancard", category: "Processors", description: "Payment processing solutions", logoUrl: "/logos/nab.png", loginUrl: "https://www.nabancard.com", status: "active" },
+  { name: "Paya", category: "Processors", description: "Integrated payment solutions", logoUrl: "/logos/paya.png", loginUrl: "https://www.paya.com", status: "active" },
+  { name: "Priority Payments", category: "Processors", description: "Payment processing services", logoUrl: "/logos/priority-payments.png", loginUrl: "https://www.prioritypayments.com", status: "active" },
+  { name: "Shift4", category: "Processors", description: "Payment processing solutions", logoUrl: "/logos/shift4.png", loginUrl: "https://shift4.com", status: "active" },
+  { name: "Worldpay", category: "Processors", description: "Global payment technology", logoUrl: "/logos/worldpay.png", loginUrl: "https://online.worldpay.com", status: "active" },
   
   // Gateways
-  { name: "Authorize.Net", category: "Gateways", description: "Payment gateway solutions", logoUrl: "/logos/authorize-net.png", loginUrl: "https://account.authorize.net", status: "active" },
-  { name: "Stripe", category: "Gateways", description: "Online payment processing", logoUrl: "/logos/stripe.png", loginUrl: "https://dashboard.stripe.com", status: "active" },
-  { name: "PayPal", category: "Gateways", description: "Digital payment platform", logoUrl: "/logos/paypal.png", loginUrl: "https://www.paypal.com", status: "active" },
-  { name: "Square", category: "Gateways", description: "Point of sale and payment solutions", logoUrl: "/logos/square.png", loginUrl: "https://squareup.com", status: "active" },
-  { name: "Braintree", category: "Gateways", description: "Mobile and web payment systems", logoUrl: "/logos/braintree.png", loginUrl: "https://www.braintreegateway.com", status: "active" },
-  { name: "Worldpay", category: "Gateways", description: "Global payment technology", logoUrl: "/logos/worldpay.png", loginUrl: "https://online.worldpay.com", status: "active" },
-  { name: "Adyen", category: "Gateways", description: "Global payment platform", logoUrl: "/logos/adyen.png", loginUrl: "https://ca-live.adyen.com", status: "active" },
-  { name: "CyberSource", category: "Gateways", description: "Payment management platform", logoUrl: "/logos/cybersource.png", loginUrl: "https://businesscenter.cybersource.com", status: "active" },
-  { name: "BlueSnap", category: "Gateways", description: "Global payment orchestration", logoUrl: "/logos/bluesnap.png", loginUrl: "https://cp.bluesnap.com", status: "active" },
+  { name: "Other (+ another)", category: "Gateways", description: "Custom gateway option", logoUrl: "/logos/other.png", loginUrl: "", status: "active" },
+  { name: "Affirm", category: "Gateways", description: "Buy now pay later gateway", logoUrl: "/logos/affirm.png", loginUrl: "https://www.affirm.com", status: "active" },
+  { name: "Authorize.net", category: "Gateways", description: "Payment gateway solutions", logoUrl: "/logos/authorize-net.png", loginUrl: "https://account.authorize.net", status: "active" },
+  { name: "Hyfin", category: "Gateways", description: "Payment gateway platform", logoUrl: "/logos/hyfin.png", loginUrl: "https://www.hyfin.com", status: "active" },
   { name: "NMI", category: "Gateways", description: "Payment gateway and processing", logoUrl: "/logos/nmi.png", loginUrl: "https://secure.nmi.com", status: "active" },
-  { name: "USAePay", category: "Gateways", description: "Payment gateway solutions", logoUrl: "/logos/usaepay.png", loginUrl: "https://secure.usaepay.com", status: "active" },
+  { name: "Rectangle Health", category: "Gateways", description: "Healthcare payment solutions", logoUrl: "/logos/rectangle-health.png", loginUrl: "https://www.rectanglehealth.com", status: "active" },
+  { name: "TracerPay", category: "Gateways", description: "Payment gateway services", logoUrl: "/logos/tracerpay.png", loginUrl: "https://www.tracerpay.com", status: "active" },
+  { name: "WooCommerce", category: "Gateways", description: "E-commerce payment gateway", logoUrl: "/logos/woocommerce.png", loginUrl: "https://woocommerce.com", status: "active" },
   
-  // Hardware/Equipment
+  // Hardware/Equipment (POS)
+  { name: "Other (+ another)", category: "Hardware/Equipment", description: "Custom hardware option", logoUrl: "/logos/other.png", loginUrl: "", status: "active" },
+  { name: "DeJavoo", category: "Hardware/Equipment", description: "Payment processing terminals", logoUrl: "/logos/dejavoo.png", loginUrl: "https://www.dejavoo.com", status: "active" },
   { name: "Ingenico", category: "Hardware/Equipment", description: "Payment terminals and solutions", logoUrl: "/logos/ingenico.png", loginUrl: "https://www.ingenico.com", status: "active" },
+  { name: "Pax", category: "Hardware/Equipment", description: "Payment terminal manufacturer", logoUrl: "/logos/pax.png", loginUrl: "https://www.pax.us", status: "active" },
+  { name: "Valor", category: "Hardware/Equipment", description: "POS terminal solutions", logoUrl: "/logos/valor.png", loginUrl: "https://www.valor-pos.com", status: "active" },
   { name: "Verifone", category: "Hardware/Equipment", description: "Electronic payment solutions", logoUrl: "/logos/verifone.png", loginUrl: "https://www.verifone.com", status: "active" },
-  { name: "PAX Technology", category: "Hardware/Equipment", description: "Payment terminal manufacturer", logoUrl: "/logos/pax.png", loginUrl: "https://www.pax.us", status: "active" },
-  { name: "Clover", category: "Hardware/Equipment", description: "Point of sale systems", logoUrl: "/logos/clover.png", loginUrl: "https://www.clover.com", status: "active" },
-  { name: "Dejavoo", category: "Hardware/Equipment", description: "Payment processing terminals", logoUrl: "/logos/dejavoo.png", loginUrl: "https://www.dejavoo.com", status: "active" },
-  { name: "BBPOS", category: "Hardware/Equipment", description: "Mobile payment terminals", logoUrl: "/logos/bbpos.png", loginUrl: "https://www.bbpos.com", status: "active" },
-  { name: "Castles Technology", category: "Hardware/Equipment", description: "Payment terminal solutions", logoUrl: "/logos/castles.png", loginUrl: "https://www.castlestech.com", status: "active" },
-  { name: "ID TECH", category: "Hardware/Equipment", description: "Payment device manufacturer", logoUrl: "/logos/idtech.png", loginUrl: "https://www.idtechproducts.com", status: "active" },
-  { name: "Magensa", category: "Hardware/Equipment", description: "Payment security solutions", logoUrl: "/logos/magensa.png", loginUrl: "https://www.magensa.net", status: "active" },
-  { name: "NewPOS Technology", category: "Hardware/Equipment", description: "POS terminal solutions", logoUrl: "/logos/newpos.png", loginUrl: "https://www.newpos.com", status: "active" },
-  { name: "Spire Payments", category: "Hardware/Equipment", description: "Payment processing hardware", logoUrl: "/logos/spire.png", loginUrl: "https://www.spirepayments.com", status: "active" },
-  { name: "WisePad", category: "Hardware/Equipment", description: "Mobile payment readers", logoUrl: "/logos/wisepad.png", loginUrl: "https://www.wisepad.com", status: "active" },
   
   // Internal
   { name: "ISOHub CRM", category: "Internal", description: "Customer relationship management", logoUrl: "/logos/isohub.png", loginUrl: "https://crm.isohub.io", status: "active" },
@@ -55,24 +57,25 @@ const DEFAULT_VENDORS = [
   { name: "ISOHub API", category: "Internal", description: "Developer API access", logoUrl: "/logos/isohub.png", loginUrl: "https://api.isohub.io", status: "active" },
 ] as const;
 
-// Initialize vendors if none exist
+// Initialize vendors - clear and reseed every time
 async function initializeVendors() {
   try {
-    const existingVendors = await db.select().from(vendors).limit(1);
+    // Clear all existing vendors
+    await db.delete(vendors);
+    console.log("Cleared existing vendors...");
     
-    if (existingVendors.length === 0) {
-      console.log("Initializing vendors database...");
-      
-      for (const vendor of DEFAULT_VENDORS) {
-        await db.insert(vendors).values({
-          ...vendor,
-          contactEmail: `support@${vendor.name.toLowerCase().replace(/\s+/g, '')}.com`,
-          integrationNotes: `Integration notes for ${vendor.name}`,
-        });
-      }
-      
-      console.log(`Initialized ${DEFAULT_VENDORS.length} vendors`);
+    // Insert all vendors from DEFAULT_VENDORS
+    console.log("Initializing vendors database...");
+    
+    for (const vendor of DEFAULT_VENDORS) {
+      await db.insert(vendors).values({
+        ...vendor,
+        contactEmail: `support@${vendor.name.toLowerCase().replace(/\s+/g, '').replace(/[()]/g, '').replace(/\+/g, '')}.com`,
+        integrationNotes: `Integration notes for ${vendor.name}`,
+      });
     }
+    
+    console.log(`✅ Initialized ${DEFAULT_VENDORS.length} vendors`);
   } catch (error) {
     console.error("Error initializing vendors:", error);
   }

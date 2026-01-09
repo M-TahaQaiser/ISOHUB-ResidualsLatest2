@@ -61,11 +61,10 @@ const stepIcons = {
   'Business Profile': TrendingUp,
   'User Setup': Users,
   'Vendor Selection': Database,
-  'Processor & Lead Sheet Setup': Upload,
-  'FAQ Upload': FileText,
+  'Processor Setup': Upload,
   'Document Center': FolderOpen,
   'ISO-AI Preferences': Sparkles,
-  'Residual Upload': DollarSign,
+  'Upload lead sheet and Mapping': Upload,
   'Dashboard Tour': LayoutDashboard,
 };
 
@@ -75,11 +74,10 @@ const stepDescriptions = {
   'Business Profile': 'AI-powered business understanding and analysis',
   'User Setup': 'Add team members and configure user roles',
   'Vendor Selection': 'Select processors, gateways, and hardware/POS vendors',
-  'Processor & Lead Sheet Setup': 'Upload lead sheets, map processor data, and import historical data',
-  'FAQ Upload': 'Upload FAQ document for ISO-AI knowledge base',
+  'Processor Setup': 'Upload processor data files with automatic column detection and mapping',
   'Document Center': 'Upload essential documents and resources',
   'ISO-AI Preferences': 'Configure your AI assistant settings',
-  'Residual Upload': 'Import historical residual data',
+  'Upload lead sheet and Mapping': 'Upload lead sheet with automatic column detection and mapping',
   'Dashboard Tour': 'Quick tour of your new dashboard',
 };
 
@@ -1046,9 +1044,9 @@ function VendorSelectionStep({ onComplete, isCompleted, initialData }: any) {
     } else {
       // Final step - complete
       onComplete({
-        processors: selectedProcessors,
-        gateways: selectedGateways,
-        hardware: selectedHardware
+        selectedProcessors: selectedProcessors,
+        selectedGateways: selectedGateways,
+        selectedHardware: selectedHardware
       });
     }
   };
@@ -1201,13 +1199,18 @@ function VendorSelectionStep({ onComplete, isCompleted, initialData }: any) {
 
 function ProcessorDataSetupStep({ onComplete, isCompleted, initialData }: any) {
   const { toast } = useToast();
-  const [currentSubStep, setCurrentSubStep] = useState(0);
-  const [leadSheetFile, setLeadSheetFile] = useState<File | null>(initialData?.leadSheetFile || null);
-  const [processorMappings, setProcessorMappings] = useState<any[]>(initialData?.processorMappings || []);
-  const [uploadedData, setUploadedData] = useState<any[]>(initialData?.uploadedData || []);
+  const [vendorUploads, setVendorUploads] = useState<any[]>(initialData?.vendorUploads || []);
+  const [selectedVendor, setSelectedVendor] = useState<any>(null);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [parsedColumns, setParsedColumns] = useState<string[]>([]);
+  const [columnMappings, setColumnMappings] = useState<any>({});
+  const [showMapping, setShowMapping] = useState(false);
 
-  // Get selected processors from previous step
+  // Get ALL selected vendors from previous step (Processors, Gateways, Hardware)
   const selectedProcessorIds = initialData?.selectedProcessors || [];
+  const selectedGatewayIds = initialData?.selectedGateways || [];
+  const selectedHardwareIds = initialData?.selectedHardware || [];
+  const allSelectedIds = [...selectedProcessorIds, ...selectedGatewayIds, ...selectedHardwareIds];
   
   const { data: vendors } = useQuery({
     queryKey: ['/api/vendors'],
@@ -1218,521 +1221,389 @@ function ProcessorDataSetupStep({ onComplete, isCompleted, initialData }: any) {
     }
   });
 
-  const selectedProcessors = vendors?.filter((v: any) => 
-    selectedProcessorIds.includes(v.id) && v.category === 'Processors'
+  // Filter to get all selected vendors across all categories
+  const selectedVendors = vendors?.filter((v: any) => 
+    allSelectedIds.includes(v.id) && ['Processors', 'Gateways', 'Hardware/Equipment'].includes(v.category)
   ) || [];
 
-  const subSteps = [
-    { title: 'Lead Sheet Upload', icon: Upload },
-    { title: 'Processor Mapping', icon: Database },
-    { title: 'Upload Past Data', icon: FileText }
-  ];
-
-  // Sub-step 5.1: Lead Sheet Upload
-  const renderLeadSheetUpload = () => {
-    const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (file) {
-        setLeadSheetFile(file);
-        toast({
-          title: "File Selected",
-          description: `${file.name} ready for upload`,
-        });
+  // Parse CSV/Excel columns from uploaded file
+  const parseFileColumns = async (file: File) => {
+    return new Promise<string[]>((resolve) => {
+      const reader = new FileReader();
+      
+      if (file.name.endsWith('.csv')) {
+        reader.onload = (e) => {
+          const text = e.target?.result as string;
+          const firstLine = text.split('\n')[0];
+          const columns = firstLine.split(',').map(col => col.trim().replace(/"/g, ''));
+          resolve(columns.filter(col => col.length > 0));
+        };
+        reader.readAsText(file);
+      } else if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+        // Parse Excel file using xlsx library
+        reader.onload = async (e) => {
+          try {
+            const data = e.target?.result;
+            const XLSX = await import('xlsx');
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as any[][];
+            
+            if (jsonData.length > 0) {
+              const headers = jsonData[0].map((h: any) => String(h || '').trim()).filter(h => h.length > 0);
+              resolve(headers);
+            } else {
+              resolve([]);
+            }
+          } catch (error) {
+            console.error('Error parsing Excel file:', error);
+            resolve([]);
+          }
+        };
+        reader.readAsArrayBuffer(file);
+      } else {
+        resolve([]);
       }
-    };
-
-    return (
-      <div className="space-y-6">
-        <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <Upload className="h-5 w-5 text-yellow-400" />
-            Upload Lead Sheet
-          </h3>
-          <p className="text-gray-400 text-sm mb-4">
-            Upload your master lead sheet that cross-references MID numbers and branch numbers for processor reports.
-          </p>
-
-          <div className="mt-4 flex justify-center px-6 pt-5 pb-6 border-2 border-yellow-400/30 border-dashed rounded-md hover:border-yellow-400/50 transition-colors bg-zinc-900/50">
-            <div className="space-y-1 text-center">
-              <Upload className="mx-auto h-12 w-12 text-yellow-400" />
-              <div className="flex text-sm text-gray-400">
-                <label
-                  htmlFor="lead-sheet-upload"
-                  className="relative cursor-pointer rounded-md font-medium text-yellow-400 hover:text-yellow-300 focus-within:outline-none"
-                >
-                  <span>Upload a file</span>
-                  <input
-                    id="lead-sheet-upload"
-                    type="file"
-                    accept=".csv,.xlsx,.xls"
-                    onChange={handleFileUpload}
-                    className="sr-only"
-                  />
-                </label>
-                <p className="pl-1">or drag and drop</p>
-              </div>
-              <p className="text-xs text-gray-500">CSV or Excel files</p>
-              {leadSheetFile && (
-                <div className="mt-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
-                  <p className="text-sm text-green-400 flex items-center justify-center gap-2">
-                    <CheckCircle className="h-4 w-4" />
-                    {leadSheetFile.name}
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-end">
-          <Button
-            onClick={() => {
-              if (!leadSheetFile) {
-                toast({
-                  title: "No File Selected",
-                  description: "Please upload a lead sheet to continue",
-                  variant: "destructive"
-                });
-                return;
-              }
-              setCurrentSubStep(1);
-              toast({
-                title: "Lead Sheet Uploaded",
-                description: "Proceeding to processor mapping",
-              });
-            }}
-            className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
-            disabled={!leadSheetFile}
-          >
-            Continue to Mapping
-          </Button>
-        </div>
-      </div>
-    );
+    });
   };
 
-  // Sub-step 5.2: Processor Mapping
-  const renderProcessorMapping = () => {
-    const [selectedProcessor, setSelectedProcessor] = useState<any>(null);
-    const [mappingFile, setMappingFile] = useState<File | null>(null);
-    const [columnMappings, setColumnMappings] = useState<any>({});
+  const handleFileUpload = async (vendor: any, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedVendor(vendor);
+      setUploadedFile(file);
+      
+      toast({
+        title: "Processing File",
+        description: "Parsing columns from uploaded file...",
+      });
 
-    const sampleColumns = ['MID', 'DBA Name', 'Monthly Volume', 'Transaction Count', 'Fees', 'Date'];
-    const targetFields = ['merchant_id', 'business_name', 'volume', 'transactions', 'fees', 'statement_date'];
+      // Parse columns from file
+      const columns = await parseFileColumns(file);
+      setParsedColumns(columns);
+      // Initialize all columns as 'ignore' by default
+      const initialMappings: any = {};
+      columns.forEach(col => {
+        initialMappings[col] = { action: 'ignore', targetField: '' };
+      });
+      setColumnMappings(initialMappings);
+      setShowMapping(true);
 
-    const handleProcessorSelect = (processor: any) => {
-      setSelectedProcessor(processor);
-      setMappingFile(null);
-      setColumnMappings({});
-    };
+      toast({
+        title: "File Uploaded",
+        description: `${columns.length} columns detected. Ready for mapping.`,
+      });
+    }
+  };
 
-    const handleMappingFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (file) {
-        setMappingFile(file);
-        toast({
-          title: "Sample File Uploaded",
-          description: "Ready for column mapping",
-        });
-      }
-    };
+  const targetFields = ['merchant_id', 'business_name', 'legal_name', 'volume', 'transactions', 'fees', 'statement_date', 'status', 'processor_name', 'gateway_name', 'hardware_name', 'branch_id', 'account_number', 'routing_number', 'terminal_id', 'batch_number'];
 
-    const handleSaveMapping = () => {
-      if (!selectedProcessor || !mappingFile) {
-        toast({
-          title: "Incomplete Mapping",
-          description: "Please select a processor and upload a sample file",
-          variant: "destructive"
-        });
-        return;
-      }
+  const handleSaveMapping = async () => {
+    if (!selectedVendor || !uploadedFile || parsedColumns.length === 0) {
+      toast({
+        title: "Incomplete Mapping",
+        description: "Please upload a file and map columns",
+        variant: "destructive"
+      });
+      return;
+    }
 
-      const newMapping = {
-        processorId: selectedProcessor.id,
-        processorName: selectedProcessor.name,
-        file: mappingFile,
-        columns: columnMappings,
+    // Save mapping to database
+    try {
+      const response = await fetch('/api/vendor-mappings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          vendorId: selectedVendor.id,
+          vendorName: selectedVendor.name,
+          vendorCategory: selectedVendor.category,
+          fileName: uploadedFile.name,
+          columnMappings: columnMappings
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to save mapping');
+
+      const newUpload = {
+        vendorId: selectedVendor.id,
+        vendorName: selectedVendor.name,
+        vendorCategory: selectedVendor.category,
+        file: uploadedFile,
+        columns: parsedColumns,
+        mappings: columnMappings,
         completed: true
       };
 
-      setProcessorMappings([...processorMappings, newMapping]);
-      setSelectedProcessor(null);
-      setMappingFile(null);
+      setVendorUploads([...vendorUploads, newUpload]);
+      setSelectedVendor(null);
+      setUploadedFile(null);
+      setParsedColumns([]);
       setColumnMappings({});
+      setShowMapping(false);
       
       toast({
-        title: "Mapping Saved",
-        description: `${selectedProcessor.name} mapping configured`,
+        title: "Vendor Configured",
+        description: `${selectedVendor.name} uploaded and mapped successfully`,
       });
-    };
-
-    const allProcessorsMapped = selectedProcessors.length > 0 && 
-      processorMappings.length === selectedProcessors.length;
-
-    return (
-      <div className="space-y-6">
-        <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <Database className="h-5 w-5 text-yellow-400" />
-            Processor Data Mapping
-          </h3>
-          <p className="text-gray-400 text-sm mb-4">
-            Configure column mapping for each processor selected in Step 4.
-          </p>
-
-          {/* Processor List */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-            {selectedProcessors.map((processor: any) => {
-              const isMapped = processorMappings.some((m: any) => m.processorId === processor.id);
-              const isSelected = selectedProcessor?.id === processor.id;
-              
-              return (
-                <button
-                  key={processor.id}
-                  onClick={() => handleProcessorSelect(processor)}
-                  className={`p-4 rounded-lg border-2 transition-all text-left ${
-                    isMapped
-                      ? 'bg-green-500/10 border-green-500 cursor-default'
-                      : isSelected
-                      ? 'bg-yellow-400/20 border-yellow-400'
-                      : 'bg-zinc-900/50 border-zinc-700 hover:border-yellow-400/50'
-                  }`}
-                  disabled={isMapped}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className={`font-medium ${
-                      isMapped ? 'text-green-400' : isSelected ? 'text-white' : 'text-gray-400'
-                    }`}>
-                      {processor.name}
-                    </span>
-                    {isMapped && <CheckCircle className="h-5 w-5 text-green-400" />}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Mapping Interface */}
-          {selectedProcessor && (
-            <div className="mt-6 p-4 bg-zinc-900/50 rounded-lg border border-yellow-400/30">
-              <h4 className="text-white font-medium mb-4">
-                Mapping for {selectedProcessor.name}
-              </h4>
-
-              <div className="mb-4">
-                <Label className="text-gray-300">Upload Sample File</Label>
-                <div className="mt-2 flex justify-center px-6 pt-4 pb-4 border-2 border-dashed rounded-md border-yellow-400/30 bg-zinc-800/50">
-                  <div className="text-center">
-                    <Upload className="mx-auto h-8 w-8 text-yellow-400" />
-                    <div className="mt-2">
-                      <label
-                        htmlFor="mapping-file-upload"
-                        className="cursor-pointer text-sm text-yellow-400 hover:text-yellow-300"
-                      >
-                        Upload CSV/Excel
-                        <input
-                          id="mapping-file-upload"
-                          type="file"
-                          accept=".csv,.xlsx,.xls"
-                          onChange={handleMappingFileUpload}
-                          className="sr-only"
-                        />
-                      </label>
-                    </div>
-                    {mappingFile && (
-                      <p className="text-xs text-green-400 mt-2">✓ {mappingFile.name}</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              {mappingFile && (
-                <div className="space-y-3">
-                  <p className="text-sm text-gray-400">Map your columns to system fields:</p>
-                  {sampleColumns.map((col, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <div className="flex-1 p-2 bg-zinc-800 rounded border border-zinc-700">
-                        <span className="text-sm text-gray-300">{col}</span>
-                      </div>
-                      <ArrowRight className="h-4 w-4 text-yellow-400" />
-                      <div className="flex-1">
-                        <Select
-                          value={columnMappings[col] || ''}
-                          onValueChange={(value) => setColumnMappings({ ...columnMappings, [col]: value })}
-                        >
-                          <SelectTrigger className="bg-zinc-800 border-yellow-400/30 text-white">
-                            <SelectValue placeholder="Select field" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-zinc-800 border-yellow-400/30">
-                            {targetFields.map(field => (
-                              <SelectItem key={field} value={field}>{field}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <Button
-                onClick={handleSaveMapping}
-                className="w-full mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
-                disabled={!mappingFile}
-              >
-                Save Mapping
-              </Button>
-            </div>
-          )}
-        </div>
-
-        <div className="flex justify-between">
-          <Button
-            onClick={() => setCurrentSubStep(0)}
-            variant="outline"
-            className="border-yellow-400/30 text-yellow-400"
-          >
-            Back
-          </Button>
-          <Button
-            onClick={() => {
-              if (!allProcessorsMapped) {
-                toast({
-                  title: "Incomplete Mappings",
-                  description: "Please map all selected processors",
-                  variant: "destructive"
-                });
-                return;
-              }
-              setCurrentSubStep(2);
-            }}
-            className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
-            disabled={!allProcessorsMapped}
-          >
-            Continue to Upload
-          </Button>
-        </div>
-      </div>
-    );
-  };
-
-  // Sub-step 5.3: Upload Past Data
-  const renderUploadPastData = () => {
-    const [uploadingProcessor, setUploadingProcessor] = useState<any>(null);
-    const [dataFile, setDataFile] = useState<File | null>(null);
-
-    const handleDataUpload = (processor: any) => {
-      setUploadingProcessor(processor);
-      setDataFile(null);
-    };
-
-    const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (file) {
-        setDataFile(file);
-      }
-    };
-
-    const handleProcessData = () => {
-      if (!dataFile || !uploadingProcessor) return;
-
-      // Simulate data processing
+    } catch (error) {
       toast({
-        title: "Processing Data",
-        description: "Parsing and auditing uploaded data...",
+        title: "Error Saving Mapping",
+        description: "Failed to save vendor mapping to database",
+        variant: "destructive"
       });
-
-      setTimeout(() => {
-        const newUpload = {
-          processorId: uploadingProcessor.id,
-          processorName: uploadingProcessor.name,
-          file: dataFile,
-          processed: true,
-          recordCount: Math.floor(Math.random() * 1000) + 100
-        };
-
-        setUploadedData([...uploadedData, newUpload]);
-        setUploadingProcessor(null);
-        setDataFile(null);
-
-        toast({
-          title: "Data Uploaded Successfully",
-          description: `${newUpload.recordCount} records parsed and saved to master data table`,
-        });
-      }, 2000);
-    };
-
-    const allDataUploaded = processorMappings.length > 0 && 
-      uploadedData.length === processorMappings.length;
-
-    return (
-      <div className="space-y-6">
-        <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <FileText className="h-5 w-5 text-yellow-400" />
-            Upload Historical Data
-          </h3>
-          <p className="text-gray-400 text-sm mb-4">
-            Upload past data for each mapped processor. Data will be parsed by month/year and added to your master table.
-          </p>
-
-          <div className="space-y-3">
-            {processorMappings.map((mapping: any) => {
-              const isUploaded = uploadedData.some((u: any) => u.processorId === mapping.processorId);
-              const isUploading = uploadingProcessor?.id === mapping.processorId;
-
-              return (
-                <div
-                  key={mapping.processorId}
-                  className={`p-4 rounded-lg border-2 transition-all ${
-                    isUploaded
-                      ? 'bg-green-500/10 border-green-500'
-                      : isUploading
-                      ? 'bg-yellow-400/20 border-yellow-400'
-                      : 'bg-zinc-900/50 border-zinc-700'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                        isUploaded ? 'bg-green-500/20' : 'bg-yellow-400/20'
-                      }`}>
-                        {isUploaded ? (
-                          <CheckCircle className="h-5 w-5 text-green-400" />
-                        ) : (
-                          <Upload className="h-5 w-5 text-yellow-400" />
-                        )}
-                      </div>
-                      <div>
-                        <p className="text-white font-medium">{mapping.processorName}</p>
-                        {isUploaded && (
-                          <p className="text-xs text-green-400">
-                            {uploadedData.find((u: any) => u.processorId === mapping.processorId)?.recordCount} records uploaded
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                    {!isUploaded && !isUploading && (
-                      <Button
-                        onClick={() => handleDataUpload(mapping)}
-                        size="sm"
-                        className="bg-yellow-400 hover:bg-yellow-500 text-black"
-                      >
-                        Upload Data
-                      </Button>
-                    )}
-                  </div>
-
-                  {isUploading && (
-                    <div className="mt-3 p-3 bg-zinc-800/50 rounded border border-yellow-400/30">
-                      <input
-                        type="file"
-                        accept=".csv,.xlsx,.xls"
-                        onChange={handleFileSelect}
-                        className="mb-3 text-sm text-gray-400"
-                      />
-                      {dataFile && (
-                        <Button
-                          onClick={handleProcessData}
-                          className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
-                        >
-                          Process & Upload
-                        </Button>
-                      )}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="flex justify-between">
-          <Button
-            onClick={() => setCurrentSubStep(1)}
-            variant="outline"
-            className="border-yellow-400/30 text-yellow-400"
-          >
-            Back
-          </Button>
-          <Button
-            onClick={() => {
-              if (!allDataUploaded) {
-                toast({
-                  title: "Incomplete Uploads",
-                  description: "Please upload data for all processors",
-                  variant: "destructive"
-                });
-                return;
-              }
-              onComplete({
-                leadSheetFile,
-                processorMappings,
-                uploadedData
-              });
-            }}
-            className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
-            disabled={!allDataUploaded}
-          >
-            Complete Data Setup
-          </Button>
-        </div>
-      </div>
-    );
+    }
   };
+
+  const allVendorsConfigured = selectedVendors.length > 0 && 
+    vendorUploads.length === selectedVendors.length;
+
+
 
   if (isCompleted) {
     return (
       <div className="text-center py-8">
         <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
-        <p className="text-white">Processor data setup complete</p>
+        <p className="text-white">Vendor data setup complete</p>
         <p className="text-gray-400 text-sm mt-2">
-          {uploadedData.length} processor(s) configured with historical data
+          {vendorUploads.length} vendor(s) configured across all categories
         </p>
+      </div>
+    );
+  }
+
+  // Show message if no vendors selected in Step 4
+  if (selectedVendors.length === 0) {
+    return (
+      <div className="space-y-6">
+        <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <Database className="h-5 w-5 text-yellow-400" />
+            Vendor Data Upload & Mapping
+          </h3>
+          <div className="text-center py-8">
+            <Upload className="h-12 w-12 text-gray-500 mx-auto mb-4" />
+            <p className="text-yellow-400 font-medium mb-2">No Vendors Selected</p>
+            <p className="text-gray-400 text-sm">
+              Please complete Step 4 (Vendor Selection) first to select processors, gateways, and hardware/POS vendors.
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      {/* Sub-step Progress */}
-      <div className="flex items-center justify-center gap-2 mb-6">
-        {subSteps.map((step, index) => {
-          const Icon = step.icon;
-          return (
-            <div key={index} className="flex items-center">
-              <div className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
-                index === currentSubStep
-                  ? 'bg-yellow-400/20 border-2 border-yellow-400'
-                  : index < currentSubStep
-                  ? 'bg-green-500/20 border-2 border-green-500'
-                  : 'bg-zinc-800 border-2 border-zinc-600'
-              }`}>
-                {index < currentSubStep ? (
-                  <CheckCircle className="h-4 w-4 text-green-400" />
-                ) : (
-                  <Icon className={`h-4 w-4 ${
-                    index === currentSubStep ? 'text-yellow-400' : 'text-gray-500'
-                  }`} />
-                )}
-                <span className={`text-sm font-medium ${
-                  index === currentSubStep ? 'text-yellow-400' : index < currentSubStep ? 'text-green-400' : 'text-gray-500'
-                }`}>
-                  {step.title}
-                </span>
+      <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <Database className="h-5 w-5 text-yellow-400" />
+          Vendor Data Upload & Mapping
+        </h3>
+        <p className="text-gray-400 text-sm mb-4">
+          Upload a data file for each selected vendor (Processors, Gateways, Hardware/POS). The system will automatically detect columns for mapping.
+        </p>
+
+        {/* Vendor List - Grouped by Category */}
+        <div className="space-y-6">
+          {['Processors', 'Gateways', 'Hardware/Equipment'].map(category => {
+            const categoryVendors = selectedVendors.filter((v: any) => v.category === category);
+            if (categoryVendors.length === 0) return null;
+
+            return (
+              <div key={category} className="space-y-3">
+                <h4 className="text-md font-medium text-yellow-400 flex items-center gap-2">
+                  {category === 'Processors' && <Database className="h-4 w-4" />}
+                  {category === 'Gateways' && <Settings className="h-4 w-4" />}
+                  {category === 'Hardware/Equipment' && <Upload className="h-4 w-4" />}
+                  {category}
+                </h4>
+                <div className="space-y-3">
+                  {categoryVendors.map((vendor: any) => {
+                    const isConfigured = vendorUploads.some((u: any) => u.vendorId === vendor.id);
+                    const isCurrentlySelected = selectedVendor?.id === vendor.id;
+                    const upload = vendorUploads.find((u: any) => u.vendorId === vendor.id);
+            
+                    return (
+                      <div
+                        key={vendor.id}
+                        className={`p-4 rounded-lg border-2 transition-all ${
+                          isConfigured
+                            ? 'bg-green-500/10 border-green-500'
+                            : isCurrentlySelected
+                            ? 'bg-yellow-400/20 border-yellow-400'
+                            : 'bg-zinc-900/50 border-zinc-700'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                              isConfigured ? 'bg-green-500/20' : 'bg-yellow-400/20'
+                            }`}>
+                              {isConfigured ? (
+                                <CheckCircle className="h-5 w-5 text-green-400" />
+                              ) : (
+                                <Upload className="h-5 w-5 text-yellow-400" />
+                              )}
+                            </div>
+                            <div>
+                              <p className={`font-medium ${
+                                isConfigured ? 'text-green-400' : 'text-white'
+                              }`}>
+                                {vendor.name}
+                              </p>
+                              <p className="text-xs text-gray-500">{vendor.category}</p>
+                              {isConfigured && upload && (
+                                <p className="text-xs text-green-400">
+                                  {Object.values(upload.mappings).filter((m: any) => m.action === 'map').length} columns mapped
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                          {!isConfigured && !isCurrentlySelected && (
+                            <label className="cursor-pointer">
+                              <input
+                                type="file"
+                                accept=".csv,.xlsx,.xls"
+                                onChange={(e) => handleFileUpload(vendor, e)}
+                                className="sr-only"
+                              />
+                              <Button
+                                type="button"
+                                size="sm"
+                                className="bg-yellow-400 hover:bg-yellow-500 text-black"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  (e.currentTarget.previousElementSibling as HTMLInputElement)?.click();
+                                }}
+                              >
+                                Upload File
+                              </Button>
+                            </label>
+                          )}
+                        </div>
+
+                        {/* Column Mapping Interface */}
+                        {isCurrentlySelected && showMapping && parsedColumns.length > 0 && (
+                          <div className="mt-4 p-4 bg-zinc-800/50 rounded-lg border border-yellow-400/30">
+                            <div className="mb-4">
+                              <p className="text-sm text-green-400 mb-2">✓ File uploaded: {uploadedFile?.name}</p>
+                              <p className="text-sm text-gray-400 mb-4">
+                                {parsedColumns.length} columns detected. Choose to map or ignore each column:
+                              </p>
+                            </div>
+
+                            <div className="space-y-3 max-h-96 overflow-y-auto">
+                              {parsedColumns.map((col, idx) => (
+                                <div key={idx} className="flex items-center gap-3">
+                                  <div className="w-32 p-2 bg-zinc-900 rounded border border-zinc-700">
+                                    <span className="text-sm text-gray-300 truncate block">{col}</span>
+                                  </div>
+                                  <ArrowRight className="h-4 w-4 text-yellow-400 flex-shrink-0" />
+                                  <div className="flex-1 flex gap-2">
+                                    <Select
+                                      value={columnMappings[col]?.action || 'ignore'}
+                                      onValueChange={(value) => {
+                                        setColumnMappings({
+                                          ...columnMappings,
+                                          [col]: {
+                                            action: value,
+                                            targetField: value === 'ignore' ? '' : columnMappings[col]?.targetField || ''
+                                          }
+                                        });
+                                      }}
+                                    >
+                                      <SelectTrigger className="w-28 bg-zinc-900 border-yellow-400/30 text-white">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent className="bg-zinc-800 border-yellow-400/30">
+                                        <SelectItem value="map">Map</SelectItem>
+                                        <SelectItem value="ignore">Ignore</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                    {columnMappings[col]?.action === 'map' && (
+                                      <Select
+                                        value={columnMappings[col]?.targetField || ''}
+                                        onValueChange={(value) => {
+                                          setColumnMappings({
+                                            ...columnMappings,
+                                            [col]: { action: 'map', targetField: value }
+                                          });
+                                        }}
+                                      >
+                                        <SelectTrigger className="flex-1 bg-zinc-900 border-yellow-400/30 text-white">
+                                          <SelectValue placeholder="Select field" />
+                                        </SelectTrigger>
+                                        <SelectContent className="bg-zinc-800 border-yellow-400/30">
+                                          {targetFields.map(field => (
+                                            <SelectItem key={field} value={field}>{field}</SelectItem>
+                                          ))}
+                                        </SelectContent>
+                                      </Select>
+                                    )}
+                                    {columnMappings[col]?.action === 'ignore' && (
+                                      <div className="flex-1 p-2 bg-zinc-900/50 rounded border border-zinc-700 flex items-center">
+                                        <span className="text-sm text-gray-500 italic">Column will be ignored</span>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+
+                            <div className="flex gap-3 mt-4">
+                              <Button
+                                onClick={() => {
+                                  setSelectedVendor(null);
+                                  setUploadedFile(null);
+                                  setParsedColumns([]);
+                                  setColumnMappings({});
+                                  setShowMapping(false);
+                                }}
+                                variant="outline"
+                                className="flex-1 border-yellow-400/30 text-yellow-400"
+                              >
+                                Cancel
+                              </Button>
+                              <Button
+                                onClick={handleSaveMapping}
+                                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+                              >
+                                Save Mapping
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-              {index < subSteps.length - 1 && (
-                <ArrowRight className="h-4 w-4 text-gray-600 mx-2" />
-              )}
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
-      {/* Render current sub-step */}
-      {currentSubStep === 0 && renderLeadSheetUpload()}
-      {currentSubStep === 1 && renderProcessorMapping()}
-      {currentSubStep === 2 && renderUploadPastData()}
+      <div className="flex justify-end">
+        <Button
+          onClick={() => {
+            if (!allVendorsConfigured) {
+              toast({
+                title: "Incomplete Setup",
+                description: "Please upload and map all selected vendors",
+                variant: "destructive"
+              });
+              return;
+            }
+            onComplete({ vendorUploads });
+          }}
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+          disabled={!allVendorsConfigured}
+        >
+          Complete Vendor Setup
+        </Button>
+      </div>
     </div>
   );
 }
@@ -2121,59 +1992,140 @@ function ISOAIPreferencesStep({ onComplete, isCompleted, initialData }: any) {
   );
 }
 
-// Task 3.9: Residual Upload
-function ResidualUploadStep({ onComplete, isCompleted, initialData }: any) {
+// Task 3.9: Lead Sheet Upload and Mapping
+function LeadSheetUploadStep({ onComplete, isCompleted, initialData }: any) {
   const { toast } = useToast();
-  const [residualFile, setResidualFile] = useState<File | null>(initialData?.residualFile || null);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [uploadStats, setUploadStats] = useState<any>(initialData?.uploadStats || null);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(initialData?.leadSheetFile || null);
+  const [parsedColumns, setParsedColumns] = useState<string[]>(initialData?.columns || []);
+  const [columnMappings, setColumnMappings] = useState<any>(initialData?.columnMappings || {});
+  const [showMapping, setShowMapping] = useState(false);
+  const [isMappingSaved, setIsMappingSaved] = useState(initialData?.isMappingSaved || false);
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Parse CSV/Excel columns from uploaded file
+  const parseFileColumns = async (file: File) => {
+    return new Promise<string[]>((resolve) => {
+      const reader = new FileReader();
+      
+      if (file.name.endsWith('.csv')) {
+        reader.onload = (e) => {
+          const text = e.target?.result as string;
+          const firstLine = text.split('\n')[0];
+          const columns = firstLine.split(',').map(col => col.trim().replace(/"/g, ''));
+          resolve(columns.filter(col => col.length > 0));
+        };
+        reader.readAsText(file);
+      } else if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+        reader.onload = async (e) => {
+          try {
+            const data = e.target?.result;
+            const XLSX = await import('xlsx');
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as any[][];
+            
+            if (jsonData.length > 0) {
+              const headers = jsonData[0].map((h: any) => String(h || '').trim()).filter(h => h.length > 0);
+              resolve(headers);
+            } else {
+              resolve([]);
+            }
+          } catch (error) {
+            console.error('Error parsing Excel file:', error);
+            resolve([]);
+          }
+        };
+        reader.readAsArrayBuffer(file);
+      } else {
+        resolve([]);
+      }
+    });
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setResidualFile(file);
+      setUploadedFile(file);
+      
       toast({
-        title: "Residual File Selected",
-        description: `${file.name} ready for processing`,
+        title: "Processing File",
+        description: "Parsing columns from uploaded file...",
+      });
+
+      const columns = await parseFileColumns(file);
+      setParsedColumns(columns);
+      const initialMappings: any = {};
+      columns.forEach(col => {
+        initialMappings[col] = { action: 'ignore', targetField: '' };
+      });
+      setColumnMappings(initialMappings);
+      setShowMapping(true);
+      setIsMappingSaved(false);
+
+      toast({
+        title: "File Uploaded",
+        description: `${columns.length} columns detected. Ready for mapping.`,
       });
     }
   };
 
-  const handleProcessResiduals = () => {
-    if (!residualFile) return;
+  const targetFields = [
+    'merchant_id', 'business_name', 'legal_name', 'dba_name',
+    'monthly_volume', 'transaction_count', 'fees', 'statement_date',
+    'status', 'processor_name', 'gateway_name', 'hardware_name',
+    'branch_id', 'account_number', 'routing_number', 'terminal_id',
+    'batch_number', 'contact_name', 'phone', 'email', 'address',
+    'city', 'state', 'zip', 'mcc_code', 'setup_date'
+  ];
 
-    setIsProcessing(true);
-    toast({
-      title: "Processing Residuals",
-      description: "Parsing and calculating residual data...",
-    });
-
-    setTimeout(() => {
-      const stats = {
-        totalRecords: Math.floor(Math.random() * 500) + 100,
-        totalAmount: (Math.random() * 50000 + 10000).toFixed(2),
-        merchants: Math.floor(Math.random() * 100) + 20,
-        months: Math.floor(Math.random() * 6) + 1
-      };
-      setUploadStats(stats);
-      setIsProcessing(false);
+  const handleSaveMapping = async () => {
+    if (!uploadedFile || parsedColumns.length === 0) {
       toast({
-        title: "Residuals Processed Successfully",
-        description: `${stats.totalRecords} records imported`,
+        title: "Incomplete Mapping",
+        description: "Please upload a file and map columns",
+        variant: "destructive"
       });
-    }, 2500);
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/lead-sheet-mappings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          fileName: uploadedFile.name,
+          columnMappings: columnMappings,
+          agencyId: 1
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to save mapping');
+
+      setIsMappingSaved(true);
+      setShowMapping(false);
+      
+      toast({
+        title: "Mapping Saved",
+        description: "Lead sheet column mapping saved successfully",
+      });
+    } catch (error) {
+      toast({
+        title: "Error Saving Mapping",
+        description: "Failed to save lead sheet mapping to database",
+        variant: "destructive"
+      });
+    }
   };
 
   if (isCompleted) {
     return (
       <div className="text-center py-8">
         <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
-        <p className="text-white">Residual data uploaded</p>
-        {uploadStats && (
-          <p className="text-gray-400 text-sm mt-2">
-            ${uploadStats.totalAmount} across {uploadStats.merchants} merchants
-          </p>
-        )}
+        <p className="text-white">Lead sheet uploaded and mapped</p>
+        <p className="text-gray-400 text-sm mt-2">
+          {Object.values(columnMappings).filter((m: any) => m.action === 'map').length} columns mapped
+        </p>
       </div>
     );
   }
@@ -2182,11 +2134,11 @@ function ResidualUploadStep({ onComplete, isCompleted, initialData }: any) {
     <div className="space-y-6">
       <div className="bg-zinc-800/50 p-6 rounded-lg border border-yellow-400/20">
         <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-          <DollarSign className="h-5 w-5 text-yellow-400" />
-          Upload Residual Data
+          <Upload className="h-5 w-5 text-yellow-400" />
+          Lead Sheet Upload & Mapping
         </h3>
         <p className="text-gray-400 text-sm mb-4">
-          Upload your historical residual data. The system will parse and calculate splits automatically.
+          Upload your lead sheet (.csv or .xlsx). The system will automatically detect columns for mapping.
         </p>
 
         <div className="mt-4 flex justify-center px-6 pt-5 pb-6 border-2 border-yellow-400/30 border-dashed rounded-md hover:border-yellow-400/50 transition-colors bg-zinc-900/50">
@@ -2194,12 +2146,12 @@ function ResidualUploadStep({ onComplete, isCompleted, initialData }: any) {
             <Upload className="mx-auto h-12 w-12 text-yellow-400" />
             <div className="flex text-sm text-gray-400">
               <label
-                htmlFor="residual-upload"
+                htmlFor="leadsheet-upload"
                 className="relative cursor-pointer rounded-md font-medium text-yellow-400 hover:text-yellow-300"
               >
-                <span>Upload residual file</span>
+                <span>Upload lead sheet</span>
                 <input
-                  id="residual-upload"
+                  id="leadsheet-upload"
                   type="file"
                   accept=".csv,.xlsx,.xls"
                   onChange={handleFileUpload}
@@ -2209,56 +2161,127 @@ function ResidualUploadStep({ onComplete, isCompleted, initialData }: any) {
               <p className="pl-1">or drag and drop</p>
             </div>
             <p className="text-xs text-gray-500">CSV or Excel files</p>
-            {residualFile && (
+            {uploadedFile && (
               <div className="mt-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
                 <p className="text-sm text-green-400 flex items-center justify-center gap-2">
                   <CheckCircle className="h-4 w-4" />
-                  {residualFile.name}
+                  {uploadedFile.name}
                 </p>
               </div>
             )}
           </div>
         </div>
 
-        {residualFile && !uploadStats && (
-          <Button
-            onClick={handleProcessResiduals}
-            className="w-full mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
-            disabled={isProcessing}
-          >
-            {isProcessing ? 'Processing...' : 'Process Residuals'}
-          </Button>
+        {showMapping && parsedColumns.length > 0 && (
+          <div className="mt-6 p-4 bg-zinc-800/50 rounded-lg border border-yellow-400/30">
+            <div className="mb-4">
+              <p className="text-sm text-green-400 mb-2">✓ File uploaded: {uploadedFile?.name}</p>
+              <p className="text-sm text-gray-400 mb-4">
+                {parsedColumns.length} columns detected. Choose to map or ignore each column:
+              </p>
+            </div>
+
+            <div className="space-y-3 max-h-96 overflow-y-auto">
+              {parsedColumns.map((col, idx) => (
+                <div key={idx} className="flex items-center gap-3">
+                  <div className="w-40 p-2 bg-zinc-900 rounded border border-zinc-700">
+                    <span className="text-sm text-gray-300 truncate block">{col}</span>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-yellow-400 flex-shrink-0" />
+                  <div className="flex-1 flex gap-2">
+                    <Select
+                      value={columnMappings[col]?.action || 'ignore'}
+                      onValueChange={(value) => {
+                        setColumnMappings({
+                          ...columnMappings,
+                          [col]: {
+                            action: value,
+                            targetField: value === 'ignore' ? '' : columnMappings[col]?.targetField || ''
+                          }
+                        });
+                      }}
+                    >
+                      <SelectTrigger className="w-28 bg-zinc-900 border-yellow-400/30 text-white">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-zinc-800 border-yellow-400/30">
+                        <SelectItem value="map">Map</SelectItem>
+                        <SelectItem value="ignore">Ignore</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {columnMappings[col]?.action === 'map' && (
+                      <Select
+                        value={columnMappings[col]?.targetField || ''}
+                        onValueChange={(value) => {
+                          setColumnMappings({
+                            ...columnMappings,
+                            [col]: { action: 'map', targetField: value }
+                          });
+                        }}
+                      >
+                        <SelectTrigger className="flex-1 bg-zinc-900 border-yellow-400/30 text-white">
+                          <SelectValue placeholder="Select field" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-zinc-800 border-yellow-400/30">
+                          {targetFields.map(field => (
+                            <SelectItem key={field} value={field}>{field}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                    {columnMappings[col]?.action === 'ignore' && (
+                      <div className="flex-1 p-2 bg-zinc-900/50 rounded border border-zinc-700 flex items-center">
+                        <span className="text-sm text-gray-500 italic">Column will be ignored</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex gap-3 mt-4">
+              <Button
+                onClick={() => {
+                  setShowMapping(false);
+                  setUploadedFile(null);
+                  setParsedColumns([]);
+                  setColumnMappings({});
+                }}
+                variant="outline"
+                className="flex-1 border-yellow-400/30 text-yellow-400"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleSaveMapping}
+                className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
+              >
+                Save Mapping
+              </Button>
+            </div>
+          </div>
         )}
 
-        {uploadStats && (
-          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
-            <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-center">
-              <p className="text-2xl font-bold text-green-400">{uploadStats.totalRecords}</p>
-              <p className="text-xs text-gray-400 mt-1">Records</p>
-            </div>
-            <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-center">
-              <p className="text-2xl font-bold text-green-400">${uploadStats.totalAmount}</p>
-              <p className="text-xs text-gray-400 mt-1">Total Amount</p>
-            </div>
-            <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-center">
-              <p className="text-2xl font-bold text-green-400">{uploadStats.merchants}</p>
-              <p className="text-xs text-gray-400 mt-1">Merchants</p>
-            </div>
-            <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-center">
-              <p className="text-2xl font-bold text-green-400">{uploadStats.months}</p>
-              <p className="text-xs text-gray-400 mt-1">Months</p>
-            </div>
+        {isMappingSaved && !showMapping && (
+          <div className="mt-4 p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+            <p className="text-green-400 font-medium flex items-center gap-2">
+              <CheckCircle className="h-5 w-5" />
+              Lead sheet mapping saved successfully
+            </p>
+            <p className="text-sm text-gray-400 mt-2">
+              {Object.values(columnMappings).filter((m: any) => m.action === 'map').length} columns mapped from {uploadedFile?.name}
+            </p>
           </div>
         )}
       </div>
 
       <div className="flex justify-end">
         <Button
-          onClick={() => onComplete({ residualFile, uploadStats })}
+          onClick={() => onComplete({ leadSheetFile: uploadedFile, columns: parsedColumns, columnMappings, isMappingSaved })}
           className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
-          disabled={!uploadStats}
+          disabled={!isMappingSaved}
         >
-          Continue to Next Step
+          Complete Lead Sheet Setup
         </Button>
       </div>
     </div>
@@ -2382,6 +2405,8 @@ export default function AgencyOnboarding() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  // Local state to track step data for passing between steps
+  const [localStepData, setLocalStepData] = useState<Record<string, any>>({});
 
   const agencyId = 1;
 
@@ -2409,7 +2434,7 @@ export default function AgencyOnboarding() {
       });
       // Move to next step after a short delay to allow UI to update
       setTimeout(() => {
-        setCurrentStepIndex(prev => prev < 6 ? prev + 1 : prev);
+        setCurrentStepIndex(prev => prev < 8 ? prev + 1 : prev);
       }, 300);
     }
   });
@@ -2422,10 +2447,14 @@ export default function AgencyOnboarding() {
   };
 
   const handleCompleteStep = (stepName: string, data: any) => {
+    // Save step data to local state for cross-step access
+    setLocalStepData(prev => ({ ...prev, [stepName]: data }));
     completeStepMutation.mutate({ stepName, data });
   };
 
   const renderStepContent = (step: OnboardingStep) => {
+    // Get vendor selection data from local state for use in Step 5
+    const vendorSelectionData = localStepData['Vendor Selection'] || {};
     switch (step.stepName) {
       case 'Company Information':
         return (
@@ -2467,20 +2496,15 @@ export default function AgencyOnboarding() {
             initialData={step.stepData}
           />
         );
-      case 'Processor & Lead Sheet Setup':
+      case 'Processor Setup':
         return (
           <ProcessorDataSetupStep 
             onComplete={(data: any) => handleCompleteStep(step.stepName, data)}
             isCompleted={step.isCompleted}
-            initialData={step.stepData}
-          />
-        );
-      case 'FAQ Upload':
-        return (
-          <FAQUploadStep 
-            onComplete={(data: any) => handleCompleteStep(step.stepName, data)}
-            isCompleted={step.isCompleted}
-            initialData={step.stepData}
+            initialData={{
+              ...step.stepData,
+              ...vendorSelectionData
+            }}
           />
         );
       case 'Document Center':
@@ -2499,9 +2523,9 @@ export default function AgencyOnboarding() {
             initialData={step.stepData}
           />
         );
-      case 'Residual Upload':
+      case 'Upload lead sheet and Mapping':
         return (
-          <ResidualUploadStep 
+          <LeadSheetUploadStep 
             onComplete={(data: any) => handleCompleteStep(step.stepName, data)}
             isCompleted={step.isCompleted}
             initialData={step.stepData}
@@ -2535,12 +2559,11 @@ export default function AgencyOnboarding() {
     { id: 2, stepName: 'Business Profile', stepOrder: 2, isCompleted: false, completedAt: null, stepData: {} },
     { id: 3, stepName: 'User Setup', stepOrder: 3, isCompleted: false, completedAt: null, stepData: {} },
     { id: 4, stepName: 'Vendor Selection', stepOrder: 4, isCompleted: false, completedAt: null, stepData: {} },
-    { id: 5, stepName: 'Processor & Lead Sheet Setup', stepOrder: 5, isCompleted: false, completedAt: null, stepData: {} },
-    { id: 6, stepName: 'FAQ Upload', stepOrder: 6, isCompleted: false, completedAt: null, stepData: {} },
-    { id: 7, stepName: 'Document Center', stepOrder: 7, isCompleted: false, completedAt: null, stepData: {} },
-    { id: 8, stepName: 'ISO-AI Preferences', stepOrder: 8, isCompleted: false, completedAt: null, stepData: {} },
-    { id: 9, stepName: 'Residual Upload', stepOrder: 9, isCompleted: false, completedAt: null, stepData: {} },
-    { id: 10, stepName: 'Dashboard Tour', stepOrder: 10, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 5, stepName: 'Processor Setup', stepOrder: 5, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 6, stepName: 'Document Center', stepOrder: 6, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 7, stepName: 'ISO-AI Preferences', stepOrder: 7, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 8, stepName: 'Upload lead sheet and Mapping', stepOrder: 8, isCompleted: false, completedAt: null, stepData: {} },
+    { id: 9, stepName: 'Dashboard Tour', stepOrder: 9, isCompleted: false, completedAt: null, stepData: {} },
   ];
 
   const displaySteps = status.steps.length > 0 ? status.steps : defaultSteps;
