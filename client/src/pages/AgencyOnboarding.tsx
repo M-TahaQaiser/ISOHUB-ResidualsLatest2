@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useLocation } from 'wouter';
 import { CheckCircle, Clock, ArrowRight, Building2, Users, Settings, Database, FileText, DollarSign, TrendingUp, Upload, Palette, Save, User, FolderOpen, Sparkles, LayoutDashboard, Shield, BookOpen, Image } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -1320,7 +1321,8 @@ function ProcessorDataSetupStep({ onComplete, isCompleted, initialData }: any) {
           vendorName: selectedVendor.name,
           vendorCategory: selectedVendor.category,
           fileName: uploadedFile.name,
-          columnMappings: columnMappings
+          columnMappings: columnMappings,
+          agencyId: parseInt(localStorage.getItem('onboarding_agency_id') || '1')
         })
       });
 
@@ -2096,7 +2098,7 @@ function LeadSheetUploadStep({ onComplete, isCompleted, initialData }: any) {
         body: JSON.stringify({
           fileName: uploadedFile.name,
           columnMappings: columnMappings,
-          agencyId: 1
+          agencyId: parseInt(localStorage.getItem('onboarding_agency_id') || '1')
         })
       });
 
@@ -2404,11 +2406,14 @@ function DashboardTourStep({ onComplete, isCompleted }: any) {
 export default function AgencyOnboarding() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const [, setLocation] = useLocation();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   // Local state to track step data for passing between steps
   const [localStepData, setLocalStepData] = useState<Record<string, any>>({});
 
-  const agencyId = 1;
+  // Get agency ID from localStorage (set when clicking "Onboard" button) or default to 1
+  const agencyId = parseInt(localStorage.getItem('onboarding_agency_id') || '1');
+  const agencyName = localStorage.getItem('onboarding_agency_name') || 'Your Agency';
 
   const { data: onboardingStatus, isLoading } = useQuery({
     queryKey: [`/api/agencies/${agencyId}/onboarding`],
@@ -2450,6 +2455,13 @@ export default function AgencyOnboarding() {
     // Save step data to local state for cross-step access
     setLocalStepData(prev => ({ ...prev, [stepName]: data }));
     completeStepMutation.mutate({ stepName, data });
+    
+    // If completing the final step (Dashboard Tour), redirect to dashboard
+    if (stepName === 'Dashboard Tour') {
+      setTimeout(() => {
+        setLocation('/dashboard');
+      }, 1500); // Small delay to show success toast
+    }
   };
 
   const renderStepContent = (step: OnboardingStep) => {

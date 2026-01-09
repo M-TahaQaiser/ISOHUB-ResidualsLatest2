@@ -16,24 +16,55 @@ router.delete('/:organizationId', async (req: AuthenticatedRequest, res) => {
 
     console.log(`Attempting to delete organization: ${organizationId}`);
 
-    // Get organization details and agency_id
-    const orgResult = await db.execute(sql`
-      SELECT id, organization_id, name, agency_id 
-      FROM organizations 
-      WHERE organization_id = ${organizationId}
-      LIMIT 1
-    `);
+    let agencyId: number | null = null;
+    let orgName: string = '';
+    let orgIdToDelete: string | null = null;
 
-    if (!orgResult.rows || orgResult.rows.length === 0) {
+    // Check if organizationId is a string ID (from organizations table) or numeric (from agencies table)
+    const isNumericId = /^\d+$/.test(organizationId);
+
+    if (isNumericId) {
+      // It's a numeric agency ID - delete from agencies table
+      const agencyResult = await db.execute(sql`
+        SELECT id, company_name FROM agencies WHERE id = ${parseInt(organizationId)} LIMIT 1
+      `);
+      
+      if (agencyResult.rows && agencyResult.rows.length > 0) {
+        const agency = agencyResult.rows[0] as any;
+        agencyId = agency.id;
+        orgName = agency.company_name;
+        
+        // Also find and delete corresponding organization entry
+        const orgResult = await db.execute(sql`
+          SELECT organization_id FROM organizations WHERE agency_id = ${agencyId} LIMIT 1
+        `);
+        if (orgResult.rows && orgResult.rows.length > 0) {
+          orgIdToDelete = (orgResult.rows[0] as any).organization_id;
+        }
+      }
+    } else {
+      // It's a string organization_id - get from organizations table
+      const orgResult = await db.execute(sql`
+        SELECT id, organization_id, name, agency_id 
+        FROM organizations 
+        WHERE organization_id = ${organizationId}
+        LIMIT 1
+      `);
+
+      if (orgResult.rows && orgResult.rows.length > 0) {
+        const org = orgResult.rows[0] as any;
+        agencyId = org.agency_id;
+        orgName = org.name;
+        orgIdToDelete = org.organization_id;
+      }
+    }
+
+    if (!agencyId) {
       return res.status(404).json({ 
         success: false,
         error: 'Organization not found' 
       });
     }
-
-    const org = orgResult.rows[0] as any;
-    const agencyId = org.agency_id;
-    const orgName = org.name;
 
     console.log(`Deleting organization: ${orgName} (agency_id: ${agencyId})`);
 
@@ -88,18 +119,26 @@ router.delete('/:organizationId', async (req: AuthenticatedRequest, res) => {
       console.log('file_uploads table does not exist or has no agency_id column');
     }
 
-    // Finally, delete the organization itself
-    const orgDeleteResult = await db.execute(sql`
-      DELETE FROM organizations WHERE organization_id = ${organizationId}
-    `);
-    deletionResults.organization = (orgDeleteResult as any).rowCount || 0;
+    // Delete from organizations table if we have an organizationId
+    if (orgIdToDelete) {
+      const orgDeleteResult = await db.execute(sql`
+        DELETE FROM organizations WHERE organization_id = ${orgIdToDelete}
+      `);
+      deletionResults.organization = (orgDeleteResult as any).rowCount || 0;
+    }
 
-    console.log('Deletion complete:', deletionResults);
+    // Delete from agencies table
+    const agencyDeleteResult = await db.execute(sql`
+      DELETE FROM agencies WHERE id = ${agencyId}
+    `);
+    const agenciesDeleted = (agencyDeleteResult as any).rowCount || 0;
+
+    console.log('Deletion complete:', { ...deletionResults, agenciesDeleted });
 
     res.json({
       success: true,
       message: `Organization "${orgName}" and all associated data have been permanently deleted`,
-      deletionResults
+      deletionResults: { ...deletionResults, agenciesDeleted }
     });
 
   } catch (error: any) {

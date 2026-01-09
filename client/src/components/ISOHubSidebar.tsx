@@ -145,6 +145,7 @@ export default function ISOHubSidebar({ username, isAdmin, userRole = 'user', on
                 <span>ISO-AI</span>
                 <span className="ml-auto text-xs bg-yellow-400 text-black px-1.5 py-0.5 rounded">NEW</span>
               </a>
+              {/* ISO-Sign temporarily hidden
               <Link href="/iso-sign">
                 <div className={`
                   group flex items-center px-3 py-3 text-sm font-medium rounded-md transition-colors
@@ -158,6 +159,7 @@ export default function ISOHubSidebar({ username, isAdmin, userRole = 'user', on
                   <span className="ml-auto text-xs bg-yellow-400 text-black px-1.5 py-0.5 rounded">NEW</span>
                 </div>
               </Link>
+              */}
             </div>
 
             {/* SuperAdmin Tools Section - Only visible to SuperAdmins */}

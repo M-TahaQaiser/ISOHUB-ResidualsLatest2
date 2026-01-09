@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, Building2, Users, Mail, Key, Eye, EyeOff, Upload, Check, Clock, AlertTriangle, Palette, Settings, Edit, Trash2, ExternalLink, UserCheck, Copy } from 'lucide-react';
+import { useLocation } from 'wouter';
+import { Plus, Building2, Users, Mail, Key, Eye, EyeOff, Upload, Check, Clock, AlertTriangle, Palette, Settings, Edit, Trash2, ExternalLink, UserCheck, Copy, PlayCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,6 +21,7 @@ import { z } from 'zod';
 
 interface Organization {
   id: number;
+  organizationId?: string; // Optional for organizations table entries
   companyName: string;
   contactName: string;
   email: string;
@@ -111,6 +113,7 @@ const testOrganizationTemplates: TestOrganizationTemplate[] = [
 ];
 
 export default function OrganizationManagement() {
+  const [, setLocation] = useLocation();
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState<TestOrganizationTemplate | null>(null);
   const [logoFile, setLogoFile] = useState<File | null>(null);
@@ -120,6 +123,13 @@ export default function OrganizationManagement() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
+
+  const handleStartOnboarding = (org: Organization) => {
+    // Store organization context and redirect to onboarding
+    localStorage.setItem('onboarding_agency_id', String(org.id));
+    localStorage.setItem('onboarding_agency_name', org.companyName);
+    setLocation('/onboarding');
+  };
 
   const form = useForm<CreateOrganizationForm>({
     resolver: zodResolver(createOrganizationSchema),
@@ -196,7 +206,12 @@ export default function OrganizationManagement() {
       });
     },
     onSuccess: (data) => {
+      // Invalidate all organization-related queries to refresh lists everywhere
       queryClient.invalidateQueries({ queryKey: ['/api/organizations'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/agencies'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/onboarding/organizations'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/organizations'] });
+      
       setShowCreateDialog(false);
       setSelectedTemplate(null);
       setLogoFile(null);
@@ -264,7 +279,12 @@ export default function OrganizationManagement() {
       return response.json();
     },
     onSuccess: () => {
+      // Invalidate all organization-related queries
       queryClient.invalidateQueries({ queryKey: ['/api/organizations'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/agencies'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/onboarding/organizations'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/organizations'] });
+      
       setDeleteDialogOpen(false);
       setOrganizationToDelete(null);
       
@@ -289,7 +309,9 @@ export default function OrganizationManagement() {
 
   const handleConfirmDelete = () => {
     if (organizationToDelete) {
-      deleteMutation.mutate(organizationToDelete.organizationId);
+      // Use organizationId if available (from organizations table), otherwise use numeric id (from agencies table)
+      const idToDelete = organizationToDelete.organizationId || String(organizationToDelete.id);
+      deleteMutation.mutate(idToDelete);
     }
   };
 
@@ -619,6 +641,16 @@ export default function OrganizationManagement() {
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center space-x-2">
+                          {org.status === 'setup' && (
+                            <Button
+                              size="sm"
+                              onClick={() => handleStartOnboarding(org)}
+                              className="bg-yellow-400 hover:bg-yellow-500 text-black"
+                            >
+                              <PlayCircle className="h-4 w-4 mr-1" />
+                              Onboard
+                            </Button>
+                          )}
                           <Button
                             size="sm"
                             variant="outline"
