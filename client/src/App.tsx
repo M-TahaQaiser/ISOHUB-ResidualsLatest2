@@ -25,6 +25,7 @@ import DataManagement from "@/pages/DataManagement";
 
 import SuperAdmin from "@/pages/SuperAdmin";
 import AgencyOnboarding from "@/pages/AgencyOnboarding";
+import ProspectManagement from "@/pages/ProspectManagement";
 
 import BulkAssignments from "@/pages/BulkAssignments";
 import RepManagement from "@/pages/RepManagement";
@@ -199,6 +200,7 @@ function Router() {
                     </Route>
 
                     <Route path="/super-admin" component={SuperAdmin} />
+                    <Route path="/prospects" component={ProspectManagement} />
                     <Route path="/onboarding" component={AgencyOnboarding} />
                     <Route path="/organizations" component={AdminOrganizationManagement} />
                     <Route path="/bulk-assignments" component={BulkAssignments} />
@@ -261,6 +263,7 @@ function Router() {
                 </Route>
 
                 <Route path="/super-admin" component={SuperAdmin} />
+                <Route path="/prospects" component={ProspectManagement} />
                 <Route path="/onboarding" component={AgencyOnboarding} />
                 <Route path="/organizations" component={AdminOrganizationManagement} />
                 <Route path="/bulk-assignments" component={BulkAssignments} />

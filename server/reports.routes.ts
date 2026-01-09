@@ -17,22 +17,10 @@ router.get("/residuals", async (req, res) => {
     
     // Get month from query parameter or default to current month
     const requestedMonth = req.query.month as string || "2025-05";
-    const organizationId = req.query.organizationId as string;
-    
-    // Get agency_id from organization if provided
-    let agencyId: number | undefined;
-    if (organizationId) {
-      const orgResult = await db.execute(sql`
-        SELECT agency_id FROM organizations WHERE organization_id = ${organizationId} LIMIT 1
-      `);
-      if (orgResult.rows && orgResult.rows.length > 0) {
-        agencyId = (orgResult.rows[0] as any).agency_id;
-      }
-    }
     
     // Get assignment data to show audit status
     const assignments = await storage.getAssignments(requestedMonth);
-    const monthlyData = await storage.getMonthlyData(requestedMonth, agencyId);
+    const monthlyData = await storage.getMonthlyData(requestedMonth);
     
     // Calculate assignment statistics - fix data structure access
     const assignedMerchantIds = new Set(assignments.map(a => a.merchantId));

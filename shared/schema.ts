@@ -1943,3 +1943,84 @@ export interface IsoSignEnvelopeWithDetails extends IsoSignEnvelope {
   recipients?: IsoSignRecipient[];
   events?: IsoSignEvent[];
 }
+
+// PROSPECTS TABLE - Pre-Onboarding Management
+// ==========================================
+
+export const prospects = pgTable('prospects', {
+  id: serial('id').primaryKey(),
+  
+  // Unique identifier for the prospect
+  prospectId: varchar('prospect_id', { length: 50 }).unique().notNull(),
+  
+  // Company Information
+  companyName: varchar('company_name', { length: 255 }).notNull(),
+  
+  // Contact Information
+  contactFirstName: varchar('contact_first_name', { length: 100 }).notNull(),
+  contactLastName: varchar('contact_last_name', { length: 100 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull(),
+  phone: varchar('phone', { length: 50 }),
+  
+  // Pricing
+  totalPrice: decimal('total_price', { precision: 10, scale: 2 }),
+  pricingNotes: text('pricing_notes'),
+  
+  // Invoice Management
+  invoiceLink: varchar('invoice_link', { length: 500 }),
+  invoiceSentAt: timestamp('invoice_sent_at'),
+  
+  // Payment Status (manual toggle)
+  isPaid: boolean('is_paid').default(false),
+  paidAt: timestamp('paid_at'),
+  isActive: boolean('is_active').default(false),
+  
+  // Conversion to Agency
+  convertedToAgencyId: integer('converted_to_agency_id').references(() => agencies.id),
+  convertedAt: timestamp('converted_at'),
+  
+  // Onboarding Access
+  onboardingToken: varchar('onboarding_token', { length: 255 }),
+  onboardingTokenExpiry: timestamp('onboarding_token_expiry'),
+  welcomeEmailSent: boolean('welcome_email_sent').default(false),
+  welcomeEmailSentAt: timestamp('welcome_email_sent_at'),
+  
+  // Status tracking
+  status: varchar('status', { 
+    length: 25,
+    enum: ['new', 'invoice_sent', 'paid', 'pending_activation', 'onboarding', 'converted', 'cancelled']
+  }).default('new'),
+  
+  // Admin tracking
+  createdBy: integer('created_by').references(() => users.id),
+  notes: text('notes'),
+  
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
+
+// Prospects Zod Schemas
+export const insertProspectSchema = createInsertSchema(prospects).omit({
+  id: true,
+  prospectId: true,
+  createdAt: true,
+  updatedAt: true,
+  convertedAt: true,
+  paidAt: true,
+  onboardingToken: true,
+  onboardingTokenExpiry: true,
+  welcomeEmailSent: true,
+  welcomeEmailSentAt: true,
+  invoiceSentAt: true,
+});
+
+export const createProspectSchema = insertProspectSchema.extend({
+  companyName: z.string().min(1, 'Company name is required'),
+  contactFirstName: z.string().min(1, 'First name is required'),
+  contactLastName: z.string().min(1, 'Last name is required'),
+  email: z.string().email('Valid email is required'),
+});
+
+// Prospects Types
+export type Prospect = typeof prospects.$inferSelect;
+export type InsertProspect = z.infer<typeof insertProspectSchema>;

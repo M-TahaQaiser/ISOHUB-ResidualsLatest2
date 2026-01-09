@@ -49,71 +49,78 @@ router.post('/upload/:month/:processorId', upload.single('file'), async (req, re
     const fileExtension = path.extname(file.originalname).toLowerCase();
     
     if (!allowedExtensions.includes(fileExtension)) {
-      fs.unlinkSync(file.path);
+      fs.unlinkSync(file.path); // Clean up uploaded file
       return res.status(400).json({
         success: false,
         error: 'Invalid file format. Only CSV and Excel files are allowed.'
       });
     }
 
-    console.log('Processor file uploaded:', {
-      originalname: file.originalname,
-      size: file.size,
-      month: month,
-      processorId: processorId
-    });
-
-    // Get processor name
-    let processorName = 'Unknown Processor';
+    // Process the file using the real processor mapping service
+    let validationResults: any;
+    
     try {
-      const [processor] = await db.select({ name: processors.name })
-        .from(processors)
-        .where(eq(processors.id, parseInt(processorId)))
-        .limit(1);
-      if (processor) {
-        processorName = processor.name;
+      // Use the actual processor file processing service
+      validationResults = await ResidualsWorkflowService.processProcessorFile(
+        file.path, 
+        parseInt(processorId), 
+        month, 
+        file.originalname
+      );
+      
+      console.log(`Processed ${validationResults.recordCount} records from processor file`);
+      
+      // After successful processing, cross-reference and populate master dataset
+      if (validationResults.validRecords > 0) {
+        try {
+          const crossRefResults = await ResidualsWorkflowService.crossReferenceAndPopulateMasterDataset(month);
+          console.log(`Cross-referenced data: ${crossRefResults.matchedRecords} matched, ${crossRefResults.unmatchedRecords} unmatched`);
+        } catch (crossRefError) {
+          console.error('Cross-reference failed but continuing:', crossRefError);
+        }
       }
-    } catch (e) {
-      console.error('Failed to get processor name:', e);
-    }
-
-    // Simple approach: Update upload_progress to show file was uploaded
-    try {
-      await db.execute(sql`
-        INSERT INTO upload_progress (month, processor_id, processor_name, upload_status, file_name, file_size, last_updated)
-        VALUES (${month}, ${parseInt(processorId)}, ${processorName}, 'validated', ${file.originalname}, ${file.size}, NOW())
-        ON CONFLICT (month, processor_id) 
-        DO UPDATE SET upload_status = 'validated', file_name = ${file.originalname}, file_size = ${file.size}, last_updated = NOW()
-      `);
-      console.log(`Upload progress updated for processor ${processorId}`);
-    } catch (dbError) {
-      console.error('Failed to update upload progress:', dbError);
-    }
-
-    // Clean up uploaded file
-    try {
-      fs.unlinkSync(file.path);
-    } catch (e) {
-      // Ignore cleanup errors
+      
+      if (validationResults.errors.length === 0) {
+        // Ensure upload progress record exists before updating
+        await ResidualsWorkflowService.ensureUploadProgressRecord(month, parseInt(processorId));
+        
+        await ResidualsWorkflowService.updateUploadStatus(
+          month,
+          parseInt(processorId),
+          'processor',
+          'validated',
+          undefined,
+          validationResults
+        );
+      } else {
+        await ResidualsWorkflowService.updateUploadStatus(
+          month,
+          parseInt(processorId),
+          'processor',
+          'error',
+          'Validation errors found',
+          validationResults
+        );
+      }
+    } catch (error) {
+      await ResidualsWorkflowService.updateUploadStatus(
+        month,
+        parseInt(processorId),
+        'processor',
+        'error',
+        `Processing failed: ${error}`,
+        validationResults
+      );
+      throw error;
+    } finally {
+      fs.unlinkSync(file.path); // Clean up uploaded file
     }
 
     res.json({
       success: true,
-      message: `File uploaded successfully for ${processorName}.`,
-      results: {
-        fileName: file.originalname,
-        fileSize: file.size,
-        month: month,
-        processorId: parseInt(processorId),
-        processorName: processorName,
-        status: 'validated',
-        recordCount: 0
-      },
-      validation: {
-        errors: [],
-        warnings: [],
-        recordCount: 0
-      }
+      message: `File uploaded successfully. ${validationResults.recordCount} records processed.`,
+      results: validationResults,
+      validation: validationResults
     });
 
   } catch (error) {
@@ -140,152 +147,42 @@ router.post('/upload-lead-sheet/:month', upload.single('file'), async (req, res)
     }
 
     // Log file details for debugging
-    console.log('Lead sheet uploaded:', {
+    console.log('Uploaded file details:', {
       originalname: file.originalname,
       mimetype: file.mimetype,
       size: file.size,
-      month: month
+      filename: file.filename,
+      path: file.path
     });
     
-    // Parse CSV file
-    let parsedData: any[] = [];
-    let recordCount = 0;
+    // Process lead sheet (extract Column I data)
+    const leadSheetResults = await ResidualsWorkflowService.processLeadSheet(file.path, month, file.originalname);
+
+    // Get all active processors from database
+    const activeProcessors = await db.select({ id: processors.id }).from(processors).where(eq(processors.isActive, true));
     
-    try {
-      const fileContent = fs.readFileSync(file.path, 'utf-8');
-      const lines = fileContent.split('\n').filter(line => line.trim());
+    // Update lead sheet status for all active processors
+    for (const processor of activeProcessors) {
+      // First ensure a record exists for this processor/month
+      await ResidualsWorkflowService.ensureUploadProgressRecord(month, processor.id);
       
-      if (lines.length < 2) {
-        throw new Error('CSV file is empty or has no data rows');
-      }
-      
-      // Parse header
-      const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-      console.log('CSV Headers:', headers);
-      
-      // Parse data rows
-      for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
-        if (values.length >= headers.length && values[0]) {
-          const row: any = {};
-          headers.forEach((header, index) => {
-            row[header] = values[index] || '';
-          });
-          parsedData.push(row);
-        }
-      }
-      
-      recordCount = parsedData.length;
-      console.log(`Parsed ${recordCount} records from lead sheet`);
-      
-      // Get organizationId from request or use default
-      const organizationId = req.body.organizationId || req.query.organizationId || 'org-demo-isohub-2025';
-      
-      // Resolve to agencyId
-      const orgResult = await db.execute(sql`
-        SELECT agency_id FROM organizations WHERE organization_id = ${organizationId} LIMIT 1
-      `);
-      
-      let agencyId = 1; // Default to demo agency
-      if (orgResult.rows.length > 0 && orgResult.rows[0].agency_id) {
-        agencyId = orgResult.rows[0].agency_id as number;
-      }
-      
-      console.log(`Storing lead sheet data for agency ${agencyId}, month ${month}`);
-      
-      // Store each record in master_lead_sheets table
-      let insertedCount = 0;
-      for (const record of parsedData) {
-        try {
-          // Extract key fields (adjust based on actual CSV structure)
-          const mid = record['MID'] || record['Merchant ID'] || record['mid'] || '';
-          const dba = record['DBA'] || record['Business Name'] || record['dba'] || '';
-          const processorName = record['Processor'] || record['processor'] || '';
-          
-          if (!mid) continue; // Skip rows without MID
-          
-          // Find or create merchant
-          let merchantResult = await db.execute(sql`
-            SELECT id FROM merchants WHERE mid = ${mid} AND agency_id = ${agencyId} LIMIT 1
-          `);
-          
-          let merchantId: number;
-          if (merchantResult.rows.length === 0) {
-            const insertMerchant = await db.execute(sql`
-              INSERT INTO merchants (mid, dba, legal_name, agency_id, is_active, created_at)
-              VALUES (${mid}, ${dba}, ${dba}, ${agencyId}, true, NOW())
-              RETURNING id
-            `);
-            merchantId = insertMerchant.rows[0].id as number;
-          } else {
-            merchantId = merchantResult.rows[0].id as number;
-          }
-          
-          // Find processor
-          let processorResult = await db.execute(sql`
-            SELECT id FROM processors WHERE name ILIKE ${processorName} LIMIT 1
-          `);
-          
-          let processorId: number | null = null;
-          if (processorResult.rows.length > 0) {
-            processorId = processorResult.rows[0].id as number;
-          }
-          
-          // Insert into master_lead_sheets
-          await db.execute(sql`
-            INSERT INTO master_lead_sheets (
-              month, merchant_id, processor_id, agency_id, raw_data, created_at
-            ) VALUES (
-              ${month}, ${merchantId}, ${processorId}, ${agencyId}, ${JSON.stringify(record)}::jsonb, NOW()
-            )
-            ON CONFLICT (month, merchant_id) DO UPDATE 
-            SET processor_id = ${processorId}, raw_data = ${JSON.stringify(record)}::jsonb, updated_at = NOW()
-          `);
-          
-          insertedCount++;
-        } catch (rowError) {
-          console.error('Error inserting lead sheet row:', rowError);
-        }
-      }
-      
-      console.log(`Inserted/updated ${insertedCount} lead sheet records`);
-      
-      // Update upload progress for all processors
-      const activeProcessors = await db.select({ id: processors.id, name: processors.name })
-        .from(processors)
-        .where(eq(processors.isActive, true));
-      
-      for (const processor of activeProcessors) {
-        await db.execute(sql`
-          INSERT INTO upload_progress (month, processor_id, processor_name, lead_sheet_status, last_updated)
-          VALUES (${month}, ${processor.id}, ${processor.name}, 'validated', NOW())
-          ON CONFLICT (month, processor_id) 
-          DO UPDATE SET lead_sheet_status = 'validated', last_updated = NOW()
-        `);
-      }
-      
-    } catch (parseError) {
-      console.error('Failed to parse lead sheet:', parseError);
-      throw parseError;
+      // Then update the lead sheet status
+      await ResidualsWorkflowService.updateUploadStatus(
+        month,
+        processor.id,
+        'lead_sheet',
+        'validated',
+        undefined,
+        leadSheetResults
+      );
     }
 
-    // Clean up uploaded file
-    try {
-      fs.unlinkSync(file.path);
-    } catch (e) {
-      // Ignore cleanup errors
-    }
+    fs.unlinkSync(file.path); // Clean up
 
     res.json({
       success: true,
-      message: 'Lead sheet uploaded and processed successfully',
-      results: {
-        fileName: file.originalname,
-        fileSize: file.size,
-        month: month,
-        status: 'validated',
-        recordCount: recordCount
-      }
+      message: 'Lead sheet uploaded successfully',
+      results: leadSheetResults
     });
 
   } catch (error) {
