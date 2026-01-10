@@ -147,5 +147,8 @@
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"
+  },
+  "overrides": {
+    "better-sqlite3": "npm:empty-npm-package@1.0.0"
   }
 }
