@@ -159,14 +159,12 @@ app.use((req, res, next) => {
   // Seed default admin user if none exists - disabled due to schema issues
   // await seedAdminUser();
 
-  // In development, provide easy login credentials shown in the UI
-  if (app.get('env') === 'development') {
-    try {
-      const { seedDevUsers } = await import('./utils/seedDevUsers');
-      await seedDevUsers();
-    } catch (err) {
-      console.warn('⚠️ Failed to seed dev users:', err);
-    }
+  // Seed initial users if database is empty (works in all environments)
+  try {
+    const { seedDevUsers } = await import('./utils/seedDevUsers');
+    await seedDevUsers();
+  } catch (err) {
+    console.warn('⚠️ Failed to seed initial users:', err);
   }
 
   const server = await registerRoutes(app);

@@ -5,9 +5,16 @@ import { AuthService } from '../services/AuthService';
 
 export async function seedDevUsers(): Promise<void> {
   try {
-    if (process.env.NODE_ENV !== 'development') return;
+    console.log('🔧 Checking if initial users need to be seeded...');
+    
+    // Check if any users exist
+    const existingUsers = await db.select().from(users).limit(1);
+    if (existingUsers.length > 0) {
+      console.log('✅ Users already exist, skipping seed');
+      return;
+    }
 
-    console.log('🔧 Seeding development users...');
+    console.log('🔧 Seeding initial users...');
 
     const devUsers = [
       { username: 'dev', password: 'dev123', role: 'Users/Reps', email: 'dev@local' },
