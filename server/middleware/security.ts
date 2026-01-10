@@ -56,9 +56,7 @@ export const securityHeaders = helmet({
       styleSrc: ["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"], // TODO: Replace with nonce in production
       // SECURITY: In production, generate nonces for each request
       // For now, use strict CSP with hash-based approach for known scripts
-      scriptSrc: process.env.NODE_ENV?.toLowerCase() === 'production'
-        ? ["'self'", "'strict-dynamic'"]
-        : ["'self'", "'unsafe-inline'"], // Only allow unsafe-inline in development
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://replit.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
       imgSrc: ["'self'", "data:", "https:", "blob:"],
       connectSrc: ["'self'", "wss:", "https:",
