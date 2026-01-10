@@ -31,7 +31,7 @@ export const sessionMiddleware = session({
   name: 'isohub.sid', // Custom cookie name
   cookie: {
     httpOnly: true, // Prevents JavaScript access - XSS protection
-    secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+    secure: process.env.NODE_ENV?.toLowerCase() === 'production', // HTTPS only in production
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
     sameSite: 'strict', // CSRF protection
   },

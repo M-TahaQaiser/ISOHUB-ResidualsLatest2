@@ -56,7 +56,7 @@ export const securityHeaders = helmet({
       styleSrc: ["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"], // TODO: Replace with nonce in production
       // SECURITY: In production, generate nonces for each request
       // For now, use strict CSP with hash-based approach for known scripts
-      scriptSrc: process.env.NODE_ENV === 'production'
+      scriptSrc: process.env.NODE_ENV?.toLowerCase() === 'production'
         ? ["'self'", "'strict-dynamic'"]
         : ["'self'", "'unsafe-inline'"], // Only allow unsafe-inline in development
       fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
@@ -71,7 +71,7 @@ export const securityHeaders = helmet({
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
       formAction: ["'self'"],
-      ...(process.env.NODE_ENV === 'production' ? { upgradeInsecureRequests: [] } : {}),
+      ...(process.env.NODE_ENV?.toLowerCase() === 'production' ? { upgradeInsecureRequests: [] } : {}),
     }
   },
   hsts: {
@@ -229,7 +229,7 @@ export const setCSRFToken = (req: Request, res: Response, next: NextFunction) =>
     csrfToken = generateSecureToken();
     res.cookie(CSRF_COOKIE_NAME, csrfToken, {
       httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV?.toLowerCase() === 'production',
       sameSite: 'strict',
       maxAge: 24 * 60 * 60 * 1000
     });

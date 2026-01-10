@@ -19,7 +19,7 @@ const createSecurePool = (): pg.Pool => {
     connectionTimeoutMillis: 5000, // 5 seconds
     
     // SSL configuration for production
-    ssl: process.env.NODE_ENV === 'production' ? {
+    ssl: process.env.NODE_ENV?.toLowerCase() === 'production' ? {
       rejectUnauthorized: false,
     } : false,
   };

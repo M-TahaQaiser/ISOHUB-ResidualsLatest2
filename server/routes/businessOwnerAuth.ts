@@ -110,7 +110,7 @@ router.post('/logout', (req: Request, res: Response) => {
     // Explicitly clear the session cookie
     res.clearCookie('isohub.sid', {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV?.toLowerCase() === 'production',
       sameSite: 'strict',
     });
 

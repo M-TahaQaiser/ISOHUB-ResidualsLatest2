@@ -145,6 +145,6 @@ export const hasSecret = (key: string) => secretsManager.hasSecret(key);
 export const auditSecrets = () => secretsManager.auditSecrets();
 
 // Initialize secrets audit on startup
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV?.toLowerCase() === 'production') {
   auditSecrets();
 }
